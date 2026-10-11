@@ -237,7 +237,7 @@ export default function DesignFoundationLabPage() {
               <article className={`tessli-panel ${styles.componentPanel}`}>
                 <p className={styles.panelLabel}>Tags and eyebrow</p>
                 <div className={styles.tagRow}>
-                  <Tag tone="signal">Profiled</Tag>
+                  <Tag tone="signal">Component System</Tag>
                   <Tag>Typography</Tag>
                   <Tag>Motion</Tag>
                   <Tag>Open source</Tag>

@@ -7,6 +7,7 @@ The catalogue models behind the Sources directory, and the frozen media fallback
 Every source is one YAML file, `sources/<slug>.yml`, validated by [`schemas/source.schema.json`](../schemas/source.schema.json):
 
 ```yaml
+# sources/godly.yml, as committed
 id: resource-169e5a48b03e # frozen; never derived from the URL, never changed
 slug: godly # must equal the file name
 name: Godly
@@ -19,14 +20,20 @@ status: active # active | needs-review | archived
 added_at: 2026-07-22
 added_via: curator # curator | community
 last_checked: null # date a human last checked it, or null
-# Optional:
-best_for: [creative-direction, motion-research, high-end-landing-pages] # at most 3
-limitations: [No source code provided] # at most 2
-frameworks: [react]
-license: MIT
-submission_issue: 123 # the suggest-a-source issue it came from
-replaced_by: other-slug # archived only: the source that replaces it
-archived_reason: Redirects to Other # required when status is archived
+best_for: # optional, at most 3
+  - creative-direction
+  - motion-research
+  - high-end-landing-pages
+limitations: # optional, at most 2
+  - No source code provided
+  - Focuses on bespoke/agency implementations
+# Other optional fields (Godly has none of these; values are placeholders):
+# frameworks: [react]
+# license: MIT
+# submission_issue: 123 # the suggest-a-source issue it came from
+# Archive-only fields (the schema rejects them unless status is archived):
+# archived_reason: Redirects to Other # required when status is archived
+# replaced_by: other-slug # the source that replaces it, when one does
 ```
 
 New summaries say specifically what you'll find there in 40–200 characters; the migrated rows keep their original text verbatim until a curator rewrites them. The domain is not stored: it is derived from `url` at build time.

@@ -40,16 +40,20 @@ test("every frozen ID equals the owner-approved triage ID for its slug", async (
     buildCatalogue({ root: repoRoot }),
     triageIdsBySlug(),
   ]);
+  const bySlug = new Map(
+    catalogue.resources.map((resource) => [resource.slug, resource]),
+  );
 
   assert.equal(report.issues.errors.length, 0);
-  assert.equal(catalogue.resources.length, triage.size);
+  assert.ok(triage.size > 0, "The triage CSV has no rows");
+  // Every triaged source is still present with its frozen ID. Sources added
+  // after the triage are not in the CSV; they only need a unique,
+  // schema-valid ID, which the generator and the tests below check.
   let matched = 0;
-  for (const resource of catalogue.resources) {
-    assert.equal(
-      resource.id,
-      triage.get(resource.slug),
-      `ID drift for ${resource.slug}`,
-    );
+  for (const [slug, id] of triage) {
+    const resource = bySlug.get(slug);
+    assert.ok(resource, `Triaged source ${slug} is missing`);
+    assert.equal(resource.id, id, `ID drift for ${slug}`);
     matched += 1;
   }
   assert.equal(matched, triage.size);

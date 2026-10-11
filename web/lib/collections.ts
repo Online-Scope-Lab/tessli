@@ -1,4 +1,4 @@
-import catalogue from "@/data/catalogue.json";
+import catalogue from "../data/catalogue.json" with { type: "json" };
 import type {
   ResourceCardAccess,
   ResourceCardData,
@@ -37,16 +37,18 @@ export type PublishedCollection = Readonly<{
   resources: readonly CollectionResource[];
 }>;
 
-const resourceById = new Map(
-  catalogue.resources.map((resource) => [resource.id, resource]),
-);
-const categoryLabelById = new Map(
-  catalogue.categories.map((category) => [category.id, category.label]),
-);
+type CatalogueResource = (typeof catalogue.resources)[number];
+type CatalogueCollection = (typeof catalogue.collections)[number];
+type CatalogueCategory = (typeof catalogue.categories)[number];
 
-function toResourceCardData(
-  resource: (typeof catalogue.resources)[number],
-): ResourceCardData {
+/** The catalogue fields the collection pages read. */
+export type CollectionCatalogue = Readonly<{
+  resources: readonly CatalogueResource[];
+  categories: readonly Pick<CatalogueCategory, "id" | "label">[];
+  collections: readonly CatalogueCollection[];
+}>;
+
+function toResourceCardData(resource: CatalogueResource): ResourceCardData {
   return {
     id: resource.id,
     slug: resource.slug,
@@ -62,63 +64,79 @@ function toResourceCardData(
   };
 }
 
-function resolveResource(
-  collectionSlug: string,
-  stageId: string,
-  item: (typeof catalogue.collections)[number]["stages"][number]["items"][number],
-): CollectionResource {
-  const source = resourceById.get(item.resourceId);
-  if (!source) {
-    throw new Error(
-      `Playbook ${collectionSlug} references missing resource ${item.resourceId}.`,
-    );
+/**
+ * Resolves the published collections against a catalogue. Archived sources
+ * keep their collection membership in the data but are never listed; a stage
+ * left with no listed source is not shown. Pure, so fixtures can exercise it.
+ */
+export function resolvePublishedCollections(
+  data: CollectionCatalogue,
+): readonly PublishedCollection[] {
+  const resourceById = new Map(
+    data.resources.map((resource) => [resource.id, resource]),
+  );
+  const categoryLabelById = new Map(
+    data.categories.map((category) => [category.id, category.label]),
+  );
+
+  function resolveResource(
+    collectionSlug: string,
+    stageId: string,
+    item: CatalogueCollection["stages"][number]["items"][number],
+  ): CollectionResource {
+    const source = resourceById.get(item.resourceId);
+    if (!source) {
+      throw new Error(
+        `Playbook ${collectionSlug} references missing resource ${item.resourceId}.`,
+      );
+    }
+
+    return {
+      resource: toResourceCardData(source),
+      categoryLabel: categoryLabelById.get(source.category) ?? source.category,
+      role: item.role,
+      stageId,
+    };
   }
 
-  return {
-    resource: toResourceCardData(source),
-    categoryLabel: categoryLabelById.get(source.category) ?? source.category,
-    role: item.role,
-    stageId,
-  };
+  function resolveCollection(
+    collection: CatalogueCollection,
+  ): PublishedCollection {
+    const stages = collection.stages
+      .map((stage) => ({
+        id: stage.id,
+        title: stage.title,
+        inspect: stage.inspect,
+        decision: stage.decision,
+        resources: stage.items
+          .map((item) => resolveResource(collection.slug, stage.id, item))
+          .filter(({ resource }) => resource.status !== "archived"),
+      }))
+      .filter((stage) => stage.resources.length > 0);
+    const resources = stages.flatMap((stage) => stage.resources);
+
+    return {
+      id: collection.id,
+      slug: collection.slug,
+      title: collection.title,
+      description: collection.description,
+      outcome: collection.outcome,
+      audience: collection.audience,
+      resourceIds: resources.map(({ resource }) => resource.id),
+      stages,
+      coverStyle: collection.coverStyle as CollectionCoverStyle,
+      lastReviewedAt: collection.lastReviewedAt,
+      status: collection.status as "published",
+      resources,
+    };
+  }
+
+  return data.collections
+    .filter((collection) => collection.status === "published")
+    .map(resolveCollection);
 }
 
-function resolveCollection(
-  collection: (typeof catalogue.collections)[number],
-): PublishedCollection {
-  // Archived sources keep their collection membership in the data but are
-  // never listed; a stage left with no listed source is not shown.
-  const stages = collection.stages
-    .map((stage) => ({
-      id: stage.id,
-      title: stage.title,
-      inspect: stage.inspect,
-      decision: stage.decision,
-      resources: stage.items
-        .map((item) => resolveResource(collection.slug, stage.id, item))
-        .filter(({ resource }) => resource.status !== "archived"),
-    }))
-    .filter((stage) => stage.resources.length > 0);
-  const resources = stages.flatMap((stage) => stage.resources);
-
-  return {
-    id: collection.id,
-    slug: collection.slug,
-    title: collection.title,
-    description: collection.description,
-    outcome: collection.outcome,
-    audience: collection.audience,
-    resourceIds: resources.map(({ resource }) => resource.id),
-    stages,
-    coverStyle: collection.coverStyle as CollectionCoverStyle,
-    lastReviewedAt: collection.lastReviewedAt,
-    status: collection.status as "published",
-    resources,
-  };
-}
-
-const publishedCollections = catalogue.collections
-  .filter((collection) => collection.status === "published")
-  .map(resolveCollection);
+const publishedCollections = resolvePublishedCollections(catalogue);
 
 export function getPublishedCollections(): readonly PublishedCollection[] {
   return publishedCollections;

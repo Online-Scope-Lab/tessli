@@ -59,12 +59,6 @@ function resolveSourceProfile(identifier: string): SourceProfile {
   return profile;
 }
 
-/** Archived sources never appear in a collection's MCP output. */
-function isBrowsableResource(resourceId: string): boolean {
-  const profile = getSourceProfile(resourceId);
-  return profile !== null && !isArchivedSource(profile);
-}
-
 function resolveCollection(identifier: string): CatalogueCollection {
   const normalizedIdentifier = identifier.trim();
   const collection = collectionsByIdentifier.get(normalizedIdentifier);
@@ -166,7 +160,31 @@ export function findNativeAlternatives(
 }
 
 export function getNativeCollection(identifier: string) {
-  const collection = resolveCollection(identifier);
+  return createNativeCollection(resolveCollection(identifier));
+}
+
+/**
+ * Builds a collection's MCP output. Archived sources never appear in it and
+ * never count towards resourceCount. `resolve` defaults to the canonical
+ * profile index; fixtures pass their own.
+ */
+export function createNativeCollection(
+  collection: CatalogueCollection,
+  resolve: (identifier: string) => SourceProfile | null = getSourceProfile,
+) {
+  const requireProfile = (resourceId: string) => {
+    const profile = resolve(resourceId);
+    if (!profile) {
+      throw new NativeMcpInputError(
+        `Unknown Tessli resource identifier: ${resourceId}.`,
+      );
+    }
+    return profile;
+  };
+  const isBrowsableResource = (resourceId: string) => {
+    const profile = resolve(resourceId);
+    return profile !== null && !isArchivedSource(profile);
+  };
   const browsableResourceIds =
     collection.resourceIds.filter(isBrowsableResource);
   const resourceIds = browsableResourceIds.slice(
@@ -187,7 +205,7 @@ export function getNativeCollection(identifier: string) {
     returnedSourceCount: resourceIds.length,
     sources: resourceIds.map((resourceId, index) => ({
       order: index + 1,
-      ...toSourceGuide(resolveSourceProfile(resourceId)),
+      ...toSourceGuide(requireProfile(resourceId)),
     })),
     stages: collection.stages.map((stage) => ({
       id: stage.id,
@@ -197,7 +215,7 @@ export function getNativeCollection(identifier: string) {
       sources: stage.items
         .filter((item) => resourceIds.includes(item.resourceId))
         .map((item) => {
-          const source = resolveSourceProfile(item.resourceId);
+          const source = requireProfile(item.resourceId);
           return {
             sourceId: source.id,
             sourceSlug: source.slug,

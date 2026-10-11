@@ -140,9 +140,9 @@ test("Tag and Eyebrow render plain, non-interactive text", () => {
     render(
       ui.Tag,
       { tone: "signal", "data-intelligence-badge": "true" },
-      "Profiled",
+      "Component System",
     ),
-    '<span data-intelligence-badge="true" class="tag signal">Profiled</span>',
+    '<span data-intelligence-badge="true" class="tag signal">Component System</span>',
   );
   assert.equal(
     render(ui.Eyebrow, null, "Curated design resources"),

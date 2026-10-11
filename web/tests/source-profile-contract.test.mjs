@@ -10,7 +10,11 @@ import {
   ACCESS_ROUTE_PILOT_SOURCE_IDS,
 } from "../data/access-route-pilot.ts";
 import { getAllIntelligenceProfiles } from "../lib/intelligence.ts";
-import { getNativeSource } from "../lib/mcp-native-tools.ts";
+import { resolvePublishedCollections } from "../lib/collections.ts";
+import {
+  createNativeCollection,
+  getNativeSource,
+} from "../lib/mcp-native-tools.ts";
 import { createPublicSourceRepresentation } from "../lib/public-representations.mjs";
 import {
   SOURCE_PROFILE_CONTRACT_VERSION,
@@ -439,6 +443,107 @@ test("source profile validator accepts the complete deterministic baseline", () 
   assert.equal(Object.hasOwn(report, "coverageCounts"), false);
 });
 
+const fixtureCollection = {
+  id: "collection-fixture",
+  slug: "fixture-path",
+  title: "Fixture path",
+  description: "A fixture collection used only by tests.",
+  outcome: "A fixture outcome.",
+  audience: "Tests",
+  resourceIds: [
+    "resource-fixture-active",
+    "resource-fixture-archived",
+    "resource-fixture-review",
+    "resource-fixture-gone",
+  ],
+  stages: [
+    {
+      id: "look",
+      title: "Look",
+      inspect: "Inspect fixtures.",
+      decision: "Decide on fixtures.",
+      items: [
+        { resourceId: "resource-fixture-active", role: "Active role" },
+        { resourceId: "resource-fixture-archived", role: "Archived role" },
+      ],
+    },
+    {
+      id: "gone",
+      title: "Gone",
+      inspect: "Only archived sources.",
+      decision: "Never shown.",
+      items: [{ resourceId: "resource-fixture-gone", role: "Gone role" }],
+    },
+    {
+      id: "review",
+      title: "Review",
+      inspect: "Inspect the review fixture.",
+      decision: "Decide on it.",
+      items: [{ resourceId: "resource-fixture-review", role: "Review role" }],
+    },
+  ],
+  coverStyle: "editorial",
+  lastReviewedAt: "2026-10-11",
+  status: "published",
+};
+
+test("collection pages drop archived members and hide emptied stages", () => {
+  const [collection] = resolvePublishedCollections({
+    resources: fixtures,
+    categories: [
+      { id: "typography", label: "Typography" },
+      { id: "icons", label: "Icons" },
+    ],
+    collections: [
+      fixtureCollection,
+      { ...fixtureCollection, slug: "fixture-draft", status: "draft" },
+    ],
+  });
+
+  assert.equal(collection.slug, "fixture-path");
+  assert.deepEqual(
+    collection.stages.map((stage) => [
+      stage.id,
+      stage.resources.map(({ resource }) => resource.slug),
+    ]),
+    [
+      ["look", ["fixture-active"]],
+      ["review", ["fixture-review"]],
+    ],
+  );
+  assert.deepEqual(collection.resourceIds, [
+    "resource-fixture-active",
+    "resource-fixture-review",
+  ]);
+  assert.equal(collection.resources.length, 2);
+});
+
+test("the MCP collection tool drops archived members from sources, stages and counts", () => {
+  const index = createSourceProfileIndex(fixtures);
+  const output = createNativeCollection(fixtureCollection, index.get);
+
+  assert.equal(output.resourceCount, 2);
+  assert.equal(output.returnedSourceCount, 2);
+  assert.deepEqual(
+    output.sources.map((source) => [source.order, source.slug, source.status]),
+    [
+      [1, "fixture-active", "active"],
+      [2, "fixture-review", "needs-review"],
+    ],
+  );
+  assert.deepEqual(
+    output.stages.map((stage) => [
+      stage.id,
+      stage.sources.map((source) => source.sourceSlug),
+    ]),
+    [
+      ["look", ["fixture-active"]],
+      ["gone", []],
+      ["review", ["fixture-review"]],
+    ],
+  );
+});
+
 test("every public listing, search and count reads only non-archived sources", () => {
   const read = (relativePath) =>
     fs.readFileSync(path.join(__dirname, "..", relativePath), "utf8");
@@ -460,9 +565,14 @@ test("every public listing, search and count reads only non-archived sources", (
   ]) {
     assert.match(read(file), /getBrowsableSourceCounts\(\)/, file);
   }
+  // Collections and the MCP collection tool are exercised with fixtures
+  // above; the real data goes through the same functions.
+  assert.match(
+    read("lib/collections.ts"),
+    /resolvePublishedCollections\(catalogue\)/,
+  );
   assert.match(
     read("lib/mcp-native-tools.ts"),
-    /collection\.resourceIds\.filter\(isBrowsableResource\)/,
+    /return createNativeCollection\(resolveCollection\(identifier\)\)/,
   );
-  assert.match(read("lib/collections.ts"), /resource\.status !== "archived"/);
 });
