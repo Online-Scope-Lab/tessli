@@ -48,7 +48,7 @@ type Category = {
 };
 ```
 
-The current eleven broad categories remain the release taxonomy. Short labels are used in compact UI while full labels remain available in filters and detail views.
+The current eleven broad categories remain the release taxonomy until the v1.2 catalogue triage moves the site to the v1.2 categories (the suggest-source issue form already lists the v1.2 categories). Short labels are used in compact UI while full labels remain available in filters and detail views.
 
 ## 3. Collection model
 

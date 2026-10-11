@@ -13,3 +13,4 @@ One dated line per non-obvious decision, newest at the bottom. Format: `- YYYY-M
 - 2026-10-11 — Stale draft PR #99 is closed as superseded by v1.2. Its work predates the new direction.
 - 2026-10-11 — Merged branches are listed for a human to delete rather than deleted by automation. The automation environment's proxy rejects remote ref deletion.
 - 2026-10-11 — Process docs (PRD, build slices, slice evidence, contracts, handoffs, research, archive) are removed from the tree. The PR and diff are now the record; everything removed is recoverable from the `v1.1-archive` tag and the `archive/v1.1` branch.
+- 2026-10-11 — The issue forms apply the labels `source:suggestion`, `source:problem`, `design:needs-implementation` and `bug`; a human must create any that are missing in the repository settings. GitHub does not create labels from issue forms, so until then issues arrive unlabelled and the triage in `CONTRIBUTING.md` will not work.

@@ -8,7 +8,7 @@ Tessli is becoming an open-source UI library that explains itself. Every compone
 
 Be clear about what exists today:
 
-- **Live now:** the curated **Sources** directory (browse, source pages, collections), public Markdown/JSON for each source, and a local read-only MCP server ([`docs/tessli-native-mcp.md`](docs/tessli-native-mcp.md)).
+- **Live now:** the curated **Sources** directory (browse, source pages, collections), public Markdown/JSON for each source, and a local read-only MCP server ([`docs/tessli-native-mcp.md`](docs/tessli-native-mcp.md)). Saved and Boards are still present but are removed in a later v1.2 step.
 - **Being built:** the library itself, its item template, preview themes and CI checks. No library items exist yet.
 - **Not built:** accounts, a database, analytics or payments. GitHub issues and pull requests are the backend.
 
