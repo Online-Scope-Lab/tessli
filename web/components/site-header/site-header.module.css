@@ -27,6 +27,9 @@
 }
 
 .wordmark {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.28em;
   justify-self: start;
   color: var(--text-strong);
   font-family: var(--font-newsreader), Georgia, serif;
@@ -36,6 +39,10 @@
   letter-spacing: -0.045em;
   line-height: 1;
   text-decoration: none;
+}
+
+.wordmarkMark {
+  font-size: 0.86em;
 }
 
 .desktopNavigation {

@@ -1,0 +1,19 @@
+.mark {
+  display: block;
+  flex: none;
+  width: 1em;
+  height: 1em;
+}
+
+.tile {
+  fill: var(--surface);
+  stroke: var(--line);
+}
+
+.letter {
+  fill: var(--text-strong);
+}
+
+.dot {
+  fill: var(--accent);
+}

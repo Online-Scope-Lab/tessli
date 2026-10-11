@@ -1,5 +1,7 @@
 import Link from "next/link";
 
+import { BrandMark } from "@/components/brand-mark/brand-mark";
+
 import { footerGroups } from "./footer-navigation";
 import styles from "./site-footer.module.css";
 
@@ -9,6 +11,7 @@ export function SiteFooter() {
       <div className={`tessli-container ${styles.inner}`}>
         <div className={styles.intro}>
           <Link className={styles.wordmark} href="/" aria-label="Tessli home">
+            <BrandMark className={styles.wordmarkMark} />
             Tessli
           </Link>
           <p>
