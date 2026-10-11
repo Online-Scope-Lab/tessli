@@ -123,10 +123,11 @@ const extraRouteChecks = [
   ["/collections/not-a-real-collection", 404, "Page not found"],
   ["/library/faq", 200, "FAQ that answers real objections"],
   ["/library/empty-state", 200, "Empty state that says why and what next"],
-  ["/library?kind=section", 200, "Showing 2 of 3 items."],
+  ["/library?kind=section", 200, "Showing 6 of 12 items."],
+  ["/library/data-table", 200, "Data table with filters and states"],
   ["/library/not-a-real-item", 404, "Page not found"],
   ["/rules/H-01", 200, "One primary action per surface"],
-  ["/rules/ST-05", 200, "No library item applies this rule yet"],
+  ["/rules/H-03", 200, "No library item applies this rule yet"],
   ["/rules/TESSLI.md", 200, "# Tessli UI rules"],
   ["/rules/Z-99", 404, "Page not found"],
   // Bare previews: the item only, no site header.

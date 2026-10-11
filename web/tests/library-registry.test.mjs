@@ -205,8 +205,28 @@ test("root registry.json is a shadcn GitHub registry over web/registry/items", a
 test("the starter items are honest community items", async () => {
   const registry = JSON.parse(await read("registry.json"));
   const names = registry.items.map((item) => item.name);
-  for (const name of ["empty-state", "faq", "pricing-tiers"]) {
+  // Plan §6.4: the twelve starter items. Only a human signs `reviewed`.
+  const starter = [
+    "auth-forms",
+    "closing-cta-footer",
+    "dashboard-overview",
+    "data-table",
+    "empty-state",
+    "faq",
+    "feature-evidence",
+    "mobile-list-detail",
+    "pricing-tiers",
+    "product-hero",
+    "settings-account",
+    "social-proof-honest",
+  ];
+  for (const name of starter) {
     assert.ok(names.includes(name), name);
+    const { tessli } = registry.items.find((item) => item.name === name).meta;
+    assert.equal(tessli.status, "community", name);
+    assert.deepEqual(tessli.reviewed_by, [], name);
+    assert.equal(tessli.reviewed_at, null, name);
+    assert.equal(tessli.provenance, "original", name);
   }
   const pricing = registry.items.find((item) => item.name === "pricing-tiers");
   assert.deepEqual(pricing.registryDependencies, ["button"]);

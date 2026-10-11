@@ -9,10 +9,10 @@ Tessli is an open-source UI library that explains itself. Every component, secti
 Be clear about what exists today:
 
 - **Live now:**
-  - the **Library** at `/library`: three community items (an empty state, an FAQ section and a pricing section), each with a live preview in three themes (Tessli, Neutral, Dark) at three widths, its taste notes, code, and `item.json`/`item.md` for agents. None is reviewed by a maintainer yet.
+  - the **Library** at `/library`: twelve community starter items (six sections, from a product hero to a closing call to action with footer; a data table and an empty state; and pages for sign-in, account settings, a dashboard overview and a mobile list with detail), each with a live preview in three themes (Tessli, Neutral, Dark) at three widths, its taste notes, code, and `item.json`/`item.md` for agents. None is reviewed by a maintainer yet.
   - the **Rules** at `/rules`: 39 draft rules for hierarchy, typography, spacing, colour, components, copy, states, responsive behaviour, motion and accessibility, each with why it matters, how to check it, the default it guards against, its sources and the items that apply it. None is reviewed by a maintainer yet. [`rules/TESSLI.md`](rules/TESSLI.md) is the compact index for agents.
   - the curated **Sources** directory (browse, source pages, collections), public Markdown/JSON for each source, and a local read-only MCP server ([`docs/tessli-native-mcp.md`](docs/tessli-native-mcp.md)).
-- **Being built:** the rest of the starter set, MCP tools for items and rules, and the Contribute page.
+- **Being built:** MCP tools for items and rules, and the Contribute page.
 - **Not built:** accounts, a database, analytics or payments. GitHub issues and pull requests are the backend.
 
 The plan and its phases are in [`docs/v1.2/plan.md`](docs/v1.2/plan.md).
