@@ -2,7 +2,7 @@
 
 Date: 2026-10-11
 Scope: the 129 sources that were `active` or `needs-review` (archived sources were not rechecked).
-Method: this sandbox's network blocks direct requests to most sites, so liveness and redirects came from a third-party redirect checker and web search. Maintenance and quality notes come from web search only. Treat each note as a lead for the owner to confirm, not as a verified fact.
+Method: liveness and redirects came first from a third-party redirect checker and web search, then from a direct check of every URL once the network allowed it (118 returned 200; 10 returned 403 or 429, which is bot protection on sites that load in a browser; Awwwards timed out). Maintenance and quality notes come from web search only. Treat each note as a lead for the owner to confirm, not as a verified fact.
 
 ## Applied in this change
 
@@ -16,23 +16,27 @@ Method: this sandbox's network blocks direct requests to most sites, so liveness
 | `react-aria`                                                      | `needs-review` → `active`                                                                                                                | `react-aria.adobe.com` is live (React Aria's new docs site)                                                                                                                              |
 | `v0`                                                              | `needs-review` → `active`                                                                                                                | `v0.app` is live and actively developed                                                                                                                                                  |
 | `fffuel`, `heroui`, `ibm-carbon-design-system`, `realtime-colors` | URL changed to the host it redirects to (`www.` added or removed)                                                                        | Permanent redirect                                                                                                                                                                       |
+| `sap-fiori`                                                       | URL → `https://www.sap.com/design-system/fiori-design-web`                                                                               | `experience.sap.com/fiori-design-web` redirects there                                                                                                                                    |
+| `twilio-paste`                                                    | URL → `https://github.com/twilio-labs/paste`                                                                                             | The docs site `paste.twilio.design` now redirects to the repository; see the weak list                                                                                                   |
+| `saaspo`                                                          | URL → `https://saaspo.com`                                                                                                               | `www.` redirects to the bare domain                                                                                                                                                      |
 
 ## Flagged for the owner: weak
 
 Live, but possibly not worth keeping in a directory for thoughtful UI work. Decide keep or archive; archiving needs a reason.
 
-| Source                         | Concern                                                                                                           |
-| ------------------------------ | ----------------------------------------------------------------------------------------------------------------- |
-| `happy-hues`                   | About 17 static palettes from 2019; no sign of updates since                                                      |
-| `variable-fonts` (v-fonts.com) | Still labelled "limited beta"; last technical update reported in 2021                                             |
-| `who-can-use`                  | Useful, but its repo has had no push since June 2024                                                              |
-| `realtime-colors`              | Repo and docs reported unchanged since 2023–24                                                                    |
-| `landingfolio`                 | Upsell-heavy: templates and components behind paid plans                                                          |
-| `saasframe`                    | Paid-only Pro; no free plan reported                                                                              |
-| `page-flows`                   | Paid-only ($99/yr)                                                                                                |
-| `lordicon`                     | Most of the library behind Pro; free icons need attribution                                                       |
-| `streamline`                   | Full use needs a paid subscription; free sets need attribution                                                    |
-| `tailwind-plus`                | Reported closed to new customers after a reported acquisition of Tailwind Labs (Sept 2026); confirm before acting |
+| Source                         | Concern                                                                                                                                |
+| ------------------------------ | -------------------------------------------------------------------------------------------------------------------------------------- |
+| `happy-hues`                   | About 17 static palettes from 2019; no sign of updates since                                                                           |
+| `variable-fonts` (v-fonts.com) | Still labelled "limited beta"; last technical update reported in 2021                                                                  |
+| `who-can-use`                  | Useful, but its repo has had no push since June 2024                                                                                   |
+| `realtime-colors`              | Repo and docs reported unchanged since 2023–24                                                                                         |
+| `landingfolio`                 | Upsell-heavy: templates and components behind paid plans                                                                               |
+| `saasframe`                    | Paid-only Pro; no free plan reported                                                                                                   |
+| `page-flows`                   | Paid-only ($99/yr)                                                                                                                     |
+| `lordicon`                     | Most of the library behind Pro; free icons need attribution                                                                            |
+| `streamline`                   | Full use needs a paid subscription; free sets need attribution                                                                         |
+| `twilio-paste`                 | Its docs site was retired and now redirects to the GitHub repository; the repo is active, but there is no browsable design-system site |
+| `tailwind-plus`                | Reported closed to new customers after a reported acquisition of Tailwind Labs (Sept 2026); confirm before acting                      |
 
 Kept as fine but upsell-heavy, worth a `limitations` line: `aceternity-ui`, `coolors`, `flowbite`, `kibo-ui`, `mobbin`, `relume`, `uiverse`, `framer` (a paid product rather than a resource).
 
