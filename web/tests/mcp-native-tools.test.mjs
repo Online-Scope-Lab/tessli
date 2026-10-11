@@ -20,6 +20,8 @@ import {
 import { getSimilarSourceProfiles } from "../lib/similar-sources.ts";
 import { getSourceProfile } from "../lib/source-profiles.ts";
 import { retrieveTaskSources } from "../lib/task-retrieval.ts";
+import { TESSLI_MCP_NODE_REQUIREMENT } from "../lib/mcp-tool-catalogue.ts";
+import packageJson from "../package.json" with { type: "json" };
 
 test("search terms drop stop words and plural endings deterministically", () => {
   assert.deepEqual(toSearchTerms("Build the Pricing tables for our UI"), [
@@ -159,6 +161,29 @@ test("get_rules returns the compact index, exact ids or matching rules", () => {
     items: h01.items.map((item) => item.slug),
   });
   assert.throws(() => getNativeRules("Z-99"), NativeMcpInputError);
+  assert.throws(() => getNativeRules("z-99 or Q-12"), NativeMcpInputError);
+
+  // id-shaped text in a brief (Tailwind classes) is not a rule request.
+  for (const tailwindBrief of [
+    "card with h-12 header and p-10 padding",
+    "a-11 thing",
+    "empty state with h-12 icon and p-10 padding",
+  ]) {
+    const result = getNativeRules(tailwindBrief);
+    assert.equal(result.mode, "search", tailwindBrief);
+    assert.equal(result.unknownIds, undefined, tailwindBrief);
+  }
+  assert.equal(
+    getNativeRules("empty state with h-12 icon and p-10 padding").rules[0].id,
+    "ST-02",
+  );
+  const mixed = getNativeRules("follow H-01 for a card with an h-12 header");
+  assert.equal(mixed.mode, "ids");
+  assert.deepEqual(
+    mixed.rules.map((rule) => rule.id),
+    ["H-01"],
+  );
+  assert.equal(mixed.unknownIds, undefined);
 
   const category = getNativeRules("accessibility");
   assert.equal(category.mode, "search");
@@ -263,4 +288,25 @@ test("get_source returns the public source profile, archived ones included", () 
       error instanceof NativeMcpInputError &&
       /Unknown Tessli source: not-a-tessli-resource/.test(error.message),
   );
+});
+
+test("the Node.js requirement is one value across the server, docs and package", async () => {
+  const { readFile } = await import("node:fs/promises");
+  assert.equal(TESSLI_MCP_NODE_REQUIREMENT, "Node.js 22.18 or later");
+  assert.equal(packageJson.engines.node, ">=22.18.0");
+  for (const path of [
+    "../../docs/tessli-native-mcp.md",
+    "../../docs/decisions.md",
+    "../../README.md",
+    "../../CONTRIBUTING.md",
+  ]) {
+    const text = await readFile(new URL(path, import.meta.url), "utf8");
+    assert.ok(text.includes(TESSLI_MCP_NODE_REQUIREMENT), path);
+    assert.doesNotMatch(text, /Node\.js 22 or (?:later|newer)/, path);
+  }
+  const page = await readFile(
+    new URL("../app/(site)/for-ai/page.tsx", import.meta.url),
+    "utf8",
+  );
+  assert.match(page, /\{TESSLI_MCP_NODE_REQUIREMENT\}/);
 });

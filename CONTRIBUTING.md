@@ -68,7 +68,7 @@ To remove a source, don't delete its file: set `status: archived` with an `archi
 
 ## Local setup
 
-You need Node.js 22 or later and npm.
+You need Node.js 22.18 or later and npm.
 
 ```bash
 git clone https://github.com/Online-Scope-Lab/tessli.git

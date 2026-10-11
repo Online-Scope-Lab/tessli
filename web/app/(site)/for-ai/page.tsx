@@ -3,7 +3,10 @@ import Link from "next/link";
 import { CopyCommand } from "@/components/library/copy-command";
 import { Button } from "@/components/ui/button";
 import { getLibraryItem, getLibraryItems, installCommand } from "@/lib/library";
-import { TESSLI_MCP_TOOL_CATALOGUE } from "@/lib/mcp-tool-catalogue";
+import {
+  TESSLI_MCP_NODE_REQUIREMENT,
+  TESSLI_MCP_TOOL_CATALOGUE,
+} from "@/lib/mcp-tool-catalogue";
 import { repositoryCloneUrl, repositoryUrl } from "@/lib/repository";
 import {
   getRules,
@@ -262,7 +265,7 @@ export default function ForAiPage() {
             <article>
               <h3>Run it</h3>
               <p>
-                It needs Node.js 22.18 or later. Install the locked
+                It needs {TESSLI_MCP_NODE_REQUIREMENT}. Install the locked
                 dependencies, then <code>npm run mcp</code> starts the server
                 and waits for a client on standard input.
               </p>

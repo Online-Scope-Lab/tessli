@@ -17,7 +17,7 @@ test("package scripts and runtime constraints are present", async () => {
   const packageJson = JSON.parse(await read("package.json"));
 
   assert.equal(packageJson.private, true);
-  assert.equal(packageJson.engines.node, ">=22.0.0");
+  assert.equal(packageJson.engines.node, ">=22.18.0");
   assert.equal(packageJson.dependencies.next, "16.2.12");
 
   for (const script of [

@@ -20,7 +20,7 @@ The plan and its phases are in [`docs/v1.2/plan.md`](docs/v1.2/plan.md).
 
 ## Quick start
 
-You need Node.js 22 or later and npm. The app lives in `web/`.
+You need Node.js 22.18 or later and npm. The app lives in `web/`.
 
 ```bash
 cd web

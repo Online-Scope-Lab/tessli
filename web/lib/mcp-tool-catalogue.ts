@@ -1,6 +1,7 @@
 export const TESSLI_MCP_SERVER_NAME = "tessli" as const;
 export const TESSLI_MCP_SERVER_VERSION = "0.3.0" as const;
-export const TESSLI_MCP_NODE_REQUIREMENT = "Node.js 22 or newer" as const;
+/** The first 22.x release with TypeScript type stripping on by default. */
+export const TESSLI_MCP_NODE_REQUIREMENT = "Node.js 22.18 or later" as const;
 
 /**
  * The five read-only tools of the local Tessli MCP server (plan §6.6). The

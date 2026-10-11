@@ -304,6 +304,8 @@ export function getNativeItem(slug: string) {
 /* ------------------------------------------------------------------ rules */
 
 const RULE_ID_PATTERN = /\b([a-z]{1,2})-(\d{2})\b/giu;
+/** What may separate ids in an id-only topic: "H-01, ST-03 and Z-99". */
+const RULE_ID_LIST_FILLER = /[\s,;/&+|]+|\b(?:and|or)\b/giu;
 
 function toRuleGuide(rule: Rule) {
   return {
@@ -339,7 +341,8 @@ const RULE_BOUNDARY =
 
 /**
  * get_rules: with no topic, the compact index (rules/TESSLI.md). With rule
- * ids in the topic ("H-01 ST-03"), exactly those rules. Otherwise, rules
+ * ids of real rules in the topic ("H-01 ST-03"), exactly those rules; a topic
+ * made only of ids that name no rule is an error. Otherwise, rules
  * ranked by keyword matches over title, category, statement, check and the
  * default each rule guards against.
  */
@@ -356,6 +359,10 @@ export function getNativeRules(topic: string = "") {
     };
   }
 
+  // Rule ids are matched only when they name a real rule. A brief can hold
+  // id-shaped text that is not a rule (Tailwind classes such as h-12 or
+  // p-10), so unknown id-shaped tokens fall through to keyword search unless
+  // the topic is nothing but ids, in which case the caller asked for ids.
   const ids = Array.from(
     new Set(
       Array.from(query.matchAll(RULE_ID_PATTERN), (match) =>
@@ -363,23 +370,27 @@ export function getNativeRules(topic: string = "") {
       ),
     ),
   );
-  if (ids.length > 0) {
-    const known = ids.filter((id) => ruleById.has(id));
-    const unknown = ids.filter((id) => !ruleById.has(id));
-    if (known.length === 0) {
-      throw new NativeMcpInputError(
-        `Unknown Tessli rule id: ${unknown.join(", ")}. Call get_rules with no topic for the full index.`,
-      );
-    }
+  const known = ids.filter((id) => ruleById.has(id));
+  const unknown = ids.filter((id) => !ruleById.has(id));
+  const onlyIds =
+    ids.length > 0 &&
+    query.replace(RULE_ID_PATTERN, " ").replace(RULE_ID_LIST_FILLER, "")
+      .length === 0;
+  if (known.length > 0) {
     return {
       mode: "ids" as const,
       query,
       rules: known
         .slice(0, NATIVE_MCP_LIMITS.rules)
         .map((id) => toRuleGuide(ruleById.get(id) as Rule)),
-      ...(unknown.length > 0 ? { unknownIds: unknown } : {}),
+      ...(onlyIds && unknown.length > 0 ? { unknownIds: unknown } : {}),
       boundary: RULE_BOUNDARY,
     };
+  }
+  if (onlyIds) {
+    throw new NativeMcpInputError(
+      `Unknown Tessli rule id: ${unknown.join(", ")}. Call get_rules with no topic for the full index.`,
+    );
   }
 
   const terms = toSearchTerms(query);
