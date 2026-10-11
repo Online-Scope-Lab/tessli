@@ -2,7 +2,7 @@ import assert from "node:assert/strict";
 
 const endpoint = process.env.CDP_ENDPOINT ?? "http://127.0.0.1:9222";
 const browseUrl =
-  process.env.TESSLI_RESOURCE_CARD_URL ?? "http://127.0.0.1:3000/resources";
+  process.env.TESSLI_BROWSE_URL ?? "http://127.0.0.1:3000/resources";
 const pending = new Map();
 let messageId = 0;
 
@@ -214,7 +214,55 @@ assert.equal(
   "The explicit Inspect action should be keyboard-focusable.",
 );
 
+const mediaOrder = ["preview", "favicon", "generated"];
+const mediaCardIndex = await evaluate(`(() => {
+  const cards = Array.from(
+    document.querySelectorAll('[data-browse-view=cards] [data-resource-card]'),
+  );
+  return cards.findIndex(
+    (card) => card.getAttribute('data-media-state') !== 'generated' && card.querySelector('img'),
+  );
+})()`);
+assert.notEqual(
+  mediaCardIndex,
+  -1,
+  "At least one Browse card should render preview or favicon media.",
+);
+const mediaCard = `document.querySelectorAll('[data-browse-view=cards] [data-resource-card]')[${mediaCardIndex}]`;
+const observedStates = [
+  await evaluate(`${mediaCard}.getAttribute('data-media-state')`),
+];
+
+while (observedStates.at(-1) !== "generated") {
+  const previous = observedStates.at(-1);
+  await evaluate(
+    `${mediaCard}.querySelector('img')?.dispatchEvent(new Event('error'))`,
+  );
+  await waitFor(
+    `${mediaCard}.getAttribute('data-media-state') !== '${previous}'`,
+    `the media fallback to advance past ${previous}`,
+  );
+  observedStates.push(
+    await evaluate(`${mediaCard}.getAttribute('data-media-state')`),
+  );
+}
+
+assert.deepEqual(
+  observedStates,
+  mediaOrder.filter((state) => observedStates.includes(state)),
+  "Card media should fall back in preview, favicon, generated-mark order.",
+);
+assert.equal(
+  await evaluate(`(() => {
+    const card = ${mediaCard};
+    const mark = card.querySelector(':scope > a span[aria-hidden="true"]');
+    return !card.querySelector('img') && /^[A-Z0-9]$/.test(mark?.textContent?.trim() ?? '');
+  })()`),
+  true,
+  "A card whose media all fails should render the generated mark without an image.",
+);
+
 socket.close();
 console.log(
-  "Resource card hover, selection, overflow, and independent-action checks passed.",
+  "Resource card hover, selection, overflow, independent-action, and media-fallback checks passed.",
 );
