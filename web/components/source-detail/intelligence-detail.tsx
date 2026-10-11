@@ -60,7 +60,6 @@ export function IntelligenceDetail({
   profile: SourceProfile;
   similar: readonly SimilarSourceMatch[];
 }>) {
-  const intelligence = profile.intelligence;
   const exploration = [
     ...new Set([...profile.capabilities, ...profile.contentObjects]),
   ];
@@ -73,7 +72,7 @@ export function IntelligenceDetail({
       <GuideSection title="What to explore">
         <GuideList
           items={exploration}
-          empty="No structured exploration points are recorded for this Listed source. Start with the canonical provider page."
+          empty="No structured exploration points are recorded for this source. Start with the canonical provider page."
         />
       </GuideSection>
 
@@ -150,45 +149,14 @@ export function IntelligenceDetail({
               <dd>{label(profile.accessModel.access)}</dd>
             </div>
             <div>
-              <dt>Availability</dt>
+              <dt>Status</dt>
               <dd>{label(profile.status)}</dd>
             </div>
           </dl>
 
-          {intelligence ? (
-            <section aria-labelledby="governance-title">
-              <h3 id="governance-title">Recorded governance</h3>
-              <ul>
-                <li>
-                  Persistence:{" "}
-                  {label(intelligence.governance.defaultPersistence)}
-                </li>
-                <li>
-                  Redistribution:{" "}
-                  {label(intelligence.governance.assetRedistribution)}
-                </li>
-                <li>
-                  Attribution:{" "}
-                  {label(intelligence.governance.sourceAttribution)}
-                </li>
-                <li>
-                  User credential required:{" "}
-                  {intelligence.governance.userCredentialRequired
-                    ? "Yes"
-                    : "No"}
-                </li>
-                <li>
-                  Terms review required:{" "}
-                  {intelligence.governance.termsReviewRequired ? "Yes" : "No"}
-                </li>
-              </ul>
-            </section>
-          ) : (
-            <p className={styles.emptyNote}>
-              No structured governance record is linked to this Listed source.
-              This page does not imply live provider verification.
-            </p>
-          )}
+          <p className={styles.emptyNote}>
+            This page does not imply live provider verification.
+          </p>
         </div>
       </details>
     </>

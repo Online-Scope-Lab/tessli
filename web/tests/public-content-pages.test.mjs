@@ -20,10 +20,13 @@ test("public content routes replace preview shells with factual Phase 1 pages", 
     assert.doesNotMatch(page, /RoutePlaceholder|preview notice|before launch/i);
     assert.doesNotMatch(page, /fetch\(|<form|Sign in|account dashboard/i);
   }
+  // About derives its counts from the catalogue instead of hard-coding them.
   assert.match(
     pages[0],
-    /295 repository-managed resources across 11 practical categories/,
+    /\$\{counts\.sources\} repository-managed resources across \$\{counts\.categories\} practical categories/,
   );
+  assert.match(pages[0], /getBrowsableSourceCounts\(\)/);
+  assert.doesNotMatch(pages[0], /\b295\b/);
   assert.match(pages[1], /pricing, licensing, availability/i);
   assert.match(pages[2], /do not write to your browser's local storage/i);
   assert.doesNotMatch(pages[2], /\bSaved\b|save a resource/i);

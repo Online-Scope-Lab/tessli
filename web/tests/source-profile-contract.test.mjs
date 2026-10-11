@@ -9,16 +9,18 @@ import {
   ACCESS_ROUTE_KINDS,
   ACCESS_ROUTE_PILOT_SOURCE_IDS,
 } from "../data/access-route-pilot.ts";
-import { getNativeResourceProfile } from "../lib/mcp-native-tools.ts";
+import { getAllIntelligenceProfiles } from "../lib/intelligence.ts";
+import { getNativeSource } from "../lib/mcp-native-tools.ts";
 import { createPublicSourceRepresentation } from "../lib/public-representations.mjs";
 import {
   SOURCE_PROFILE_CONTRACT_VERSION,
-  SOURCE_PROFILE_REVIEWED_AT,
   SOURCE_TYPE_BY_CATEGORY,
-  deriveCoverageLevel,
+  createSourceProfileIndex,
   getAllSourceProfiles,
+  getArchiveNotice,
+  getBrowsableSourceCounts,
+  getBrowsableSourceProfiles,
   getSourceContractSummary,
-  getSourceCoverageCounts,
   getSourceProfile,
 } from "../lib/source-profiles.ts";
 import { validateSourceProfileContract } from "../scripts/check-source-profile-contract.mjs";
@@ -75,13 +77,14 @@ const requiredSourceFields = [
   "integrationMethods",
   "accessRoutes",
   "limitations",
-  "profileLevel",
   "status",
-  "verifiedAt",
-  "evidence",
+  "archivedReason",
+  "replacedBy",
 ];
 
-test("source profile schema defines the complete canonical v1 contract", () => {
+const removedFields = ["profileLevel", "verifiedAt", "evidence", "coverage"];
+
+test("source profile schema defines the complete canonical v2 contract", () => {
   const schema = JSON.parse(fs.readFileSync(schemaPath, "utf8"));
   assert.equal(
     schema.$id,
@@ -98,20 +101,24 @@ test("source profile schema defines the complete canonical v1 contract", () => {
     );
     assert.ok(schema.properties[field], `Missing property schema ${field}`);
   }
-  assert.deepEqual(schema.properties.profileLevel.enum, [
-    "listed",
-    "profiled",
-    "verified",
+  assert.equal(SOURCE_PROFILE_CONTRACT_VERSION, 2);
+  assert.deepEqual(schema.properties.status.enum, [
+    "active",
+    "needs-review",
+    "archived",
   ]);
-  assert.equal(SOURCE_PROFILE_REVIEWED_AT, "2026-08-05");
+  for (const field of removedFields) {
+    assert.equal(schema.properties[field], undefined, field);
+    assert.equal(schema.required.includes(field), false, field);
+  }
 });
 
-test("all 295 catalogue resources have one deterministic source profile", () => {
+test("every catalogue resource has one deterministic source profile", () => {
   const profiles = getAllSourceProfiles();
-  assert.equal(profiles.length, 295);
-  assert.equal(profiles.length, catalogue.resources.length);
-  assert.equal(new Set(profiles.map((profile) => profile.id)).size, 295);
-  assert.equal(new Set(profiles.map((profile) => profile.slug)).size, 295);
+  const total = catalogue.resources.length;
+  assert.equal(profiles.length, total);
+  assert.equal(new Set(profiles.map((profile) => profile.id)).size, total);
+  assert.equal(new Set(profiles.map((profile) => profile.slug)).size, total);
 
   for (const resource of catalogue.resources) {
     const profile = getSourceProfile(resource.id);
@@ -124,10 +131,14 @@ test("all 295 catalogue resources have one deterministic source profile", () => 
     assert.equal(profile.summary, resource.description);
     assert.equal(profile.category, resource.category);
     assert.deepEqual(profile.accessModel, { access: resource.access });
+    assert.equal(profile.status, resource.status);
+    for (const field of removedFields) {
+      assert.equal(Object.hasOwn(profile, field), false, field);
+    }
   }
 });
 
-test("AccessRoute is canonical for exactly ten recorded pilot sources and honest for the other 285", () => {
+test("AccessRoute is canonical for exactly ten recorded pilot sources and honest for every other source", () => {
   assert.equal(ACCESS_ROUTE_PILOT_SOURCE_IDS.length, 10);
   assert.equal(new Set(ACCESS_ROUTE_PILOT_SOURCE_IDS).size, 10);
 
@@ -138,7 +149,10 @@ test("AccessRoute is canonical for exactly ten recorded pilot sources and honest
     (profile) => !ACCESS_ROUTE_PILOT_SOURCE_IDS.includes(profile.id),
   );
   assert.equal(pilotProfiles.length, 10);
-  assert.equal(fallbackProfiles.length, 285);
+  assert.equal(
+    fallbackProfiles.length,
+    getAllSourceProfiles().length - pilotProfiles.length,
+  );
 
   const pilotKinds = new Set(
     pilotProfiles.flatMap((profile) =>
@@ -184,35 +198,25 @@ test("AccessRoute is canonical for exactly ten recorded pilot sources and honest
   }
 });
 
-test("coverage baseline is truthful: 255 Listed, 40 Profiled, 0 Verified", () => {
-  assert.deepEqual(getSourceCoverageCounts(), {
-    listed: 255,
-    profiled: 40,
-    verified: 0,
-  });
+test("contract summary and public counts are derived from the data", () => {
+  const nonArchived = catalogue.resources.filter(
+    (resource) => resource.status !== "archived",
+  );
   assert.deepEqual(getSourceContractSummary(), {
-    contractVersion: 1,
-    reviewedAt: "2026-08-05",
-    resourceCount: 295,
-    intelligenceProfileCount: 40,
-    coverageCounts: {
-      listed: 255,
-      profiled: 40,
-      verified: 0,
-    },
+    contractVersion: 2,
+    resourceCount: catalogue.resources.length,
+    browsableCount: nonArchived.length,
+    intelligenceProfileCount: getAllIntelligenceProfiles().length,
+  });
+  assert.deepEqual(getBrowsableSourceCounts(), {
+    sources: nonArchived.length,
+    categories: new Set(nonArchived.map((resource) => resource.category)).size,
   });
 });
 
-test("Profiled records expose normalized intelligence without losing evidence", () => {
+test("sources with an intelligence profile expose its normalized guidance", () => {
   const relume = getSourceProfile("relume");
   assert.ok(relume?.intelligence);
-  assert.equal(relume.intelligence.status, "verified");
-  assert.equal(relume.profileLevel, "profiled");
-  assert.equal(relume.coverage.level, "profiled");
-  assert.equal(relume.coverage.humanReviewStatus, "not-recorded");
-  assert.equal(relume.verifiedAt, "2026-07-31");
-  assert.equal(relume.coverage.freshnessStatus, "current");
-  assert.equal(relume.coverage.confidence, "certain");
   assert.deepEqual(relume.bestFor, relume.intelligence.workflowFit);
   assert.deepEqual(relume.capabilities, relume.intelligence.capabilities);
   assert.deepEqual(relume.contentObjects, relume.intelligence.contentObjects);
@@ -223,59 +227,162 @@ test("Profiled records expose normalized intelligence without losing evidence", 
     relume.intelligence.integrationMethods,
   );
   assert.deepEqual(relume.limitations, relume.intelligence.limitations);
-  assert.deepEqual(relume.evidence, relume.intelligence.evidence);
-  assert.equal(
-    deriveCoverageLevel(relume.intelligence, "completed"),
-    "verified",
-  );
-});
 
-test("expanded batch records are complete Profiled sources without invented verification", () => {
   for (const identifier of expandedBatchIdentifiers) {
     const profile = getSourceProfile(identifier);
     assert.ok(profile?.intelligence, `${identifier} must have intelligence`);
-    assert.equal(profile.profileLevel, "profiled");
-    assert.equal(profile.coverage.level, "profiled");
-    assert.equal(profile.coverage.profileStatus, "needs-review");
-    assert.equal(profile.coverage.humanReviewStatus, "not-recorded");
-    assert.equal(profile.coverage.freshnessStatus, "current");
-    assert.equal(profile.coverage.confidence, "certain");
-    assert.equal(profile.verifiedAt, "2026-08-05");
     assert.ok(profile.bestFor.length > 0);
     assert.ok(profile.capabilities.length > 0);
     assert.ok(profile.contentObjects.length > 0);
     assert.ok(profile.limitations.length > 0);
-    assert.ok(profile.evidence.length > 0);
   }
 });
 
-test("Listed records expose no invented intelligence, evidence, or timestamps", () => {
-  const listed = getAllSourceProfiles().filter(
-    (profile) => profile.profileLevel === "listed",
+test("sources without an intelligence profile expose only their source file's fields", () => {
+  const byId = new Map(
+    catalogue.resources.map((resource) => [resource.id, resource]),
   );
-  assert.equal(listed.length, 255);
-  for (const profile of listed) {
-    assert.equal(profile.intelligence, null);
-    assert.deepEqual(profile.bestFor, []);
+  const sparse = getAllSourceProfiles().filter(
+    (profile) => profile.intelligence === null,
+  );
+  assert.equal(
+    sparse.length,
+    getAllSourceProfiles().length - getAllIntelligenceProfiles().length,
+  );
+  for (const profile of sparse) {
+    const resource = byId.get(profile.id);
+    assert.deepEqual(profile.bestFor, resource.bestFor ?? []);
+    assert.deepEqual(profile.limitations, resource.limitations ?? []);
+    assert.deepEqual(profile.frameworks, resource.frameworks ?? []);
     assert.deepEqual(profile.capabilities, []);
     assert.deepEqual(profile.contentObjects, []);
     assert.deepEqual(profile.platforms, []);
-    assert.deepEqual(profile.frameworks, []);
     assert.deepEqual(profile.integrationMethods, []);
-    assert.deepEqual(profile.limitations, []);
-    assert.deepEqual(profile.evidence, []);
-    assert.equal(profile.verifiedAt, null);
-    assert.equal(profile.coverage.profileStatus, null);
-    assert.equal(profile.coverage.lastVerifiedAt, null);
-    assert.equal(profile.coverage.confidence, "unknown");
-    assert.equal(profile.coverage.freshnessStatus, "unknown");
-    assert.equal(profile.coverage.humanReviewStatus, "not-recorded");
-    assert.equal(profile.coverage.evidenceCount, 0);
   }
 });
 
+const fixtureResource = {
+  domain: "fixture.example",
+  description: "A fixture source used only by tests.",
+  category: "typography",
+  access: "free",
+};
+const fixtures = [
+  {
+    ...fixtureResource,
+    id: "resource-fixture-active",
+    slug: "fixture-active",
+    name: "Fixture Active",
+    url: "https://active.fixture.example",
+    status: "active",
+  },
+  {
+    ...fixtureResource,
+    id: "resource-fixture-review",
+    slug: "fixture-review",
+    name: "Fixture Review",
+    url: "https://review.fixture.example",
+    category: "icons",
+    status: "needs-review",
+  },
+  {
+    ...fixtureResource,
+    id: "resource-fixture-archived",
+    slug: "fixture-archived",
+    name: "Fixture Archived",
+    url: "https://archived.fixture.example",
+    status: "archived",
+    archivedReason: "The site now redirects to Fixture Active.",
+    replacedBy: "fixture-active",
+  },
+  {
+    ...fixtureResource,
+    id: "resource-fixture-gone",
+    slug: "fixture-gone",
+    name: "Fixture Gone",
+    url: "https://gone.fixture.example",
+    status: "archived",
+    archivedReason: "The site no longer exists.",
+  },
+];
+
+test("archived sources are kept by ID and slug but never browsable", () => {
+  const index = createSourceProfileIndex(fixtures);
+
+  assert.deepEqual(
+    index.all.map((profile) => profile.slug),
+    ["fixture-active", "fixture-review", "fixture-archived", "fixture-gone"],
+  );
+  assert.deepEqual(
+    index.browsable.map((profile) => profile.slug),
+    ["fixture-active", "fixture-review"],
+  );
+  const archived = index.get("resource-fixture-archived");
+  assert.equal(index.get("fixture-archived"), archived);
+  assert.equal(archived.status, "archived");
+  assert.equal(
+    archived.archivedReason,
+    "The site now redirects to Fixture Active.",
+  );
+  assert.equal(archived.replacedBy, "fixture-active");
+  assert.equal(index.get("fixture-active").archivedReason, null);
+  assert.equal(index.get("fixture-active").replacedBy, null);
+
+  // The real catalogue applies the same rule.
+  assert.ok(
+    getBrowsableSourceProfiles().every(
+      (profile) => profile.status !== "archived",
+    ),
+  );
+});
+
+test("an archived source page shows its reason and a non-archived replacement", () => {
+  const index = createSourceProfileIndex(fixtures);
+
+  assert.deepEqual(getArchiveNotice(index.get("fixture-archived"), index.get), {
+    reason: "The site now redirects to Fixture Active.",
+    replacement: { slug: "fixture-active", name: "Fixture Active" },
+  });
+  assert.deepEqual(getArchiveNotice(index.get("fixture-gone"), index.get), {
+    reason: "The site no longer exists.",
+    replacement: null,
+  });
+  assert.equal(getArchiveNotice(index.get("fixture-active"), index.get), null);
+  assert.equal(getArchiveNotice(index.get("fixture-review"), index.get), null);
+
+  const page = fs.readFileSync(
+    path.join(__dirname, "../app/resources/[slug]/page.tsx"),
+    "utf8",
+  );
+  const actions = fs.readFileSync(
+    path.join(__dirname, "../components/source-detail/source-actions.tsx"),
+    "utf8",
+  );
+  // Archived pages still render (every source gets a static page), are
+  // noindex, state the reason, link the replacement, and never promote Visit.
+  assert.match(page, /getAllSourceProfiles\(\)\.map/);
+  assert.match(
+    page,
+    /isArchivedSource\(profile\)\s*\?\s*\{ robots: \{ index: false, follow: true \} \}/,
+  );
+  assert.match(page, /<strong>Archived:<\/strong> \{archiveNotice\.reason\}/);
+  assert.match(
+    page,
+    /href=\{`\/resources\/\$\{archiveNotice\.replacement\.slug\}`\}/,
+  );
+  const archivedBranch = actions.slice(
+    actions.indexOf('resource.status === "archived"'),
+    actions.indexOf(") : ("),
+  );
+  assert.match(archivedBranch, /Original address/);
+  assert.doesNotMatch(archivedBranch, /buttonClassName|Visit source/);
+});
+
 test("source type is a deterministic category classification, not provider fact", () => {
-  assert.equal(Object.keys(SOURCE_TYPE_BY_CATEGORY).length, 11);
+  assert.deepEqual(
+    Object.keys(SOURCE_TYPE_BY_CATEGORY).sort(),
+    catalogue.categories.map((category) => category.id).sort(),
+  );
   for (const profile of getAllSourceProfiles()) {
     assert.equal(profile.sourceType, SOURCE_TYPE_BY_CATEGORY[profile.category]);
     assert.equal(profile.sourceTypeBasis, "category-classification");
@@ -285,13 +392,14 @@ test("source type is a deterministic category classification, not provider fact"
 test("website-ready source profiles and MCP preserve the same source identity", () => {
   for (const identifier of ["relume", ...expandedBatchIdentifiers]) {
     const sourceProfile = getSourceProfile(identifier);
-    const nativeProfile = getNativeResourceProfile(identifier);
+    const nativeSource = getNativeSource(identifier).source;
     assert.ok(sourceProfile);
-    assert.equal(nativeProfile.resource.id, sourceProfile.id);
-    assert.equal(nativeProfile.resource.slug, sourceProfile.slug);
-    assert.equal(
-      nativeProfile.intelligenceProfile?.resourceId,
-      sourceProfile.intelligence?.resourceId,
+    assert.equal(nativeSource.id, sourceProfile.id);
+    assert.equal(nativeSource.slug, sourceProfile.slug);
+    assert.equal(nativeSource.status, sourceProfile.status);
+    assert.deepEqual(
+      nativeSource.whatItHelpsWith,
+      sourceProfile.bestFor.slice(0, 4),
     );
   }
 });
@@ -302,27 +410,51 @@ test("website profiles, public representations, and local MCP share exact Access
     assert.ok(sourceProfile);
     const publicRepresentation =
       createPublicSourceRepresentation(sourceProfile);
-    const nativeProfile = getNativeResourceProfile(identifier);
+    const nativeSource = getNativeSource(identifier).source;
 
     assert.deepEqual(
       publicRepresentation.source.accessRoutes,
       sourceProfile.accessRoutes,
     );
-    assert.deepEqual(
-      nativeProfile.resource.accessRoutes,
-      sourceProfile.accessRoutes,
-    );
+    assert.deepEqual(nativeSource.accessRoutes, sourceProfile.accessRoutes);
   }
 });
 
 test("source profile validator accepts the complete deterministic baseline", () => {
   const report = validateSourceProfileContract();
   assert.equal(report.valid, true, JSON.stringify(report.errors, null, 2));
-  assert.equal(report.resourceCount, 295);
-  assert.equal(report.intelligenceProfileCount, 40);
-  assert.deepEqual(report.coverageCounts, {
-    listed: 255,
-    profiled: 40,
-    verified: 0,
-  });
+  assert.equal(report.resourceCount, catalogue.resources.length);
+  assert.equal(
+    report.intelligenceProfileCount,
+    getAllIntelligenceProfiles().length,
+  );
+  assert.equal(Object.hasOwn(report, "coverageCounts"), false);
+});
+
+test("every public listing, search and count reads only non-archived sources", () => {
+  const read = (relativePath) =>
+    fs.readFileSync(path.join(__dirname, "..", relativePath), "utf8");
+  for (const file of [
+    "app/resources/page.tsx",
+    "app/sitemap.ts",
+    "lib/task-retrieval.ts",
+    "lib/similar-sources.ts",
+  ]) {
+    const source = read(file);
+    assert.match(source, /getBrowsableSourceProfiles\(\)/, file);
+    assert.doesNotMatch(source, /getAllSourceProfiles/, file);
+  }
+  for (const file of [
+    "components/explore-facts/explore-facts.tsx",
+    "app/about/page.tsx",
+    "app/not-found.tsx",
+    "app/lab/page.tsx",
+  ]) {
+    assert.match(read(file), /getBrowsableSourceCounts\(\)/, file);
+  }
+  assert.match(
+    read("lib/mcp-native-tools.ts"),
+    /collection\.resourceIds\.filter\(isBrowsableResource\)/,
+  );
+  assert.match(read("lib/collections.ts"), /resource\.status !== "archived"/);
 });

@@ -53,6 +53,31 @@
   line-height: 1.55;
 }
 
+.archivedNotice {
+  display: grid;
+  gap: var(--space-2);
+  max-width: 50ch;
+  margin: var(--space-5) 0 0;
+  padding: var(--space-3) var(--space-4);
+  border: 1px solid var(--line-strong, #bdb5ab);
+  border-left: 3px solid var(--accent);
+  background: var(--surface, #fffefc);
+  color: var(--text-body, #4f4a44);
+}
+
+.archivedNotice p {
+  margin: 0;
+}
+
+.archivedNotice strong {
+  color: var(--text-strong);
+}
+
+.archivedNotice a {
+  color: var(--text-strong);
+  text-underline-offset: 0.18em;
+}
+
 .preview {
   position: relative;
   display: grid;

@@ -55,7 +55,7 @@ Accepts a structured task with optional surface, framework, needs, and exclusion
 
 ### `get_source`
 
-Returns one exact stable source ID or slug as compact canonical guidance: what it helps with, what to inspect, recorded access routes, caveats, and differentiated alternatives.
+Returns one exact stable source ID or slug as compact canonical guidance: status, what it helps with, what to inspect, recorded access routes, caveats, and differentiated alternatives. An archived source still resolves by exact ID or slug, with its `archivedReason` and `replacedBy`; it never appears in `find_sources`, alternatives, collections or research briefs.
 
 ### `find_alternatives`
 
@@ -71,7 +71,7 @@ Returns a compact, deterministic research handoff from the same structured task 
 
 ## V1 replacement boundary
 
-The previous seven-tool v1 list is not registered as MCP aliases: registered stdio tools are necessarily visible through `ListTools`, which would contradict the focused five-tool contract. The direct `getNativeResourceProfile` library adapter remains only for an internal source-profile parity check; it is not an MCP tool.
+The previous seven-tool v1 list is not registered as MCP aliases: registered stdio tools are necessarily visible through `ListTools`, which would contradict the focused five-tool contract. Tool output carries no coverage level, verification date, evidence or governance record.
 
 ## Remote MCP availability
 

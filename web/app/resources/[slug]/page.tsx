@@ -12,7 +12,12 @@ import { Tag } from "@/components/ui/tag";
 import catalogue from "@/data/catalogue.json";
 import { getPublishedCollections } from "@/lib/collections";
 import { getSimilarSourceProfiles } from "@/lib/similar-sources";
-import { getAllSourceProfiles, getSourceProfile } from "@/lib/source-profiles";
+import {
+  getAllSourceProfiles,
+  getArchiveNotice,
+  getSourceProfile,
+  isArchivedSource,
+} from "@/lib/source-profiles";
 
 import styles from "./source-detail.module.css";
 
@@ -69,6 +74,10 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     title: profile.name,
     description: profile.summary,
     alternates: { canonical: `/resources/${profile.slug}` },
+    // Archived sources keep their page for old links but leave search indexes.
+    ...(isArchivedSource(profile)
+      ? { robots: { index: false, follow: true } }
+      : {}),
   };
 }
 
@@ -81,12 +90,13 @@ export default async function SourceProfilePage({ params }: Props) {
     collection.resourceIds.includes(profile.id),
   );
   const similar = getSimilarSourceProfiles(profile, 4);
+  const archiveNotice = getArchiveNotice(profile);
 
   return (
     <main
       className={styles.page}
-      data-profile-level={profile.profileLevel}
       data-source-detail={profile.slug}
+      data-source-status={profile.status}
       id="main-content"
     >
       <div className="tessli-container">
@@ -100,6 +110,22 @@ export default async function SourceProfilePage({ params }: Props) {
           <div className={styles.identity}>
             <h1>{profile.name}</h1>
             <p className={styles.summary}>{profile.summary}</p>
+            {archiveNotice ? (
+              <div className={styles.archivedNotice} data-source-archived="">
+                <p>
+                  <strong>Archived:</strong> {archiveNotice.reason}
+                </p>
+                {archiveNotice.replacement ? (
+                  <p>
+                    Use{" "}
+                    <Link href={`/resources/${archiveNotice.replacement.slug}`}>
+                      {archiveNotice.replacement.name}
+                    </Link>{" "}
+                    instead.
+                  </p>
+                ) : null}
+              </div>
+            ) : null}
             <p className={styles.category}>
               <Tag>
                 {categories.get(profile.category) ?? label(profile.category)}
@@ -140,7 +166,7 @@ export default async function SourceProfilePage({ params }: Props) {
           <ProfileList
             title="Use it when"
             items={profile.bestFor}
-            empty="No structured task-fit guidance is recorded for this Listed source. Start with its canonical description and provider page."
+            empty="No structured task-fit guidance is recorded for this source. Start with its canonical description and provider page."
           />
 
           <IntelligenceDetail profile={profile} similar={similar} />

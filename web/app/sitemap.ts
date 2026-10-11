@@ -1,7 +1,7 @@
 import type { MetadataRoute } from "next";
 
 import { getPublishedCollections } from "@/lib/collections";
-import { getAllSourceProfiles } from "@/lib/source-profiles";
+import { getBrowsableSourceProfiles } from "@/lib/source-profiles";
 
 function siteOrigin() {
   const configured = process.env.NEXT_PUBLIC_SITE_URL?.trim();
@@ -35,7 +35,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
       { url: `${origin}/collections/${collection.slug}/collection.json` },
       { url: `${origin}/collections/${collection.slug}/collection.md` },
     ]),
-    ...getAllSourceProfiles().flatMap((profile) => [
+    ...getBrowsableSourceProfiles().flatMap((profile) => [
       { url: `${origin}/resources/${profile.slug}` },
       { url: `${origin}/resources/${profile.slug}/profile.json` },
       { url: `${origin}/resources/${profile.slug}/profile.md` },

@@ -1,5 +1,13 @@
 import assert from "node:assert/strict";
 
+import catalogue from "../data/catalogue.json" with { type: "json" };
+
+// The hero facts are derived from the catalogue: non-archived sources and the
+// categories that hold at least one of them.
+const listedSources = catalogue.resources.filter(
+  (resource) => resource.status !== "archived",
+);
+
 const endpoint = process.env.CDP_ENDPOINT ?? "http://127.0.0.1:9222";
 const pageUrl = process.env.TESSLI_URL ?? "http://127.0.0.1:3000/";
 const pending = new Map();
@@ -241,8 +249,13 @@ const facts = await evaluate(`Array.from(
 }))`);
 
 assert.deepEqual(facts, [
-  { label: "Curated resources", value: "295" },
-  { label: "Practical categories", value: "11" },
+  { label: "Curated resources", value: String(listedSources.length) },
+  {
+    label: "Practical categories",
+    value: String(
+      new Set(listedSources.map((resource) => resource.category)).size,
+    ),
+  },
   { label: "Needed to browse", value: "No account" },
   { label: "Community-built project", value: "Open" },
 ]);

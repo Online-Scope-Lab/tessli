@@ -1,17 +1,21 @@
+import { getBrowsableSourceCounts } from "@/lib/source-profiles";
+
 import styles from "./explore-facts.module.css";
 
 type FactIconName = "resources" | "categories" | "private" | "open";
+
+const counts = getBrowsableSourceCounts();
 
 const facts = [
   {
     icon: "resources",
     label: "Curated resources",
-    value: "295",
+    value: String(counts.sources),
   },
   {
     icon: "categories",
     label: "Practical categories",
-    value: "11",
+    value: String(counts.categories),
   },
   {
     icon: "private",

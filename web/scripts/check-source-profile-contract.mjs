@@ -7,11 +7,12 @@ import {
   ACCESS_ROUTE_PILOT_SOURCE_IDS,
   ACCESS_ROUTE_KINDS,
 } from "../data/access-route-pilot.ts";
+import { getAllIntelligenceProfiles } from "../lib/intelligence.ts";
 import {
   SOURCE_PROFILE_CONTRACT_VERSION,
-  SOURCE_PROFILE_REVIEWED_AT,
   SOURCE_TYPES,
   getAllSourceProfiles,
+  getBrowsableSourceProfiles,
   getSourceContractSummary,
   getSourceProfile,
 } from "../lib/source-profiles.ts";
@@ -28,20 +29,8 @@ function issue(code, message, details = {}) {
   return { code, message, ...details };
 }
 
-function validIsoDate(value) {
-  return (
-    typeof value === "string" &&
-    /^\d{4}-\d{2}-\d{2}$/.test(value) &&
-    Number.isFinite(Date.parse(`${value}T00:00:00Z`))
-  );
-}
-
 function sameValue(left, right) {
   return JSON.stringify(left) === JSON.stringify(right);
-}
-
-function expectedSourceStatus(status) {
-  return status === "active" || status === "inactive" ? status : "unknown";
 }
 
 export function validateSourceProfileContract() {
@@ -66,12 +55,6 @@ export function validateSourceProfileContract() {
       ),
     );
   }
-  if (!validIsoDate(SOURCE_PROFILE_REVIEWED_AT)) {
-    errors.push(
-      issue("reviewed-at", "Source profile contract review date is invalid."),
-    );
-  }
-
   if (profiles.length !== catalogue.resources.length) {
     errors.push(
       issue(
@@ -145,11 +128,15 @@ export function validateSourceProfileContract() {
         ),
       );
     }
-    if (profile.status !== expectedSourceStatus(catalogueResource.status)) {
+    if (
+      profile.status !== catalogueResource.status ||
+      profile.archivedReason !== (catalogueResource.archivedReason ?? null) ||
+      profile.replacedBy !== (catalogueResource.replacedBy ?? null)
+    ) {
       errors.push(
         issue(
           "source-status",
-          `${profile.id} does not preserve its catalogue availability status.`,
+          `${profile.id} does not preserve its catalogue status, archive reason or replacement.`,
         ),
       );
     }
@@ -202,32 +189,6 @@ export function validateSourceProfileContract() {
         }
       }
     }
-    if (profile.profileLevel !== profile.coverage.level) {
-      errors.push(
-        issue(
-          "profile-level",
-          `${profile.id} profile level does not match its coverage record.`,
-        ),
-      );
-    }
-
-    if (profile.profileLevel === "listed" && profile.intelligence !== null) {
-      errors.push(
-        issue(
-          "listed-has-intelligence",
-          `${profile.id} is Listed despite having intelligence data.`,
-        ),
-      );
-    }
-    if (profile.profileLevel !== "listed" && profile.intelligence === null) {
-      errors.push(
-        issue(
-          "profile-missing-intelligence",
-          `${profile.id} has ${profile.profileLevel} coverage without intelligence data.`,
-        ),
-      );
-    }
-
     if (profile.intelligence) {
       const intelligence = profile.intelligence;
       if (
@@ -250,7 +211,6 @@ export function validateSourceProfileContract() {
         ["frameworks", intelligence.frameworks],
         ["integrationMethods", intelligence.integrationMethods],
         ["limitations", intelligence.limitations],
-        ["evidence", intelligence.evidence],
       ];
       for (const [field, expected] of normalizedFields) {
         if (!sameValue(profile[field], expected)) {
@@ -262,76 +222,27 @@ export function validateSourceProfileContract() {
           );
         }
       }
-
-      if (profile.verifiedAt !== intelligence.verifiedAt) {
-        errors.push(
-          issue(
-            "verification-date",
-            `${profile.id} verification date does not match its intelligence profile.`,
-          ),
-        );
-      }
-      if (profile.coverage.evidenceCount !== intelligence.evidence.length) {
-        errors.push(
-          issue(
-            "evidence-count",
-            `${profile.id} evidence count does not match its intelligence profile.`,
-          ),
-        );
-      }
-      if (profile.coverage.lastVerifiedAt !== intelligence.verifiedAt) {
-        errors.push(
-          issue(
-            "coverage-verification-date",
-            `${profile.id} coverage date does not match its intelligence profile.`,
-          ),
-        );
-      }
-      if (
-        profile.profileLevel === "verified" &&
-        profile.coverage.humanReviewStatus !== "completed"
-      ) {
-        errors.push(
-          issue(
-            "verified-without-review",
-            `${profile.id} is Verified without an explicit human-review record.`,
-          ),
-        );
-      }
     } else {
-      for (const field of [
-        "bestFor",
-        "capabilities",
-        "contentObjects",
-        "platforms",
-        "frameworks",
-        "integrationMethods",
-        "limitations",
-        "evidence",
-      ]) {
-        if (!Array.isArray(profile[field]) || profile[field].length !== 0) {
+      // Without an intelligence profile, only the source file's own optional
+      // fields may appear; nothing else is invented.
+      const fromSourceFile = [
+        ["bestFor", catalogueResource.bestFor ?? []],
+        ["frameworks", catalogueResource.frameworks ?? []],
+        ["limitations", catalogueResource.limitations ?? []],
+        ["capabilities", []],
+        ["contentObjects", []],
+        ["platforms", []],
+        ["integrationMethods", []],
+      ];
+      for (const [field, expected] of fromSourceFile) {
+        if (!sameValue(profile[field], expected)) {
           errors.push(
             issue(
-              "listed-intelligence",
+              "invented-intelligence",
               `${profile.id} invents ${field} without an intelligence profile.`,
             ),
           );
         }
-      }
-      if (
-        profile.verifiedAt !== null ||
-        profile.coverage.evidenceCount !== 0 ||
-        profile.coverage.lastVerifiedAt !== null ||
-        profile.coverage.confidence !== "unknown" ||
-        profile.coverage.freshnessStatus !== "unknown" ||
-        profile.coverage.humanReviewStatus !== "not-recorded"
-      ) {
-        errors.push(
-          issue(
-            "listed-evidence",
-            `${profile.id} exposes verification claims without an intelligence profile.`,
-          ),
-        );
       }
     }
 
@@ -347,26 +258,31 @@ export function validateSourceProfileContract() {
     }
   }
 
-  const coverageTotal = Object.values(summary.coverageCounts).reduce(
-    (total, count) => total + count,
-    0,
-  );
-  if (coverageTotal !== profiles.length) {
+  const archivedCount = profiles.filter(
+    (profile) => profile.status === "archived",
+  ).length;
+  const browsable = getBrowsableSourceProfiles();
+  if (
+    browsable.length !== profiles.length - archivedCount ||
+    browsable.some((profile) => profile.status === "archived")
+  ) {
     errors.push(
       issue(
-        "coverage-total",
-        "Coverage counts do not account for every source profile.",
+        "browsable-sources",
+        "Browsable sources must be exactly the non-archived sources.",
       ),
     );
   }
-  if (summary.intelligenceProfileCount !== 40) {
-    errors.push(
-      issue(
-        "intelligence-count",
-        "The reviewed intelligence dataset must contain exactly 40 profiles after Slice 1.4.",
-        { actual: summary.intelligenceProfileCount },
-      ),
-    );
+  for (const intelligence of getAllIntelligenceProfiles()) {
+    const profile = getSourceProfile(intelligence.resourceId);
+    if (profile?.intelligence !== intelligence) {
+      errors.push(
+        issue(
+          "intelligence-unlinked",
+          `Intelligence profile ${intelligence.resourceId} is not linked to exactly one source.`,
+        ),
+      );
+    }
   }
   if (ACCESS_ROUTE_PILOT_SOURCE_IDS.length !== 10) {
     errors.push(
@@ -376,27 +292,12 @@ export function validateSourceProfileContract() {
       ),
     );
   }
-  if (
-    summary.coverageCounts.listed !== 255 ||
-    summary.coverageCounts.profiled !== 40 ||
-    summary.coverageCounts.verified !== 0
-  ) {
-    errors.push(
-      issue(
-        "coverage-composition",
-        "Coverage composition is not the truthful Slice 1.4 baseline.",
-        { actual: summary.coverageCounts },
-      ),
-    );
-  }
-
   return {
     valid: errors.length === 0,
     contractVersion: SOURCE_PROFILE_CONTRACT_VERSION,
-    reviewedAt: SOURCE_PROFILE_REVIEWED_AT,
     resourceCount: profiles.length,
+    browsableCount: summary.browsableCount,
     intelligenceProfileCount: summary.intelligenceProfileCount,
-    coverageCounts: summary.coverageCounts,
     errors,
   };
 }
@@ -404,10 +305,9 @@ export function validateSourceProfileContract() {
 if (process.argv[1] && fileURLToPath(import.meta.url) === process.argv[1]) {
   const report = validateSourceProfileContract();
   console.log(
-    `Source profile contract: ${report.resourceCount} resources; ` +
-      `${report.coverageCounts.listed} Listed, ` +
-      `${report.coverageCounts.profiled} Profiled, ` +
-      `${report.coverageCounts.verified} Verified.`,
+    `Source profile contract: ${report.resourceCount} sources ` +
+      `(${report.browsableCount} not archived); ` +
+      `${report.intelligenceProfileCount} with an intelligence profile.`,
   );
 
   if (!report.valid) {

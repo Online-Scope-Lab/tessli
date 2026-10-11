@@ -1,5 +1,5 @@
 import type { SourceProfile } from "./source-profiles.ts";
-import { getAllSourceProfiles } from "./source-profiles.ts";
+import { getBrowsableSourceProfiles } from "./source-profiles.ts";
 
 export interface SimilarSourceMatch {
   profile: SourceProfile;
@@ -79,7 +79,7 @@ export function getSimilarSourceProfiles(
 ): readonly SimilarSourceMatch[] {
   if (limit <= 0) return [];
 
-  return getAllSourceProfiles()
+  return getBrowsableSourceProfiles()
     .filter(
       (candidate) =>
         candidate.id !== source.id &&

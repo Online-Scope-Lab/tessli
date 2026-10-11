@@ -119,7 +119,7 @@ test("sitemap limits discovery to public routes and canonical documents", async 
   }
 
   assert.match(sitemap, /getPublishedCollections\(\)/);
-  assert.match(sitemap, /getAllSourceProfiles\(\)/);
+  assert.match(sitemap, /getBrowsableSourceProfiles\(\)/);
   assert.match(sitemap, /collection\.(?:json|md)/);
   assert.match(sitemap, /profile\.(?:json|md)/);
   assert.doesNotMatch(sitemap, /"\/(?:saved|boards|auth|submit|suggest|lab)/u);

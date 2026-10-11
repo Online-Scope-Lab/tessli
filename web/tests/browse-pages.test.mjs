@@ -18,7 +18,8 @@ test("canonical Browse derives one paginated result set from source profiles", a
     read("components/browse/browse-filters.tsx"),
   ]);
 
-  assert.match(page, /getAllSourceProfiles\(\)/);
+  assert.match(page, /getBrowsableSourceProfiles\(\)/);
+  assert.doesNotMatch(page, /getAllSourceProfiles/);
   assert.match(page, /parseBrowseState\(/);
   assert.match(page, /deriveBrowseResults\(/);
   assert.match(page, /<BrowseResults resources=\{resources\}/);
@@ -48,7 +49,7 @@ test("canonical Browse uses repository data without remote state", async () => {
   ]);
 
   assert.match(resources, /import catalogue from "@\/data\/catalogue\.json"/);
-  assert.match(resources, /getAllSourceProfiles\(\)/);
+  assert.match(resources, /getBrowsableSourceProfiles\(\)/);
   assert.match(resources, /parseBrowseState/);
   assert.match(resources, /deriveBrowseResults/);
   assert.match(resources, /<BrowseResults resources=\{resources\}/);
@@ -132,11 +133,15 @@ test("minimum source profile routes cover all source slugs without overstating e
   assert.match(detail, /getAllSourceProfiles\(\)\.map/);
   assert.match(detail, /getSourceProfile/);
   assert.match(detail, /if \(!profile\) notFound\(\)/);
-  assert.match(detail, /profile\.profileLevel/);
+  assert.doesNotMatch(detail, /profileLevel|Listed source/);
+  assert.match(detail, /data-source-status=\{profile\.status\}/);
   assert.match(detail, /<SourceActions resource=\{card\}/);
   assert.match(detail, /Use it when/i);
   assert.match(guide, /does not imply live provider verification/);
-  assert.doesNotMatch(guide, /profile\.coverage|Recorded references/);
+  assert.doesNotMatch(
+    guide,
+    /profile\.coverage|Recorded references|Recorded governance|Listed source/,
+  );
   assert.match(guide, /Source details/i);
   assert.match(actions, /Visit source ↗/);
   assert.match(actions, /rel="noopener noreferrer"/);

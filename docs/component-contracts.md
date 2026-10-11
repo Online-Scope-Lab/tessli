@@ -90,9 +90,9 @@ Desktop can use concise inline controls or a sidebar. Tablet/mobile use an acces
 - preview loading, preview failed, missing preview;
 - missing description/task cues;
 - long title;
-- unavailable/broken provider.
+- archived source (never in Browse; a card for one replaces Visit with a plain "Archived" label).
 
-Coverage level, evidence, freshness, and governance can be available in a quiet secondary treatment but are not card focal points. Cards or compact rows are the standard Browse forms; a table requires a documented research benefit and must recompose on mobile rather than horizontally scroll.
+Coverage levels, evidence, freshness and governance are not shown on cards in v1.2. Cards or compact rows are the standard Browse forms; a table requires a documented research benefit and must recompose on mobile rather than horizontally scroll.
 
 ## 7. Source Guide sections
 
@@ -104,9 +104,11 @@ Source Guide composition follows this fixed reading hierarchy:
 4. How to access and useful compatibility;
 5. Important limitations;
 6. differentiated alternatives and containing Collections;
-7. quiet source details (domain, type, access model, availability and any recorded governance).
+7. quiet source details (domain, type, access model and status).
 
-The component family must degrade honestly for thinly described sources and omit unsupported optional fields. Coverage levels, evidence records and verification mechanics are not shown on the Source Guide in v1.2.
+The component family must degrade honestly for thinly described sources and omit unsupported optional fields. Coverage levels, evidence records, governance and verification mechanics are not shown on the Source Guide in v1.2.
+
+An archived source keeps its Source Guide for old links, marked `noindex`. It shows an "Archived: <reason>" notice under the purpose, links the replacing source when one is recorded, and shows the provider address as a quiet text link instead of the Visit button.
 
 ## 8. Collection card and stage item
 

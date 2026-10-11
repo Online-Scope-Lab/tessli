@@ -85,15 +85,19 @@ function resolveResource(
 function resolveCollection(
   collection: (typeof catalogue.collections)[number],
 ): PublishedCollection {
-  const stages = collection.stages.map((stage) => ({
-    id: stage.id,
-    title: stage.title,
-    inspect: stage.inspect,
-    decision: stage.decision,
-    resources: stage.items.map((item) =>
-      resolveResource(collection.slug, stage.id, item),
-    ),
-  }));
+  // Archived sources keep their collection membership in the data but are
+  // never listed; a stage left with no listed source is not shown.
+  const stages = collection.stages
+    .map((stage) => ({
+      id: stage.id,
+      title: stage.title,
+      inspect: stage.inspect,
+      decision: stage.decision,
+      resources: stage.items
+        .map((item) => resolveResource(collection.slug, stage.id, item))
+        .filter(({ resource }) => resource.status !== "archived"),
+    }))
+    .filter((stage) => stage.resources.length > 0);
   const resources = stages.flatMap((stage) => stage.resources);
 
   return {
@@ -103,7 +107,7 @@ function resolveCollection(
     description: collection.description,
     outcome: collection.outcome,
     audience: collection.audience,
-    resourceIds: collection.resourceIds,
+    resourceIds: resources.map(({ resource }) => resource.id),
     stages,
     coverStyle: collection.coverStyle as CollectionCoverStyle,
     lastReviewedAt: collection.lastReviewedAt,

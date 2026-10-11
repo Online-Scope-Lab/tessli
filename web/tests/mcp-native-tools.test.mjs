@@ -54,13 +54,14 @@ test("get_source exposes compact canonical action guidance and recorded caveats"
   );
   assert.match(bySlug.boundary, /not a live provider/i);
 
-  const listed = getNativeSource("designindex");
-  assert.deepEqual(listed.source.whatItHelpsWith, []);
-  assert.deepEqual(listed.source.caveats, []);
-  assert.match(
-    listed.source.coverageNote,
-    /no structured intelligence profile/i,
-  );
+  const sparse = getNativeSource("designindex");
+  assert.deepEqual(sparse.source.whatItHelpsWith, []);
+  assert.deepEqual(sparse.source.caveats, []);
+  assert.equal(sparse.source.status, "active");
+  for (const removed of ["profileLevel", "coverageNote", "evidence"]) {
+    assert.equal(Object.hasOwn(sparse.source, removed), false, removed);
+    assert.equal(Object.hasOwn(bySlug.source, removed), false, removed);
+  }
 
   assert.throws(
     () => getNativeSource("not-a-tessli-resource"),

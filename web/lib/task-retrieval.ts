@@ -3,7 +3,10 @@ import {
   getSimilarSourceProfiles,
   type SimilarSourceMatch,
 } from "./similar-sources.ts";
-import { getAllSourceProfiles, type SourceProfile } from "./source-profiles.ts";
+import {
+  getBrowsableSourceProfiles,
+  type SourceProfile,
+} from "./source-profiles.ts";
 
 export const MAX_TASK_RETRIEVAL_RESULTS = 8 as const;
 
@@ -44,10 +47,9 @@ export interface TaskSourceChoice {
   name: string;
   url: string;
   summary: string;
-  profileLevel: SourceProfile["profileLevel"];
+  status: SourceProfile["status"];
   fitReasons: readonly string[];
   caveats: readonly string[];
-  coverageNote: string;
   accessRoutes: readonly AccessRoute[];
   alternatives: readonly TaskRetrievalAlternative[];
 }
@@ -301,10 +303,9 @@ function toChoice(
     name: profile.name,
     url: profile.url,
     summary: profile.summary,
-    profileLevel: profile.profileLevel,
+    status: profile.status,
     fitReasons: candidate.fitReasons,
     caveats: [...profile.limitations],
-    coverageNote: profile.coverage.reason,
     accessRoutes: profile.accessRoutes.map((route) => ({ ...route })),
     alternatives: toAlternatives(
       getSimilarSourceProfiles(profile, 2),
@@ -335,14 +336,15 @@ export function normalizeTaskRetrievalInput(
 }
 
 /**
- * Returns a small, repository-backed source shortlist. Ranking considers only
- * canonical SourceProfile fields; it never calls providers or mutates state.
+ * Returns a small, repository-backed source shortlist of non-archived sources.
+ * Ranking considers only canonical SourceProfile fields; it never calls
+ * providers or mutates state.
  */
 export function retrieveTaskSources(
   input: TaskRetrievalInput,
 ): TaskRetrievalResult {
   const normalizedInput = normalizeTaskRetrievalInput(input);
-  const ranked = getAllSourceProfiles()
+  const ranked = getBrowsableSourceProfiles()
     .filter((profile) => !isExcluded(profile, normalizedInput.exclusions))
     .flatMap((profile) => {
       const candidate = rankProfile(profile, normalizedInput);

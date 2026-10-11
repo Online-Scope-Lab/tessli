@@ -238,7 +238,18 @@ const machineRouteChecks = [
 ];
 
 function assertSourcePacket(packet, path) {
-  assert.equal(packet.contract, "tessli.public-source.v2", `${path} contract`);
+  assert.equal(packet.contract, "tessli.public-source.v3", `${path} contract`);
+  assert.ok(
+    ["active", "needs-review", "archived"].includes(packet.source?.status),
+    `${path} status`,
+  );
+  for (const removed of ["profileLevel", "diagnostics"]) {
+    assert.equal(
+      Object.hasOwn(packet.source, removed) || Object.hasOwn(packet, removed),
+      false,
+      `${path} has no ${removed}`,
+    );
+  }
   assert.equal(typeof packet.source?.purpose, "string", `${path} purpose`);
   assert.ok(packet.source.purpose.length > 0, `${path} purpose copy`);
   for (const field of [

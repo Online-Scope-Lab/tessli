@@ -1,4 +1,4 @@
-export const PUBLIC_SOURCE_REPRESENTATION_CONTRACT = "tessli.public-source.v2";
+export const PUBLIC_SOURCE_REPRESENTATION_CONTRACT = "tessli.public-source.v3";
 export const PUBLIC_COLLECTION_REPRESENTATION_CONTRACT =
   "tessli.public-collection.v2";
 
@@ -89,58 +89,22 @@ function publicAlternatives(profile, similarSources) {
   return alternatives;
 }
 
-function publicDiagnostics(profile) {
-  if (profile.profileLevel === "listed" || !isPlainObject(profile.coverage)) {
-    return null;
-  }
-
-  const coverage = profile.coverage;
-  const governance = profile.intelligence?.governance;
-  const diagnostics = {
-    coverage: {
-      level: coverage.level,
-      ...(coverage.profileStatus
-        ? { profileStatus: coverage.profileStatus }
-        : {}),
-      ...(coverage.lastVerifiedAt
-        ? { recordedVerifiedAt: coverage.lastVerifiedAt }
-        : {}),
-      ...(coverage.confidence && coverage.confidence !== "unknown"
-        ? { confidence: coverage.confidence }
-        : {}),
-      ...(coverage.humanReviewStatus !== "not-recorded"
-        ? { humanReviewStatus: coverage.humanReviewStatus }
-        : {}),
-      ...(coverage.freshnessStatus && coverage.freshnessStatus !== "unknown"
-        ? { freshnessStatus: coverage.freshnessStatus }
-        : {}),
-    },
-    ...(typeof coverage.evidenceCount === "number" && coverage.evidenceCount > 0
-      ? { evidenceCount: coverage.evidenceCount }
+function publicStatus(profile) {
+  if (profile.status !== "archived") return { status: profile.status };
+  return {
+    status: "archived",
+    ...(profile.archivedReason
+      ? { archivedReason: profile.archivedReason }
+      : {}),
+    ...(profile.replacedBy
+      ? {
+          replacedBy: {
+            slug: profile.replacedBy,
+            canonicalPath: `/resources/${profile.replacedBy}`,
+          },
+        }
       : {}),
   };
-
-  if (isPlainObject(governance)) {
-    diagnostics.governance = {
-      ...(governance.defaultPersistence
-        ? { defaultPersistence: governance.defaultPersistence }
-        : {}),
-      ...(governance.assetRedistribution
-        ? { assetRedistribution: governance.assetRedistribution }
-        : {}),
-      ...(governance.sourceAttribution
-        ? { sourceAttribution: governance.sourceAttribution }
-        : {}),
-      ...(typeof governance.userCredentialRequired === "boolean"
-        ? { userCredentialRequired: governance.userCredentialRequired }
-        : {}),
-      ...(typeof governance.termsReviewRequired === "boolean"
-        ? { termsReviewRequired: governance.termsReviewRequired }
-        : {}),
-    };
-  }
-
-  return diagnostics;
 }
 
 /**
@@ -154,7 +118,6 @@ export function createPublicSourceRepresentation(profile, similarSources = []) {
   const canonicalPath = `/resources/${profile.slug}`;
   const jsonPath = `${canonicalPath}/profile.json`;
   const markdownPath = `${canonicalPath}/profile.md`;
-  const diagnostics = publicDiagnostics(profile);
 
   return {
     contract: PUBLIC_SOURCE_REPRESENTATION_CONTRACT,
@@ -168,7 +131,7 @@ export function createPublicSourceRepresentation(profile, similarSources = []) {
       providerUrl: profile.url,
       category: profile.category,
       sourceType: profile.sourceType,
-      profileLevel: profile.profileLevel,
+      ...publicStatus(profile),
       useWhen: uniqueRecordedStrings(profile.bestFor),
       whatToExplore: uniqueRecordedStrings([
         ...(profile.capabilities ?? []),
@@ -178,7 +141,6 @@ export function createPublicSourceRepresentation(profile, similarSources = []) {
       importantLimitations: uniqueRecordedStrings(profile.limitations),
       alternatives: publicAlternatives(profile, similarSources),
     },
-    ...(diagnostics ? { diagnostics } : {}),
     boundaries: [
       "Repository intelligence is not live-provider verification.",
       "Revalidate provider access, pricing, licensing, terms, availability, and time-sensitive claims.",
@@ -281,10 +243,20 @@ export function serializePublicSourceMarkdown(document) {
     "",
     `Use this source to ${inline(source.purpose)}`,
     "",
+  ];
+  if (source.status === "archived") {
+    lines.push(`**Archived:** ${inline(source.archivedReason)}`);
+    if (source.replacedBy) {
+      lines.push(`Replaced by: ${inline(source.replacedBy.canonicalPath)}`);
+    }
+    lines.push("");
+  }
+  lines.push(
+    `Status: ${inline(source.status)}`,
     `Tessli guide: ${document.canonicalPath}`,
     `Provider: ${inline(source.providerUrl)}`,
     "",
-  ];
+  );
   pushList(lines, "Use it when", source.useWhen);
   pushList(lines, "What to explore", source.whatToExplore);
   lines.push("## How to access", "");
@@ -375,6 +347,7 @@ export function createPublicRepresentationHeaders({
   canonicalPath,
   jsonPath,
   markdownPath,
+  index = true,
 }) {
   const contentType =
     format === "json"
@@ -388,7 +361,7 @@ export function createPublicRepresentationHeaders({
     "Cross-Origin-Resource-Policy": "cross-origin",
     Link: `<${canonicalPath}>; rel="canonical"; type="text/html", <${jsonPath}>; rel="alternate"; type="application/json", <${markdownPath}>; rel="alternate"; type="text/markdown"`,
     "X-Content-Type-Options": "nosniff",
-    "X-Robots-Tag": "index, follow",
+    "X-Robots-Tag": index ? "index, follow" : "noindex, follow",
   };
 }
 

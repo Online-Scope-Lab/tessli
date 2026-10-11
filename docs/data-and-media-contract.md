@@ -67,6 +67,8 @@ type Resource = {
 
 `Resource.url` remains the canonical provider destination. Recorded access routes belong to the richer source-profile data, not this catalogue record, and never claim provider access that has not been recorded.
 
+The 40 intelligence profiles (`web/data/intelligence-profiles/` and `web/data/intelligence-profile-batches/`, keyed by slug and checked by `npm run profiles:check`) stay committed JSON. The site and the MCP read only their guidance: best-for, capabilities, content, platforms, frameworks, integrations and limitations. Their evidence, verification dates and governance stay on disk for provenance but are not published: no coverage level (Listed, Profiled, Verified), evidence list or governance record appears on a page, in `profile.json`/`profile.md` or in MCP output.
+
 Approved media is a separate, frozen, repository-managed sidecar at `lib_data/resource-media.json`, validated by `schemas/resource-media.schema.json`. It is keyed by stable resource ID and deterministically merged into the generated catalogue. Its approval count and SHA-256 are included in `web/data/catalogue-validation.json`.
 
 `free-trial` is preserved as its own access value because the source contains one explicitly researched free-trial resource. It must not be silently converted to freemium or paid.

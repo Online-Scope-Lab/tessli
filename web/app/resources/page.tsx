@@ -19,7 +19,7 @@ import {
   type BrowseState,
 } from "@/lib/browse";
 import {
-  getAllSourceProfiles,
+  getBrowsableSourceProfiles,
   SOURCE_TYPES,
   type SourceProfile,
 } from "@/lib/source-profiles";
@@ -116,7 +116,7 @@ export default async function ResourcesPage({
 }: ResourcesPageProps) {
   const rawSearchParams = await searchParams;
   const state = parseBrowseState(rawSearchParams, categoryIds, sourceTypeIds);
-  const result = deriveBrowseResults(getAllSourceProfiles(), state);
+  const result = deriveBrowseResults(getBrowsableSourceProfiles(), state);
 
   if (result.outOfRange) {
     redirect(withState(state, { page: result.page }));

@@ -2,7 +2,7 @@
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "$id": "https://tessli.dev/schemas/source-profile.schema.json",
   "title": "Tessli Source Profile",
-  "description": "Canonical source identity, normalized research fields, coverage level, evidence state, and optional intelligence profile consumed by Tessli website and MCP surfaces.",
+  "description": "Canonical source identity, normalized research fields, status and optional intelligence profile consumed by Tessli website and MCP surfaces.",
   "type": "object",
   "additionalProperties": false,
   "required": [
@@ -25,17 +25,15 @@
     "integrationMethods",
     "accessRoutes",
     "limitations",
-    "profileLevel",
     "status",
-    "verifiedAt",
-    "evidence",
-    "coverage",
+    "archivedReason",
+    "replacedBy",
     "intelligence"
   ],
   "properties": {
     "contractVersion": {
       "type": "integer",
-      "const": 1
+      "const": 2
     },
     "id": {
       "$ref": "#/$defs/identifier"
@@ -113,26 +111,18 @@
     "limitations": {
       "$ref": "https://tessli.dev/schemas/resource-intelligence-profile.schema.json#/properties/limitations"
     },
-    "profileLevel": {
-      "type": "string",
-      "enum": ["listed", "profiled", "verified"]
-    },
     "status": {
       "type": "string",
-      "enum": ["active", "inactive", "unknown"]
+      "enum": ["active", "needs-review", "archived"]
     },
-    "verifiedAt": {
+    "archivedReason": {
+      "description": "Required text when status is archived; null otherwise.",
       "type": ["string", "null"],
-      "format": "date"
+      "minLength": 1
     },
-    "evidence": {
-      "type": "array",
-      "items": {
-        "$ref": "https://tessli.dev/schemas/resource-intelligence-profile.schema.json#/$defs/evidence"
-      }
-    },
-    "coverage": {
-      "$ref": "#/$defs/coverage"
+    "replacedBy": {
+      "description": "Slug of the source that replaces an archived one, or null.",
+      "oneOf": [{ "type": "null" }, { "$ref": "#/$defs/identifier" }]
     },
     "intelligence": {
       "anyOf": [
@@ -153,63 +143,11 @@
     "accessModel": {
       "type": "object",
       "additionalProperties": false,
-      "required": ["access", "subscriptionRequired"],
+      "required": ["access"],
       "properties": {
         "access": {
           "type": "string",
           "enum": ["free", "freemium", "paid", "open-source", "free-trial"]
-        },
-        "subscriptionRequired": {
-          "type": "string",
-          "enum": ["no", "optional", "yes", "after-trial"]
-        }
-      }
-    },
-    "coverage": {
-      "type": "object",
-      "additionalProperties": false,
-      "required": [
-        "level",
-        "reason",
-        "profileStatus",
-        "lastVerifiedAt",
-        "confidence",
-        "humanReviewStatus",
-        "freshnessStatus",
-        "evidenceCount"
-      ],
-      "properties": {
-        "level": {
-          "type": "string",
-          "enum": ["listed", "profiled", "verified"]
-        },
-        "reason": {
-          "type": "string",
-          "minLength": 1
-        },
-        "profileStatus": {
-          "type": ["string", "null"],
-          "enum": ["draft", "verified", "needs-review", "archived", null]
-        },
-        "lastVerifiedAt": {
-          "type": ["string", "null"],
-          "format": "date"
-        },
-        "confidence": {
-          "type": "string",
-          "enum": ["certain", "likely", "unknown"]
-        },
-        "humanReviewStatus": {
-          "type": "string",
-          "enum": ["not-recorded", "completed"]
-        },
-        "freshnessStatus": {
-          "type": "string",
-          "enum": ["current", "aging", "stale", "unknown"]
-        },
-        "evidenceCount": {
-          "type": "integer",
-          "minimum": 0
         }
       }
     },

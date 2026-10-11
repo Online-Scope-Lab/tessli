@@ -6,7 +6,11 @@ import {
   serializePublicSourceMarkdown,
 } from "@/lib/public-representations.mjs";
 import { getSimilarSourceProfiles } from "@/lib/similar-sources";
-import { getAllSourceProfiles, getSourceProfile } from "@/lib/source-profiles";
+import {
+  getAllSourceProfiles,
+  getSourceProfile,
+  isArchivedSource,
+} from "@/lib/source-profiles";
 
 export const dynamic = "force-static";
 export const dynamicParams = false;
@@ -76,6 +80,7 @@ async function buildResponse({ params }: RouteProps, head = false) {
       canonicalPath: document.canonicalPath,
       jsonPath: document.representations.json,
       markdownPath: document.representations.markdown,
+      index: !isArchivedSource(profile),
     }),
   });
 }

@@ -96,9 +96,14 @@ test("search styling keeps a visible focus treatment and touch targets", async (
 test("hero facts contain only the approved truthful values", async () => {
   const facts = await read("components/explore-facts/explore-facts.tsx");
 
-  for (const value of ["295", "11", "No account", "Open"]) {
+  for (const value of ["No account", "Open"]) {
     assert.match(facts, new RegExp(`value: "${value}"`));
   }
+  // Counts are derived from the catalogue, never hard-coded.
+  assert.match(facts, /const counts = getBrowsableSourceCounts\(\);/);
+  assert.match(facts, /value: String\(counts\.sources\)/);
+  assert.match(facts, /value: String\(counts\.categories\)/);
+  assert.doesNotMatch(facts, /value: "\d+"/);
 
   for (const label of [
     "Curated resources",

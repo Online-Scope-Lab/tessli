@@ -5,10 +5,13 @@ import { Button } from "@/components/ui/button";
 import { Eyebrow } from "@/components/ui/eyebrow";
 import { Field } from "@/components/ui/field";
 import { Tag } from "@/components/ui/tag";
+import { getBrowsableSourceCounts } from "@/lib/source-profiles";
 
 import { GrainToggle } from "./grain-toggle";
 import styles from "./lab.module.css";
 import toolbarStyles from "./lab-toolbar.module.css";
+
+const sourceCounts = getBrowsableSourceCounts();
 
 const swatches = [
   ["Canvas", "#fcf8f3", "var(--canvas)"],
@@ -96,7 +99,10 @@ export default function DesignFoundationLabPage() {
                 <p className={styles.typeHeadline}>
                   Find better design resources, faster.
                 </p>
-                <p className={styles.typeNumerals}>295 · 11 · 2026 · 01—09</p>
+                <p className={styles.typeNumerals}>
+                  {sourceCounts.sources} · {sourceCounts.categories} · 2026 ·
+                  01—09
+                </p>
               </article>
               <article
                 className={`${styles.typePanel} ${styles.interfacePanel}`}

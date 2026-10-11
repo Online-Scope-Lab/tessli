@@ -11,7 +11,14 @@ export function SourceActions({ resource }: SourceActionsProps) {
   return (
     <div className={styles.wrapper}>
       {resource.status === "archived" ? (
-        <span className={styles.unavailable}>Archived source</span>
+        // An archived source is not promoted: its old address stays visible as
+        // plain text with a quiet link, never as the primary Visit action.
+        <p className={styles.archived}>
+          Original address:{" "}
+          <a href={resource.url} rel="noopener noreferrer" target="_blank">
+            {resource.domain} ↗
+          </a>
+        </p>
       ) : (
         <a
           className={buttonClassName("secondary")}

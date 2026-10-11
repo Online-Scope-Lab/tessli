@@ -96,7 +96,7 @@ test("exclusions remove matching canonical metadata from the shortlist", () => {
   );
 });
 
-test("Listed sources stay sparse and disclose their recorded coverage boundary", () => {
+test("sparse sources stay sparse and carry no coverage or verification fields", () => {
   const result = retrieveTaskSources({ task: "DesignIndex" });
   const designindex = result.sources.find(
     (source) => source.slug === "designindex",
@@ -105,9 +105,9 @@ test("Listed sources stay sparse and disclose their recorded coverage boundary",
 
   assert.ok(designindex);
   assert.ok(profile);
-  assert.equal(designindex.profileLevel, "listed");
+  assert.equal(designindex.status, "active");
   assert.deepEqual(designindex.caveats, []);
-  assert.equal(designindex.coverageNote, profile.coverage.reason);
-  assert.match(designindex.coverageNote, /no structured intelligence profile/u);
+  assert.equal(Object.hasOwn(designindex, "profileLevel"), false);
+  assert.equal(Object.hasOwn(designindex, "coverageNote"), false);
   assert.deepEqual(designindex.accessRoutes, profile.accessRoutes);
 });

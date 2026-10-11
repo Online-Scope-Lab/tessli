@@ -1,6 +1,10 @@
 import catalogue from "../data/catalogue.json" with { type: "json" };
 import { getSimilarSourceProfiles } from "./similar-sources.ts";
-import { getSourceProfile, type SourceProfile } from "./source-profiles.ts";
+import {
+  getSourceProfile,
+  isArchivedSource,
+  type SourceProfile,
+} from "./source-profiles.ts";
 import {
   retrieveTaskSources,
   type TaskRetrievalInput,
@@ -55,6 +59,12 @@ function resolveSourceProfile(identifier: string): SourceProfile {
   return profile;
 }
 
+/** Archived sources never appear in a collection's MCP output. */
+function isBrowsableResource(resourceId: string): boolean {
+  const profile = getSourceProfile(resourceId);
+  return profile !== null && !isArchivedSource(profile);
+}
+
 function resolveCollection(identifier: string): CatalogueCollection {
   const normalizedIdentifier = identifier.trim();
   const collection = collectionsByIdentifier.get(normalizedIdentifier);
@@ -79,8 +89,13 @@ function toSourceGuide(profile: SourceProfile) {
     url: profile.url,
     summary: profile.summary,
     sourceType: profile.sourceType,
-    profileLevel: profile.profileLevel,
     status: profile.status,
+    ...(profile.status === "archived"
+      ? {
+          archivedReason: profile.archivedReason,
+          replacedBy: profile.replacedBy,
+        }
+      : {}),
     accessModel: { ...profile.accessModel },
     whatItHelpsWith: profile.bestFor.slice(0, 4),
     whatToInspect: [...profile.capabilities, ...profile.contentObjects].slice(
@@ -89,7 +104,6 @@ function toSourceGuide(profile: SourceProfile) {
     ),
     accessRoutes: toAccessRoutes(profile),
     caveats: profile.limitations.slice(0, 3),
-    coverageNote: profile.coverage.reason,
   };
 }
 
@@ -153,7 +167,9 @@ export function findNativeAlternatives(
 
 export function getNativeCollection(identifier: string) {
   const collection = resolveCollection(identifier);
-  const resourceIds = collection.resourceIds.slice(
+  const browsableResourceIds =
+    collection.resourceIds.filter(isBrowsableResource);
+  const resourceIds = browsableResourceIds.slice(
     0,
     NATIVE_MCP_LIMITS.collectionSources,
   );
@@ -167,7 +183,7 @@ export function getNativeCollection(identifier: string) {
     audience: collection.audience,
     status: collection.status,
     lastReviewedAt: collection.lastReviewedAt,
-    resourceCount: collection.resourceIds.length,
+    resourceCount: browsableResourceIds.length,
     returnedSourceCount: resourceIds.length,
     sources: resourceIds.map((resourceId, index) => ({
       order: index + 1,
@@ -208,26 +224,5 @@ export function createNativeResearchBrief(input: TaskRetrievalInput) {
     ],
     boundary:
       "The brief is deterministic, repository-backed guidance. It does not read browser data, inspect project code, fetch providers, use credentials, or write state.",
-  };
-}
-
-/**
- * Direct library compatibility for the V3.2 profile-parity checks. This is not
- * registered as a local MCP tool and has no provider or filesystem effects.
- */
-export function getNativeResourceProfile(identifier: string) {
-  const profile = resolveSourceProfile(identifier);
-
-  return {
-    resource: {
-      id: profile.id,
-      slug: profile.slug,
-      name: profile.name,
-      url: profile.url,
-      accessRoutes: toAccessRoutes(profile),
-    },
-    intelligenceProfile: profile.intelligence,
-    interpretationBoundary:
-      "Capabilities and workflow fit are Tessli classifications. Revalidate time-sensitive provider claims before relying on them.",
   };
 }

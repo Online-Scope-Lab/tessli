@@ -23,7 +23,7 @@ const browserAccess = {
 };
 
 const profiled = {
-  contractVersion: 1,
+  contractVersion: 2,
   id: "source-one",
   slug: "source-one",
   name: "Source One",
@@ -42,28 +42,9 @@ const profiled = {
   integrationMethods: ["web-ui"],
   accessRoutes: [browserAccess],
   limitations: ["No source code", "No source code"],
-  profileLevel: "profiled",
   status: "active",
-  verifiedAt: "2026-07-01",
-  evidence: [
-    {
-      claim: "Recorded claim",
-      sourceUrl: "https://example.com/docs",
-      sourceType: "official-docs",
-      verifiedAt: "2026-07-01",
-      confidence: "certain",
-    },
-  ],
-  coverage: {
-    level: "profiled",
-    reason: "Structured intelligence is present.",
-    profileStatus: "verified",
-    lastVerifiedAt: "2026-07-01",
-    confidence: "certain",
-    humanReviewStatus: "not-recorded",
-    freshnessStatus: "current",
-    evidenceCount: 1,
-  },
+  archivedReason: null,
+  replacedBy: null,
   intelligence: {
     profileVersion: 1,
     status: "verified",
@@ -81,6 +62,15 @@ const profiled = {
       termsReviewRequired: true,
       notes: ["Raw governance notes must not be published."],
     },
+    evidence: [
+      {
+        claim: "Recorded claim",
+        sourceUrl: "https://example.com/docs",
+        sourceType: "official-docs",
+        verifiedAt: "2026-07-01",
+        confidence: "certain",
+      },
+    ],
   },
 };
 
@@ -92,8 +82,6 @@ const listed = {
   url: "https://two.example",
   domain: "two.example",
   summary: "A catalogue-listed source with only identity metadata.",
-  profileLevel: "listed",
-  verifiedAt: null,
   bestFor: [],
   capabilities: [],
   contentObjects: [],
@@ -101,18 +89,17 @@ const listed = {
   integrationMethods: [],
   accessRoutes: [],
   limitations: [],
-  evidence: [],
-  coverage: {
-    level: "listed",
-    reason: "Catalogue metadata only.",
-    profileStatus: null,
-    lastVerifiedAt: null,
-    confidence: "unknown",
-    humanReviewStatus: "not-recorded",
-    freshnessStatus: "unknown",
-    evidenceCount: 0,
-  },
   intelligence: null,
+};
+
+const archived = {
+  ...listed,
+  id: "source-six",
+  slug: "source-six",
+  name: "Source Six",
+  status: "archived",
+  archivedReason: "The site now redirects to Source One.",
+  replacedBy: "source-one",
 };
 
 function collectKeys(value, keys = new Set()) {
@@ -128,7 +115,7 @@ function collectKeys(value, keys = new Set()) {
   return keys;
 }
 
-test("source v2 is deterministic and preserves compact canonical guidance", () => {
+test("source v3 is deterministic and preserves compact canonical guidance", () => {
   const similarSources = [
     {
       profile: {
@@ -178,7 +165,7 @@ test("source v2 is deterministic and preserves compact canonical guidance", () =
     providerUrl: profiled.url,
     category: profiled.category,
     sourceType: profiled.sourceType,
-    profileLevel: profiled.profileLevel,
+    status: "active",
     useWhen: profiled.bestFor,
     whatToExplore: ["inspiration", "components", "websites"],
     accessRoutes: profiled.accessRoutes,
@@ -201,23 +188,9 @@ test("source v2 is deterministic and preserves compact canonical guidance", () =
     ],
   });
   assert.equal(first.source.alternatives.length, 2);
-  assert.deepEqual(first.diagnostics, {
-    coverage: {
-      level: "profiled",
-      profileStatus: "verified",
-      recordedVerifiedAt: "2026-07-01",
-      confidence: "certain",
-      freshnessStatus: "current",
-    },
-    evidenceCount: 1,
-    governance: {
-      defaultPersistence: "transient",
-      assetRedistribution: "restricted",
-      sourceAttribution: "required",
-      userCredentialRequired: false,
-      termsReviewRequired: true,
-    },
-  });
+  // Coverage levels, verification dates, evidence and governance are not
+  // part of the public representation.
+  assert.equal(Object.hasOwn(first, "diagnostics"), false);
 
   const markdown = serializePublicSourceMarkdown(first);
   for (const heading of [
@@ -229,11 +202,48 @@ test("source v2 is deterministic and preserves compact canonical guidance", () =
   ]) {
     assert.match(markdown, new RegExp(heading, "u"));
   }
+  assert.match(markdown, /^Status: active$/mu);
+  assert.doesNotMatch(markdown, /Archived/u);
   assert.equal(markdown.endsWith("\n"), true);
   assert.doesNotMatch(markdown, /[ \t]+$/gmu);
 });
 
-test("Listed source v2 fallback stays sparse and does not invent guidance", () => {
+test("archived source v3 keeps its page data with the reason and replacement", () => {
+  const document = createPublicSourceRepresentation(archived);
+
+  assert.equal(document.source.status, "archived");
+  assert.equal(
+    document.source.archivedReason,
+    "The site now redirects to Source One.",
+  );
+  assert.deepEqual(document.source.replacedBy, {
+    slug: "source-one",
+    canonicalPath: "/resources/source-one",
+  });
+  const markdown = serializePublicSourceMarkdown(document);
+  assert.match(
+    markdown,
+    /\*\*Archived:\*\* The site now redirects to Source One\./u,
+  );
+  assert.match(markdown, /^Replaced by: \/resources\/source-one$/mu);
+  assert.match(markdown, /^Status: archived$/mu);
+
+  const withoutReplacement = createPublicSourceRepresentation({
+    ...archived,
+    replacedBy: null,
+  });
+  assert.equal(Object.hasOwn(withoutReplacement.source, "replacedBy"), false);
+
+  // Active and needs-review sources never carry archive fields.
+  const active = createPublicSourceRepresentation({
+    ...listed,
+    status: "needs-review",
+  });
+  assert.equal(active.source.status, "needs-review");
+  assert.equal(Object.hasOwn(active.source, "archivedReason"), false);
+});
+
+test("sparse source v3 fallback stays sparse and does not invent guidance", () => {
   const document = createPublicSourceRepresentation(listed);
 
   assert.deepEqual(document.source.useWhen, []);
@@ -241,7 +251,7 @@ test("Listed source v2 fallback stays sparse and does not invent guidance", () =
   assert.deepEqual(document.source.accessRoutes, []);
   assert.deepEqual(document.source.importantLimitations, []);
   assert.deepEqual(document.source.alternatives, []);
-  assert.equal(document.diagnostics, undefined);
+  assert.equal(Object.hasOwn(document, "diagnostics"), false);
   assert.match(
     serializePublicSourceMarkdown(document),
     /## How to access\n\nNone recorded/u,
@@ -356,7 +366,7 @@ test("Collection v2 preserves ordered staged inspection and decision guidance", 
   assert.doesNotMatch(markdown, /[ \t]+$/gmu);
 });
 
-test("public v2 output omits raw audit, intelligence, and private data", () => {
+test("public output omits coverage, evidence, governance, intelligence, and private data", () => {
   const source = createPublicSourceRepresentation(profiled, [
     {
       profile: { ...listed, id: "source-three", slug: "source-three" },
@@ -387,6 +397,12 @@ test("public v2 output omits raw audit, intelligence, and private data", () => {
 
   for (const forbiddenKey of [
     "contractVersion",
+    "profileLevel",
+    "coverage",
+    "diagnostics",
+    "governance",
+    "recordedVerifiedAt",
+    "evidenceCount",
     "verifiedAt",
     "evidence",
     "intelligence",
@@ -425,6 +441,17 @@ test("public headers remain readable, cacheable, indexable, and safe", () => {
   assert.equal(headers["Access-Control-Allow-Origin"], "*");
   assert.equal(headers["X-Content-Type-Options"], "nosniff");
   assert.equal(headers["X-Robots-Tag"], "index, follow");
+  assert.equal(
+    createPublicRepresentationHeaders({
+      format: "markdown",
+      filename: "tessli-source.md",
+      canonicalPath: "/resources/source-six",
+      jsonPath: "/resources/source-six/profile.json",
+      markdownPath: "/resources/source-six/profile.md",
+      index: false,
+    })["X-Robots-Tag"],
+    "noindex, follow",
+  );
   assert.match(headers["Cache-Control"], /s-maxage=86400/u);
   assert.match(headers.Link, /rel="canonical"/u);
   assert.deepEqual(createPublicOptionsHeaders(), {

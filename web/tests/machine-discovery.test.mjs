@@ -92,7 +92,7 @@ test("sitemap lists only public discovery routes and machine representations", a
   assert.match(sitemap, /\$\{origin\}\/collections\/\$\{collection\.slug\}/);
   assert.match(sitemap, /collection\.json/);
   assert.match(sitemap, /collection\.md/);
-  assert.match(sitemap, /getAllSourceProfiles\(\)\.flatMap/);
+  assert.match(sitemap, /getBrowsableSourceProfiles\(\)\.flatMap/);
   assert.match(sitemap, /\$\{origin\}\/resources\/\$\{profile\.slug\}/);
   assert.match(sitemap, /profile\.json/);
   assert.match(sitemap, /profile\.md/);

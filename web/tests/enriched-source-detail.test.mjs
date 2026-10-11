@@ -23,17 +23,17 @@ test("source detail uses recorded intelligence as guidance and keeps diagnostics
   assert.ok(page.includes("<IntelligenceDetail profile={profile}"));
   assert.ok(detail.includes("What to explore"));
   assert.ok(detail.includes("How to access it"));
-  assert.ok(detail.includes("Recorded governance"));
   assert.ok(detail.includes("<summary>Source details</summary>"));
   assert.ok(detail.includes("does not imply live provider verification"));
   assert.doesNotMatch(
     detail,
     /Recorded capabilities and boundaries|Research intelligence/,
   );
-  // Verification tiers and evidence records are not public UI in v1.2.
+  // Verification tiers, evidence records and governance are not public UI
+  // in v1.2.
   assert.doesNotMatch(
     detail,
-    /Recorded references|profile\.evidence|profile\.coverage|profileLevel/,
+    /Recorded references|Recorded governance|governance\.|profile\.evidence|profile\.coverage|profileLevel/,
   );
 });
 

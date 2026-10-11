@@ -1,6 +1,8 @@
 import { PublicContentPage } from "@/components/public-content/public-content-page";
+import { getBrowsableSourceCounts } from "@/lib/source-profiles";
 export const metadata = { title: "About" };
 export default function AboutPage() {
+  const counts = getBrowsableSourceCounts();
   return (
     <PublicContentPage
       label="About Tessli"
@@ -17,7 +19,7 @@ export default function AboutPage() {
           title: "Useful references should be easier to find and judge.",
           paragraphs: [
             "Tessli brings together design resources that can help with a real task: researching an interface, choosing a type tool, finding an accessible component library, or studying a useful pattern.",
-            "The public catalogue begins with 295 repository-managed resources across 11 practical categories. It is intended to be searchable and reviewable rather than endlessly expanded.",
+            `The public catalogue lists ${counts.sources} repository-managed resources across ${counts.categories} practical categories. It is intended to be searchable and reviewable rather than endlessly expanded.`,
           ],
         },
         {

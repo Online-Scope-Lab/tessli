@@ -19,8 +19,17 @@ test("Playbook adapter resolves staged roles from canonical catalogue data", asy
   assert.match(adapter, /audience: string/);
   assert.match(adapter, /role: string/);
   assert.match(adapter, /stageId: string/);
-  assert.match(adapter, /collection\.stages\.map/);
+  assert.match(adapter, /collection\.stages\s*\.map/);
   assert.match(adapter, /stages\.flatMap/);
+  // Archived sources are never listed in a collection.
+  assert.match(
+    adapter,
+    /\.filter\(\(\{ resource \}\) => resource\.status !== "archived"\)/,
+  );
+  assert.match(
+    adapter,
+    /\.filter\(\(stage\) => stage\.resources\.length > 0\)/,
+  );
   assert.doesNotMatch(adapter, /fetch\(|Date\.now\(|Math\.random/);
 });
 

@@ -26,7 +26,11 @@ const sitemap = await readFile(
 );
 
 test("source detail keeps the complete canonical route set", () => {
-  assert.equal(catalogue.resources.length, 295);
+  // Every source, archived ones included, keeps a page at a unique slug.
+  assert.equal(
+    new Set(catalogue.resources.map((resource) => resource.slug)).size,
+    catalogue.resources.length,
+  );
   assert.match(page, /generateStaticParams/);
   assert.match(page, /getAllSourceProfiles\(\)/);
   assert.match(page, /dynamicParams = false/);
@@ -56,15 +60,16 @@ test("source detail follows the V3.3 guide-first reading order", () => {
   assert.doesNotMatch(page, /LivePreview|live-preview/);
 });
 
-test("Listed source guidance uses honest compact fallbacks", () => {
+test("thinly described sources use honest compact fallbacks", () => {
   assert.match(
     page,
-    /No structured task-fit guidance is recorded for this Listed source/,
+    /No structured task-fit guidance is recorded for this source/,
   );
   assert.match(
     detail,
-    /No structured exploration points are recorded for this Listed source/,
+    /No structured exploration points are recorded for this source/,
   );
+  assert.doesNotMatch(`${page}${detail}`, /Listed source|Profiled|Verified/);
   assert.match(detail, /No structured limitation is recorded/);
   assert.match(detail, /No differentiated alternatives are recorded/);
 });
@@ -78,8 +83,9 @@ test("source guide styling preserves a fixed preview and narrow-screen recomposi
   assert.doesNotMatch(styles, /backdrop-filter|linear-gradient\([^\n]*purple/i);
 });
 
-test("sitemap includes every canonical source profile", () => {
-  assert.match(sitemap, /getAllSourceProfiles/);
+test("sitemap includes every non-archived source profile", () => {
+  assert.match(sitemap, /getBrowsableSourceProfiles\(\)/);
+  assert.doesNotMatch(sitemap, /getAllSourceProfiles/);
   assert.match(sitemap, /\/resources\/\$\{profile\.slug\}/);
   assert.match(sitemap, /NEXT_PUBLIC_SITE_URL/);
   assert.match(sitemap, /VERCEL_PROJECT_PRODUCTION_URL/);

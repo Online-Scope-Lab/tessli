@@ -214,9 +214,9 @@ assert.equal(
       const primary = card.querySelector(':scope > a[data-resource-profile-link]');
       const save = card.querySelector('button[data-resource-save], button[aria-pressed]');
       const visit = card.querySelector('a[data-resource-visit]');
-      const unavailable = card.getAttribute('data-resource-status') === 'unavailable';
-      const independentActions = unavailable
-        ? !visit && /Provider unavailable/.test(card.textContent)
+      const archived = card.getAttribute('data-resource-status') === 'archived';
+      const independentActions = archived
+        ? !visit && /Archived/.test(card.textContent)
         : visit?.getAttribute('target') === '_blank' &&
           visit?.getAttribute('rel') === 'noopener noreferrer';
 

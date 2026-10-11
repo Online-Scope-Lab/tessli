@@ -4,6 +4,8 @@ export interface PublicRepresentationHeadersInput {
   canonicalPath: string;
   jsonPath: string;
   markdownPath: string;
+  /** false sends X-Robots-Tag: noindex (archived sources). */
+  index?: boolean;
 }
 
 export interface PublicRepresentationLinks {
@@ -27,27 +29,8 @@ export interface PublicSourceAlternative {
   differentiator: string;
 }
 
-export interface PublicSourceDiagnostics {
-  coverage: {
-    level: string;
-    profileStatus?: string;
-    recordedVerifiedAt?: string;
-    confidence?: string;
-    humanReviewStatus?: string;
-    freshnessStatus?: string;
-  };
-  evidenceCount?: number;
-  governance?: {
-    defaultPersistence?: string;
-    assetRedistribution?: string;
-    sourceAttribution?: string;
-    userCredentialRequired?: boolean;
-    termsReviewRequired?: boolean;
-  };
-}
-
 export interface PublicSourceDocument {
-  contract: "tessli.public-source.v2";
+  contract: "tessli.public-source.v3";
   canonicalPath: string;
   representations: PublicRepresentationLinks;
   source: {
@@ -58,14 +41,15 @@ export interface PublicSourceDocument {
     providerUrl: string;
     category: string;
     sourceType: string;
-    profileLevel: string;
+    status: "active" | "needs-review" | "archived";
+    archivedReason?: string;
+    replacedBy?: { slug: string; canonicalPath: string };
     useWhen: readonly string[];
     whatToExplore: readonly string[];
     accessRoutes: readonly PublicAccessRoute[];
     importantLimitations: readonly string[];
     alternatives: readonly PublicSourceAlternative[];
   };
-  diagnostics?: PublicSourceDiagnostics;
   boundaries: readonly string[];
 }
 
@@ -125,7 +109,7 @@ export interface PublicCollectionDocument {
   boundaries: readonly string[];
 }
 
-export const PUBLIC_SOURCE_REPRESENTATION_CONTRACT: "tessli.public-source.v2";
+export const PUBLIC_SOURCE_REPRESENTATION_CONTRACT: "tessli.public-source.v3";
 export const PUBLIC_COLLECTION_REPRESENTATION_CONTRACT: "tessli.public-collection.v2";
 
 export function createPublicSourceRepresentation(
