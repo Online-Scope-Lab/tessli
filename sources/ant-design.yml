@@ -1,0 +1,18 @@
+id: resource-51c9a91512df
+slug: ant-design
+name: Ant Design
+url: https://ant.design
+category: ui-libraries
+kind: library
+access: open-source
+summary: Enterprise-oriented React UI framework
+status: active
+added_at: 2026-07-22
+added_via: curator
+last_checked: null
+best_for:
+  - enterprise-dashboard
+  - data-dense-ui
+  - admin-panel-building
+limitations:
+  - Opinionated styling that requires dedicated token customization

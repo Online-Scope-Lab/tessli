@@ -48,7 +48,6 @@ type ReviewAwareIntelligenceProfile = ResourceIntelligenceProfile & {
 
 export interface SourceAccessModel {
   access: string;
-  subscriptionRequired: string;
 }
 
 export interface SourceCoverage {
@@ -230,16 +229,15 @@ function buildSourceProfile(resource: CatalogueResource): SourceProfile {
     sourceTypeBasis: "category-classification",
     accessModel: {
       access: resource.access,
-      subscriptionRequired: resource.subscriptionRequired,
     },
-    bestFor: intelligence?.workflowFit ?? [],
+    bestFor: intelligence?.workflowFit ?? resource.bestFor ?? [],
     capabilities: intelligence?.capabilities ?? [],
     contentObjects: intelligence?.contentObjects ?? [],
     platforms: intelligence?.platforms ?? [],
     frameworks: intelligence?.frameworks ?? [],
     integrationMethods: intelligence?.integrationMethods ?? [],
     accessRoutes: getCanonicalAccessRoutes(resource),
-    limitations: intelligence?.limitations ?? [],
+    limitations: intelligence?.limitations ?? resource.limitations ?? [],
     profileLevel,
     status: sourceStatus(resource.status),
     verifiedAt: intelligence?.verifiedAt ?? null,

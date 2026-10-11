@@ -204,7 +204,7 @@ test("approved media is merged deterministically into only its linked resources"
       "patternpad",
     ],
   );
-  assert.equal(enriched[0].previewSource, "open-graph");
+  assert.equal(Object.hasOwn(enriched[0], "previewSource"), false);
   assert.equal(result.report.mediaSource.path, MEDIA_SOURCE_PATH);
   assert.equal(
     result.report.mediaSource.sha256,

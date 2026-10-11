@@ -1,0 +1,12 @@
+id: resource-b76b3dbf3494
+slug: daisyui
+name: DaisyUI
+url: https://daisyui.com
+category: ui-libraries
+kind: library
+access: freemium
+summary: Themeable component classes for Tailwind CSS
+status: active
+added_at: 2026-07-22
+added_via: curator
+last_checked: null

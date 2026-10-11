@@ -1,0 +1,12 @@
+id: resource-fd6228fd8e88
+slug: origin-ui
+name: Origin UI
+url: https://originui.com
+category: ui-libraries
+kind: library
+access: free
+summary: Copyable Tailwind and shadcn-style components
+status: active
+added_at: 2026-07-22
+added_via: curator
+last_checked: null

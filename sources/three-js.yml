@@ -1,0 +1,17 @@
+id: resource-e5c348f9190f
+slug: three-js
+name: Three.js
+url: https://threejs.org
+category: motion-3d
+kind: library
+access: open-source
+summary: JavaScript 3D and WebGL rendering library
+status: active
+added_at: 2026-07-22
+added_via: curator
+last_checked: null
+best_for:
+  - 3d-hero-background
+  - interactive-canvas-graphics
+limitations:
+  - High performance requirement on mobile devices

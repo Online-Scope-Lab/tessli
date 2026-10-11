@@ -1,0 +1,12 @@
+id: resource-0d7e0a3bc997
+slug: quasar
+name: Quasar
+url: https://quasar.dev
+category: ui-libraries
+kind: library
+access: open-source
+summary: Vue framework for web, desktop, and mobile interfaces
+status: active
+added_at: 2026-07-22
+added_via: curator
+last_checked: null

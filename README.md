@@ -34,7 +34,7 @@ npm run check
 
 It runs the hero artwork hash check, `format:check`, `typecheck`, `lint`, `test`, `catalogue:check` and `build`: everything CI runs except the browser tests. `npm run format` fixes formatting.
 
-The source catalogue is generated deterministically from repository data (`lib_data/`) into `web/data/`; `npm run catalogue:generate` rebuilds it and `npm run catalogue:check` verifies it. Normal build and test make no network calls.
+Each source is one file, `sources/<slug>.yml`. The catalogue is generated deterministically from those files (plus the curated order, media and collections in `lib_data/`) into `web/data/`; `npm run catalogue:generate` rebuilds it and `npm run catalogue:check` verifies it. Normal build and test make no network calls.
 
 ## Contributing
 

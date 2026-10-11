@@ -1,0 +1,18 @@
+id: resource-acfe63268811
+slug: nicelydone
+name: Nicelydone
+url: https://nicelydone.club
+category: product-ui-ux
+kind: gallery
+access: freemium
+summary: Screenshots and UX patterns from high-quality web applications
+status: active
+added_at: 2026-07-22
+added_via: curator
+last_checked: null
+best_for:
+  - saas-dashboard-design
+  - onboarding-flows
+  - settings-page-ux
+limitations:
+  - Pro features require user paid subscription

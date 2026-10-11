@@ -1,0 +1,12 @@
+id: resource-1173adaab852
+slug: hyperui
+name: HyperUI
+url: https://www.hyperui.dev
+category: ui-libraries
+kind: library
+access: open-source
+summary: Free Tailwind CSS components
+status: active
+added_at: 2026-07-22
+added_via: curator
+last_checked: null

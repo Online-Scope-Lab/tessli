@@ -1,0 +1,12 @@
+id: resource-efc9a91db0cb
+slug: kibo-ui
+name: Kibo UI
+url: https://www.kibo-ui.com
+category: ui-libraries
+kind: library
+access: open-source
+summary: Composable components for shadcn-based React applications
+status: active
+added_at: 2026-07-22
+added_via: curator
+last_checked: null

@@ -1,0 +1,12 @@
+id: resource-7e8cb8d5ef89
+slug: angular-material
+name: Angular Material
+url: https://material.angular.dev
+category: ui-libraries
+kind: library
+access: open-source
+summary: Official Material Design components for Angular
+status: active
+added_at: 2026-07-22
+added_via: curator
+last_checked: null

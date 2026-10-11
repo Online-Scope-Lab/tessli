@@ -1,0 +1,12 @@
+id: resource-b6eecac2578f
+slug: vuetify
+name: Vuetify
+url: https://vuetifyjs.com
+category: ui-libraries
+kind: library
+access: freemium
+summary: Material Design component framework for Vue
+status: active
+added_at: 2026-07-22
+added_via: curator
+last_checked: null

@@ -1,0 +1,12 @@
+id: resource-1f691e6fcca8
+slug: motion-primitives
+name: Motion Primitives
+url: https://motion-primitives.com
+category: ui-libraries
+kind: library
+access: open-source
+summary: Reusable animated React interface primitives
+status: active
+added_at: 2026-07-22
+added_via: curator
+last_checked: null

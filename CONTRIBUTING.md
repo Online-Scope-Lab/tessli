@@ -6,12 +6,12 @@ Please read the [Code of Conduct](CODE_OF_CONDUCT.md) first. By contributing you
 
 ## Ways to contribute
 
-| You have                                  | Do this                                                                                                                                                                                                                  | It lands as                                                                              |
-| ----------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ---------------------------------------------------------------------------------------- |
-| A good design or frontend source          | Open a [**Suggest a source**](https://github.com/Online-Scope-Lab/tessli/issues/new?template=suggest-source.yml) issue                                                                                                   | Issue labelled `source:suggestion`; a maintainer or contributor turns it into a small PR |
-| A design (screenshot or Figma link)       | Open a [**Submit a design**](https://github.com/Online-Scope-Lab/tessli/issues/new?template=submit-design.yml) issue                                                                                                     | Issue labelled `design:needs-implementation`, which developers can pick up               |
-| Code for a library item                   | Open a pull request (see [Contribute an item](#contribute-an-item))                                                                                                                                                      | PR checked by CI, then reviewed by maintainers                                           |
-| A broken link, wrong information or a bug | Open a [**Report a source problem**](https://github.com/Online-Scope-Lab/tessli/issues/new?template=report-source.yml) or [**Bug report**](https://github.com/Online-Scope-Lab/tessli/issues/new?template=bug.yml) issue | Issue                                                                                    |
+| You have                                  | Do this                                                                                                                                                                                                                  | It lands as                                                                                 |
+| ----------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------- |
+| A good design or frontend source          | Open a [**Suggest a source**](https://github.com/Online-Scope-Lab/tessli/issues/new?template=suggest-source.yml) issue                                                                                                   | Issue labelled `source:suggestion`; a maintainer or contributor turns it into a one-file PR |
+| A design (screenshot or Figma link)       | Open a [**Submit a design**](https://github.com/Online-Scope-Lab/tessli/issues/new?template=submit-design.yml) issue                                                                                                     | Issue labelled `design:needs-implementation`, which developers can pick up                  |
+| Code for a library item                   | Open a pull request (see [Contribute an item](#contribute-an-item))                                                                                                                                                      | PR checked by CI, then reviewed by maintainers                                              |
+| A broken link, wrong information or a bug | Open a [**Report a source problem**](https://github.com/Online-Scope-Lab/tessli/issues/new?template=report-source.yml) or [**Bug report**](https://github.com/Online-Scope-Lab/tessli/issues/new?template=bug.yml) issue | Issue                                                                                       |
 
 Designers and developers who build an item from a submitted design are both credited on the item.
 
@@ -20,6 +20,30 @@ Designers and developers who build an item from a submitted design are both cred
 **Honest status: the library is not open for item contributions yet.** Tessli v1.2 is in progress. Today the site is the curated Sources directory. The library, the item template (`web/registry/_template/`) and the CI checks for items arrive in Phase 2, and the first items are built and reviewed by the maintainers to set the bar. Until then, the most useful contributions are source suggestions, design submissions, problem reports and fixes to the existing site.
 
 When the template lands, an item will be a folder you copy, fill in and open as a PR. The [item checklist](#item-checklist) below is the bar it will be reviewed against.
+
+### Add a source
+
+Adding a source is one new file, `sources/<slug>.yml`, so source PRs never conflict. Copy an existing file and change every field:
+
+```yaml
+id: resource-example-patterns # "resource-" + the slug; never change it later
+slug: example-patterns # must equal the file name
+name: Example Patterns
+url: https://example.com
+category: design-systems
+kind: reference # gallery | library | design-system | tool | asset | reference
+access: free # free | open-source | freemium | paid | free-trial
+summary: What you'll find there, specifically, in one sentence of 40-200 characters.
+status: active
+added_at: 2026-10-11
+added_via: community
+last_checked: 2026-10-11 # the day you opened and checked it
+submission_issue: 123 # the "Suggest a source" issue, if there is one
+```
+
+The `summary` says specifically what you'll find there in 40–200 characters. `best_for` (at most 3), `limitations` (at most 2), `frameworks` and `license` are optional. [`schemas/source.schema.json`](schemas/source.schema.json) has the full field list and [`docs/data-and-media-contract.md`](docs/data-and-media-contract.md) explains it. Then run `npm run catalogue:generate` in `web/` and commit the updated `web/data/catalogue.json` and `web/data/catalogue-validation.json` with your file; `npm run catalogue:check` fails if they drift.
+
+To remove a source, don't delete its file: set `status: archived` with an `archived_reason` (and `replaced_by: <slug>` if another source replaces it).
 
 ## Local setup
 

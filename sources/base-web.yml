@@ -1,0 +1,12 @@
+id: resource-2779e0c3a14a
+slug: base-web
+name: Base Web
+url: https://baseweb.design
+category: design-systems
+kind: design-system
+access: open-source
+summary: Uber's React design system
+status: active
+added_at: 2026-07-22
+added_via: curator
+last_checked: null

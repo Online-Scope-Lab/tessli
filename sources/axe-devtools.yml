@@ -1,0 +1,12 @@
+id: resource-220b2bdd9432
+slug: axe-devtools
+name: axe DevTools
+url: https://www.deque.com/axe/devtools
+category: color-accessibility
+kind: tool
+access: freemium
+summary: Automated accessibility testing for websites and applications
+status: active
+added_at: 2026-07-22
+added_via: curator
+last_checked: null

@@ -1,0 +1,16 @@
+id: resource-c873b7d6cf1d
+slug: react-three-fiber
+name: React Three Fiber
+url: https://r3f.docs.pmnd.rs
+category: motion-3d
+kind: library
+access: open-source
+summary: React renderer for Three.js
+status: active
+added_at: 2026-07-22
+added_via: curator
+last_checked: null
+best_for:
+  - react-3d-integration
+  - declarative-three-js
+  - interactive-scene-architecture

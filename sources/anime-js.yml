@@ -1,0 +1,16 @@
+id: resource-23cc7dc75f79
+slug: anime-js
+name: Anime.js
+url: https://animejs.com
+category: motion-3d
+kind: library
+access: open-source
+summary: Lightweight JavaScript animation library
+status: active
+added_at: 2026-07-22
+added_via: curator
+last_checked: null
+best_for:
+  - targeted-interface-animation
+  - code-driven-motion
+  - svg-and-text-animation

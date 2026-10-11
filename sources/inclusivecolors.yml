@@ -1,0 +1,12 @@
+id: resource-9b8e899f4893
+slug: inclusivecolors
+name: InclusiveColors
+url: https://www.inclusivecolors.com
+category: color-accessibility
+kind: tool
+access: free
+summary: WCAG-aware Tailwind-style color-scale generation
+status: active
+added_at: 2026-07-22
+added_via: curator
+last_checked: null

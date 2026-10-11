@@ -106,7 +106,6 @@ function mediaFields(entry) {
   const fields = {};
   if (entry.preview) {
     fields.previewImageUrl = entry.preview.url;
-    fields.previewSource = entry.preview.source;
   }
   if (entry.favicon) {
     fields.faviconUrl = entry.favicon.url;

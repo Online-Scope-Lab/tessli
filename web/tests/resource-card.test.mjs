@@ -42,7 +42,10 @@ test("resource card exposes independent profile and visit actions", async () => 
   assert.match(component, /href=\{resource\.url\}/);
   assert.match(component, /target="_blank"/);
   assert.match(component, /rel="noopener noreferrer"/);
-  assert.match(component, /Provider unavailable/);
+  assert.match(
+    component,
+    /<span className=\{styles\.unavailableAction\}>Archived<\/span>/,
+  );
   assert.doesNotMatch(component, /window\.open|router\.push|preventDefault/);
 });
 
@@ -108,7 +111,7 @@ test("resource card geometry survives long copy and restores restrained hover mo
   assert.match(css, /@media \(prefers-reduced-motion: reduce\)/);
   assert.match(css, /@media \(forced-colors: active\)/);
   assert.match(component, /<Tag data-intelligence-badge="true" tone="signal">/);
-  assert.match(component, /<Tag key=\{tag\}>\{tag\}<\/Tag>/);
+  assert.match(component, /<Tag>\{categoryLabel\}<\/Tag>/);
   assert.doesNotMatch(component, /style=\{\{/);
   assert.doesNotMatch(css, /\.tags span|\.intelligenceBadge/);
   assert.doesNotMatch(css, /border-radius: 1[2-9]px|backdrop-filter/);

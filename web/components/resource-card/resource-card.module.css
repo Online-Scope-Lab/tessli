@@ -48,7 +48,7 @@
     1px 100%;
 }
 
-.card[data-resource-status="unavailable"] {
+.card[data-resource-status="archived"] {
   background: color-mix(in srgb, var(--surface-muted) 86%, transparent);
 }
 
@@ -296,7 +296,7 @@
   color: var(--text-muted);
 }
 
-.card[data-resource-status="unavailable"] .status {
+.card[data-resource-status="archived"] .status {
   color: var(--danger);
 }
 

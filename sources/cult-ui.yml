@@ -1,0 +1,12 @@
+id: resource-1d30ade89c50
+slug: cult-ui
+name: Cult UI
+url: https://www.cult-ui.com
+category: ui-libraries
+kind: library
+access: open-source
+summary: Animated components built for React and Tailwind
+status: active
+added_at: 2026-07-22
+added_via: curator
+last_checked: null

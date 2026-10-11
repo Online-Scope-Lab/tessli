@@ -1,0 +1,18 @@
+id: resource-25a6040823a7
+slug: fontshare
+name: Fontshare
+url: https://www.fontshare.com
+category: typography
+kind: asset
+access: free
+summary: Free professional-quality typefaces
+status: active
+added_at: 2026-07-22
+added_via: curator
+last_checked: null
+best_for:
+  - brand-typography
+  - web-font-selection
+  - heading-pairings
+limitations:
+  - 100% free for personal and commercial use under ITF license

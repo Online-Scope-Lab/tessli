@@ -1,0 +1,12 @@
+id: resource-8cc85fbfcfc8
+slug: gitlab-pajamas
+name: GitLab Pajamas
+url: https://design.gitlab.com
+category: design-systems
+kind: design-system
+access: open-source
+summary: GitLab's product design system and usage guidance
+status: active
+added_at: 2026-07-22
+added_via: curator
+last_checked: null

@@ -1,9 +1,9 @@
 {
-  "version": 1,
+  "version": 2,
   "source": {
-    "path": "lib_data/design-resource-library-295.csv",
-    "sha256": "c20d5389fdd5d187177543146c020c97fdc2f2f1f71001e8dee2c596eaa34c83",
-    "rowCount": 295
+    "path": "sources",
+    "sha256": "d63c0eae1c380eaef90f32cfa588ccb8654f8e15c512c8f737b0285b5b4d14dd",
+    "fileCount": 295
   },
   "resources": [
     {
@@ -14,11 +14,12 @@
       "domain": "designindex.xyz",
       "description": "Curated directory of design inspiration and useful design resources",
       "category": "website-inspiration",
+      "kind": "gallery",
       "access": "free",
-      "subscriptionRequired": "no",
-      "usefulFor": [],
-      "tags": [],
-      "status": "active"
+      "status": "active",
+      "addedAt": "2026-07-22",
+      "addedVia": "curator",
+      "lastChecked": null
     },
     {
       "id": "resource-3ea619b0ed5d",
@@ -28,13 +29,13 @@
       "domain": "toools.design",
       "description": "Large searchable directory of design tools, assets, inspiration, and learning resources",
       "category": "website-inspiration",
+      "kind": "gallery",
       "access": "free",
-      "subscriptionRequired": "no",
-      "usefulFor": [],
-      "tags": [],
       "status": "active",
+      "addedAt": "2026-07-22",
+      "addedVia": "curator",
+      "lastChecked": null,
       "previewImageUrl": "https://cdn.prod.website-files.com/5ce10a4c0b5f0b05f522e746/6a4a19c7af17b15abe7f8a0a_toools-design-ogimg.jpg",
-      "previewSource": "open-graph",
       "faviconUrl": "https://cdn.prod.website-files.com/5ce10a4c0b5f0b05f522e746/6a04fc6e5e84a0009e4f999f_toools-design-favicon-light.png"
     },
     {
@@ -45,11 +46,12 @@
       "domain": "land-book.com",
       "description": "Curated landing-page and website inspiration",
       "category": "website-inspiration",
+      "kind": "gallery",
       "access": "freemium",
-      "subscriptionRequired": "optional",
-      "usefulFor": [],
-      "tags": [],
-      "status": "active"
+      "status": "active",
+      "addedAt": "2026-07-22",
+      "addedVia": "curator",
+      "lastChecked": null
     },
     {
       "id": "resource-4798232a04e5",
@@ -59,13 +61,13 @@
       "domain": "onepagelove.com",
       "description": "One-page website inspiration, templates, and examples",
       "category": "website-inspiration",
+      "kind": "gallery",
       "access": "free",
-      "subscriptionRequired": "no",
-      "usefulFor": [],
-      "tags": [],
       "status": "active",
+      "addedAt": "2026-07-22",
+      "addedVia": "curator",
+      "lastChecked": null,
       "previewImageUrl": "https://assets.onepagelove.com/cdn-cgi/image/width=1200,height=628,fit=cover,gravity=top,format=jpg,quality=85/wp-content/uploads/global/one-page-love-meta.jpg",
-      "previewSource": "open-graph",
       "faviconUrl": "https://onepagelove.com/wp-content/themes/onepagelove/frontend/img/favicon/favicon-32x32.png"
     },
     {
@@ -76,13 +78,13 @@
       "domain": "awwwards.com",
       "description": "Award-winning websites, experimental interactions, and agency work",
       "category": "website-inspiration",
+      "kind": "gallery",
       "access": "free",
-      "subscriptionRequired": "no",
-      "usefulFor": [],
-      "tags": [],
       "status": "active",
-      "previewImageUrl": "https://assets.awwwards.com/assets/images/pages/about-certificates/awwwards.jpg",
-      "previewSource": "open-graph"
+      "addedAt": "2026-07-22",
+      "addedVia": "curator",
+      "lastChecked": null,
+      "previewImageUrl": "https://assets.awwwards.com/assets/images/pages/about-certificates/awwwards.jpg"
     },
     {
       "id": "resource-a5297d09a82a",
@@ -92,11 +94,21 @@
       "domain": "siteinspire.com",
       "description": "Curated gallery of strong web and interactive design",
       "category": "website-inspiration",
+      "kind": "gallery",
       "access": "free",
-      "subscriptionRequired": "no",
-      "usefulFor": [],
-      "tags": [],
-      "status": "active"
+      "status": "active",
+      "addedAt": "2026-07-22",
+      "addedVia": "curator",
+      "lastChecked": null,
+      "bestFor": [
+        "visual-direction",
+        "editorial-inspiration",
+        "brand-identity-research"
+      ],
+      "limitations": [
+        "No code or component exports",
+        "Purely visual inspiration gallery"
+      ]
     },
     {
       "id": "resource-169e5a48b03e",
@@ -106,11 +118,21 @@
       "domain": "godly.website",
       "description": "Modern and highly polished website inspiration",
       "category": "website-inspiration",
+      "kind": "gallery",
       "access": "free",
-      "subscriptionRequired": "no",
-      "usefulFor": [],
-      "tags": [],
-      "status": "active"
+      "status": "active",
+      "addedAt": "2026-07-22",
+      "addedVia": "curator",
+      "lastChecked": null,
+      "bestFor": [
+        "creative-direction",
+        "motion-research",
+        "high-end-landing-pages"
+      ],
+      "limitations": [
+        "No source code provided",
+        "Focuses on bespoke/agency implementations"
+      ]
     },
     {
       "id": "resource-db60acdf7cd7",
@@ -120,11 +142,19 @@
       "domain": "lapa.ninja",
       "description": "Landing-page inspiration organized by industry and section",
       "category": "website-inspiration",
+      "kind": "gallery",
       "access": "free",
-      "subscriptionRequired": "no",
-      "usefulFor": [],
-      "tags": [],
-      "status": "active"
+      "status": "active",
+      "addedAt": "2026-07-22",
+      "addedVia": "curator",
+      "lastChecked": null,
+      "bestFor": [
+        "landing-page-research",
+        "template-selection"
+      ],
+      "limitations": [
+        "Third-party templates have separate licences"
+      ]
     },
     {
       "id": "resource-74ccbd68a672",
@@ -134,11 +164,12 @@
       "domain": "httpster.net",
       "description": "Curated creative and minimal website showcase",
       "category": "website-inspiration",
+      "kind": "gallery",
       "access": "free",
-      "subscriptionRequired": "no",
-      "usefulFor": [],
-      "tags": [],
-      "status": "active"
+      "status": "active",
+      "addedAt": "2026-07-22",
+      "addedVia": "curator",
+      "lastChecked": null
     },
     {
       "id": "resource-def4db859619",
@@ -148,11 +179,12 @@
       "domain": "thefwa.com",
       "description": "Experimental, interactive, and cutting-edge digital experiences",
       "category": "website-inspiration",
+      "kind": "gallery",
       "access": "free",
-      "subscriptionRequired": "no",
-      "usefulFor": [],
-      "tags": [],
       "status": "active",
+      "addedAt": "2026-07-22",
+      "addedVia": "curator",
+      "lastChecked": null,
       "faviconUrl": "https://thefwa.com/favicons/apple-touch-icon-180x180.png"
     },
     {
@@ -163,11 +195,12 @@
       "domain": "cssdesignawards.com",
       "description": "Award gallery for web design, UI, UX, and innovation",
       "category": "website-inspiration",
+      "kind": "gallery",
       "access": "free",
-      "subscriptionRequired": "no",
-      "usefulFor": [],
-      "tags": [],
-      "status": "active"
+      "status": "active",
+      "addedAt": "2026-07-22",
+      "addedVia": "curator",
+      "lastChecked": null
     },
     {
       "id": "resource-c5b1425b1432",
@@ -177,11 +210,12 @@
       "domain": "cssnectar.com",
       "description": "Curated website inspiration and design awards",
       "category": "website-inspiration",
+      "kind": "gallery",
       "access": "free",
-      "subscriptionRequired": "no",
-      "usefulFor": [],
-      "tags": [],
-      "status": "active"
+      "status": "active",
+      "addedAt": "2026-07-22",
+      "addedVia": "curator",
+      "lastChecked": null
     },
     {
       "id": "resource-a7ae7a615066",
@@ -191,11 +225,12 @@
       "domain": "bestwebsite.gallery",
       "description": "Hand-picked website design gallery",
       "category": "website-inspiration",
+      "kind": "gallery",
       "access": "free",
-      "subscriptionRequired": "no",
-      "usefulFor": [],
-      "tags": [],
       "status": "active",
+      "addedAt": "2026-07-22",
+      "addedVia": "curator",
+      "lastChecked": null,
       "faviconUrl": "https://bestwebsite.gallery/assets/images/bitmap/favicon/apple-touch-icon-152x152.png"
     },
     {
@@ -206,13 +241,13 @@
       "domain": "minimal.gallery",
       "description": "Clean, minimal, and functional website inspiration",
       "category": "website-inspiration",
+      "kind": "gallery",
       "access": "free",
-      "subscriptionRequired": "no",
-      "usefulFor": [],
-      "tags": [],
       "status": "active",
+      "addedAt": "2026-07-22",
+      "addedVia": "curator",
+      "lastChecked": null,
       "previewImageUrl": "https://minimal.gallery/wp-content/themes/minimalgallery/assets/img/meta/og.jpg",
-      "previewSource": "open-graph",
       "faviconUrl": "https://minimal.gallery/wp-content/themes/minimalgallery/assets/favicon/apple-touch-icon.png"
     },
     {
@@ -223,11 +258,12 @@
       "domain": "siiimple.com",
       "description": "Minimal website gallery",
       "category": "website-inspiration",
+      "kind": "gallery",
       "access": "free",
-      "subscriptionRequired": "no",
-      "usefulFor": [],
-      "tags": [],
       "status": "active",
+      "addedAt": "2026-07-22",
+      "addedVia": "curator",
+      "lastChecked": null,
       "faviconUrl": "https://siiimple.com/wp-content/uploads/2018/02/cropped-favicon-1-1-180x180.png"
     },
     {
@@ -238,13 +274,13 @@
       "domain": "sitesee.co",
       "description": "Modern website inspiration gallery",
       "category": "website-inspiration",
+      "kind": "gallery",
       "access": "free",
-      "subscriptionRequired": "no",
-      "usefulFor": [],
-      "tags": [],
       "status": "active",
+      "addedAt": "2026-07-22",
+      "addedVia": "curator",
+      "lastChecked": null,
       "previewImageUrl": "https://d3alngem7je9z2.cloudfront.net/sitesee_banner.png",
-      "previewSource": "open-graph",
       "faviconUrl": "https://sitesee.co/apple-touch-icon.png"
     },
     {
@@ -255,11 +291,12 @@
       "domain": "hoverstat.es",
       "description": "Alternative, experimental, and unconventional web design",
       "category": "website-inspiration",
+      "kind": "gallery",
       "access": "free",
-      "subscriptionRequired": "no",
-      "usefulFor": [],
-      "tags": [],
-      "status": "active"
+      "status": "active",
+      "addedAt": "2026-07-22",
+      "addedVia": "curator",
+      "lastChecked": null
     },
     {
       "id": "resource-859433d5d4ec",
@@ -269,13 +306,20 @@
       "domain": "landing.love",
       "description": "Animated landing pages and interaction inspiration",
       "category": "website-inspiration",
+      "kind": "gallery",
       "access": "free",
-      "subscriptionRequired": "no",
-      "usefulFor": [],
-      "tags": [],
       "status": "active",
+      "addedAt": "2026-07-22",
+      "addedVia": "curator",
+      "lastChecked": null,
+      "bestFor": [
+        "micro-site-design",
+        "interactive-landing-page"
+      ],
+      "limitations": [
+        "No code files included"
+      ],
       "previewImageUrl": "https://www.landing.love/img/social.jpg",
-      "previewSource": "open-graph",
       "faviconUrl": "https://www.landing.love/img/favicon.png"
     },
     {
@@ -286,11 +330,12 @@
       "domain": "maxibestof.one",
       "description": "Websites, typography, and visual inspiration",
       "category": "website-inspiration",
+      "kind": "gallery",
       "access": "free",
-      "subscriptionRequired": "no",
-      "usefulFor": [],
-      "tags": [],
-      "status": "active"
+      "status": "active",
+      "addedAt": "2026-07-22",
+      "addedVia": "curator",
+      "lastChecked": null
     },
     {
       "id": "resource-a15a27462f41",
@@ -300,13 +345,13 @@
       "domain": "darkmodedesign.com",
       "description": "Dark-mode website inspiration",
       "category": "website-inspiration",
+      "kind": "gallery",
       "access": "free",
-      "subscriptionRequired": "no",
-      "usefulFor": [],
-      "tags": [],
       "status": "active",
+      "addedAt": "2026-07-22",
+      "addedVia": "curator",
+      "lastChecked": null,
       "previewImageUrl": "https://cdn.prod.website-files.com/5ea7fc450fe2ee12b924f695/63f1a4bc731066c857d55d0b_97ffe48072aebe00cb0efe5b320f4130_OpenGraph-min.png",
-      "previewSource": "open-graph",
       "faviconUrl": "https://cdn.prod.website-files.com/5ea7fc450fe2ee12b924f695/6a6c2105544b94d5960c409f_Icon_Webclip.png"
     },
     {
@@ -317,13 +362,13 @@
       "domain": "dark.design",
       "description": "Hand-picked dark-themed websites",
       "category": "website-inspiration",
+      "kind": "gallery",
       "access": "free",
-      "subscriptionRequired": "no",
-      "usefulFor": [],
-      "tags": [],
       "status": "active",
+      "addedAt": "2026-07-22",
+      "addedVia": "curator",
+      "lastChecked": null,
       "previewImageUrl": "https://www.dark.design/og.avif",
-      "previewSource": "open-graph",
       "faviconUrl": "https://www.dark.design/favicon.avif"
     },
     {
@@ -334,11 +379,12 @@
       "domain": "deadsimplesites.com",
       "description": "Extremely simple and minimal websites",
       "category": "website-inspiration",
+      "kind": "gallery",
       "access": "free",
-      "subscriptionRequired": "no",
-      "usefulFor": [],
-      "tags": [],
-      "status": "active"
+      "status": "active",
+      "addedAt": "2026-07-22",
+      "addedVia": "curator",
+      "lastChecked": null
     },
     {
       "id": "resource-a76216149326",
@@ -348,13 +394,13 @@
       "domain": "navbar.gallery",
       "description": "Navigation bar patterns and examples",
       "category": "website-inspiration",
+      "kind": "gallery",
       "access": "free",
-      "subscriptionRequired": "no",
-      "usefulFor": [],
-      "tags": [],
       "status": "active",
-      "previewImageUrl": "https://cdn.prod.website-files.com/65676438ff1c480b81cf0085/65d0d08ee366dcfc3c73aa94_ogimage%20(2).webp",
-      "previewSource": "open-graph"
+      "addedAt": "2026-07-22",
+      "addedVia": "curator",
+      "lastChecked": null,
+      "previewImageUrl": "https://cdn.prod.website-files.com/65676438ff1c480b81cf0085/65d0d08ee366dcfc3c73aa94_ogimage%20(2).webp"
     },
     {
       "id": "resource-16a9509c3d04",
@@ -364,13 +410,13 @@
       "domain": "footer.design",
       "description": "Website footer patterns and inspiration",
       "category": "website-inspiration",
+      "kind": "gallery",
       "access": "free",
-      "subscriptionRequired": "no",
-      "usefulFor": [],
-      "tags": [],
       "status": "active",
+      "addedAt": "2026-07-22",
+      "addedVia": "curator",
+      "lastChecked": null,
       "previewImageUrl": "https://cdn.prod.website-files.com/64fe0870e6e4f3a42a145c1c/6514c4e3bcde78421b541de9_open-graph.webp",
-      "previewSource": "open-graph",
       "faviconUrl": "https://cdn.prod.website-files.com/64fe0870e6e4f3a42a145c1c/650866dc23fd1193a04dcb30_app-clip.png"
     },
     {
@@ -381,13 +427,13 @@
       "domain": "404s.design",
       "description": "Creative 404 error-page inspiration",
       "category": "website-inspiration",
+      "kind": "gallery",
       "access": "free",
-      "subscriptionRequired": "no",
-      "usefulFor": [],
-      "tags": [],
       "status": "active",
+      "addedAt": "2026-07-22",
+      "addedVia": "curator",
+      "lastChecked": null,
       "previewImageUrl": "https://cdn.prod.website-files.com/65ba70a4bb6f912baf009423/6899c6b37147b1d3587301c5_2533.webp",
-      "previewSource": "open-graph",
       "faviconUrl": "https://cdn.prod.website-files.com/65ba70a4bb6f912baf009423/65bc1ed89a6f1dd0c60f93c4_Frame%203.png"
     },
     {
@@ -398,11 +444,12 @@
       "domain": "siteofsites.co",
       "description": "Curated collection of noteworthy websites",
       "category": "website-inspiration",
+      "kind": "gallery",
       "access": "free",
-      "subscriptionRequired": "no",
-      "usefulFor": [],
-      "tags": [],
-      "status": "active"
+      "status": "active",
+      "addedAt": "2026-07-22",
+      "addedVia": "curator",
+      "lastChecked": null
     },
     {
       "id": "resource-c5f9ae1c7798",
@@ -412,13 +459,13 @@
       "domain": "browsingmode.com",
       "description": "Websites selected for design and functionality",
       "category": "website-inspiration",
+      "kind": "gallery",
       "access": "free",
-      "subscriptionRequired": "no",
-      "usefulFor": [],
-      "tags": [],
       "status": "active",
+      "addedAt": "2026-07-22",
+      "addedVia": "curator",
+      "lastChecked": null,
       "previewImageUrl": "https://framerusercontent.com/assets/wCuoawEW0qbKivA7KjNgcPtGUoE.webp",
-      "previewSource": "open-graph",
       "faviconUrl": "https://framerusercontent.com/images/guIul9Er3h97K5iT2hUme3EDuM.png"
     },
     {
@@ -429,11 +476,12 @@
       "domain": "3dwebsites.design",
       "description": "3D and WebGL website inspiration",
       "category": "website-inspiration",
+      "kind": "gallery",
       "access": "free",
-      "subscriptionRequired": "no",
-      "usefulFor": [],
-      "tags": [],
-      "status": "active"
+      "status": "active",
+      "addedAt": "2026-07-22",
+      "addedVia": "curator",
+      "lastChecked": null
     },
     {
       "id": "resource-1cd85fba3a9b",
@@ -443,11 +491,12 @@
       "domain": "seesaw.website",
       "description": "Daily hand-picked website inspiration",
       "category": "website-inspiration",
+      "kind": "gallery",
       "access": "free",
-      "subscriptionRequired": "no",
-      "usefulFor": [],
-      "tags": [],
-      "status": "active"
+      "status": "active",
+      "addedAt": "2026-07-22",
+      "addedVia": "curator",
+      "lastChecked": null
     },
     {
       "id": "resource-f297ebee087b",
@@ -457,11 +506,12 @@
       "domain": "webinteractions.gallery",
       "description": "Animated web elements and interaction patterns",
       "category": "website-inspiration",
+      "kind": "gallery",
       "access": "free",
-      "subscriptionRequired": "no",
-      "usefulFor": [],
-      "tags": [],
-      "status": "active"
+      "status": "active",
+      "addedAt": "2026-07-22",
+      "addedVia": "curator",
+      "lastChecked": null
     },
     {
       "id": "resource-3894be38dacd",
@@ -471,11 +521,12 @@
       "domain": "nordicdesign.gallery",
       "description": "Web design from Nordic countries and nearby regions",
       "category": "website-inspiration",
+      "kind": "gallery",
       "access": "free",
-      "subscriptionRequired": "no",
-      "usefulFor": [],
-      "tags": [],
-      "status": "active"
+      "status": "active",
+      "addedAt": "2026-07-22",
+      "addedVia": "curator",
+      "lastChecked": null
     },
     {
       "id": "resource-46c4289c2359",
@@ -485,13 +536,13 @@
       "domain": "a-fresh.website",
       "description": "Unusual and highly creative website inspiration",
       "category": "website-inspiration",
+      "kind": "gallery",
       "access": "free",
-      "subscriptionRequired": "no",
-      "usefulFor": [],
-      "tags": [],
       "status": "active",
-      "previewImageUrl": "https://www.a-fresh.website/a/2mNsxrKcXN2U0NnPyI6xqK/a-fresh-social-share.jpg",
-      "previewSource": "open-graph"
+      "addedAt": "2026-07-22",
+      "addedVia": "curator",
+      "lastChecked": null,
+      "previewImageUrl": "https://www.a-fresh.website/a/2mNsxrKcXN2U0NnPyI6xqK/a-fresh-social-share.jpg"
     },
     {
       "id": "resource-a122af04190c",
@@ -501,11 +552,12 @@
       "domain": "supahero.io",
       "description": "Curated website hero-section inspiration",
       "category": "website-inspiration",
+      "kind": "gallery",
       "access": "free",
-      "subscriptionRequired": "no",
-      "usefulFor": [],
-      "tags": [],
-      "status": "active"
+      "status": "active",
+      "addedAt": "2026-07-22",
+      "addedVia": "curator",
+      "lastChecked": null
     },
     {
       "id": "resource-c1be6f2c9435",
@@ -515,13 +567,13 @@
       "domain": "cta.gallery",
       "description": "Call-to-action section inspiration",
       "category": "website-inspiration",
+      "kind": "gallery",
       "access": "free",
-      "subscriptionRequired": "no",
-      "usefulFor": [],
-      "tags": [],
       "status": "active",
+      "addedAt": "2026-07-22",
+      "addedVia": "curator",
+      "lastChecked": null,
       "previewImageUrl": "https://framerusercontent.com/images/yXhxFS3RMgsD2U3vLGvsjBaE4Q.jpg",
-      "previewSource": "open-graph",
       "faviconUrl": "https://framerusercontent.com/images/wvsg35aPOjBoT6Jli6VVqeJ9Qs.png"
     },
     {
@@ -532,13 +584,13 @@
       "domain": "a1.gallery",
       "description": "Curated gallery of high-quality websites",
       "category": "website-inspiration",
+      "kind": "gallery",
       "access": "free",
-      "subscriptionRequired": "no",
-      "usefulFor": [],
-      "tags": [],
       "status": "active",
+      "addedAt": "2026-07-22",
+      "addedVia": "curator",
+      "lastChecked": null,
       "previewImageUrl": "https://www.a1.gallery/images/og-default.webp",
-      "previewSource": "open-graph",
       "faviconUrl": "https://www.a1.gallery/images/a1-favicon-192.png"
     },
     {
@@ -549,11 +601,12 @@
       "domain": "inspo.page",
       "description": "Website inspiration organized at component level",
       "category": "website-inspiration",
+      "kind": "gallery",
       "access": "free",
-      "subscriptionRequired": "no",
-      "usefulFor": [],
-      "tags": [],
-      "status": "active"
+      "status": "active",
+      "addedAt": "2026-07-22",
+      "addedVia": "curator",
+      "lastChecked": null
     },
     {
       "id": "resource-910c4b25079b",
@@ -563,13 +616,13 @@
       "domain": "webzooo.com",
       "description": "Website gallery organized by color",
       "category": "website-inspiration",
+      "kind": "gallery",
       "access": "free",
-      "subscriptionRequired": "no",
-      "usefulFor": [],
-      "tags": [],
       "status": "active",
+      "addedAt": "2026-07-22",
+      "addedVia": "curator",
+      "lastChecked": null,
       "previewImageUrl": "https://webzooo.com/og-image.webp",
-      "previewSource": "open-graph",
       "faviconUrl": "https://webzooo.com/apple-touch-icon.png"
     },
     {
@@ -580,13 +633,13 @@
       "domain": "recent.design",
       "description": "Recent web, interface, and interaction design",
       "category": "website-inspiration",
+      "kind": "gallery",
       "access": "free",
-      "subscriptionRequired": "no",
-      "usefulFor": [],
-      "tags": [],
       "status": "active",
-      "previewImageUrl": "https://recent.design/og.png",
-      "previewSource": "open-graph"
+      "addedAt": "2026-07-22",
+      "addedVia": "curator",
+      "lastChecked": null,
+      "previewImageUrl": "https://recent.design/og.png"
     },
     {
       "id": "resource-3a1b90436f0b",
@@ -596,13 +649,13 @@
       "domain": "detail.design",
       "description": "Small UI and interaction details from digital products",
       "category": "website-inspiration",
+      "kind": "gallery",
       "access": "free",
-      "subscriptionRequired": "no",
-      "usefulFor": [],
-      "tags": [],
       "status": "active",
-      "previewImageUrl": "https://detail.design/og.png",
-      "previewSource": "open-graph"
+      "addedAt": "2026-07-22",
+      "addedVia": "curator",
+      "lastChecked": null,
+      "previewImageUrl": "https://detail.design/og.png"
     },
     {
       "id": "resource-14231b7b938a",
@@ -612,13 +665,13 @@
       "domain": "bentogrids.com",
       "description": "Bento-style website and interface layouts",
       "category": "website-inspiration",
+      "kind": "gallery",
       "access": "free",
-      "subscriptionRequired": "no",
-      "usefulFor": [],
-      "tags": [],
       "status": "active",
+      "addedAt": "2026-07-22",
+      "addedVia": "curator",
+      "lastChecked": null,
       "previewImageUrl": "https://bentogrids.com/images/og.png",
-      "previewSource": "open-graph",
       "faviconUrl": "https://bentogrids.com/favicon/icon-512x512.png"
     },
     {
@@ -629,13 +682,13 @@
       "domain": "mobbin.com",
       "description": "Searchable screenshots and flows from real mobile and web products",
       "category": "product-ui-ux",
+      "kind": "gallery",
       "access": "freemium",
-      "subscriptionRequired": "optional",
-      "usefulFor": [],
-      "tags": [],
       "status": "active",
+      "addedAt": "2026-07-22",
+      "addedVia": "curator",
+      "lastChecked": null,
       "previewImageUrl": "https://framerusercontent.com/assets/FE3uqmxi41SxsiiVq9JNJC1Pwc.png",
-      "previewSource": "open-graph",
       "faviconUrl": "https://framerusercontent.com/images/2cz8ZUxTsw3gbMD0g6JE4jLsgr8.png"
     },
     {
@@ -646,13 +699,20 @@
       "domain": "refero.design",
       "description": "Real product-interface screenshots and design references",
       "category": "product-ui-ux",
+      "kind": "gallery",
       "access": "freemium",
-      "subscriptionRequired": "optional",
-      "usefulFor": [],
-      "tags": [],
       "status": "active",
+      "addedAt": "2026-07-22",
+      "addedVia": "curator",
+      "lastChecked": null,
+      "bestFor": [
+        "ux-pattern-research",
+        "web-application-flows"
+      ],
+      "limitations": [
+        "Refero Pro account required for full access"
+      ],
       "previewImageUrl": "https://refero.design/open-graph-4-1200x630.png",
-      "previewSource": "open-graph",
       "faviconUrl": "https://refero.design/apple-icon-180x180.png"
     },
     {
@@ -663,11 +723,19 @@
       "domain": "pageflows.com",
       "description": "Recorded user flows and screen sequences from real products",
       "category": "product-ui-ux",
+      "kind": "gallery",
       "access": "freemium",
-      "subscriptionRequired": "optional",
-      "usefulFor": [],
-      "tags": [],
       "status": "active",
+      "addedAt": "2026-07-22",
+      "addedVia": "curator",
+      "lastChecked": null,
+      "bestFor": [
+        "user-onboarding-design",
+        "interaction-flow-mapping"
+      ],
+      "limitations": [
+        "Pro videos require paid subscription"
+      ],
       "faviconUrl": "https://pageflows.com/static/website/images/apple-icon-180x180.png"
     },
     {
@@ -678,11 +746,12 @@
       "domain": "uisources.com",
       "description": "Interaction recordings and UI details from real apps",
       "category": "product-ui-ux",
+      "kind": "gallery",
       "access": "free",
-      "subscriptionRequired": "no",
-      "usefulFor": [],
-      "tags": [],
-      "status": "active"
+      "status": "active",
+      "addedAt": "2026-07-22",
+      "addedVia": "curator",
+      "lastChecked": null
     },
     {
       "id": "resource-5c66064d184b",
@@ -692,11 +761,12 @@
       "domain": "screenlane.com",
       "description": "Mobile-app screen and flow inspiration",
       "category": "product-ui-ux",
+      "kind": "gallery",
       "access": "free",
-      "subscriptionRequired": "no",
-      "usefulFor": [],
-      "tags": [],
-      "status": "active"
+      "status": "active",
+      "addedAt": "2026-07-22",
+      "addedVia": "curator",
+      "lastChecked": null
     },
     {
       "id": "resource-ac7884b515b0",
@@ -706,11 +776,12 @@
       "domain": "pttrns.com",
       "description": "Mobile UI patterns and categorized app screenshots",
       "category": "product-ui-ux",
+      "kind": "gallery",
       "access": "paid",
-      "subscriptionRequired": "yes",
-      "usefulFor": [],
-      "tags": [],
       "status": "active",
+      "addedAt": "2026-07-22",
+      "addedVia": "curator",
+      "lastChecked": null,
       "faviconUrl": "https://www.pttrns.com/wp-content/uploads/2022/07/favicon-300x300.png"
     },
     {
@@ -721,11 +792,12 @@
       "domain": "designvault.io",
       "description": "UI patterns and inspiration from real products",
       "category": "product-ui-ux",
+      "kind": "gallery",
       "access": "free",
-      "subscriptionRequired": "no",
-      "usefulFor": [],
-      "tags": [],
-      "status": "active"
+      "status": "active",
+      "addedAt": "2026-07-22",
+      "addedVia": "curator",
+      "lastChecked": null
     },
     {
       "id": "resource-cd0047dcee72",
@@ -735,13 +807,13 @@
       "domain": "interface-index.com",
       "description": "Interface elements from B2B, SaaS, and desktop products",
       "category": "product-ui-ux",
+      "kind": "gallery",
       "access": "free",
-      "subscriptionRequired": "no",
-      "usefulFor": [],
-      "tags": [],
       "status": "active",
+      "addedAt": "2026-07-22",
+      "addedVia": "curator",
+      "lastChecked": null,
       "previewImageUrl": "https://interface-index.com/assets/interface-index-opengraph-share-image.png",
-      "previewSource": "open-graph",
       "faviconUrl": "https://interface-index.com/favicons/apple-touch-icon.png"
     },
     {
@@ -752,13 +824,13 @@
       "domain": "builtformars.com",
       "description": "Short examples of useful UX interactions and product decisions",
       "category": "product-ui-ux",
+      "kind": "gallery",
       "access": "free",
-      "subscriptionRequired": "no",
-      "usefulFor": [],
-      "tags": [],
       "status": "active",
-      "previewImageUrl": "https://cdn.craft.cloud/983dd56a-1291-4f1f-ba2b-57c60e14c22a/assets/images/UXBites.jpg?width=1200&height=630&quality=82&fit=cover&s=dY5gls4sy2fXZUuDCQLhhP5z6E5rJlP7GW83Soj_d6Q",
-      "previewSource": "open-graph"
+      "addedAt": "2026-07-22",
+      "addedVia": "curator",
+      "lastChecked": null,
+      "previewImageUrl": "https://cdn.craft.cloud/983dd56a-1291-4f1f-ba2b-57c60e14c22a/assets/images/UXBites.jpg?width=1200&height=630&quality=82&fit=cover&s=dY5gls4sy2fXZUuDCQLhhP5z6E5rJlP7GW83Soj_d6Q"
     },
     {
       "id": "resource-fbcb29e83b14",
@@ -768,11 +840,12 @@
       "domain": "60fps.design",
       "description": "Microinteractions and polished details from real apps",
       "category": "product-ui-ux",
+      "kind": "gallery",
       "access": "freemium",
-      "subscriptionRequired": "optional",
-      "usefulFor": [],
-      "tags": [],
-      "status": "active"
+      "status": "active",
+      "addedAt": "2026-07-22",
+      "addedVia": "curator",
+      "lastChecked": null
     },
     {
       "id": "resource-33a500177818",
@@ -782,11 +855,12 @@
       "domain": "appshots.design",
       "description": "Mobile-app screenshots and product-flow references",
       "category": "product-ui-ux",
+      "kind": "gallery",
       "access": "freemium",
-      "subscriptionRequired": "optional",
-      "usefulFor": [],
-      "tags": [],
-      "status": "active"
+      "status": "active",
+      "addedAt": "2026-07-22",
+      "addedVia": "curator",
+      "lastChecked": null
     },
     {
       "id": "resource-fe4c69647281",
@@ -796,13 +870,13 @@
       "domain": "spottedinprod.com",
       "description": "Interesting patterns found in production iOS apps",
       "category": "product-ui-ux",
+      "kind": "gallery",
       "access": "freemium",
-      "subscriptionRequired": "optional",
-      "usefulFor": [],
-      "tags": [],
       "status": "active",
+      "addedAt": "2026-07-22",
+      "addedVia": "curator",
+      "lastChecked": null,
       "previewImageUrl": "https://www.spottedinprod.com/opengraph-image.png?opengraph-image.ab455828.png",
-      "previewSource": "open-graph",
       "faviconUrl": "https://www.spottedinprod.com/apple-icon.jpg?apple-icon.a92d0c31.jpg"
     },
     {
@@ -813,11 +887,12 @@
       "domain": "scrnshts.club",
       "description": "App-store screenshots and mobile product presentation",
       "category": "product-ui-ux",
+      "kind": "gallery",
       "access": "freemium",
-      "subscriptionRequired": "optional",
-      "usefulFor": [],
-      "tags": [],
-      "status": "active"
+      "status": "active",
+      "addedAt": "2026-07-22",
+      "addedVia": "curator",
+      "lastChecked": null
     },
     {
       "id": "resource-0ef7f1529f9e",
@@ -827,13 +902,13 @@
       "domain": "pushkeen.ai",
       "description": "Push-notification patterns from mobile apps",
       "category": "product-ui-ux",
+      "kind": "gallery",
       "access": "free",
-      "subscriptionRequired": "no",
-      "usefulFor": [],
-      "tags": [],
       "status": "active",
-      "previewImageUrl": "https://djqvvvbpwetdfwhwbsin.supabase.co/storage/v1/object/public/static/og_image.png?v=1.0",
-      "previewSource": "open-graph"
+      "addedAt": "2026-07-22",
+      "addedVia": "curator",
+      "lastChecked": null,
+      "previewImageUrl": "https://djqvvvbpwetdfwhwbsin.supabase.co/storage/v1/object/public/static/og_image.png?v=1.0"
     },
     {
       "id": "resource-c7f686b41a96",
@@ -843,13 +918,13 @@
       "domain": "paywallpro.app",
       "description": "Mobile subscription paywall screenshots and analysis",
       "category": "product-ui-ux",
+      "kind": "gallery",
       "access": "freemium",
-      "subscriptionRequired": "optional",
-      "usefulFor": [],
-      "tags": [],
       "status": "active",
-      "previewImageUrl": "https://cdn.dingyuebao.cn/paywall/assets/seo.png",
-      "previewSource": "open-graph"
+      "addedAt": "2026-07-22",
+      "addedVia": "curator",
+      "lastChecked": null,
+      "previewImageUrl": "https://cdn.dingyuebao.cn/paywall/assets/seo.png"
     },
     {
       "id": "resource-60706995bb78",
@@ -859,13 +934,13 @@
       "domain": "laudableapps.com",
       "description": "Independent showcase of polished iOS applications",
       "category": "product-ui-ux",
+      "kind": "gallery",
       "access": "free",
-      "subscriptionRequired": "no",
-      "usefulFor": [],
-      "tags": [],
       "status": "active",
-      "previewImageUrl": "https://laudableapps.com/images/og.jpg",
-      "previewSource": "open-graph"
+      "addedAt": "2026-07-22",
+      "addedVia": "curator",
+      "lastChecked": null,
+      "previewImageUrl": "https://laudableapps.com/images/og.jpg"
     },
     {
       "id": "resource-2792fea54078",
@@ -875,11 +950,12 @@
       "domain": "iosicongallery.com",
       "description": "iOS, macOS, and watchOS app-icon inspiration",
       "category": "product-ui-ux",
+      "kind": "gallery",
       "access": "free",
-      "subscriptionRequired": "no",
-      "usefulFor": [],
-      "tags": [],
-      "status": "active"
+      "status": "active",
+      "addedAt": "2026-07-22",
+      "addedVia": "curator",
+      "lastChecked": null
     },
     {
       "id": "resource-acfe63268811",
@@ -889,11 +965,20 @@
       "domain": "nicelydone.club",
       "description": "Screenshots and UX patterns from high-quality web applications",
       "category": "product-ui-ux",
+      "kind": "gallery",
       "access": "freemium",
-      "subscriptionRequired": "optional",
-      "usefulFor": [],
-      "tags": [],
-      "status": "active"
+      "status": "active",
+      "addedAt": "2026-07-22",
+      "addedVia": "curator",
+      "lastChecked": null,
+      "bestFor": [
+        "saas-dashboard-design",
+        "onboarding-flows",
+        "settings-page-ux"
+      ],
+      "limitations": [
+        "Pro features require user paid subscription"
+      ]
     },
     {
       "id": "resource-52b39211e431",
@@ -903,13 +988,13 @@
       "domain": "saasframe.io",
       "description": "SaaS website, product UI, and email-flow inspiration",
       "category": "product-ui-ux",
+      "kind": "gallery",
       "access": "freemium",
-      "subscriptionRequired": "optional",
-      "usefulFor": [],
-      "tags": [],
       "status": "active",
-      "previewImageUrl": "https://cdn.prod.website-files.com/5e9dc792e1210c2d5df7eba4/63f2c6022d342cc2330d5ff4_SaaSFrame%20PH%201.webp",
-      "previewSource": "open-graph"
+      "addedAt": "2026-07-22",
+      "addedVia": "curator",
+      "lastChecked": null,
+      "previewImageUrl": "https://cdn.prod.website-files.com/5e9dc792e1210c2d5df7eba4/63f2c6022d342cc2330d5ff4_SaaSFrame%20PH%201.webp"
     },
     {
       "id": "resource-b4c81fa6f889",
@@ -919,11 +1004,12 @@
       "domain": "saasinterface.com",
       "description": "SaaS product UI and UX examples",
       "category": "product-ui-ux",
+      "kind": "gallery",
       "access": "freemium",
-      "subscriptionRequired": "optional",
-      "usefulFor": [],
-      "tags": [],
       "status": "active",
+      "addedAt": "2026-07-22",
+      "addedVia": "curator",
+      "lastChecked": null,
       "faviconUrl": "https://saasinterface.com/wp-content/themes/saasinterface/dist/images/favicon-32x32.png"
     },
     {
@@ -934,13 +1020,13 @@
       "domain": "webframe.xyz",
       "description": "Web-application interface inspiration",
       "category": "product-ui-ux",
+      "kind": "gallery",
       "access": "free",
-      "subscriptionRequired": "no",
-      "usefulFor": [],
-      "tags": [],
       "status": "active",
-      "previewImageUrl": "https://webframe.xyz/site-image.png",
-      "previewSource": "open-graph"
+      "addedAt": "2026-07-22",
+      "addedVia": "curator",
+      "lastChecked": null,
+      "previewImageUrl": "https://webframe.xyz/site-image.png"
     },
     {
       "id": "resource-804d857049dd",
@@ -950,11 +1036,12 @@
       "domain": "uigarage.net",
       "description": "UI examples organized by pattern and platform",
       "category": "product-ui-ux",
+      "kind": "gallery",
       "access": "free",
-      "subscriptionRequired": "no",
-      "usefulFor": [],
-      "tags": [],
       "status": "active",
+      "addedAt": "2026-07-22",
+      "addedVia": "curator",
+      "lastChecked": null,
       "faviconUrl": "https://cdn.prod.website-files.com/6191a88a1c0e3983292beff7/65b9a33e8a695f1636c77064_webclip.png"
     },
     {
@@ -965,13 +1052,13 @@
       "domain": "collectui.com",
       "description": "Daily UI inspiration organized by component type",
       "category": "product-ui-ux",
+      "kind": "gallery",
       "access": "free",
-      "subscriptionRequired": "no",
-      "usefulFor": [],
-      "tags": [],
       "status": "active",
+      "addedAt": "2026-07-22",
+      "addedVia": "curator",
+      "lastChecked": null,
       "previewImageUrl": "https://collectui.com/og-image.jpg",
-      "previewSource": "open-graph",
       "faviconUrl": "https://collectui.com/favicon.png"
     },
     {
@@ -982,11 +1069,12 @@
       "domain": "uimovement.com",
       "description": "UI animation and interaction inspiration",
       "category": "product-ui-ux",
+      "kind": "gallery",
       "access": "free",
-      "subscriptionRequired": "no",
-      "usefulFor": [],
-      "tags": [],
-      "status": "active"
+      "status": "active",
+      "addedAt": "2026-07-22",
+      "addedVia": "curator",
+      "lastChecked": null
     },
     {
       "id": "resource-be4bfd235371",
@@ -996,13 +1084,13 @@
       "domain": "builtformars.com",
       "description": "Detailed UX case studies and product teardowns",
       "category": "product-ui-ux",
+      "kind": "gallery",
       "access": "freemium",
-      "subscriptionRequired": "optional",
-      "usefulFor": [],
-      "tags": [],
       "status": "active",
-      "previewImageUrl": "https://cdn.craft.cloud/983dd56a-1291-4f1f-ba2b-57c60e14c22a/assets/images/rootOG.jpg?width=1200&height=630&quality=82&fit=contain&s=JE_0V_IWMSrCXr_xGIzHYWtmY4QPTLRdfBzs_myuE7I",
-      "previewSource": "open-graph"
+      "addedAt": "2026-07-22",
+      "addedVia": "curator",
+      "lastChecked": null,
+      "previewImageUrl": "https://cdn.craft.cloud/983dd56a-1291-4f1f-ba2b-57c60e14c22a/assets/images/rootOG.jpg?width=1200&height=630&quality=82&fit=contain&s=JE_0V_IWMSrCXr_xGIzHYWtmY4QPTLRdfBzs_myuE7I"
     },
     {
       "id": "resource-c6ead4379d56",
@@ -1012,13 +1100,13 @@
       "domain": "landingfolio.com",
       "description": "Landing-page screenshots, sections, and templates",
       "category": "landing-marketing",
+      "kind": "gallery",
       "access": "freemium",
-      "subscriptionRequired": "optional",
-      "usefulFor": [],
-      "tags": [],
       "status": "active",
-      "previewImageUrl": "https://www.landingfolio.com/og-image.png",
-      "previewSource": "open-graph"
+      "addedAt": "2026-07-22",
+      "addedVia": "curator",
+      "lastChecked": null,
+      "previewImageUrl": "https://www.landingfolio.com/og-image.png"
     },
     {
       "id": "resource-068a498e5c53",
@@ -1028,11 +1116,12 @@
       "domain": "landings.dev",
       "description": "Curated landing-page inspiration",
       "category": "landing-marketing",
+      "kind": "gallery",
       "access": "free",
-      "subscriptionRequired": "no",
-      "usefulFor": [],
-      "tags": [],
-      "status": "active"
+      "status": "active",
+      "addedAt": "2026-07-22",
+      "addedVia": "curator",
+      "lastChecked": null
     },
     {
       "id": "resource-1ef2bbb67602",
@@ -1042,13 +1131,13 @@
       "domain": "saaspages.xyz",
       "description": "SaaS landing pages focused on design and copywriting",
       "category": "landing-marketing",
+      "kind": "gallery",
       "access": "free",
-      "subscriptionRequired": "no",
-      "usefulFor": [],
-      "tags": [],
       "status": "active",
-      "previewImageUrl": "https://saaspages.xyz/assets/img/cover.png",
-      "previewSource": "open-graph"
+      "addedAt": "2026-07-22",
+      "addedVia": "curator",
+      "lastChecked": null,
+      "previewImageUrl": "https://saaspages.xyz/assets/img/cover.png"
     },
     {
       "id": "resource-f52b14528531",
@@ -1058,13 +1147,13 @@
       "domain": "saaslandingpage.com",
       "description": "Landing-page examples from SaaS companies",
       "category": "landing-marketing",
+      "kind": "gallery",
       "access": "free",
-      "subscriptionRequired": "no",
-      "usefulFor": [],
-      "tags": [],
       "status": "active",
-      "previewImageUrl": "https://saaslandingpage.com/wp-content/uploads/2023/12/Link-Share-Img@2x.png",
-      "previewSource": "open-graph"
+      "addedAt": "2026-07-22",
+      "addedVia": "curator",
+      "lastChecked": null,
+      "previewImageUrl": "https://saaslandingpage.com/wp-content/uploads/2023/12/Link-Share-Img@2x.png"
     },
     {
       "id": "resource-3028e7238961",
@@ -1074,13 +1163,13 @@
       "domain": "pagesthatprint.com",
       "description": "Landing pages connected to proven revenue outcomes",
       "category": "landing-marketing",
+      "kind": "gallery",
       "access": "free",
-      "subscriptionRequired": "no",
-      "usefulFor": [],
-      "tags": [],
       "status": "active",
-      "previewImageUrl": "https://www.pagesthatprint.com/opengraph-image?7f8f5d1a86d4d3fd",
-      "previewSource": "open-graph"
+      "addedAt": "2026-07-22",
+      "addedVia": "curator",
+      "lastChecked": null,
+      "previewImageUrl": "https://www.pagesthatprint.com/opengraph-image?7f8f5d1a86d4d3fd"
     },
     {
       "id": "resource-385af8e671b2",
@@ -1090,11 +1179,12 @@
       "domain": "saaspo.com",
       "description": "Curated SaaS website inspiration",
       "category": "landing-marketing",
+      "kind": "gallery",
       "access": "free",
-      "subscriptionRequired": "no",
-      "usefulFor": [],
-      "tags": [],
-      "status": "active"
+      "status": "active",
+      "addedAt": "2026-07-22",
+      "addedVia": "curator",
+      "lastChecked": null
     },
     {
       "id": "resource-be31b989dbbe",
@@ -1104,13 +1194,13 @@
       "domain": "saaswebsites.com",
       "description": "SaaS website screenshots and pattern references",
       "category": "landing-marketing",
+      "kind": "gallery",
       "access": "freemium",
-      "subscriptionRequired": "optional",
-      "usefulFor": [],
-      "tags": [],
       "status": "active",
-      "previewImageUrl": "https://saaswebsites.s3.amazonaws.com/wp-content/uploads/2021/10/12224853/twitter-share.jpg",
-      "previewSource": "open-graph"
+      "addedAt": "2026-07-22",
+      "addedVia": "curator",
+      "lastChecked": null,
+      "previewImageUrl": "https://saaswebsites.s3.amazonaws.com/wp-content/uploads/2021/10/12224853/twitter-share.jpg"
     },
     {
       "id": "resource-8071ca23bfc4",
@@ -1120,11 +1210,12 @@
       "domain": "divbyzero.com",
       "description": "SaaS website, product, and email examples",
       "category": "landing-marketing",
+      "kind": "gallery",
       "access": "free",
-      "subscriptionRequired": "no",
-      "usefulFor": [],
-      "tags": [],
-      "status": "active"
+      "status": "active",
+      "addedAt": "2026-07-22",
+      "addedVia": "curator",
+      "lastChecked": null
     },
     {
       "id": "resource-6482b53e4e09",
@@ -1134,11 +1225,12 @@
       "domain": "glance.fyi",
       "description": "Tracks website experiments and changes made by SaaS companies",
       "category": "landing-marketing",
+      "kind": "gallery",
       "access": "free",
-      "subscriptionRequired": "no",
-      "usefulFor": [],
-      "tags": [],
-      "status": "active"
+      "status": "active",
+      "addedAt": "2026-07-22",
+      "addedVia": "curator",
+      "lastChecked": null
     },
     {
       "id": "resource-4aeb8a54737a",
@@ -1148,11 +1240,12 @@
       "domain": "pricingpages.design",
       "description": "Pricing-page patterns and examples",
       "category": "landing-marketing",
+      "kind": "gallery",
       "access": "free",
-      "subscriptionRequired": "no",
-      "usefulFor": [],
-      "tags": [],
-      "status": "active"
+      "status": "active",
+      "addedAt": "2026-07-22",
+      "addedVia": "curator",
+      "lastChecked": null
     },
     {
       "id": "resource-aab7c16fffb1",
@@ -1162,11 +1255,12 @@
       "domain": "socialproofexamples.com",
       "description": "Trust, testimonial, and social-proof patterns",
       "category": "landing-marketing",
+      "kind": "gallery",
       "access": "free",
-      "subscriptionRequired": "no",
-      "usefulFor": [],
-      "tags": [],
-      "status": "active"
+      "status": "active",
+      "addedAt": "2026-07-22",
+      "addedVia": "curator",
+      "lastChecked": null
     },
     {
       "id": "resource-33ac0a63b8fc",
@@ -1176,11 +1270,12 @@
       "domain": "commercecream.com",
       "description": "Curated Shopify and ecommerce website inspiration",
       "category": "landing-marketing",
+      "kind": "gallery",
       "access": "free",
-      "subscriptionRequired": "no",
-      "usefulFor": [],
-      "tags": [],
-      "status": "active"
+      "status": "active",
+      "addedAt": "2026-07-22",
+      "addedVia": "curator",
+      "lastChecked": null
     },
     {
       "id": "resource-f5eae6c7040d",
@@ -1190,11 +1285,12 @@
       "domain": "ecomm.design",
       "description": "Ecommerce design gallery and technology references",
       "category": "landing-marketing",
+      "kind": "gallery",
       "access": "free",
-      "subscriptionRequired": "no",
-      "usefulFor": [],
-      "tags": [],
-      "status": "active"
+      "status": "active",
+      "addedAt": "2026-07-22",
+      "addedVia": "curator",
+      "lastChecked": null
     },
     {
       "id": "resource-847d27f24972",
@@ -1204,11 +1300,12 @@
       "domain": "goodcart.design",
       "description": "Well-designed ecommerce website examples",
       "category": "landing-marketing",
+      "kind": "gallery",
       "access": "free",
-      "subscriptionRequired": "no",
-      "usefulFor": [],
-      "tags": [],
-      "status": "active"
+      "status": "active",
+      "addedAt": "2026-07-22",
+      "addedVia": "curator",
+      "lastChecked": null
     },
     {
       "id": "resource-8dab0ae47043",
@@ -1218,11 +1315,12 @@
       "domain": "tinyblocks.cc",
       "description": "Small and notable web-interface patterns",
       "category": "landing-marketing",
+      "kind": "gallery",
       "access": "free",
-      "subscriptionRequired": "no",
-      "usefulFor": [],
-      "tags": [],
-      "status": "active"
+      "status": "active",
+      "addedAt": "2026-07-22",
+      "addedVia": "curator",
+      "lastChecked": null
     },
     {
       "id": "resource-984c1f3c1edb",
@@ -1232,11 +1330,12 @@
       "domain": "reallygoodemails.com",
       "description": "Email design and campaign inspiration",
       "category": "landing-marketing",
+      "kind": "gallery",
       "access": "free",
-      "subscriptionRequired": "no",
-      "usefulFor": [],
-      "tags": [],
-      "status": "active"
+      "status": "active",
+      "addedAt": "2026-07-22",
+      "addedVia": "curator",
+      "lastChecked": null
     },
     {
       "id": "resource-ccf11806422e",
@@ -1246,11 +1345,12 @@
       "domain": "inboxflows.com",
       "description": "Catalogued email sequences and lifecycle campaigns",
       "category": "landing-marketing",
+      "kind": "gallery",
       "access": "freemium",
-      "subscriptionRequired": "optional",
-      "usefulFor": [],
-      "tags": [],
-      "status": "active"
+      "status": "active",
+      "addedAt": "2026-07-22",
+      "addedVia": "curator",
+      "lastChecked": null
     },
     {
       "id": "resource-312c2f30d95c",
@@ -1260,11 +1360,12 @@
       "domain": "emaillove.com",
       "description": "Curated email design examples",
       "category": "landing-marketing",
+      "kind": "gallery",
       "access": "free",
-      "subscriptionRequired": "no",
-      "usefulFor": [],
-      "tags": [],
-      "status": "active"
+      "status": "active",
+      "addedAt": "2026-07-22",
+      "addedVia": "curator",
+      "lastChecked": null
     },
     {
       "id": "resource-8dc314976241",
@@ -1274,11 +1375,12 @@
       "domain": "milled.com",
       "description": "Search engine for brand email newsletters",
       "category": "landing-marketing",
+      "kind": "gallery",
       "access": "freemium",
-      "subscriptionRequired": "optional",
-      "usefulFor": [],
-      "tags": [],
-      "status": "active"
+      "status": "active",
+      "addedAt": "2026-07-22",
+      "addedVia": "curator",
+      "lastChecked": null
     },
     {
       "id": "resource-e723df9157ce",
@@ -1288,11 +1390,12 @@
       "domain": "mailboard.com",
       "description": "Email moodboards, saving, and campaign analysis",
       "category": "landing-marketing",
+      "kind": "gallery",
       "access": "freemium",
-      "subscriptionRequired": "optional",
-      "usefulFor": [],
-      "tags": [],
-      "status": "active"
+      "status": "active",
+      "addedAt": "2026-07-22",
+      "addedVia": "curator",
+      "lastChecked": null
     },
     {
       "id": "resource-649678169c05",
@@ -1302,11 +1405,12 @@
       "domain": "email-gallery.com",
       "description": "Curated newsletter and email-design examples",
       "category": "landing-marketing",
+      "kind": "gallery",
       "access": "free",
-      "subscriptionRequired": "no",
-      "usefulFor": [],
-      "tags": [],
-      "status": "active"
+      "status": "active",
+      "addedAt": "2026-07-22",
+      "addedVia": "curator",
+      "lastChecked": null
     },
     {
       "id": "resource-d9ae8b6a37c9",
@@ -1316,13 +1420,13 @@
       "domain": "marketingexamples.com",
       "description": "Real-world marketing tactics and copy examples",
       "category": "landing-marketing",
+      "kind": "gallery",
       "access": "free",
-      "subscriptionRequired": "no",
-      "usefulFor": [],
-      "tags": [],
       "status": "active",
-      "previewImageUrl": "https://s3.amazonaws.com/harrydry/gdmarketing/cards/main.jpg",
-      "previewSource": "open-graph"
+      "addedAt": "2026-07-22",
+      "addedVia": "curator",
+      "lastChecked": null,
+      "previewImageUrl": "https://s3.amazonaws.com/harrydry/gdmarketing/cards/main.jpg"
     },
     {
       "id": "resource-7ca60a12d4fe",
@@ -1332,11 +1436,12 @@
       "domain": "adsoftheworld.com",
       "description": "Advertising campaign inspiration from around the world",
       "category": "landing-marketing",
+      "kind": "gallery",
       "access": "free",
-      "subscriptionRequired": "no",
-      "usefulFor": [],
-      "tags": [],
-      "status": "active"
+      "status": "active",
+      "addedAt": "2026-07-22",
+      "addedVia": "curator",
+      "lastChecked": null
     },
     {
       "id": "resource-2ca28274835a",
@@ -1346,11 +1451,12 @@
       "domain": "adfolio.design",
       "description": "Meta and LinkedIn advertising inspiration",
       "category": "landing-marketing",
+      "kind": "gallery",
       "access": "free",
-      "subscriptionRequired": "no",
-      "usefulFor": [],
-      "tags": [],
-      "status": "active"
+      "status": "active",
+      "addedAt": "2026-07-22",
+      "addedVia": "curator",
+      "lastChecked": null
     },
     {
       "id": "resource-fc953b0fb713",
@@ -1360,11 +1466,12 @@
       "domain": "foreplay.co",
       "description": "Ad-library research, saving, and creative workflow tools",
       "category": "landing-marketing",
+      "kind": "gallery",
       "access": "freemium",
-      "subscriptionRequired": "optional",
-      "usefulFor": [],
-      "tags": [],
-      "status": "active"
+      "status": "active",
+      "addedAt": "2026-07-22",
+      "addedVia": "curator",
+      "lastChecked": null
     },
     {
       "id": "resource-28acba4a9d55",
@@ -1374,13 +1481,20 @@
       "domain": "21st.dev",
       "description": "Community-built React and Tailwind components designed for AI-assisted development",
       "category": "ui-libraries",
+      "kind": "library",
       "access": "free",
-      "subscriptionRequired": "no",
-      "usefulFor": [],
-      "tags": [],
       "status": "active",
-      "previewImageUrl": "https://21st.dev/opengraph-image.png",
-      "previewSource": "open-graph"
+      "addedAt": "2026-07-22",
+      "addedVia": "curator",
+      "lastChecked": null,
+      "bestFor": [
+        "component-discovery",
+        "agent-ui-implementation"
+      ],
+      "limitations": [
+        "Free semantic search; paid tiers for advanced agent generation"
+      ],
+      "previewImageUrl": "https://21st.dev/opengraph-image.png"
     },
     {
       "id": "resource-affc29967a7c",
@@ -1390,13 +1504,21 @@
       "domain": "ui.shadcn.com",
       "description": "Copyable React components built with Radix UI and Tailwind CSS",
       "category": "ui-libraries",
+      "kind": "library",
       "access": "open-source",
-      "subscriptionRequired": "no",
-      "usefulFor": [],
-      "tags": [],
       "status": "active",
-      "previewImageUrl": "https://ui.shadcn.com/og?title=The%20Foundation%20for%20your%20Design%20System&description=A%20set%20of%20beautifully%20designed%20components%20that%20you%20can%20customize%2C%20extend%2C%20and%20build%20on.%20Start%20here%20then%20make%20it%20your%20own.%20Open%20Source.%20Open%20Code.",
-      "previewSource": "open-graph"
+      "addedAt": "2026-07-22",
+      "addedVia": "curator",
+      "lastChecked": null,
+      "bestFor": [
+        "frontend-building",
+        "accessible-components",
+        "design-system-setup"
+      ],
+      "limitations": [
+        "Components are unstyled primitives requiring Tailwind styling"
+      ],
+      "previewImageUrl": "https://ui.shadcn.com/og?title=The%20Foundation%20for%20your%20Design%20System&description=A%20set%20of%20beautifully%20designed%20components%20that%20you%20can%20customize%2C%20extend%2C%20and%20build%20on.%20Start%20here%20then%20make%20it%20your%20own.%20Open%20Source.%20Open%20Code."
     },
     {
       "id": "resource-b2c26900098f",
@@ -1406,11 +1528,12 @@
       "domain": "magicui.design",
       "description": "Animated React and Tailwind components",
       "category": "ui-libraries",
+      "kind": "library",
       "access": "freemium",
-      "subscriptionRequired": "optional",
-      "usefulFor": [],
-      "tags": [],
-      "status": "active"
+      "status": "active",
+      "addedAt": "2026-07-22",
+      "addedVia": "curator",
+      "lastChecked": null
     },
     {
       "id": "resource-e62d060a27d1",
@@ -1420,13 +1543,13 @@
       "domain": "ui.aceternity.com",
       "description": "Animated React components and website sections",
       "category": "ui-libraries",
+      "kind": "library",
       "access": "freemium",
-      "subscriptionRequired": "optional",
-      "usefulFor": [],
-      "tags": [],
       "status": "active",
-      "previewImageUrl": "https://ui.aceternity.com/banner.png",
-      "previewSource": "open-graph"
+      "addedAt": "2026-07-22",
+      "addedVia": "curator",
+      "lastChecked": null,
+      "previewImageUrl": "https://ui.aceternity.com/banner.png"
     },
     {
       "id": "resource-fd6228fd8e88",
@@ -1436,11 +1559,12 @@
       "domain": "originui.com",
       "description": "Copyable Tailwind and shadcn-style components",
       "category": "ui-libraries",
+      "kind": "library",
       "access": "free",
-      "subscriptionRequired": "no",
-      "usefulFor": [],
-      "tags": [],
-      "status": "active"
+      "status": "active",
+      "addedAt": "2026-07-22",
+      "addedVia": "curator",
+      "lastChecked": null
     },
     {
       "id": "resource-2210207ad328",
@@ -1450,11 +1574,12 @@
       "domain": "uiverse.io",
       "description": "Community-made CSS and Tailwind UI elements",
       "category": "ui-libraries",
+      "kind": "library",
       "access": "open-source",
-      "subscriptionRequired": "no",
-      "usefulFor": [],
-      "tags": [],
-      "status": "active"
+      "status": "active",
+      "addedAt": "2026-07-22",
+      "addedVia": "curator",
+      "lastChecked": null
     },
     {
       "id": "resource-d94d49dfe5a3",
@@ -1464,11 +1589,12 @@
       "domain": "reactbits.dev",
       "description": "Animated and interactive React components",
       "category": "ui-libraries",
+      "kind": "library",
       "access": "open-source",
-      "subscriptionRequired": "no",
-      "usefulFor": [],
-      "tags": [],
-      "status": "active"
+      "status": "active",
+      "addedAt": "2026-07-22",
+      "addedVia": "curator",
+      "lastChecked": null
     },
     {
       "id": "resource-ad0f35ed5155",
@@ -1478,13 +1604,13 @@
       "domain": "animata.design",
       "description": "Copyable animated React components",
       "category": "ui-libraries",
+      "kind": "library",
       "access": "open-source",
-      "subscriptionRequired": "no",
-      "usefulFor": [],
-      "tags": [],
       "status": "active",
-      "previewImageUrl": "https://assets.animata.design/og/animata-og-2026.png",
-      "previewSource": "open-graph"
+      "addedAt": "2026-07-22",
+      "addedVia": "curator",
+      "lastChecked": null,
+      "previewImageUrl": "https://assets.animata.design/og/animata-og-2026.png"
     },
     {
       "id": "resource-1f691e6fcca8",
@@ -1494,11 +1620,12 @@
       "domain": "motion-primitives.com",
       "description": "Reusable animated React interface primitives",
       "category": "ui-libraries",
+      "kind": "library",
       "access": "open-source",
-      "subscriptionRequired": "no",
-      "usefulFor": [],
-      "tags": [],
-      "status": "active"
+      "status": "active",
+      "addedAt": "2026-07-22",
+      "addedVia": "curator",
+      "lastChecked": null
     },
     {
       "id": "resource-1d30ade89c50",
@@ -1508,11 +1635,12 @@
       "domain": "cult-ui.com",
       "description": "Animated components built for React and Tailwind",
       "category": "ui-libraries",
+      "kind": "library",
       "access": "open-source",
-      "subscriptionRequired": "no",
-      "usefulFor": [],
-      "tags": [],
-      "status": "active"
+      "status": "active",
+      "addedAt": "2026-07-22",
+      "addedVia": "curator",
+      "lastChecked": null
     },
     {
       "id": "resource-71e0aa0115cb",
@@ -1522,13 +1650,13 @@
       "domain": "eldoraui.site",
       "description": "Animated React components and landing-page sections",
       "category": "ui-libraries",
+      "kind": "library",
       "access": "open-source",
-      "subscriptionRequired": "no",
-      "usefulFor": [],
-      "tags": [],
       "status": "active",
-      "previewImageUrl": "https://www.eldoraui.site/og",
-      "previewSource": "open-graph"
+      "addedAt": "2026-07-22",
+      "addedVia": "curator",
+      "lastChecked": null,
+      "previewImageUrl": "https://www.eldoraui.site/og"
     },
     {
       "id": "resource-1cd898a493ab",
@@ -1538,11 +1666,12 @@
       "domain": "park-ui.com",
       "description": "Styled components built on Ark UI",
       "category": "ui-libraries",
+      "kind": "library",
       "access": "open-source",
-      "subscriptionRequired": "no",
-      "usefulFor": [],
-      "tags": [],
-      "status": "active"
+      "status": "active",
+      "addedAt": "2026-07-22",
+      "addedVia": "curator",
+      "lastChecked": null
     },
     {
       "id": "resource-efc9a91db0cb",
@@ -1552,11 +1681,12 @@
       "domain": "kibo-ui.com",
       "description": "Composable components for shadcn-based React applications",
       "category": "ui-libraries",
+      "kind": "library",
       "access": "open-source",
-      "subscriptionRequired": "no",
-      "usefulFor": [],
-      "tags": [],
-      "status": "active"
+      "status": "active",
+      "addedAt": "2026-07-22",
+      "addedVia": "curator",
+      "lastChecked": null
     },
     {
       "id": "resource-ba14759de401",
@@ -1566,13 +1696,13 @@
       "domain": "kokonutui.com",
       "description": "Modern copy-and-paste React and Tailwind components",
       "category": "ui-libraries",
+      "kind": "library",
       "access": "free",
-      "subscriptionRequired": "no",
-      "usefulFor": [],
-      "tags": [],
       "status": "active",
+      "addedAt": "2026-07-22",
+      "addedVia": "curator",
+      "lastChecked": null,
       "previewImageUrl": "https://kokonutui.com/opengraph-image.png?opengraph-image.219_wqxzyc65n.png",
-      "previewSource": "open-graph",
       "faviconUrl": "https://kokonutui.com/icon.png?icon.2ek27zfaz6hz0.png"
     },
     {
@@ -1583,11 +1713,12 @@
       "domain": "hover.dev",
       "description": "Animated React components and interactions",
       "category": "ui-libraries",
+      "kind": "library",
       "access": "freemium",
-      "subscriptionRequired": "optional",
-      "usefulFor": [],
-      "tags": [],
-      "status": "active"
+      "status": "active",
+      "addedAt": "2026-07-22",
+      "addedVia": "curator",
+      "lastChecked": null
     },
     {
       "id": "resource-ea2802bd8265",
@@ -1597,13 +1728,13 @@
       "domain": "floatui.com",
       "description": "Responsive Tailwind components and templates",
       "category": "ui-libraries",
+      "kind": "library",
       "access": "open-source",
-      "subscriptionRequired": "no",
-      "usefulFor": [],
-      "tags": [],
       "status": "active",
-      "previewImageUrl": "https://floatui.com/thumbnail.png?v2",
-      "previewSource": "open-graph"
+      "addedAt": "2026-07-22",
+      "addedVia": "curator",
+      "lastChecked": null,
+      "previewImageUrl": "https://floatui.com/thumbnail.png?v2"
     },
     {
       "id": "resource-1173adaab852",
@@ -1613,11 +1744,12 @@
       "domain": "hyperui.dev",
       "description": "Free Tailwind CSS components",
       "category": "ui-libraries",
+      "kind": "library",
       "access": "open-source",
-      "subscriptionRequired": "no",
-      "usefulFor": [],
-      "tags": [],
-      "status": "active"
+      "status": "active",
+      "addedAt": "2026-07-22",
+      "addedVia": "curator",
+      "lastChecked": null
     },
     {
       "id": "resource-fbf8ed806c9d",
@@ -1627,13 +1759,13 @@
       "domain": "merakiui.com",
       "description": "Tailwind CSS components with RTL support",
       "category": "ui-libraries",
+      "kind": "library",
       "access": "open-source",
-      "subscriptionRequired": "no",
-      "usefulFor": [],
-      "tags": [],
       "status": "active",
-      "previewImageUrl": "https://merakiui.com/images/thumbnail.webp",
-      "previewSource": "open-graph"
+      "addedAt": "2026-07-22",
+      "addedVia": "curator",
+      "lastChecked": null,
+      "previewImageUrl": "https://merakiui.com/images/thumbnail.webp"
     },
     {
       "id": "resource-ff2d5139380c",
@@ -1643,11 +1775,12 @@
       "domain": "flowbite.com",
       "description": "Tailwind CSS components, blocks, and templates",
       "category": "ui-libraries",
+      "kind": "library",
       "access": "freemium",
-      "subscriptionRequired": "optional",
-      "usefulFor": [],
-      "tags": [],
-      "status": "active"
+      "status": "active",
+      "addedAt": "2026-07-22",
+      "addedVia": "curator",
+      "lastChecked": null
     },
     {
       "id": "resource-1ad6e1869ba2",
@@ -1657,13 +1790,13 @@
       "domain": "preline.co",
       "description": "Tailwind CSS component library and application examples",
       "category": "ui-libraries",
+      "kind": "library",
       "access": "freemium",
-      "subscriptionRequired": "optional",
-      "usefulFor": [],
-      "tags": [],
       "status": "active",
-      "previewImageUrl": "https://preline.co/assets/img/og-image.png",
-      "previewSource": "open-graph"
+      "addedAt": "2026-07-22",
+      "addedVia": "curator",
+      "lastChecked": null,
+      "previewImageUrl": "https://preline.co/assets/img/og-image.png"
     },
     {
       "id": "resource-b76b3dbf3494",
@@ -1673,11 +1806,12 @@
       "domain": "daisyui.com",
       "description": "Themeable component classes for Tailwind CSS",
       "category": "ui-libraries",
+      "kind": "library",
       "access": "freemium",
-      "subscriptionRequired": "optional",
-      "usefulFor": [],
-      "tags": [],
       "status": "active",
+      "addedAt": "2026-07-22",
+      "addedVia": "curator",
+      "lastChecked": null,
       "faviconUrl": "https://img.daisyui.com/images/daisyui/daisyui-logo-180.png"
     },
     {
@@ -1688,13 +1822,13 @@
       "domain": "tailwindcss.com",
       "description": "Official premium Tailwind components and templates",
       "category": "ui-libraries",
+      "kind": "library",
       "access": "paid",
-      "subscriptionRequired": "yes",
-      "usefulFor": [],
-      "tags": [],
       "status": "active",
+      "addedAt": "2026-07-22",
+      "addedVia": "curator",
+      "lastChecked": null,
       "previewImageUrl": "https://tailwindcss.com/plus-assets/img/og/default.png",
-      "previewSource": "open-graph",
       "faviconUrl": "https://tailwindcss.com/plus-assets/img/favicon/favicon-32x32.png"
     },
     {
@@ -1705,13 +1839,18 @@
       "domain": "headlessui.com",
       "description": "Unstyled accessible components for React and Vue",
       "category": "ui-libraries",
+      "kind": "library",
       "access": "open-source",
-      "subscriptionRequired": "no",
-      "usefulFor": [],
-      "tags": [],
       "status": "active",
+      "addedAt": "2026-07-22",
+      "addedVia": "curator",
+      "lastChecked": null,
+      "bestFor": [
+        "accessible-ui-implementation",
+        "tailwind-component-foundation",
+        "react-vue-interface-build"
+      ],
       "previewImageUrl": "https://headlessui.com/_next/static/media/social-card.46834755.jpg",
-      "previewSource": "open-graph",
       "faviconUrl": "https://headlessui.com/apple-touch-icon.png"
     },
     {
@@ -1722,11 +1861,17 @@
       "domain": "radix-ui.com",
       "description": "Accessible unstyled UI primitives for React",
       "category": "ui-libraries",
+      "kind": "library",
       "access": "open-source",
-      "subscriptionRequired": "no",
-      "usefulFor": [],
-      "tags": [],
       "status": "active",
+      "addedAt": "2026-07-22",
+      "addedVia": "curator",
+      "lastChecked": null,
+      "bestFor": [
+        "accessible-component-foundation",
+        "design-system-architecture",
+        "custom-react-ui"
+      ],
       "faviconUrl": "https://www.radix-ui.com/favicon.png"
     },
     {
@@ -1737,13 +1882,13 @@
       "domain": "base-ui.com",
       "description": "Unstyled accessible React component library",
       "category": "ui-libraries",
+      "kind": "library",
       "access": "open-source",
-      "subscriptionRequired": "no",
-      "usefulFor": [],
-      "tags": [],
       "status": "active",
+      "addedAt": "2026-07-22",
+      "addedVia": "curator",
+      "lastChecked": null,
       "previewImageUrl": "https://base-ui.com/opengraph-image-j8qpfc.png?b1b9e0366e512854",
-      "previewSource": "open-graph",
       "faviconUrl": "https://base-ui.com/static/apple-touch-icon.png"
     },
     {
@@ -1754,11 +1899,17 @@
       "domain": "react-spectrum.adobe.com",
       "description": "Accessible hooks and components for React applications",
       "category": "ui-libraries",
+      "kind": "library",
       "access": "open-source",
-      "subscriptionRequired": "no",
-      "usefulFor": [],
-      "tags": [],
-      "status": "active"
+      "status": "active",
+      "addedAt": "2026-07-22",
+      "addedVia": "curator",
+      "lastChecked": null,
+      "bestFor": [
+        "accessible-design-system",
+        "complex-interaction-design",
+        "internationalized-react-ui"
+      ]
     },
     {
       "id": "resource-513680f6b723",
@@ -1768,13 +1919,13 @@
       "domain": "heroui.com",
       "description": "Accessible React component library with Tailwind styling",
       "category": "ui-libraries",
+      "kind": "library",
       "access": "open-source",
-      "subscriptionRequired": "no",
-      "usefulFor": [],
-      "tags": [],
       "status": "active",
+      "addedAt": "2026-07-22",
+      "addedVia": "curator",
+      "lastChecked": null,
       "previewImageUrl": "https://heroui.com/images/twitter-card.jpg",
-      "previewSource": "open-graph",
       "faviconUrl": "https://heroui.com/icons/apple-touch-icon.png"
     },
     {
@@ -1785,13 +1936,13 @@
       "domain": "mantine.dev",
       "description": "Full-featured React component and hooks library",
       "category": "ui-libraries",
+      "kind": "library",
       "access": "open-source",
-      "subscriptionRequired": "no",
-      "usefulFor": [],
-      "tags": [],
       "status": "active",
-      "previewImageUrl": "https://raw.githubusercontent.com/mantinedev/mantine/master/.demo/social-preview.png",
-      "previewSource": "open-graph"
+      "addedAt": "2026-07-22",
+      "addedVia": "curator",
+      "lastChecked": null,
+      "previewImageUrl": "https://raw.githubusercontent.com/mantinedev/mantine/master/.demo/social-preview.png"
     },
     {
       "id": "resource-3ea4382bc91e",
@@ -1801,13 +1952,13 @@
       "domain": "mui.com",
       "description": "React implementation of Material Design plus premium advanced components",
       "category": "ui-libraries",
+      "kind": "library",
       "access": "freemium",
-      "subscriptionRequired": "optional",
-      "usefulFor": [],
-      "tags": [],
       "status": "active",
+      "addedAt": "2026-07-22",
+      "addedVia": "curator",
+      "lastChecked": null,
       "previewImageUrl": "https://mui.com/static/social-previews/home-preview.jpg",
-      "previewSource": "open-graph",
       "faviconUrl": "https://mui.com/static/apple-touch-icon.png"
     },
     {
@@ -1818,13 +1969,13 @@
       "domain": "chakra-ui.com",
       "description": "Accessible composable React components",
       "category": "ui-libraries",
+      "kind": "library",
       "access": "open-source",
-      "subscriptionRequired": "no",
-      "usefulFor": [],
-      "tags": [],
       "status": "active",
-      "previewImageUrl": "https://next.chakra-ui.com/og-image.png",
-      "previewSource": "open-graph"
+      "addedAt": "2026-07-22",
+      "addedVia": "curator",
+      "lastChecked": null,
+      "previewImageUrl": "https://next.chakra-ui.com/og-image.png"
     },
     {
       "id": "resource-51c9a91512df",
@@ -1834,11 +1985,20 @@
       "domain": "ant.design",
       "description": "Enterprise-oriented React UI framework",
       "category": "ui-libraries",
+      "kind": "library",
       "access": "open-source",
-      "subscriptionRequired": "no",
-      "usefulFor": [],
-      "tags": [],
       "status": "active",
+      "addedAt": "2026-07-22",
+      "addedVia": "curator",
+      "lastChecked": null,
+      "bestFor": [
+        "enterprise-dashboard",
+        "data-dense-ui",
+        "admin-panel-building"
+      ],
+      "limitations": [
+        "Opinionated styling that requires dedicated token customization"
+      ],
       "faviconUrl": "https://gw.alipayobjects.com/zos/rmsportal/rlpTLlbMzTNYuZGGCVYM.png"
     },
     {
@@ -1849,11 +2009,12 @@
       "domain": "blueprintjs.com",
       "description": "React components for complex data-dense desktop interfaces",
       "category": "ui-libraries",
+      "kind": "library",
       "access": "open-source",
-      "subscriptionRequired": "no",
-      "usefulFor": [],
-      "tags": [],
       "status": "active",
+      "addedAt": "2026-07-22",
+      "addedVia": "curator",
+      "lastChecked": null,
       "faviconUrl": "https://blueprintjs.com/assets/favicon.png"
     },
     {
@@ -1864,11 +2025,12 @@
       "domain": "v2.grommet.io",
       "description": "Responsive and accessible React component framework",
       "category": "ui-libraries",
+      "kind": "library",
       "access": "open-source",
-      "subscriptionRequired": "no",
-      "usefulFor": [],
-      "tags": [],
       "status": "active",
+      "addedAt": "2026-07-22",
+      "addedVia": "curator",
+      "lastChecked": null,
       "faviconUrl": "https://v2.grommet.io/img/mobile-app-icon.png"
     },
     {
@@ -1879,13 +2041,13 @@
       "domain": "evergreen.segment.com",
       "description": "React UI framework for enterprise web products",
       "category": "ui-libraries",
+      "kind": "library",
       "access": "open-source",
-      "subscriptionRequired": "no",
-      "usefulFor": [],
-      "tags": [],
       "status": "active",
+      "addedAt": "2026-07-22",
+      "addedVia": "curator",
+      "lastChecked": null,
       "previewImageUrl": "https://evergreen.segment.com/og-image.png",
-      "previewSource": "open-graph",
       "faviconUrl": "https://evergreen.segment.com/favicon-32x32.png"
     },
     {
@@ -1896,13 +2058,13 @@
       "domain": "tremor.so",
       "description": "React components for dashboards and data visualization",
       "category": "ui-libraries",
+      "kind": "library",
       "access": "open-source",
-      "subscriptionRequired": "no",
-      "usefulFor": [],
-      "tags": [],
       "status": "active",
-      "previewImageUrl": "https://www.tremor.so/opengraph-image.png?f5bbf8e00be369e2",
-      "previewSource": "open-graph"
+      "addedAt": "2026-07-22",
+      "addedVia": "curator",
+      "lastChecked": null,
+      "previewImageUrl": "https://www.tremor.so/opengraph-image.png?f5bbf8e00be369e2"
     },
     {
       "id": "resource-e704e009b79a",
@@ -1912,13 +2074,13 @@
       "domain": "primereact.org",
       "description": "Large React component suite with premium templates and themes",
       "category": "ui-libraries",
+      "kind": "library",
       "access": "freemium",
-      "subscriptionRequired": "optional",
-      "usefulFor": [],
-      "tags": [],
       "status": "active",
-      "previewImageUrl": "https://fqjltiegiezfetthbags.supabase.co/storage/v1/object/public/common.images/meta/primereact-meta.png",
-      "previewSource": "open-graph"
+      "addedAt": "2026-07-22",
+      "addedVia": "curator",
+      "lastChecked": null,
+      "previewImageUrl": "https://fqjltiegiezfetthbags.supabase.co/storage/v1/object/public/common.images/meta/primereact-meta.png"
     },
     {
       "id": "resource-9a10e0f94d6a",
@@ -1928,13 +2090,13 @@
       "domain": "primevue.org",
       "description": "Large Vue component suite with premium templates and themes",
       "category": "ui-libraries",
+      "kind": "library",
       "access": "freemium",
-      "subscriptionRequired": "optional",
-      "usefulFor": [],
-      "tags": [],
       "status": "active",
-      "previewImageUrl": "https://fqjltiegiezfetthbags.supabase.co/storage/v1/object/public/common.images/meta/primevue-meta.png",
-      "previewSource": "open-graph"
+      "addedAt": "2026-07-22",
+      "addedVia": "curator",
+      "lastChecked": null,
+      "previewImageUrl": "https://fqjltiegiezfetthbags.supabase.co/storage/v1/object/public/common.images/meta/primevue-meta.png"
     },
     {
       "id": "resource-b6eecac2578f",
@@ -1944,13 +2106,13 @@
       "domain": "vuetifyjs.com",
       "description": "Material Design component framework for Vue",
       "category": "ui-libraries",
+      "kind": "library",
       "access": "freemium",
-      "subscriptionRequired": "optional",
-      "usefulFor": [],
-      "tags": [],
       "status": "active",
-      "previewImageUrl": "https://vuetifyjs.com/og/index.png",
-      "previewSource": "open-graph"
+      "addedAt": "2026-07-22",
+      "addedVia": "curator",
+      "lastChecked": null,
+      "previewImageUrl": "https://vuetifyjs.com/og/index.png"
     },
     {
       "id": "resource-0d7e0a3bc997",
@@ -1960,13 +2122,13 @@
       "domain": "quasar.dev",
       "description": "Vue framework for web, desktop, and mobile interfaces",
       "category": "ui-libraries",
+      "kind": "library",
       "access": "open-source",
-      "subscriptionRequired": "no",
-      "usefulFor": [],
-      "tags": [],
       "status": "active",
+      "addedAt": "2026-07-22",
+      "addedVia": "curator",
+      "lastChecked": null,
       "previewImageUrl": "https://cdn.quasar.dev/logo-v2/social-cover.jpg",
-      "previewSource": "open-graph",
       "faviconUrl": "https://cdn.quasar.dev/logo-v2/favicon/apple-icon-180x180.png"
     },
     {
@@ -1977,11 +2139,12 @@
       "domain": "naiveui.com",
       "description": "TypeScript-based Vue 3 component library",
       "category": "ui-libraries",
+      "kind": "library",
       "access": "open-source",
-      "subscriptionRequired": "no",
-      "usefulFor": [],
-      "tags": [],
-      "status": "active"
+      "status": "active",
+      "addedAt": "2026-07-22",
+      "addedVia": "curator",
+      "lastChecked": null
     },
     {
       "id": "resource-b47c9612d739",
@@ -1991,13 +2154,13 @@
       "domain": "element-plus.org",
       "description": "Vue 3 component library for desktop applications",
       "category": "ui-libraries",
+      "kind": "library",
       "access": "open-source",
-      "subscriptionRequired": "no",
-      "usefulFor": [],
-      "tags": [],
       "status": "active",
-      "previewImageUrl": "https://element-plus.org/images/element-plus-og-image.png",
-      "previewSource": "open-graph"
+      "addedAt": "2026-07-22",
+      "addedVia": "curator",
+      "lastChecked": null,
+      "previewImageUrl": "https://element-plus.org/images/element-plus-og-image.png"
     },
     {
       "id": "resource-7e8cb8d5ef89",
@@ -2007,13 +2170,13 @@
       "domain": "material.angular.dev",
       "description": "Official Material Design components for Angular",
       "category": "ui-libraries",
+      "kind": "library",
       "access": "open-source",
-      "subscriptionRequired": "no",
-      "usefulFor": [],
-      "tags": [],
       "status": "active",
+      "addedAt": "2026-07-22",
+      "addedVia": "curator",
+      "lastChecked": null,
       "previewImageUrl": "https://material.angular.dev/assets/img/site-preview.png",
-      "previewSource": "open-graph",
       "faviconUrl": "https://material.angular.dev/assets/img/apple-touch-icon.png"
     },
     {
@@ -2024,13 +2187,13 @@
       "domain": "bits-ui.com",
       "description": "Headless accessible components for Svelte",
       "category": "ui-libraries",
+      "kind": "library",
       "access": "open-source",
-      "subscriptionRequired": "no",
-      "usefulFor": [],
-      "tags": [],
       "status": "active",
-      "previewImageUrl": "https://www.bits-ui.com/og.png",
-      "previewSource": "open-graph"
+      "addedAt": "2026-07-22",
+      "addedVia": "curator",
+      "lastChecked": null,
+      "previewImageUrl": "https://www.bits-ui.com/og.png"
     },
     {
       "id": "resource-175cd488da6c",
@@ -2040,13 +2203,13 @@
       "domain": "melt-ui.com",
       "description": "Headless builders for accessible Svelte interfaces",
       "category": "ui-libraries",
+      "kind": "library",
       "access": "open-source",
-      "subscriptionRequired": "no",
-      "usefulFor": [],
-      "tags": [],
       "status": "active",
+      "addedAt": "2026-07-22",
+      "addedVia": "curator",
+      "lastChecked": null,
       "previewImageUrl": "https://www.melt-ui.com/banner.png",
-      "previewSource": "open-graph",
       "faviconUrl": "https://melt-ui.com/favicon.png"
     },
     {
@@ -2057,13 +2220,13 @@
       "domain": "skeleton.dev",
       "description": "Svelte and Tailwind design system and component library",
       "category": "ui-libraries",
+      "kind": "library",
       "access": "open-source",
-      "subscriptionRequired": "no",
-      "usefulFor": [],
-      "tags": [],
       "status": "active",
+      "addedAt": "2026-07-22",
+      "addedVia": "curator",
+      "lastChecked": null,
       "previewImageUrl": "https://www.skeleton.dev/api/og-image?feature=Skeleton",
-      "previewSource": "open-graph",
       "faviconUrl": "https://www.skeleton.dev/_astro/favicon.oeNx7Nna.png"
     },
     {
@@ -2074,11 +2237,12 @@
       "domain": "m3.material.io",
       "description": "Google's design system, guidelines, tokens, and components",
       "category": "design-systems",
+      "kind": "design-system",
       "access": "free",
-      "subscriptionRequired": "no",
-      "usefulFor": [],
-      "tags": [],
       "status": "active",
+      "addedAt": "2026-07-22",
+      "addedVia": "curator",
+      "lastChecked": null,
       "faviconUrl": "https://m3.material.io/static/assets/m3-favicon-apple-touch.png"
     },
     {
@@ -2089,11 +2253,12 @@
       "domain": "developer.apple.com",
       "description": "Apple platform design guidance and interaction patterns",
       "category": "design-systems",
+      "kind": "design-system",
       "access": "free",
-      "subscriptionRequired": "no",
-      "usefulFor": [],
-      "tags": [],
-      "status": "active"
+      "status": "active",
+      "addedAt": "2026-07-22",
+      "addedVia": "curator",
+      "lastChecked": null
     },
     {
       "id": "resource-da29edad8096",
@@ -2103,11 +2268,12 @@
       "domain": "carbondesignsystem.com",
       "description": "IBM's enterprise design system and component ecosystem",
       "category": "design-systems",
+      "kind": "design-system",
       "access": "open-source",
-      "subscriptionRequired": "no",
-      "usefulFor": [],
-      "tags": [],
-      "status": "active"
+      "status": "active",
+      "addedAt": "2026-07-22",
+      "addedVia": "curator",
+      "lastChecked": null
     },
     {
       "id": "resource-ea00ff19bb49",
@@ -2117,13 +2283,13 @@
       "domain": "polaris.shopify.com",
       "description": "Shopify's product design system for commerce interfaces",
       "category": "design-systems",
+      "kind": "design-system",
       "access": "open-source",
-      "subscriptionRequired": "no",
-      "usefulFor": [],
-      "tags": [],
       "status": "active",
+      "addedAt": "2026-07-22",
+      "addedVia": "curator",
+      "lastChecked": null,
       "previewImageUrl": "https://polaris-react.shopify.com/og-images/home.png",
-      "previewSource": "open-graph",
       "faviconUrl": "https://polaris-react.shopify.com/images/favicon.png"
     },
     {
@@ -2134,13 +2300,13 @@
       "domain": "atlassian.design",
       "description": "Patterns, foundations, and components used in Atlassian products",
       "category": "design-systems",
+      "kind": "design-system",
       "access": "free",
-      "subscriptionRequired": "no",
-      "usefulFor": [],
-      "tags": [],
       "status": "active",
+      "addedAt": "2026-07-22",
+      "addedVia": "curator",
+      "lastChecked": null,
       "previewImageUrl": "https://atlassian.design/assets/8bd131ad85a3/static/0b4e62efc0d2c7d917e11f3860855c05/meta.png",
-      "previewSource": "open-graph",
       "faviconUrl": "https://atlassian.design/assets/8bd131ad85a3/icons/icon-512x512.png?v=f3b457b5551bdc77176991812213b3c8"
     },
     {
@@ -2151,13 +2317,13 @@
       "domain": "spectrum.adobe.com",
       "description": "Adobe's cross-platform design system",
       "category": "design-systems",
+      "kind": "design-system",
       "access": "open-source",
-      "subscriptionRequired": "no",
-      "usefulFor": [],
-      "tags": [],
       "status": "active",
-      "previewImageUrl": "https://spectrum.adobe.com/static/landscape.png",
-      "previewSource": "open-graph"
+      "addedAt": "2026-07-22",
+      "addedVia": "curator",
+      "lastChecked": null,
+      "previewImageUrl": "https://spectrum.adobe.com/static/landscape.png"
     },
     {
       "id": "resource-5df16e75e20e",
@@ -2167,13 +2333,13 @@
       "domain": "fluent2.microsoft.design",
       "description": "Microsoft's interface foundations and component system",
       "category": "design-systems",
+      "kind": "design-system",
       "access": "open-source",
-      "subscriptionRequired": "no",
-      "usefulFor": [],
-      "tags": [],
       "status": "active",
-      "previewImageUrl": "https://fluent2websitecdn.azureedge.net/cdn/fluent-logo-metadata.Cwa-_8F7.png",
-      "previewSource": "open-graph"
+      "addedAt": "2026-07-22",
+      "addedVia": "curator",
+      "lastChecked": null,
+      "previewImageUrl": "https://fluent2websitecdn.azureedge.net/cdn/fluent-logo-metadata.Cwa-_8F7.png"
     },
     {
       "id": "resource-5c3090a40968",
@@ -2183,11 +2349,12 @@
       "domain": "primer.style",
       "description": "GitHub's design system, components, and CSS framework",
       "category": "design-systems",
+      "kind": "design-system",
       "access": "open-source",
-      "subscriptionRequired": "no",
-      "usefulFor": [],
-      "tags": [],
-      "status": "active"
+      "status": "active",
+      "addedAt": "2026-07-22",
+      "addedVia": "curator",
+      "lastChecked": null
     },
     {
       "id": "resource-f4a72bdfeb3a",
@@ -2197,11 +2364,12 @@
       "domain": "lightningdesignsystem.com",
       "description": "Salesforce enterprise interface patterns and components",
       "category": "design-systems",
+      "kind": "design-system",
       "access": "open-source",
-      "subscriptionRequired": "no",
-      "usefulFor": [],
-      "tags": [],
-      "status": "active"
+      "status": "active",
+      "addedAt": "2026-07-22",
+      "addedVia": "curator",
+      "lastChecked": null
     },
     {
       "id": "resource-d3111f212292",
@@ -2211,13 +2379,13 @@
       "domain": "design-system.service.gov.uk",
       "description": "Accessible government-service patterns and components",
       "category": "design-systems",
+      "kind": "design-system",
       "access": "open-source",
-      "subscriptionRequired": "no",
-      "usefulFor": [],
-      "tags": [],
       "status": "active",
+      "addedAt": "2026-07-22",
+      "addedVia": "curator",
+      "lastChecked": null,
       "previewImageUrl": "https://design-system.service.gov.uk/assets/images/govuk-opengraph-image.png",
-      "previewSource": "open-graph",
       "faviconUrl": "https://design-system.service.gov.uk/assets/images/govuk-icon-180.png"
     },
     {
@@ -2228,11 +2396,12 @@
       "domain": "designsystem.digital.gov",
       "description": "Design system for accessible U.S. government websites",
       "category": "design-systems",
+      "kind": "design-system",
       "access": "open-source",
-      "subscriptionRequired": "no",
-      "usefulFor": [],
-      "tags": [],
       "status": "active",
+      "addedAt": "2026-07-22",
+      "addedVia": "curator",
+      "lastChecked": null,
       "faviconUrl": "https://designsystem.digital.gov/assets/img/favicons/favicon-192.png"
     },
     {
@@ -2243,11 +2412,12 @@
       "domain": "cloudscape.design",
       "description": "AWS design system for cloud-management interfaces",
       "category": "design-systems",
+      "kind": "design-system",
       "access": "open-source",
-      "subscriptionRequired": "no",
-      "usefulFor": [],
-      "tags": [],
-      "status": "active"
+      "status": "active",
+      "addedAt": "2026-07-22",
+      "addedVia": "curator",
+      "lastChecked": null
     },
     {
       "id": "resource-e3dd23ba936f",
@@ -2257,13 +2427,13 @@
       "domain": "experience.sap.com",
       "description": "SAP enterprise product design guidelines and patterns",
       "category": "design-systems",
+      "kind": "design-system",
       "access": "free",
-      "subscriptionRequired": "no",
-      "usefulFor": [],
-      "tags": [],
       "status": "active",
-      "previewImageUrl": "https://www.sap.com/design-system/media_1ee9b153315b474fc847766c10a4f9ca4c99904d7.png?width=1200&#x26;format=pjpg&#x26;optimize=medium",
-      "previewSource": "open-graph"
+      "addedAt": "2026-07-22",
+      "addedVia": "curator",
+      "lastChecked": null,
+      "previewImageUrl": "https://www.sap.com/design-system/media_1ee9b153315b474fc847766c10a4f9ca4c99904d7.png?width=1200&#x26;format=pjpg&#x26;optimize=medium"
     },
     {
       "id": "resource-2779e0c3a14a",
@@ -2273,11 +2443,12 @@
       "domain": "baseweb.design",
       "description": "Uber's React design system",
       "category": "design-systems",
+      "kind": "design-system",
       "access": "open-source",
-      "subscriptionRequired": "no",
-      "usefulFor": [],
-      "tags": [],
       "status": "active",
+      "addedAt": "2026-07-22",
+      "addedVia": "curator",
+      "lastChecked": null,
       "faviconUrl": "https://baseweb.design/apple-touch-icon.png"
     },
     {
@@ -2288,11 +2459,12 @@
       "domain": "eui.elastic.co",
       "description": "Elastic's React component and design system",
       "category": "design-systems",
+      "kind": "design-system",
       "access": "open-source",
-      "subscriptionRequired": "no",
-      "usefulFor": [],
-      "tags": [],
-      "status": "active"
+      "status": "active",
+      "addedAt": "2026-07-22",
+      "addedVia": "curator",
+      "lastChecked": null
     },
     {
       "id": "resource-946f1b1790d0",
@@ -2302,13 +2474,13 @@
       "domain": "garden.zendesk.com",
       "description": "Zendesk's design system and React components",
       "category": "design-systems",
+      "kind": "design-system",
       "access": "open-source",
-      "subscriptionRequired": "no",
-      "usefulFor": [],
-      "tags": [],
       "status": "active",
+      "addedAt": "2026-07-22",
+      "addedVia": "curator",
+      "lastChecked": null,
       "previewImageUrl": "https://garden.zendesk.com/og-image.png",
-      "previewSource": "open-graph",
       "faviconUrl": "https://garden.zendesk.com/apple-touch-icon.png"
     },
     {
@@ -2319,11 +2491,12 @@
       "domain": "paste.twilio.design",
       "description": "Twilio's accessible design system",
       "category": "design-systems",
+      "kind": "design-system",
       "access": "open-source",
-      "subscriptionRequired": "no",
-      "usefulFor": [],
-      "tags": [],
-      "status": "active"
+      "status": "active",
+      "addedAt": "2026-07-22",
+      "addedVia": "curator",
+      "lastChecked": null
     },
     {
       "id": "resource-8cc85fbfcfc8",
@@ -2333,11 +2506,12 @@
       "domain": "design.gitlab.com",
       "description": "GitLab's product design system and usage guidance",
       "category": "design-systems",
+      "kind": "design-system",
       "access": "open-source",
-      "subscriptionRequired": "no",
-      "usefulFor": [],
-      "tags": [],
       "status": "active",
+      "addedAt": "2026-07-22",
+      "addedVia": "curator",
+      "lastChecked": null,
       "faviconUrl": "https://design.gitlab.com//favicon-32x32.png"
     },
     {
@@ -2348,11 +2522,12 @@
       "domain": "ux.mailchimp.com",
       "description": "Mailchimp UI patterns and content guidance",
       "category": "design-systems",
+      "kind": "design-system",
       "access": "free",
-      "subscriptionRequired": "no",
-      "usefulFor": [],
-      "tags": [],
-      "status": "active"
+      "status": "active",
+      "addedAt": "2026-07-22",
+      "addedVia": "curator",
+      "lastChecked": null
     },
     {
       "id": "resource-001e294941b1",
@@ -2362,11 +2537,12 @@
       "domain": "audi.com",
       "description": "Audi digital interface and brand guidelines",
       "category": "design-systems",
+      "kind": "design-system",
       "access": "free",
-      "subscriptionRequired": "no",
-      "usefulFor": [],
-      "tags": [],
-      "status": "active"
+      "status": "active",
+      "addedAt": "2026-07-22",
+      "addedVia": "curator",
+      "lastChecked": null
     },
     {
       "id": "resource-cc130ededb3a",
@@ -2376,11 +2552,12 @@
       "domain": "designsystem.porsche.com",
       "description": "Porsche web-component design system",
       "category": "design-systems",
+      "kind": "design-system",
       "access": "open-source",
-      "subscriptionRequired": "no",
-      "usefulFor": [],
-      "tags": [],
-      "status": "active"
+      "status": "active",
+      "addedAt": "2026-07-22",
+      "addedVia": "curator",
+      "lastChecked": null
     },
     {
       "id": "resource-19d73841f2dc",
@@ -2390,11 +2567,12 @@
       "domain": "wise.design",
       "description": "Wise product-design foundations and patterns",
       "category": "design-systems",
+      "kind": "design-system",
       "access": "free",
-      "subscriptionRequired": "no",
-      "usefulFor": [],
-      "tags": [],
       "status": "active",
+      "addedAt": "2026-07-22",
+      "addedVia": "curator",
+      "lastChecked": null,
       "faviconUrl": "https://wise.design/_assets/v11/919f75a1f6fff5df651d33de80fd822fe89c1d5d.png"
     },
     {
@@ -2405,11 +2583,12 @@
       "domain": "vanillaframework.io",
       "description": "Canonical and Ubuntu CSS framework and design system",
       "category": "design-systems",
+      "kind": "design-system",
       "access": "open-source",
-      "subscriptionRequired": "no",
-      "usefulFor": [],
-      "tags": [],
       "status": "active",
+      "addedAt": "2026-07-22",
+      "addedVia": "curator",
+      "lastChecked": null,
       "faviconUrl": "https://assets.ubuntu.com/v1/f1464d22-vanilla_favicon_48px.png"
     },
     {
@@ -2420,11 +2599,12 @@
       "domain": "canvas.workday.com",
       "description": "Workday design-system foundations, assets, and guidance",
       "category": "design-systems",
+      "kind": "design-system",
       "access": "free",
-      "subscriptionRequired": "no",
-      "usefulFor": [],
-      "tags": [],
-      "status": "active"
+      "status": "active",
+      "addedAt": "2026-07-22",
+      "addedVia": "curator",
+      "lastChecked": null
     },
     {
       "id": "resource-086a3588fd20",
@@ -2434,13 +2614,13 @@
       "domain": "designsystemsrepo.com",
       "description": "Directory of public design systems, tools, books, and articles",
       "category": "design-systems",
+      "kind": "design-system",
       "access": "free",
-      "subscriptionRequired": "no",
-      "usefulFor": [],
-      "tags": [],
       "status": "active",
+      "addedAt": "2026-07-22",
+      "addedVia": "curator",
+      "lastChecked": null,
       "previewImageUrl": "https://designsystemsrepo.com/social-media.png",
-      "previewSource": "open-graph",
       "faviconUrl": "https://designsystemsrepo.com/assets/static/favicon.7b22250.0a422b3a157029ec129dcb261a8ff377.png"
     },
     {
@@ -2451,13 +2631,21 @@
       "domain": "motion.dev",
       "description": "Production-grade animation library for JavaScript and React",
       "category": "motion-3d",
+      "kind": "library",
       "access": "freemium",
-      "subscriptionRequired": "optional",
-      "usefulFor": [],
-      "tags": [],
       "status": "active",
+      "addedAt": "2026-07-22",
+      "addedVia": "curator",
+      "lastChecked": null,
+      "bestFor": [
+        "micro-interactions",
+        "page-transitions",
+        "layout-animation"
+      ],
+      "limitations": [
+        "Requires React for motion/react integration"
+      ],
       "previewImageUrl": "https://images.motion.dev/og/fresh/v1/site/home-3jhn8b0abpu66.png",
-      "previewSource": "open-graph",
       "faviconUrl": "https://motion.dev/apple-touch-icon.png"
     },
     {
@@ -2468,13 +2656,18 @@
       "domain": "gsap.com",
       "description": "High-performance JavaScript animation platform",
       "category": "motion-3d",
+      "kind": "library",
       "access": "free",
-      "subscriptionRequired": "no",
-      "usefulFor": [],
-      "tags": [],
       "status": "active",
+      "addedAt": "2026-07-22",
+      "addedVia": "curator",
+      "lastChecked": null,
+      "bestFor": [
+        "sequenced-web-animation",
+        "interaction-prototyping",
+        "scroll-driven-motion"
+      ],
       "previewImageUrl": "https://gsap.com/GSAP-share-image.png",
-      "previewSource": "open-graph",
       "faviconUrl": "https://gsap.com/apple-touch-icon.png"
     },
     {
@@ -2485,11 +2678,12 @@
       "domain": "lottiefiles.com",
       "description": "Lottie animation library, editor, and workflow platform",
       "category": "motion-3d",
+      "kind": "library",
       "access": "freemium",
-      "subscriptionRequired": "optional",
-      "usefulFor": [],
-      "tags": [],
-      "status": "active"
+      "status": "active",
+      "addedAt": "2026-07-22",
+      "addedVia": "curator",
+      "lastChecked": null
     },
     {
       "id": "resource-a69034dde468",
@@ -2499,13 +2693,18 @@
       "domain": "rive.app",
       "description": "Interactive vector animation design and runtime platform",
       "category": "motion-3d",
+      "kind": "library",
       "access": "freemium",
-      "subscriptionRequired": "optional",
-      "usefulFor": [],
-      "tags": [],
       "status": "active",
+      "addedAt": "2026-07-22",
+      "addedVia": "curator",
+      "lastChecked": null,
+      "bestFor": [
+        "interactive-animation-design",
+        "stateful-product-motion",
+        "cross-platform-animation-handoff"
+      ],
       "previewImageUrl": "https://framerusercontent.com/images/yEWMbP7UtsS81SlkoxTasfabvc.png",
-      "previewSource": "open-graph",
       "faviconUrl": "https://framerusercontent.com/images/jMyKrhKKXqpc15qYqC3A0pZELw.png"
     },
     {
@@ -2516,13 +2715,13 @@
       "domain": "spline.design",
       "description": "Browser-based collaborative 3D design tool",
       "category": "motion-3d",
+      "kind": "library",
       "access": "freemium",
-      "subscriptionRequired": "optional",
-      "usefulFor": [],
-      "tags": [],
       "status": "active",
+      "addedAt": "2026-07-22",
+      "addedVia": "curator",
+      "lastChecked": null,
       "previewImageUrl": "https://spline.design/_next/static/media/spline_image_banner.77c2eb63.png",
-      "previewSource": "open-graph",
       "faviconUrl": "https://spline.design/images/icon_favicon32x32.png"
     },
     {
@@ -2533,11 +2732,19 @@
       "domain": "threejs.org",
       "description": "JavaScript 3D and WebGL rendering library",
       "category": "motion-3d",
+      "kind": "library",
       "access": "open-source",
-      "subscriptionRequired": "no",
-      "usefulFor": [],
-      "tags": [],
-      "status": "active"
+      "status": "active",
+      "addedAt": "2026-07-22",
+      "addedVia": "curator",
+      "lastChecked": null,
+      "bestFor": [
+        "3d-hero-background",
+        "interactive-canvas-graphics"
+      ],
+      "limitations": [
+        "High performance requirement on mobile devices"
+      ]
     },
     {
       "id": "resource-c873b7d6cf1d",
@@ -2547,11 +2754,17 @@
       "domain": "r3f.docs.pmnd.rs",
       "description": "React renderer for Three.js",
       "category": "motion-3d",
+      "kind": "library",
       "access": "open-source",
-      "subscriptionRequired": "no",
-      "usefulFor": [],
-      "tags": [],
-      "status": "active"
+      "status": "active",
+      "addedAt": "2026-07-22",
+      "addedVia": "curator",
+      "lastChecked": null,
+      "bestFor": [
+        "react-3d-integration",
+        "declarative-three-js",
+        "interactive-scene-architecture"
+      ]
     },
     {
       "id": "resource-e0917de2c7a9",
@@ -2561,11 +2774,17 @@
       "domain": "theatrejs.com",
       "description": "Motion-design and animation tooling for the web",
       "category": "motion-3d",
+      "kind": "library",
       "access": "open-source",
-      "subscriptionRequired": "no",
-      "usefulFor": [],
-      "tags": [],
       "status": "active",
+      "addedAt": "2026-07-22",
+      "addedVia": "curator",
+      "lastChecked": null,
+      "bestFor": [
+        "authored-motion-sequencing",
+        "web-scene-animation",
+        "designer-developer-motion-handoff"
+      ],
       "faviconUrl": "https://www.theatrejs.com/logo_square_4x.png"
     },
     {
@@ -2576,13 +2795,18 @@
       "domain": "animejs.com",
       "description": "Lightweight JavaScript animation library",
       "category": "motion-3d",
+      "kind": "library",
       "access": "open-source",
-      "subscriptionRequired": "no",
-      "usefulFor": [],
-      "tags": [],
       "status": "active",
+      "addedAt": "2026-07-22",
+      "addedVia": "curator",
+      "lastChecked": null,
+      "bestFor": [
+        "targeted-interface-animation",
+        "code-driven-motion",
+        "svg-and-text-animation"
+      ],
       "previewImageUrl": "https://animejs.com/media/pages/home/d77f271f80-1782139879/generated-og-image.en.png",
-      "previewSource": "open-graph",
       "faviconUrl": "https://animejs.com/assets/images/favicon.png"
     },
     {
@@ -2593,13 +2817,18 @@
       "domain": "auto-animate.formkit.com",
       "description": "Automatic transition animations for web interfaces",
       "category": "motion-3d",
+      "kind": "library",
       "access": "open-source",
-      "subscriptionRequired": "no",
-      "usefulFor": [],
-      "tags": [],
       "status": "active",
+      "addedAt": "2026-07-22",
+      "addedVia": "curator",
+      "lastChecked": null,
+      "bestFor": [
+        "automatic-list-transitions",
+        "lightweight-layout-motion",
+        "progressive-motion-enhancement"
+      ],
       "previewImageUrl": "https://cdn.formk.it/web-assets/auto-animate-og.png",
-      "previewSource": "open-graph",
       "faviconUrl": "https://auto-animate.formkit.com/assets/favicon-vrVmGPPs.png"
     },
     {
@@ -2610,11 +2839,12 @@
       "domain": "animista.net",
       "description": "Visual generator for CSS animations",
       "category": "motion-3d",
+      "kind": "library",
       "access": "free",
-      "subscriptionRequired": "no",
-      "usefulFor": [],
-      "tags": [],
       "status": "active",
+      "addedAt": "2026-07-22",
+      "addedVia": "curator",
+      "lastChecked": null,
       "faviconUrl": "https://animista.net/images/favicons/apple-touch-icon-1024x1024.png"
     },
     {
@@ -2625,11 +2855,12 @@
       "domain": "ianlunn.github.io",
       "description": "CSS hover-effect library",
       "category": "motion-3d",
+      "kind": "library",
       "access": "open-source",
-      "subscriptionRequired": "no",
-      "usefulFor": [],
-      "tags": [],
-      "status": "active"
+      "status": "active",
+      "addedAt": "2026-07-22",
+      "addedVia": "curator",
+      "lastChecked": null
     },
     {
       "id": "resource-c69cb09bf119",
@@ -2639,11 +2870,12 @@
       "domain": "michalsnik.github.io",
       "description": "Animate-on-scroll JavaScript library",
       "category": "motion-3d",
+      "kind": "library",
       "access": "open-source",
-      "subscriptionRequired": "no",
-      "usefulFor": [],
-      "tags": [],
-      "status": "active"
+      "status": "active",
+      "addedAt": "2026-07-22",
+      "addedVia": "curator",
+      "lastChecked": null
     },
     {
       "id": "resource-d1f753224743",
@@ -2653,13 +2885,13 @@
       "domain": "lenis.darkroom.engineering",
       "description": "Smooth scrolling library for modern websites",
       "category": "motion-3d",
+      "kind": "library",
       "access": "open-source",
-      "subscriptionRequired": "no",
-      "usefulFor": [],
-      "tags": [],
       "status": "active",
+      "addedAt": "2026-07-22",
+      "addedVia": "curator",
+      "lastChecked": null,
       "previewImageUrl": "https://www.lenis.dev/og.png?v=1",
-      "previewSource": "open-graph",
       "faviconUrl": "https://www.lenis.dev/apple-touch-icon.png"
     },
     {
@@ -2670,11 +2902,12 @@
       "domain": "barba.js.org",
       "description": "Page-transition library for websites",
       "category": "motion-3d",
+      "kind": "library",
       "access": "open-source",
-      "subscriptionRequired": "no",
-      "usefulFor": [],
-      "tags": [],
       "status": "active",
+      "addedAt": "2026-07-22",
+      "addedVia": "curator",
+      "lastChecked": null,
       "faviconUrl": "https://barba.js.org/favicons/apple-touch-icon.png?rev=1"
     },
     {
@@ -2685,13 +2918,13 @@
       "domain": "swup.js.org",
       "description": "Page-transition and navigation enhancement library",
       "category": "motion-3d",
+      "kind": "library",
       "access": "open-source",
-      "subscriptionRequired": "no",
-      "usefulFor": [],
-      "tags": [],
       "status": "active",
+      "addedAt": "2026-07-22",
+      "addedVia": "curator",
+      "lastChecked": null,
       "previewImageUrl": "https://swup.js.org/assets/images/swup-social-preview.png",
-      "previewSource": "open-graph",
       "faviconUrl": "https://swup.js.org/assets/images/icon.png"
     },
     {
@@ -2702,13 +2935,13 @@
       "domain": "pixijs.com",
       "description": "High-performance 2D WebGL rendering engine",
       "category": "motion-3d",
+      "kind": "library",
       "access": "open-source",
-      "subscriptionRequired": "no",
-      "usefulFor": [],
-      "tags": [],
       "status": "active",
+      "addedAt": "2026-07-22",
+      "addedVia": "curator",
+      "lastChecked": null,
       "previewImageUrl": "https://pixijs.com/images/ogimage.jpg",
-      "previewSource": "open-graph",
       "faviconUrl": "https://pixijs.com/images/favicon.png"
     },
     {
@@ -2719,11 +2952,12 @@
       "domain": "p5js.org",
       "description": "Creative-coding library for interactive graphics",
       "category": "motion-3d",
+      "kind": "library",
       "access": "open-source",
-      "subscriptionRequired": "no",
-      "usefulFor": [],
-      "tags": [],
-      "status": "active"
+      "status": "active",
+      "addedAt": "2026-07-22",
+      "addedVia": "curator",
+      "lastChecked": null
     },
     {
       "id": "resource-60b9eb212f58",
@@ -2733,13 +2967,13 @@
       "domain": "unicorn.studio",
       "description": "No-code WebGL effects and interactive website visuals",
       "category": "motion-3d",
+      "kind": "library",
       "access": "freemium",
-      "subscriptionRequired": "optional",
-      "usefulFor": [],
-      "tags": [],
       "status": "active",
+      "addedAt": "2026-07-22",
+      "addedVia": "curator",
+      "lastChecked": null,
       "previewImageUrl": "https://www.unicorn.studio/images/ogg2.png",
-      "previewSource": "open-graph",
       "faviconUrl": "https://www.unicorn.studio/favicon.png"
     },
     {
@@ -2750,13 +2984,13 @@
       "domain": "motionity.app",
       "description": "Browser-based motion-graphics editor",
       "category": "motion-3d",
+      "kind": "library",
       "access": "free",
-      "subscriptionRequired": "no",
-      "usefulFor": [],
-      "tags": [],
       "status": "active",
-      "previewImageUrl": "https://www.motionity.app/meta.png",
-      "previewSource": "open-graph"
+      "addedAt": "2026-07-22",
+      "addedVia": "curator",
+      "lastChecked": null,
+      "previewImageUrl": "https://www.motionity.app/meta.png"
     },
     {
       "id": "resource-75ecf91b7063",
@@ -2766,13 +3000,18 @@
       "domain": "fonts.google.com",
       "description": "Open font library for web and product design",
       "category": "typography",
+      "kind": "asset",
       "access": "free",
-      "subscriptionRequired": "no",
-      "usefulFor": [],
-      "tags": [],
       "status": "active",
+      "addedAt": "2026-07-22",
+      "addedVia": "curator",
+      "lastChecked": null,
+      "bestFor": [
+        "font-shortlisting",
+        "web-font-implementation",
+        "typography-prototyping"
+      ],
       "previewImageUrl": "https://www.gstatic.com/images/icons/material/apps/fonts/1x/catalog/v5/opengraph_color.png",
-      "previewSource": "open-graph",
       "faviconUrl": "https://www.gstatic.com/images/branding/product/2x/google_fonts_96dp.png"
     },
     {
@@ -2783,11 +3022,20 @@
       "domain": "fontshare.com",
       "description": "Free professional-quality typefaces",
       "category": "typography",
+      "kind": "asset",
       "access": "free",
-      "subscriptionRequired": "no",
-      "usefulFor": [],
-      "tags": [],
       "status": "active",
+      "addedAt": "2026-07-22",
+      "addedVia": "curator",
+      "lastChecked": null,
+      "bestFor": [
+        "brand-typography",
+        "web-font-selection",
+        "heading-pairings"
+      ],
+      "limitations": [
+        "100% free for personal and commercial use under ITF license"
+      ],
       "faviconUrl": "https://www.fontshare.com/static/favicon.png"
     },
     {
@@ -2798,13 +3046,18 @@
       "domain": "fonts.adobe.com",
       "description": "Font library included with Adobe Creative Cloud subscriptions",
       "category": "typography",
+      "kind": "asset",
       "access": "paid",
-      "subscriptionRequired": "yes",
-      "usefulFor": [],
-      "tags": [],
       "status": "active",
+      "addedAt": "2026-07-22",
+      "addedVia": "curator",
+      "lastChecked": null,
+      "bestFor": [
+        "subscription-font-shortlisting",
+        "creative-cloud-typography",
+        "hosted-web-font-delivery"
+      ],
       "previewImageUrl": "https://fonts.adobe.com/adobe-fonts-social.jpg",
-      "previewSource": "open-graph",
       "faviconUrl": "https://afwebcdn.fonts.adobe.com/assets/apple-touch-icon@2x-83f87f1c2a2e99ad9b352321d8aaad7a9d9ae4e8ca2d0f68de2f9beea728a3aa.png"
     },
     {
@@ -2815,13 +3068,20 @@
       "domain": "typewolf.com",
       "description": "Typography inspiration, trends, and font recommendations",
       "category": "typography",
+      "kind": "asset",
       "access": "freemium",
-      "subscriptionRequired": "optional",
-      "usefulFor": [],
-      "tags": [],
       "status": "active",
-      "previewImageUrl": "https://www.typewolf.com/assets/img/typewolf-og.png",
-      "previewSource": "open-graph"
+      "addedAt": "2026-07-22",
+      "addedVia": "curator",
+      "lastChecked": null,
+      "bestFor": [
+        "typography-pairings",
+        "editorial-font-choice"
+      ],
+      "limitations": [
+        "Guides and checklists are paid products"
+      ],
+      "previewImageUrl": "https://www.typewolf.com/assets/img/typewolf-og.png"
     },
     {
       "id": "resource-e50e8d1ec69c",
@@ -2831,13 +3091,18 @@
       "domain": "fontsinuse.com",
       "description": "Archive of real-world typography examples",
       "category": "typography",
+      "kind": "asset",
       "access": "free",
-      "subscriptionRequired": "no",
-      "usefulFor": [],
-      "tags": [],
       "status": "active",
+      "addedAt": "2026-07-22",
+      "addedVia": "curator",
+      "lastChecked": null,
+      "bestFor": [
+        "typography-context-research",
+        "brand-reference-study",
+        "typeface-shortlisting"
+      ],
       "previewImageUrl": "https://cards.fontsinuse.com/cardshot?s=twitter&t=gallery&url=https://fontsinuse.com/&k=fea3b3b2f54abc640c7705b62dd465bd&v=5e95ed98",
-      "previewSource": "open-graph",
       "faviconUrl": "https://assets.fontsinuse.com/images/icons/apple-touch-icon-180x180.png"
     },
     {
@@ -2848,11 +3113,17 @@
       "domain": "fontsquirrel.com",
       "description": "Commercial-use free font library",
       "category": "typography",
+      "kind": "asset",
       "access": "free",
-      "subscriptionRequired": "no",
-      "usefulFor": [],
-      "tags": [],
-      "status": "active"
+      "status": "active",
+      "addedAt": "2026-07-22",
+      "addedVia": "curator",
+      "lastChecked": null,
+      "bestFor": [
+        "commercial-font-shortlisting",
+        "font-licence-check",
+        "webfont-preparation"
+      ]
     },
     {
       "id": "resource-1e6b6fad041e",
@@ -2862,11 +3133,12 @@
       "domain": "fontesk.com",
       "description": "Free and paid font discovery",
       "category": "typography",
+      "kind": "asset",
       "access": "freemium",
-      "subscriptionRequired": "optional",
-      "usefulFor": [],
-      "tags": [],
-      "status": "active"
+      "status": "active",
+      "addedAt": "2026-07-22",
+      "addedVia": "curator",
+      "lastChecked": null
     },
     {
       "id": "resource-3b9d710cd447",
@@ -2876,13 +3148,18 @@
       "domain": "freefaces.gallery",
       "description": "Curated typefaces available under free licenses",
       "category": "typography",
+      "kind": "asset",
       "access": "free",
-      "subscriptionRequired": "no",
-      "usefulFor": [],
-      "tags": [],
       "status": "active",
+      "addedAt": "2026-07-22",
+      "addedVia": "curator",
+      "lastChecked": null,
+      "bestFor": [
+        "free-font-shortlisting",
+        "visual-typeface-discovery",
+        "licence-comparison"
+      ],
       "previewImageUrl": "https://cdn.prod.website-files.com/69eb208431be71c3a2eed9ae/6a19b3eb76c2032736e5c0d7_171e3a673da35daeab39e4bd23564790_homepage-og.jpg",
-      "previewSource": "open-graph",
       "faviconUrl": "https://cdn.prod.website-files.com/69eb208431be71c3a2eed9ae/6a09a90b02ca2e6f83e10992_webclip.png"
     },
     {
@@ -2893,11 +3170,17 @@
       "domain": "open-foundry.com",
       "description": "Curated open-source font library",
       "category": "typography",
+      "kind": "asset",
       "access": "free",
-      "subscriptionRequired": "no",
-      "usefulFor": [],
-      "tags": [],
       "status": "active",
+      "addedAt": "2026-07-22",
+      "addedVia": "curator",
+      "lastChecked": null,
+      "bestFor": [
+        "open-source-font-shortlisting",
+        "typeface-provenance-research",
+        "licence-aware-font-selection"
+      ],
       "faviconUrl": "https://open-foundry.com/apple-touch-icon-180x180.png"
     },
     {
@@ -2908,11 +3191,17 @@
       "domain": "velvetyne.fr",
       "description": "Experimental libre and open-source typefaces",
       "category": "typography",
+      "kind": "asset",
       "access": "free",
-      "subscriptionRequired": "no",
-      "usefulFor": [],
-      "tags": [],
-      "status": "active"
+      "status": "active",
+      "addedAt": "2026-07-22",
+      "addedVia": "curator",
+      "lastChecked": null,
+      "bestFor": [
+        "experimental-font-shortlisting",
+        "libre-type-research",
+        "modifiable-font-workflow"
+      ]
     },
     {
       "id": "resource-51cf9c6399c6",
@@ -2922,11 +3211,12 @@
       "domain": "losttype.com",
       "description": "Independent type foundry with pay-what-you-want and paid fonts",
       "category": "typography",
+      "kind": "asset",
       "access": "freemium",
-      "subscriptionRequired": "optional",
-      "usefulFor": [],
-      "tags": [],
-      "status": "active"
+      "status": "active",
+      "addedAt": "2026-07-22",
+      "addedVia": "curator",
+      "lastChecked": null
     },
     {
       "id": "resource-42936db47b6a",
@@ -2936,11 +3226,17 @@
       "domain": "fontpair.co",
       "description": "Font-pairing inspiration and combinations",
       "category": "typography",
+      "kind": "asset",
       "access": "free",
-      "subscriptionRequired": "no",
-      "usefulFor": [],
-      "tags": [],
       "status": "active",
+      "addedAt": "2026-07-22",
+      "addedVia": "curator",
+      "lastChecked": null,
+      "bestFor": [
+        "headline-body-pairing",
+        "brand-kit-prototyping",
+        "typography-direction"
+      ],
       "faviconUrl": "https://fontpair.co/lovable-uploads/6d6d6d0f-fa61-4507-8417-e70f209f5be1.png"
     },
     {
@@ -2951,11 +3247,12 @@
       "domain": "fontjoy.com",
       "description": "Machine-assisted font-pairing generator",
       "category": "typography",
+      "kind": "asset",
       "access": "free",
-      "subscriptionRequired": "no",
-      "usefulFor": [],
-      "tags": [],
-      "status": "active"
+      "status": "active",
+      "addedAt": "2026-07-22",
+      "addedVia": "curator",
+      "lastChecked": null
     },
     {
       "id": "resource-b7677565a4ff",
@@ -2965,11 +3262,12 @@
       "domain": "fontgen.io",
       "description": "Font combinations and visual hierarchy generator",
       "category": "typography",
+      "kind": "asset",
       "access": "free",
-      "subscriptionRequired": "no",
-      "usefulFor": [],
-      "tags": [],
-      "status": "active"
+      "status": "active",
+      "addedAt": "2026-07-22",
+      "addedVia": "curator",
+      "lastChecked": null
     },
     {
       "id": "resource-a3de99297c3f",
@@ -2979,13 +3277,13 @@
       "domain": "fontmojo.com",
       "description": "Preview and compare fonts",
       "category": "typography",
+      "kind": "asset",
       "access": "free",
-      "subscriptionRequired": "no",
-      "usefulFor": [],
-      "tags": [],
       "status": "active",
+      "addedAt": "2026-07-22",
+      "addedVia": "curator",
+      "lastChecked": null,
       "previewImageUrl": "https://fontmojo.com/OG.jpg",
-      "previewSource": "open-graph",
       "faviconUrl": "https://fontmojo.com/apple-touch-icon.png"
     },
     {
@@ -2996,11 +3294,12 @@
       "domain": "v-fonts.com",
       "description": "Directory and playground for variable fonts",
       "category": "typography",
+      "kind": "asset",
       "access": "free",
-      "subscriptionRequired": "no",
-      "usefulFor": [],
-      "tags": [],
-      "status": "active"
+      "status": "active",
+      "addedAt": "2026-07-22",
+      "addedVia": "curator",
+      "lastChecked": null
     },
     {
       "id": "resource-4b6676338efd",
@@ -3010,13 +3309,13 @@
       "domain": "fontalternatives.com",
       "description": "Free alternatives to premium typefaces",
       "category": "typography",
+      "kind": "asset",
       "access": "free",
-      "subscriptionRequired": "no",
-      "usefulFor": [],
-      "tags": [],
       "status": "active",
+      "addedAt": "2026-07-22",
+      "addedVia": "curator",
+      "lastChecked": null,
       "previewImageUrl": "https://og.fontalternatives.com/og/home.png",
-      "previewSource": "open-graph",
       "faviconUrl": "https://fontalternatives.com/apple-touch-icon.png"
     },
     {
@@ -3027,13 +3326,13 @@
       "domain": "sweetfont.com",
       "description": "Google Font discovery by mood and personality",
       "category": "typography",
+      "kind": "asset",
       "access": "free",
-      "subscriptionRequired": "no",
-      "usefulFor": [],
-      "tags": [],
       "status": "active",
-      "previewImageUrl": "https://sweetfont.com/og-image.png",
-      "previewSource": "open-graph"
+      "addedAt": "2026-07-22",
+      "addedVia": "curator",
+      "lastChecked": null,
+      "previewImageUrl": "https://sweetfont.com/og-image.png"
     },
     {
       "id": "resource-628391285dd8",
@@ -3043,13 +3342,13 @@
       "domain": "tinkerfont.com",
       "description": "Browser extension for testing fonts on live websites",
       "category": "typography",
+      "kind": "asset",
       "access": "free",
-      "subscriptionRequired": "no",
-      "usefulFor": [],
-      "tags": [],
       "status": "active",
+      "addedAt": "2026-07-22",
+      "addedVia": "curator",
+      "lastChecked": null,
       "previewImageUrl": "https://tinkerfont.com/og.webp",
-      "previewSource": "open-graph",
       "faviconUrl": "https://tinkerfont.com/apple-touch-icon.png"
     },
     {
@@ -3060,13 +3359,13 @@
       "domain": "fontsource.org",
       "description": "Self-hostable open-source font packages for web projects",
       "category": "typography",
+      "kind": "asset",
       "access": "open-source",
-      "subscriptionRequired": "no",
-      "usefulFor": [],
-      "tags": [],
       "status": "active",
+      "addedAt": "2026-07-22",
+      "addedVia": "curator",
+      "lastChecked": null,
       "previewImageUrl": "https://fontsource.org/og-image.png",
-      "previewSource": "open-graph",
       "faviconUrl": "https://fontsource.org/apple-touch-icon.png"
     },
     {
@@ -3077,11 +3376,20 @@
       "domain": "coolors.co",
       "description": "Palette generation, browsing, extraction, and color tools",
       "category": "color-accessibility",
+      "kind": "tool",
       "access": "freemium",
-      "subscriptionRequired": "optional",
-      "usefulFor": [],
-      "tags": [],
-      "status": "active"
+      "status": "active",
+      "addedAt": "2026-07-22",
+      "addedVia": "curator",
+      "lastChecked": null,
+      "bestFor": [
+        "color-token-creation",
+        "palette-exploration",
+        "contrast-verification"
+      ],
+      "limitations": [
+        "Pro export formats require subscription"
+      ]
     },
     {
       "id": "resource-6897bacf002e",
@@ -3091,11 +3399,12 @@
       "domain": "colorhunt.co",
       "description": "Curated color-palette inspiration",
       "category": "color-accessibility",
+      "kind": "tool",
       "access": "free",
-      "subscriptionRequired": "no",
-      "usefulFor": [],
-      "tags": [],
-      "status": "active"
+      "status": "active",
+      "addedAt": "2026-07-22",
+      "addedVia": "curator",
+      "lastChecked": null
     },
     {
       "id": "resource-a2f7775b8c79",
@@ -3105,13 +3414,13 @@
       "domain": "color.adobe.com",
       "description": "Color-wheel, palette, and accessibility tools",
       "category": "color-accessibility",
+      "kind": "tool",
       "access": "free",
-      "subscriptionRequired": "no",
-      "usefulFor": [],
-      "tags": [],
       "status": "active",
-      "previewImageUrl": "https://color.adobe.com/media_12ba9e5d49a6c9de7b856f08eea1bf21bfb90b4de.png?width=1200&#x26;format=pjpg&#x26;optimize=medium",
-      "previewSource": "open-graph"
+      "addedAt": "2026-07-22",
+      "addedVia": "curator",
+      "lastChecked": null,
+      "previewImageUrl": "https://color.adobe.com/media_12ba9e5d49a6c9de7b856f08eea1bf21bfb90b4de.png?width=1200&#x26;format=pjpg&#x26;optimize=medium"
     },
     {
       "id": "resource-c13e9c547a60",
@@ -3121,13 +3430,13 @@
       "domain": "happyhues.co",
       "description": "Color palettes demonstrated in real interface contexts",
       "category": "color-accessibility",
+      "kind": "tool",
       "access": "free",
-      "subscriptionRequired": "no",
-      "usefulFor": [],
-      "tags": [],
       "status": "active",
+      "addedAt": "2026-07-22",
+      "addedVia": "curator",
+      "lastChecked": null,
       "previewImageUrl": "https://cdn.prod.website-files.com/5dd40aa8049df8748c72d0ee/5ddd471cbe5e6601554a2a4d_happy-hues.jpeg",
-      "previewSource": "open-graph",
       "faviconUrl": "https://cdn.prod.website-files.com/5dd40aa8049df8748c72d0ee/5dd9b92056a2d6ed5e537c61_happy-hues-apple-icon.png"
     },
     {
@@ -3138,13 +3447,13 @@
       "domain": "realtimecolors.com",
       "description": "Preview website color and typography choices in real time",
       "category": "color-accessibility",
+      "kind": "tool",
       "access": "free",
-      "subscriptionRequired": "no",
-      "usefulFor": [],
-      "tags": [],
       "status": "active",
+      "addedAt": "2026-07-22",
+      "addedVia": "curator",
+      "lastChecked": null,
       "previewImageUrl": "https://www.realtimecolors.com/preview.png",
-      "previewSource": "open-graph",
       "faviconUrl": "https://www.realtimecolors.com/favicon.png"
     },
     {
@@ -3155,11 +3464,12 @@
       "domain": "huemint.com",
       "description": "Machine-learning color palettes for brands and interfaces",
       "category": "color-accessibility",
+      "kind": "tool",
       "access": "free",
-      "subscriptionRequired": "no",
-      "usefulFor": [],
-      "tags": [],
       "status": "active",
+      "addedAt": "2026-07-22",
+      "addedVia": "curator",
+      "lastChecked": null,
       "faviconUrl": "https://huemint.com/assets/img/logo-32.png"
     },
     {
@@ -3170,13 +3480,13 @@
       "domain": "khroma.co",
       "description": "Personalized AI color discovery",
       "category": "color-accessibility",
+      "kind": "tool",
       "access": "free",
-      "subscriptionRequired": "no",
-      "usefulFor": [],
-      "tags": [],
       "status": "active",
-      "previewImageUrl": "https://www.khroma.co/assets/images/social.png",
-      "previewSource": "open-graph"
+      "addedAt": "2026-07-22",
+      "addedVia": "curator",
+      "lastChecked": null,
+      "previewImageUrl": "https://www.khroma.co/assets/images/social.png"
     },
     {
       "id": "resource-3ca920b6d522",
@@ -3186,13 +3496,13 @@
       "domain": "grabient.com",
       "description": "Gradient inspiration and CSS values",
       "category": "color-accessibility",
+      "kind": "tool",
       "access": "free",
-      "subscriptionRequired": "no",
-      "usefulFor": [],
-      "tags": [],
       "status": "active",
+      "addedAt": "2026-07-22",
+      "addedVia": "curator",
+      "lastChecked": null,
       "previewImageUrl": "https://grabient.com/grabber.png",
-      "previewSource": "open-graph",
       "faviconUrl": "https://grabient.com/apple-touch-icon.png"
     },
     {
@@ -3203,11 +3513,12 @@
       "domain": "colorbox.io",
       "description": "Algorithmic color-scale generation",
       "category": "color-accessibility",
+      "kind": "tool",
       "access": "free",
-      "subscriptionRequired": "no",
-      "usefulFor": [],
-      "tags": [],
-      "status": "active"
+      "status": "active",
+      "addedAt": "2026-07-22",
+      "addedVia": "curator",
+      "lastChecked": null
     },
     {
       "id": "resource-06ff97d405dd",
@@ -3217,13 +3528,13 @@
       "domain": "yeun.github.io",
       "description": "Open-source color scheme optimized for interfaces",
       "category": "color-accessibility",
+      "kind": "tool",
       "access": "open-source",
-      "subscriptionRequired": "no",
-      "usefulFor": [],
-      "tags": [],
       "status": "active",
-      "previewImageUrl": "https://yeun.github.io/open-color/asset/images/og-image.png",
-      "previewSource": "open-graph"
+      "addedAt": "2026-07-22",
+      "addedVia": "curator",
+      "lastChecked": null,
+      "previewImageUrl": "https://yeun.github.io/open-color/asset/images/og-image.png"
     },
     {
       "id": "resource-fe952dd7c89c",
@@ -3233,11 +3544,12 @@
       "domain": "leonardocolor.io",
       "description": "Accessible and adaptive color-system creation",
       "category": "color-accessibility",
+      "kind": "tool",
       "access": "open-source",
-      "subscriptionRequired": "no",
-      "usefulFor": [],
-      "tags": [],
       "status": "active",
+      "addedAt": "2026-07-22",
+      "addedVia": "curator",
+      "lastChecked": null,
       "faviconUrl": "https://leonardocolor.io/assets/apple-icon-180x180-yEvmENnd.png"
     },
     {
@@ -3248,13 +3560,13 @@
       "domain": "inclusivecolors.com",
       "description": "WCAG-aware Tailwind-style color-scale generation",
       "category": "color-accessibility",
+      "kind": "tool",
       "access": "free",
-      "subscriptionRequired": "no",
-      "usefulFor": [],
-      "tags": [],
       "status": "active",
-      "previewImageUrl": "https://www.inclusivecolors.com/social-media-banner-large.png",
-      "previewSource": "open-graph"
+      "addedAt": "2026-07-22",
+      "addedVia": "curator",
+      "lastChecked": null,
+      "previewImageUrl": "https://www.inclusivecolors.com/social-media-banner-large.png"
     },
     {
       "id": "resource-d741bfd3dc39",
@@ -3264,13 +3576,13 @@
       "domain": "atmos.style",
       "description": "UI color-palette and design-system tool",
       "category": "color-accessibility",
+      "kind": "tool",
       "access": "free-trial",
-      "subscriptionRequired": "after-trial",
-      "usefulFor": [],
-      "tags": [],
       "status": "active",
-      "previewImageUrl": "https://atmos.style/og.png",
-      "previewSource": "open-graph"
+      "addedAt": "2026-07-22",
+      "addedVia": "curator",
+      "lastChecked": null,
+      "previewImageUrl": "https://atmos.style/og.png"
     },
     {
       "id": "resource-9aca4d63712d",
@@ -3280,13 +3592,20 @@
       "domain": "whocanuse.com",
       "description": "Shows how color contrast affects people with visual impairments",
       "category": "color-accessibility",
+      "kind": "tool",
       "access": "free",
-      "subscriptionRequired": "no",
-      "usefulFor": [],
-      "tags": [],
       "status": "active",
+      "addedAt": "2026-07-22",
+      "addedVia": "curator",
+      "lastChecked": null,
+      "bestFor": [
+        "wcag-compliance-audit",
+        "accessible-color-selection"
+      ],
+      "limitations": [
+        "Interactive single-pair color tool"
+      ],
       "previewImageUrl": "https://www.whocanuse.com/whocanuse_banner.png",
-      "previewSource": "open-graph",
       "faviconUrl": "https://www.whocanuse.com/favicon.png"
     },
     {
@@ -3297,11 +3616,12 @@
       "domain": "getstark.co",
       "description": "Accessibility testing and collaboration across design and development tools",
       "category": "color-accessibility",
+      "kind": "tool",
       "access": "freemium",
-      "subscriptionRequired": "optional",
-      "usefulFor": [],
-      "tags": [],
       "status": "active",
+      "addedAt": "2026-07-22",
+      "addedVia": "curator",
+      "lastChecked": null,
       "faviconUrl": "https://www.getstark.co/apple-touch-icon.png"
     },
     {
@@ -3312,11 +3632,12 @@
       "domain": "webaim.org",
       "description": "WCAG foreground and background contrast testing",
       "category": "color-accessibility",
+      "kind": "tool",
       "access": "free",
-      "subscriptionRequired": "no",
-      "usefulFor": [],
-      "tags": [],
-      "status": "active"
+      "status": "active",
+      "addedAt": "2026-07-22",
+      "addedVia": "curator",
+      "lastChecked": null
     },
     {
       "id": "resource-2f7f7a4aa766",
@@ -3326,11 +3647,12 @@
       "domain": "wave.webaim.org",
       "description": "Web accessibility evaluation tool",
       "category": "color-accessibility",
+      "kind": "tool",
       "access": "free",
-      "subscriptionRequired": "no",
-      "usefulFor": [],
-      "tags": [],
-      "status": "active"
+      "status": "active",
+      "addedAt": "2026-07-22",
+      "addedVia": "curator",
+      "lastChecked": null
     },
     {
       "id": "resource-220b2bdd9432",
@@ -3340,11 +3662,12 @@
       "domain": "deque.com",
       "description": "Automated accessibility testing for websites and applications",
       "category": "color-accessibility",
+      "kind": "tool",
       "access": "freemium",
-      "subscriptionRequired": "optional",
-      "usefulFor": [],
-      "tags": [],
-      "status": "active"
+      "status": "active",
+      "addedAt": "2026-07-22",
+      "addedVia": "curator",
+      "lastChecked": null
     },
     {
       "id": "resource-9829cb4f86f3",
@@ -3354,11 +3677,12 @@
       "domain": "accessibilityinsights.io",
       "description": "Microsoft accessibility testing tools for web and Windows",
       "category": "color-accessibility",
+      "kind": "tool",
       "access": "open-source",
-      "subscriptionRequired": "no",
-      "usefulFor": [],
-      "tags": [],
       "status": "active",
+      "addedAt": "2026-07-22",
+      "addedVia": "curator",
+      "lastChecked": null,
       "faviconUrl": "https://accessibilityinsights.io/img/accessibilityinsights.png"
     },
     {
@@ -3369,13 +3693,13 @@
       "domain": "polypane.app",
       "description": "Browser for responsive, accessibility, and cross-device development",
       "category": "color-accessibility",
+      "kind": "tool",
       "access": "paid",
-      "subscriptionRequired": "yes",
-      "usefulFor": [],
-      "tags": [],
       "status": "active",
+      "addedAt": "2026-07-22",
+      "addedVia": "curator",
+      "lastChecked": null,
       "previewImageUrl": "https://polypane.app/static/e4308456df9a4993bf251982bab22896/banner.jpg",
-      "previewSource": "open-graph",
       "faviconUrl": "https://polypane.app/icons/icon-512x512.png?v=5df5528946772487a6ab462ff2125f26"
     },
     {
@@ -3386,13 +3710,13 @@
       "domain": "fonts.google.com",
       "description": "Google's variable icon family",
       "category": "icons",
+      "kind": "asset",
       "access": "free",
-      "subscriptionRequired": "no",
-      "usefulFor": [],
-      "tags": [],
       "status": "active",
+      "addedAt": "2026-07-22",
+      "addedVia": "curator",
+      "lastChecked": null,
       "previewImageUrl": "https://www.gstatic.com/images/icons/material/apps/fonts/1x/material-symbols/material_symbols.jpg",
-      "previewSource": "open-graph",
       "faviconUrl": "https://www.gstatic.com/images/branding/product/2x/google_fonts_96dp.png"
     },
     {
@@ -3403,13 +3727,13 @@
       "domain": "heroicons.com",
       "description": "Hand-crafted SVG icons for Tailwind projects",
       "category": "icons",
+      "kind": "asset",
       "access": "open-source",
-      "subscriptionRequired": "no",
-      "usefulFor": [],
-      "tags": [],
       "status": "active",
+      "addedAt": "2026-07-22",
+      "addedVia": "curator",
+      "lastChecked": null,
       "previewImageUrl": "https://heroicons.com/_next/static/media/social-card.fefc68e0.jpg",
-      "previewSource": "open-graph",
       "faviconUrl": "https://heroicons.com/_next/static/media/apple-touch-icon.822687be.png"
     },
     {
@@ -3420,13 +3744,18 @@
       "domain": "lucide.dev",
       "description": "Community-maintained consistent SVG icon toolkit",
       "category": "icons",
+      "kind": "asset",
       "access": "open-source",
-      "subscriptionRequired": "no",
-      "usefulFor": [],
-      "tags": [],
       "status": "active",
-      "previewImageUrl": "https://lucide.dev/og.png",
-      "previewSource": "open-graph"
+      "addedAt": "2026-07-22",
+      "addedVia": "curator",
+      "lastChecked": null,
+      "bestFor": [
+        "interface-icon-selection",
+        "design-system-icons",
+        "framework-icon-implementation"
+      ],
+      "previewImageUrl": "https://lucide.dev/og.png"
     },
     {
       "id": "resource-d9660d77b336",
@@ -3436,13 +3765,13 @@
       "domain": "icons.getbootstrap.com",
       "description": "Official open-source Bootstrap icon set",
       "category": "icons",
+      "kind": "asset",
       "access": "open-source",
-      "subscriptionRequired": "no",
-      "usefulFor": [],
-      "tags": [],
       "status": "active",
+      "addedAt": "2026-07-22",
+      "addedVia": "curator",
+      "lastChecked": null,
       "previewImageUrl": "https://icons.getbootstrap.com/assets/img/bootstrap-icons-social.png",
-      "previewSource": "open-graph",
       "faviconUrl": "https://icons.getbootstrap.com/assets/img/favicons/apple-touch-icon.png"
     },
     {
@@ -3453,11 +3782,12 @@
       "domain": "akveo.github.io",
       "description": "Outline and fill UI icon set",
       "category": "icons",
+      "kind": "asset",
       "access": "open-source",
-      "subscriptionRequired": "no",
-      "usefulFor": [],
-      "tags": [],
-      "status": "active"
+      "status": "active",
+      "addedAt": "2026-07-22",
+      "addedVia": "curator",
+      "lastChecked": null
     },
     {
       "id": "resource-c0300d9fcfe7",
@@ -3467,13 +3797,13 @@
       "domain": "tabler.io",
       "description": "Large pixel-perfect SVG icon library",
       "category": "icons",
+      "kind": "asset",
       "access": "open-source",
-      "subscriptionRequired": "no",
-      "usefulFor": [],
-      "tags": [],
       "status": "active",
-      "previewImageUrl": "https://tabler.io/icons/opengraph-image-1v9qf3.png?opengraph-image.0cho_qwy4g1dt.png",
-      "previewSource": "open-graph"
+      "addedAt": "2026-07-22",
+      "addedVia": "curator",
+      "lastChecked": null,
+      "previewImageUrl": "https://tabler.io/icons/opengraph-image-1v9qf3.png?opengraph-image.0cho_qwy4g1dt.png"
     },
     {
       "id": "resource-49786c86cd13",
@@ -3483,13 +3813,13 @@
       "domain": "phosphoricons.com",
       "description": "Flexible multi-weight icon family",
       "category": "icons",
+      "kind": "asset",
       "access": "open-source",
-      "subscriptionRequired": "no",
-      "usefulFor": [],
-      "tags": [],
       "status": "active",
+      "addedAt": "2026-07-22",
+      "addedVia": "curator",
+      "lastChecked": null,
       "previewImageUrl": "https://phosphoricons.com/phosphor-opengraph.png?v=2.0.2",
-      "previewSource": "open-graph",
       "faviconUrl": "https://phosphoricons.com/favicon-192.png"
     },
     {
@@ -3500,13 +3830,13 @@
       "domain": "iconoir.com",
       "description": "Large open-source SVG icon library",
       "category": "icons",
+      "kind": "asset",
       "access": "open-source",
-      "subscriptionRequired": "no",
-      "usefulFor": [],
-      "tags": [],
       "status": "active",
-      "previewImageUrl": "https://iconoir.com/iconoir-brand.png",
-      "previewSource": "open-graph"
+      "addedAt": "2026-07-22",
+      "addedVia": "curator",
+      "lastChecked": null,
+      "previewImageUrl": "https://iconoir.com/iconoir-brand.png"
     },
     {
       "id": "resource-18bba87b577c",
@@ -3516,11 +3846,12 @@
       "domain": "remixicon.com",
       "description": "Neutral-style system icon set",
       "category": "icons",
+      "kind": "asset",
       "access": "open-source",
-      "subscriptionRequired": "no",
-      "usefulFor": [],
-      "tags": [],
-      "status": "active"
+      "status": "active",
+      "addedAt": "2026-07-22",
+      "addedVia": "curator",
+      "lastChecked": null
     },
     {
       "id": "resource-3ae8acba9f2a",
@@ -3530,13 +3861,13 @@
       "domain": "feathericons.com",
       "description": "Simple open-source line icons",
       "category": "icons",
+      "kind": "asset",
       "access": "open-source",
-      "subscriptionRequired": "no",
-      "usefulFor": [],
-      "tags": [],
       "status": "active",
+      "addedAt": "2026-07-22",
+      "addedVia": "curator",
+      "lastChecked": null,
       "previewImageUrl": "https://feathericons.com/feather-og.png",
-      "previewSource": "open-graph",
       "faviconUrl": "https://feathericons.com/favicon-32x32.png"
     },
     {
@@ -3547,13 +3878,13 @@
       "domain": "ionic.io",
       "description": "Cross-platform icon set from Ionic",
       "category": "icons",
+      "kind": "asset",
       "access": "open-source",
-      "subscriptionRequired": "no",
-      "usefulFor": [],
-      "tags": [],
       "status": "active",
+      "addedAt": "2026-07-22",
+      "addedVia": "curator",
+      "lastChecked": null,
       "previewImageUrl": "https://ionic.io/ionicons/assets/img/meta/ionicons-og.png",
-      "previewSource": "open-graph",
       "faviconUrl": "https://ionic.io/ionicons/assets/img/meta/apple-icon-180x180.png"
     },
     {
@@ -3564,13 +3895,13 @@
       "domain": "boxicons.com",
       "description": "Web-friendly icon library with free and premium options",
       "category": "icons",
+      "kind": "asset",
       "access": "freemium",
-      "subscriptionRequired": "optional",
-      "usefulFor": [],
-      "tags": [],
       "status": "active",
-      "previewImageUrl": "https://boxicons.com/opengraph-image.png",
-      "previewSource": "open-graph"
+      "addedAt": "2026-07-22",
+      "addedVia": "curator",
+      "lastChecked": null,
+      "previewImageUrl": "https://boxicons.com/opengraph-image.png"
     },
     {
       "id": "resource-3f8a2a168dc0",
@@ -3580,11 +3911,12 @@
       "domain": "mingcute.com",
       "description": "Simple and polished open-source icons",
       "category": "icons",
+      "kind": "asset",
       "access": "open-source",
-      "subscriptionRequired": "no",
-      "usefulFor": [],
-      "tags": [],
-      "status": "active"
+      "status": "active",
+      "addedAt": "2026-07-22",
+      "addedVia": "curator",
+      "lastChecked": null
     },
     {
       "id": "resource-3af730ea8de8",
@@ -3594,13 +3926,13 @@
       "domain": "akaricons.com",
       "description": "Rounded interface icon library",
       "category": "icons",
+      "kind": "asset",
       "access": "open-source",
-      "subscriptionRequired": "no",
-      "usefulFor": [],
-      "tags": [],
       "status": "active",
+      "addedAt": "2026-07-22",
+      "addedVia": "curator",
+      "lastChecked": null,
       "previewImageUrl": "https://akaricons.com/images/akar-opengraph.png",
-      "previewSource": "open-graph",
       "faviconUrl": "https://akaricons.com/images/favicon.png"
     },
     {
@@ -3611,13 +3943,13 @@
       "domain": "radix-ui.com",
       "description": "Small icon set designed for interfaces",
       "category": "icons",
+      "kind": "asset",
       "access": "open-source",
-      "subscriptionRequired": "no",
-      "usefulFor": [],
-      "tags": [],
       "status": "active",
-      "previewImageUrl": "https://www.radix-ui.com/icons/opengraph-image.png?opengraph-image.3ksnf9bqqwt8y.png",
-      "previewSource": "open-graph"
+      "addedAt": "2026-07-22",
+      "addedVia": "curator",
+      "lastChecked": null,
+      "previewImageUrl": "https://www.radix-ui.com/icons/opengraph-image.png?opengraph-image.3ksnf9bqqwt8y.png"
     },
     {
       "id": "resource-e3fa48ecc192",
@@ -3627,11 +3959,12 @@
       "domain": "iconpark.oceanengine.com",
       "description": "Customizable multi-theme SVG icon library",
       "category": "icons",
+      "kind": "asset",
       "access": "open-source",
-      "subscriptionRequired": "no",
-      "usefulFor": [],
-      "tags": [],
       "status": "active",
+      "addedAt": "2026-07-22",
+      "addedVia": "curator",
+      "lastChecked": null,
       "faviconUrl": "https://lf-iconpark-cdn-cn.bytetos.com/obj/iconpark-site/bydesign/iconparksite/logo192.png"
     },
     {
@@ -3642,11 +3975,12 @@
       "domain": "svgrepo.com",
       "description": "Large searchable collection of SVG vectors and icons",
       "category": "icons",
+      "kind": "asset",
       "access": "free",
-      "subscriptionRequired": "no",
-      "usefulFor": [],
-      "tags": [],
-      "status": "active"
+      "status": "active",
+      "addedAt": "2026-07-22",
+      "addedVia": "curator",
+      "lastChecked": null
     },
     {
       "id": "resource-e9556bbef966",
@@ -3656,13 +3990,13 @@
       "domain": "fontawesome.com",
       "description": "Icon toolkit with free and Pro libraries",
       "category": "icons",
+      "kind": "asset",
       "access": "freemium",
-      "subscriptionRequired": "optional",
-      "usefulFor": [],
-      "tags": [],
       "status": "active",
+      "addedAt": "2026-07-22",
+      "addedVia": "curator",
+      "lastChecked": null,
       "previewImageUrl": "https://img.fortawesome.com/1ce05b4b/open-graph-general.png",
-      "previewSource": "open-graph",
       "faviconUrl": "https://fontawesome.com/images/favicon/apple-touch-icon.png"
     },
     {
@@ -3673,11 +4007,12 @@
       "domain": "icons8.com",
       "description": "Large collection of icons in consistent visual styles",
       "category": "icons",
+      "kind": "asset",
       "access": "freemium",
-      "subscriptionRequired": "optional",
-      "usefulFor": [],
-      "tags": [],
-      "status": "active"
+      "status": "active",
+      "addedAt": "2026-07-22",
+      "addedVia": "curator",
+      "lastChecked": null
     },
     {
       "id": "resource-903c037f5110",
@@ -3687,11 +4022,12 @@
       "domain": "thenounproject.com",
       "description": "Large community-created icon library",
       "category": "icons",
+      "kind": "asset",
       "access": "freemium",
-      "subscriptionRequired": "optional",
-      "usefulFor": [],
-      "tags": [],
       "status": "active",
+      "addedAt": "2026-07-22",
+      "addedVia": "curator",
+      "lastChecked": null,
       "faviconUrl": "https://thenounproject.com/apple-touch-icon.png"
     },
     {
@@ -3702,11 +4038,12 @@
       "domain": "iconscout.com",
       "description": "Icons, illustrations, 3D assets, and animations",
       "category": "icons",
+      "kind": "asset",
       "access": "freemium",
-      "subscriptionRequired": "optional",
-      "usefulFor": [],
-      "tags": [],
-      "status": "active"
+      "status": "active",
+      "addedAt": "2026-07-22",
+      "addedVia": "curator",
+      "lastChecked": null
     },
     {
       "id": "resource-d573ddeaa5d7",
@@ -3716,13 +4053,13 @@
       "domain": "flaticon.com",
       "description": "Large icon and sticker library",
       "category": "icons",
+      "kind": "asset",
       "access": "freemium",
-      "subscriptionRequired": "optional",
-      "usefulFor": [],
-      "tags": [],
       "status": "active",
+      "addedAt": "2026-07-22",
+      "addedVia": "curator",
+      "lastChecked": null,
       "previewImageUrl": "https://media.flaticon.com/share/flaticon-generic.jpg",
-      "previewSource": "open-graph",
       "faviconUrl": "https://media.flaticon.com/dist/min/img/apple-icon-180x180.png"
     },
     {
@@ -3733,11 +4070,12 @@
       "domain": "streamlinehq.com",
       "description": "Large consistent icon, illustration, and emoji system",
       "category": "icons",
+      "kind": "asset",
       "access": "freemium",
-      "subscriptionRequired": "optional",
-      "usefulFor": [],
-      "tags": [],
-      "status": "active"
+      "status": "active",
+      "addedAt": "2026-07-22",
+      "addedVia": "curator",
+      "lastChecked": null
     },
     {
       "id": "resource-5ef8124a8f89",
@@ -3747,11 +4085,12 @@
       "domain": "lineicons.com",
       "description": "SVG icon library for interfaces and websites",
       "category": "icons",
+      "kind": "asset",
       "access": "freemium",
-      "subscriptionRequired": "optional",
-      "usefulFor": [],
-      "tags": [],
-      "status": "active"
+      "status": "active",
+      "addedAt": "2026-07-22",
+      "addedVia": "curator",
+      "lastChecked": null
     },
     {
       "id": "resource-e338ae3b4f41",
@@ -3761,13 +4100,13 @@
       "domain": "iconshock.com",
       "description": "Large commercial icon collection with multiple styles",
       "category": "icons",
+      "kind": "asset",
       "access": "freemium",
-      "subscriptionRequired": "optional",
-      "usefulFor": [],
-      "tags": [],
       "status": "active",
-      "previewImageUrl": "https://www.iconshock.com/img/iconshock_og.png",
-      "previewSource": "open-graph"
+      "addedAt": "2026-07-22",
+      "addedVia": "curator",
+      "lastChecked": null,
+      "previewImageUrl": "https://www.iconshock.com/img/iconshock_og.png"
     },
     {
       "id": "resource-42ec6bd7c929",
@@ -3777,13 +4116,13 @@
       "domain": "nucleoapp.com",
       "description": "Premium icon library and icon organizer",
       "category": "icons",
+      "kind": "asset",
       "access": "paid",
-      "subscriptionRequired": "yes",
-      "usefulFor": [],
-      "tags": [],
       "status": "active",
+      "addedAt": "2026-07-22",
+      "addedVia": "curator",
+      "lastChecked": null,
       "previewImageUrl": "https://nucleoapp.com/assets/img/open-graph-home.png",
-      "previewSource": "open-graph",
       "faviconUrl": "https://nucleoapp.com/assets/img/favicons/apple-touch-icon.png"
     },
     {
@@ -3794,11 +4133,12 @@
       "domain": "lordicon.com",
       "description": "Animated and static icon library",
       "category": "icons",
+      "kind": "asset",
       "access": "freemium",
-      "subscriptionRequired": "optional",
-      "usefulFor": [],
-      "tags": [],
       "status": "active",
+      "addedAt": "2026-07-22",
+      "addedVia": "curator",
+      "lastChecked": null,
       "faviconUrl": "https://lordicon.com/media/assets/favicon/apple-touch-icon.png"
     },
     {
@@ -3809,13 +4149,13 @@
       "domain": "useanimations.com",
       "description": "Lottie-based animated icons for interfaces",
       "category": "icons",
+      "kind": "asset",
       "access": "open-source",
-      "subscriptionRequired": "no",
-      "usefulFor": [],
-      "tags": [],
       "status": "active",
+      "addedAt": "2026-07-22",
+      "addedVia": "curator",
+      "lastChecked": null,
       "previewImageUrl": "https://useanimations.com/images/OGuseAnimationsImage.jpg",
-      "previewSource": "open-graph",
       "faviconUrl": "https://useanimations.com/images/apple-touch-icon.png"
     },
     {
@@ -3826,11 +4166,12 @@
       "domain": "icones.js.org",
       "description": "Fast icon explorer powered by Iconify collections",
       "category": "icons",
+      "kind": "asset",
       "access": "free",
-      "subscriptionRequired": "no",
-      "usefulFor": [],
-      "tags": [],
-      "status": "active"
+      "status": "active",
+      "addedAt": "2026-07-22",
+      "addedVia": "curator",
+      "lastChecked": null
     },
     {
       "id": "resource-619b899efec6",
@@ -3840,13 +4181,13 @@
       "domain": "iconify.design",
       "description": "Unified framework and API for many open icon sets",
       "category": "icons",
+      "kind": "asset",
       "access": "open-source",
-      "subscriptionRequired": "no",
-      "usefulFor": [],
-      "tags": [],
       "status": "active",
+      "addedAt": "2026-07-22",
+      "addedVia": "curator",
+      "lastChecked": null,
       "previewImageUrl": "https://iconify.design/assets/og/iconify.png",
-      "previewSource": "open-graph",
       "faviconUrl": "https://iconify.design/apple-touch-icon.png"
     },
     {
@@ -3857,13 +4198,13 @@
       "domain": "undraw.co",
       "description": "Customizable open-source illustrations",
       "category": "visual-assets",
+      "kind": "asset",
       "access": "free",
-      "subscriptionRequired": "no",
-      "usefulFor": [],
-      "tags": [],
       "status": "active",
+      "addedAt": "2026-07-22",
+      "addedVia": "curator",
+      "lastChecked": null,
       "previewImageUrl": "https://cdn.undraw.co/static/ud24ogimage.png",
-      "previewSource": "open-graph",
       "faviconUrl": "https://undraw.co/apple-touch-icon.png"
     },
     {
@@ -3874,11 +4215,12 @@
       "domain": "storyset.com",
       "description": "Customizable static and animated illustrations",
       "category": "visual-assets",
+      "kind": "asset",
       "access": "freemium",
-      "subscriptionRequired": "optional",
-      "usefulFor": [],
-      "tags": [],
       "status": "active",
+      "addedAt": "2026-07-22",
+      "addedVia": "curator",
+      "lastChecked": null,
       "faviconUrl": "https://storyset.com/apple-touch-icon.png"
     },
     {
@@ -3889,13 +4231,13 @@
       "domain": "drawkit.com",
       "description": "Free and premium illustration packs",
       "category": "visual-assets",
+      "kind": "asset",
       "access": "freemium",
-      "subscriptionRequired": "optional",
-      "usefulFor": [],
-      "tags": [],
       "status": "active",
+      "addedAt": "2026-07-22",
+      "addedVia": "curator",
+      "lastChecked": null,
       "previewImageUrl": "https://cdn.prod.website-files.com/626f5d0ae6c15c780f2dd5c4/6336572b684b9428785ccd40_DrawKit%20Website%20preview.png",
-      "previewSource": "open-graph",
       "faviconUrl": "https://cdn.prod.website-files.com/682d1c6b3c16bb956eafd69b/682d1c6b3c16bb956eafd82f_DrawKit-Webclip.png"
     },
     {
@@ -3906,11 +4248,12 @@
       "domain": "iradesign.io",
       "description": "Mix-and-match gradient illustration components",
       "category": "visual-assets",
+      "kind": "asset",
       "access": "free",
-      "subscriptionRequired": "no",
-      "usefulFor": [],
-      "tags": [],
-      "status": "active"
+      "status": "active",
+      "addedAt": "2026-07-22",
+      "addedVia": "curator",
+      "lastChecked": null
     },
     {
       "id": "resource-ecbd825ee3b6",
@@ -3920,13 +4263,13 @@
       "domain": "blush.design",
       "description": "Customizable illustrations from independent artists",
       "category": "visual-assets",
+      "kind": "asset",
       "access": "freemium",
-      "subscriptionRequired": "optional",
-      "usefulFor": [],
-      "tags": [],
       "status": "active",
+      "addedAt": "2026-07-22",
+      "addedVia": "curator",
+      "lastChecked": null,
       "previewImageUrl": "https://blush.design/og-image.png",
-      "previewSource": "open-graph",
       "faviconUrl": "https://blush.design/apple-touch-icon.png"
     },
     {
@@ -3937,11 +4280,12 @@
       "domain": "icons8.com",
       "description": "Vector and 3D illustration library",
       "category": "visual-assets",
+      "kind": "asset",
       "access": "freemium",
-      "subscriptionRequired": "optional",
-      "usefulFor": [],
-      "tags": [],
-      "status": "active"
+      "status": "active",
+      "addedAt": "2026-07-22",
+      "addedVia": "curator",
+      "lastChecked": null
     },
     {
       "id": "resource-5b575f3ee3b5",
@@ -3951,11 +4295,12 @@
       "domain": "manypixels.co",
       "description": "Royalty-free illustration library",
       "category": "visual-assets",
+      "kind": "asset",
       "access": "free",
-      "subscriptionRequired": "no",
-      "usefulFor": [],
-      "tags": [],
       "status": "active",
+      "addedAt": "2026-07-22",
+      "addedVia": "curator",
+      "lastChecked": null,
       "faviconUrl": "https://cdn.prod.website-files.com/63a9cb71c629474d4ae334b9/64a5f701714b5fe13a08253f_favicons%201%20(2).png"
     },
     {
@@ -3966,13 +4311,13 @@
       "domain": "humaaans.com",
       "description": "Mix-and-match illustrations of people",
       "category": "visual-assets",
+      "kind": "asset",
       "access": "free",
-      "subscriptionRequired": "no",
-      "usefulFor": [],
-      "tags": [],
       "status": "active",
+      "addedAt": "2026-07-22",
+      "addedVia": "curator",
+      "lastChecked": null,
       "previewImageUrl": "https://cdn.prod.website-files.com/5bff8886c3964a992e90d465/5c050a75fc73fba30bf816f1_seo-rectangle.jpg",
-      "previewSource": "open-graph",
       "faviconUrl": "https://cdn.prod.website-files.com/5bff8886c3964a992e90d465/5c00a0ce59aa851331d34687_favicon-256.png"
     },
     {
@@ -3983,13 +4328,13 @@
       "domain": "absurd.design",
       "description": "Distinctive hand-drawn abstract illustrations",
       "category": "visual-assets",
+      "kind": "asset",
       "access": "freemium",
-      "subscriptionRequired": "optional",
-      "usefulFor": [],
-      "tags": [],
       "status": "active",
+      "addedAt": "2026-07-22",
+      "addedVia": "curator",
+      "lastChecked": null,
       "previewImageUrl": "https://absurd.design/img/social.jpg",
-      "previewSource": "open-graph",
       "faviconUrl": "https://absurd.design/img/favicon/favicon-196x196.png"
     },
     {
@@ -4000,13 +4345,13 @@
       "domain": "opendoodles.com",
       "description": "Open-source hand-drawn illustrations",
       "category": "visual-assets",
+      "kind": "asset",
       "access": "free",
-      "subscriptionRequired": "no",
-      "usefulFor": [],
-      "tags": [],
       "status": "active",
+      "addedAt": "2026-07-22",
+      "addedVia": "curator",
+      "lastChecked": null,
       "previewImageUrl": "https://cdn.prod.website-files.com/5d5d5904f8a21bfe5ff69367/5da4cb5454976755fcac7930_seo-doodles.jpg",
-      "previewSource": "open-graph",
       "faviconUrl": "https://cdn.prod.website-files.com/5d5d5904f8a21bfe5ff69367/5da4e9a454896ed80730e86b_icon-256w.png"
     },
     {
@@ -4017,11 +4362,12 @@
       "domain": "delesign.com",
       "description": "Royalty-free illustrations for digital projects",
       "category": "visual-assets",
+      "kind": "asset",
       "access": "free",
-      "subscriptionRequired": "no",
-      "usefulFor": [],
-      "tags": [],
-      "status": "active"
+      "status": "active",
+      "addedAt": "2026-07-22",
+      "addedVia": "curator",
+      "lastChecked": null
     },
     {
       "id": "resource-26a2e04e37d0",
@@ -4031,11 +4377,12 @@
       "domain": "reshot.com",
       "description": "Free icons, illustrations, and photos",
       "category": "visual-assets",
+      "kind": "asset",
       "access": "free",
-      "subscriptionRequired": "no",
-      "usefulFor": [],
-      "tags": [],
-      "status": "active"
+      "status": "active",
+      "addedAt": "2026-07-22",
+      "addedVia": "curator",
+      "lastChecked": null
     },
     {
       "id": "resource-559b9456dc31",
@@ -4045,11 +4392,12 @@
       "domain": "mixkit.co",
       "description": "Free illustrations, stock video, music, and templates",
       "category": "visual-assets",
+      "kind": "asset",
       "access": "free",
-      "subscriptionRequired": "no",
-      "usefulFor": [],
-      "tags": [],
       "status": "active",
+      "addedAt": "2026-07-22",
+      "addedVia": "curator",
+      "lastChecked": null,
       "faviconUrl": "https://assets.mixkit.co/build/favicons/apple-icon-180x180-bd3d5e368063b793b955fa228a1d9311b54a29ac871f53c2e0c69e81d5fa0d48.png"
     },
     {
@@ -4060,13 +4408,13 @@
       "domain": "blackillustrations.com",
       "description": "Illustration collections representing Black people",
       "category": "visual-assets",
+      "kind": "asset",
       "access": "freemium",
-      "subscriptionRequired": "optional",
-      "usefulFor": [],
-      "tags": [],
       "status": "active",
+      "addedAt": "2026-07-22",
+      "addedVia": "curator",
+      "lastChecked": null,
       "previewImageUrl": "https://cdn.prod.website-files.com/5f0a234d1293a2f4eb599bb5/6663071f6326830dc7376926_Open%20graph%20image.png",
-      "previewSource": "open-graph",
       "faviconUrl": "https://cdn.prod.website-files.com/5f0a234d1293a2f4eb599bb5/5f4550325567b37a486e00eb_black%20illustrations%20logo.png"
     },
     {
@@ -4077,13 +4425,13 @@
       "domain": "fffuel.co",
       "description": "SVG background, pattern, gradient, and shape generators",
       "category": "visual-assets",
+      "kind": "asset",
       "access": "free",
-      "subscriptionRequired": "no",
-      "usefulFor": [],
-      "tags": [],
       "status": "active",
-      "previewImageUrl": "https://www.fffuel.co/images/cover.png",
-      "previewSource": "open-graph"
+      "addedAt": "2026-07-22",
+      "addedVia": "curator",
+      "lastChecked": null,
+      "previewImageUrl": "https://www.fffuel.co/images/cover.png"
     },
     {
       "id": "resource-6887c11205e8",
@@ -4093,13 +4441,13 @@
       "domain": "haikei.app",
       "description": "Generative SVG backgrounds and visual assets",
       "category": "visual-assets",
+      "kind": "asset",
       "access": "freemium",
-      "subscriptionRequired": "optional",
-      "usefulFor": [],
-      "tags": [],
       "status": "active",
-      "previewImageUrl": "https://haikei.app/haikei-cover.png",
-      "previewSource": "open-graph"
+      "addedAt": "2026-07-22",
+      "addedVia": "curator",
+      "lastChecked": null,
+      "previewImageUrl": "https://haikei.app/haikei-cover.png"
     },
     {
       "id": "resource-7a8f527e423f",
@@ -4109,13 +4457,13 @@
       "domain": "patternpad.com",
       "description": "Browser-based pattern generator",
       "category": "visual-assets",
+      "kind": "asset",
       "access": "free",
-      "subscriptionRequired": "no",
-      "usefulFor": [],
-      "tags": [],
       "status": "active",
+      "addedAt": "2026-07-22",
+      "addedVia": "curator",
+      "lastChecked": null,
       "previewImageUrl": "https://patternpad.com/images/patternpad-banner.png",
-      "previewSource": "open-graph",
       "faviconUrl": "https://patternpad.com/images/apple-touch-icon.png"
     },
     {
@@ -4126,11 +4474,12 @@
       "domain": "figma.com",
       "description": "Community files, templates, plugins, and UI kits",
       "category": "visual-assets",
+      "kind": "asset",
       "access": "free",
-      "subscriptionRequired": "no",
-      "usefulFor": [],
-      "tags": [],
-      "status": "active"
+      "status": "active",
+      "addedAt": "2026-07-22",
+      "addedVia": "curator",
+      "lastChecked": null
     },
     {
       "id": "resource-076ade306587",
@@ -4140,11 +4489,12 @@
       "domain": "ui8.net",
       "description": "Premium UI kits, fonts, illustrations, and design assets",
       "category": "visual-assets",
+      "kind": "asset",
       "access": "paid",
-      "subscriptionRequired": "yes",
-      "usefulFor": [],
-      "tags": [],
-      "status": "active"
+      "status": "active",
+      "addedAt": "2026-07-22",
+      "addedVia": "curator",
+      "lastChecked": null
     },
     {
       "id": "resource-0e09218b32a8",
@@ -4154,11 +4504,12 @@
       "domain": "creativemarket.com",
       "description": "Marketplace for fonts, templates, mockups, and graphics",
       "category": "visual-assets",
+      "kind": "asset",
       "access": "paid",
-      "subscriptionRequired": "yes",
-      "usefulFor": [],
-      "tags": [],
-      "status": "active"
+      "status": "active",
+      "addedAt": "2026-07-22",
+      "addedVia": "curator",
+      "lastChecked": null
     },
     {
       "id": "resource-c8e3ed2b894f",
@@ -4168,11 +4519,12 @@
       "domain": "elements.envato.com",
       "description": "Subscription library of templates, stock, fonts, audio, and video",
       "category": "visual-assets",
+      "kind": "asset",
       "access": "paid",
-      "subscriptionRequired": "yes",
-      "usefulFor": [],
-      "tags": [],
-      "status": "active"
+      "status": "active",
+      "addedAt": "2026-07-22",
+      "addedVia": "curator",
+      "lastChecked": null
     },
     {
       "id": "resource-424e130e8422",
@@ -4182,11 +4534,12 @@
       "domain": "pixelbuddha.net",
       "description": "Free and premium fonts, mockups, effects, and graphic assets",
       "category": "visual-assets",
+      "kind": "asset",
       "access": "freemium",
-      "subscriptionRequired": "optional",
-      "usefulFor": [],
-      "tags": [],
-      "status": "active"
+      "status": "active",
+      "addedAt": "2026-07-22",
+      "addedVia": "curator",
+      "lastChecked": null
     },
     {
       "id": "resource-9b1c10807887",
@@ -4196,11 +4549,12 @@
       "domain": "unblast.com",
       "description": "Curated free mockups, fonts, icons, and templates",
       "category": "visual-assets",
+      "kind": "asset",
       "access": "free",
-      "subscriptionRequired": "no",
-      "usefulFor": [],
-      "tags": [],
-      "status": "active"
+      "status": "active",
+      "addedAt": "2026-07-22",
+      "addedVia": "curator",
+      "lastChecked": null
     },
     {
       "id": "resource-e6df4e7faaeb",
@@ -4210,11 +4564,12 @@
       "domain": "freebiesbug.com",
       "description": "Free design resources for Figma, Sketch, Photoshop, and web projects",
       "category": "visual-assets",
+      "kind": "asset",
       "access": "free",
-      "subscriptionRequired": "no",
-      "usefulFor": [],
-      "tags": [],
-      "status": "active"
+      "status": "active",
+      "addedAt": "2026-07-22",
+      "addedVia": "curator",
+      "lastChecked": null
     },
     {
       "id": "resource-ed42ea2dfde6",
@@ -4224,11 +4579,12 @@
       "domain": "uistore.design",
       "description": "Free UI kits and design resources",
       "category": "visual-assets",
+      "kind": "asset",
       "access": "free",
-      "subscriptionRequired": "no",
-      "usefulFor": [],
-      "tags": [],
-      "status": "active"
+      "status": "active",
+      "addedAt": "2026-07-22",
+      "addedVia": "curator",
+      "lastChecked": null
     },
     {
       "id": "resource-fd3c2a3a5685",
@@ -4238,11 +4594,12 @@
       "domain": "figma.com",
       "description": "Collaborative interface design, prototyping, whiteboarding, and developer handoff",
       "category": "design-tools-ai",
+      "kind": "tool",
       "access": "freemium",
-      "subscriptionRequired": "optional",
-      "usefulFor": [],
-      "tags": [],
-      "status": "active"
+      "status": "active",
+      "addedAt": "2026-07-22",
+      "addedVia": "curator",
+      "lastChecked": null
     },
     {
       "id": "resource-2a0af896ff66",
@@ -4252,11 +4609,12 @@
       "domain": "penpot.app",
       "description": "Open-source interface design and prototyping platform",
       "category": "design-tools-ai",
+      "kind": "tool",
       "access": "open-source",
-      "subscriptionRequired": "no",
-      "usefulFor": [],
-      "tags": [],
-      "status": "active"
+      "status": "active",
+      "addedAt": "2026-07-22",
+      "addedVia": "curator",
+      "lastChecked": null
     },
     {
       "id": "resource-6529347d85fd",
@@ -4266,11 +4624,12 @@
       "domain": "framer.com",
       "description": "Visual website design and publishing with React-based output",
       "category": "design-tools-ai",
+      "kind": "tool",
       "access": "freemium",
-      "subscriptionRequired": "optional",
-      "usefulFor": [],
-      "tags": [],
-      "status": "active"
+      "status": "active",
+      "addedAt": "2026-07-22",
+      "addedVia": "curator",
+      "lastChecked": null
     },
     {
       "id": "resource-21359fe8c171",
@@ -4280,11 +4639,12 @@
       "domain": "webflow.com",
       "description": "Visual website builder and CMS",
       "category": "design-tools-ai",
+      "kind": "tool",
       "access": "freemium",
-      "subscriptionRequired": "optional",
-      "usefulFor": [],
-      "tags": [],
-      "status": "active"
+      "status": "active",
+      "addedAt": "2026-07-22",
+      "addedVia": "curator",
+      "lastChecked": null
     },
     {
       "id": "resource-25d0d0a31e39",
@@ -4294,11 +4654,12 @@
       "domain": "webstudio.is",
       "description": "Open-source visual website builder",
       "category": "design-tools-ai",
+      "kind": "tool",
       "access": "open-source",
-      "subscriptionRequired": "no",
-      "usefulFor": [],
-      "tags": [],
-      "status": "active"
+      "status": "active",
+      "addedAt": "2026-07-22",
+      "addedVia": "curator",
+      "lastChecked": null
     },
     {
       "id": "resource-66b5da3637f8",
@@ -4308,11 +4669,12 @@
       "domain": "uizard.io",
       "description": "AI-assisted wireframing, UI design, and prototyping",
       "category": "design-tools-ai",
+      "kind": "tool",
       "access": "freemium",
-      "subscriptionRequired": "optional",
-      "usefulFor": [],
-      "tags": [],
-      "status": "active"
+      "status": "active",
+      "addedAt": "2026-07-22",
+      "addedVia": "curator",
+      "lastChecked": null
     },
     {
       "id": "resource-a6b11a4a9e4a",
@@ -4322,11 +4684,12 @@
       "domain": "visily.ai",
       "description": "AI UI design and wireframing for product teams",
       "category": "design-tools-ai",
+      "kind": "tool",
       "access": "freemium",
-      "subscriptionRequired": "optional",
-      "usefulFor": [],
-      "tags": [],
-      "status": "active"
+      "status": "active",
+      "addedAt": "2026-07-22",
+      "addedVia": "curator",
+      "lastChecked": null
     },
     {
       "id": "resource-9e3aab723774",
@@ -4336,11 +4699,12 @@
       "domain": "stitch.withgoogle.com",
       "description": "AI-generated UI designs and frontend code",
       "category": "design-tools-ai",
+      "kind": "tool",
       "access": "free",
-      "subscriptionRequired": "no",
-      "usefulFor": [],
-      "tags": [],
-      "status": "active"
+      "status": "active",
+      "addedAt": "2026-07-22",
+      "addedVia": "curator",
+      "lastChecked": null
     },
     {
       "id": "resource-4b1cd233f883",
@@ -4350,11 +4714,19 @@
       "domain": "v0.dev",
       "description": "AI generation of React interfaces and applications",
       "category": "design-tools-ai",
+      "kind": "tool",
       "access": "freemium",
-      "subscriptionRequired": "optional",
-      "usefulFor": [],
-      "tags": [],
-      "status": "active"
+      "status": "active",
+      "addedAt": "2026-07-22",
+      "addedVia": "curator",
+      "lastChecked": null,
+      "bestFor": [
+        "rapid-prototyping",
+        "component-generation"
+      ],
+      "limitations": [
+        "Generative credits required for heavy generation"
+      ]
     },
     {
       "id": "resource-cf7a3a4c926a",
@@ -4364,11 +4736,12 @@
       "domain": "lovable.dev",
       "description": "Prompt-driven full-stack web-application builder",
       "category": "design-tools-ai",
+      "kind": "tool",
       "access": "freemium",
-      "subscriptionRequired": "optional",
-      "usefulFor": [],
-      "tags": [],
-      "status": "active"
+      "status": "active",
+      "addedAt": "2026-07-22",
+      "addedVia": "curator",
+      "lastChecked": null
     },
     {
       "id": "resource-f97b4c3f7a1b",
@@ -4378,11 +4751,12 @@
       "domain": "bolt.new",
       "description": "Browser-based AI full-stack application development",
       "category": "design-tools-ai",
+      "kind": "tool",
       "access": "freemium",
-      "subscriptionRequired": "optional",
-      "usefulFor": [],
-      "tags": [],
-      "status": "active"
+      "status": "active",
+      "addedAt": "2026-07-22",
+      "addedVia": "curator",
+      "lastChecked": null
     },
     {
       "id": "resource-da732653cd75",
@@ -4392,11 +4766,12 @@
       "domain": "replit.com",
       "description": "Cloud IDE and AI application-building platform",
       "category": "design-tools-ai",
+      "kind": "tool",
       "access": "freemium",
-      "subscriptionRequired": "optional",
-      "usefulFor": [],
-      "tags": [],
-      "status": "active"
+      "status": "active",
+      "addedAt": "2026-07-22",
+      "addedVia": "curator",
+      "lastChecked": null
     },
     {
       "id": "resource-f11c3566f12d",
@@ -4406,11 +4781,12 @@
       "domain": "magicpatterns.com",
       "description": "AI-generated product UI and design exploration",
       "category": "design-tools-ai",
+      "kind": "tool",
       "access": "freemium",
-      "subscriptionRequired": "optional",
-      "usefulFor": [],
-      "tags": [],
-      "status": "active"
+      "status": "active",
+      "addedAt": "2026-07-22",
+      "addedVia": "curator",
+      "lastChecked": null
     },
     {
       "id": "resource-e81793f16a04",
@@ -4420,11 +4796,20 @@
       "domain": "relume.io",
       "description": "AI sitemaps, wireframes, and Webflow or Figma component libraries",
       "category": "design-tools-ai",
+      "kind": "tool",
       "access": "freemium",
-      "subscriptionRequired": "optional",
-      "usefulFor": [],
-      "tags": [],
-      "status": "active"
+      "status": "active",
+      "addedAt": "2026-07-22",
+      "addedVia": "curator",
+      "lastChecked": null,
+      "bestFor": [
+        "sitemap-architecture",
+        "wireframing",
+        "component-library-setup"
+      ],
+      "limitations": [
+        "Free tier includes limited components; full access is subscription-based"
+      ]
     },
     {
       "id": "resource-5969258ea429",
@@ -4434,11 +4819,12 @@
       "domain": "dora.run",
       "description": "No-code animated and 3D website builder",
       "category": "design-tools-ai",
+      "kind": "tool",
       "access": "freemium",
-      "subscriptionRequired": "optional",
-      "usefulFor": [],
-      "tags": [],
-      "status": "active"
+      "status": "active",
+      "addedAt": "2026-07-22",
+      "addedVia": "curator",
+      "lastChecked": null
     },
     {
       "id": "resource-9bfe4a3897ac",
@@ -4448,11 +4834,12 @@
       "domain": "plasmic.app",
       "description": "Visual builder for React websites and applications",
       "category": "design-tools-ai",
+      "kind": "tool",
       "access": "freemium",
-      "subscriptionRequired": "optional",
-      "usefulFor": [],
-      "tags": [],
-      "status": "active"
+      "status": "active",
+      "addedAt": "2026-07-22",
+      "addedVia": "curator",
+      "lastChecked": null
     },
     {
       "id": "resource-5069590156b7",
@@ -4462,11 +4849,12 @@
       "domain": "builder.io",
       "description": "Visual development platform and AI-generated frontend experiences",
       "category": "design-tools-ai",
+      "kind": "tool",
       "access": "freemium",
-      "subscriptionRequired": "optional",
-      "usefulFor": [],
-      "tags": [],
-      "status": "active"
+      "status": "active",
+      "addedAt": "2026-07-22",
+      "addedVia": "curator",
+      "lastChecked": null
     },
     {
       "id": "resource-09924984d444",
@@ -4476,11 +4864,12 @@
       "domain": "animaapp.com",
       "description": "Figma-to-code and design-to-production workflows",
       "category": "design-tools-ai",
+      "kind": "tool",
       "access": "freemium",
-      "subscriptionRequired": "optional",
-      "usefulFor": [],
-      "tags": [],
-      "status": "active"
+      "status": "active",
+      "addedAt": "2026-07-22",
+      "addedVia": "curator",
+      "lastChecked": null
     },
     {
       "id": "resource-29300a9360ac",
@@ -4490,11 +4879,12 @@
       "domain": "locofy.ai",
       "description": "Design-to-code platform for Figma and frontend frameworks",
       "category": "design-tools-ai",
+      "kind": "tool",
       "access": "freemium",
-      "subscriptionRequired": "optional",
-      "usefulFor": [],
-      "tags": [],
-      "status": "active"
+      "status": "active",
+      "addedAt": "2026-07-22",
+      "addedVia": "curator",
+      "lastChecked": null
     },
     {
       "id": "resource-79fdadef1595",
@@ -4504,11 +4894,12 @@
       "domain": "teleporthq.io",
       "description": "Visual website builder and frontend code generator",
       "category": "design-tools-ai",
+      "kind": "tool",
       "access": "freemium",
-      "subscriptionRequired": "optional",
-      "usefulFor": [],
-      "tags": [],
-      "status": "active"
+      "status": "active",
+      "addedAt": "2026-07-22",
+      "addedVia": "curator",
+      "lastChecked": null
     }
   ],
   "categories": [

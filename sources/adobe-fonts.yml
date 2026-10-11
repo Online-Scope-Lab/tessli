@@ -1,0 +1,16 @@
+id: resource-35c3f2fef142
+slug: adobe-fonts
+name: Adobe Fonts
+url: https://fonts.adobe.com
+category: typography
+kind: asset
+access: paid
+summary: Font library included with Adobe Creative Cloud subscriptions
+status: active
+added_at: 2026-07-22
+added_via: curator
+last_checked: null
+best_for:
+  - subscription-font-shortlisting
+  - creative-cloud-typography
+  - hosted-web-font-delivery

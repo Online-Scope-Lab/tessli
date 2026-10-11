@@ -1,0 +1,17 @@
+id: resource-9aca4d63712d
+slug: who-can-use
+name: Who Can Use
+url: https://www.whocanuse.com
+category: color-accessibility
+kind: tool
+access: free
+summary: Shows how color contrast affects people with visual impairments
+status: active
+added_at: 2026-07-22
+added_via: curator
+last_checked: null
+best_for:
+  - wcag-compliance-audit
+  - accessible-color-selection
+limitations:
+  - Interactive single-pair color tool

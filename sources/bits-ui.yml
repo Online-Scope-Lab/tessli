@@ -1,0 +1,12 @@
+id: resource-69d742c27ffc
+slug: bits-ui
+name: Bits UI
+url: https://bits-ui.com
+category: ui-libraries
+kind: library
+access: open-source
+summary: Headless accessible components for Svelte
+status: active
+added_at: 2026-07-22
+added_via: curator
+last_checked: null

@@ -1,0 +1,12 @@
+id: resource-dd66f2159eaa
+slug: pixijs
+name: PixiJS
+url: https://pixijs.com
+category: motion-3d
+kind: library
+access: open-source
+summary: High-performance 2D WebGL rendering engine
+status: active
+added_at: 2026-07-22
+added_via: curator
+last_checked: null

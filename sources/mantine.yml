@@ -1,0 +1,12 @@
+id: resource-c0cab3389cc0
+slug: mantine
+name: Mantine
+url: https://mantine.dev
+category: ui-libraries
+kind: library
+access: open-source
+summary: Full-featured React component and hooks library
+status: active
+added_at: 2026-07-22
+added_via: curator
+last_checked: null

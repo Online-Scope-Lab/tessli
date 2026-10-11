@@ -123,10 +123,7 @@ test("all 295 catalogue resources have one deterministic source profile", () => 
     assert.equal(profile.domain, resource.domain);
     assert.equal(profile.summary, resource.description);
     assert.equal(profile.category, resource.category);
-    assert.deepEqual(profile.accessModel, {
-      access: resource.access,
-      subscriptionRequired: resource.subscriptionRequired,
-    });
+    assert.deepEqual(profile.accessModel, { access: resource.access });
   }
 });
 

@@ -1,0 +1,16 @@
+id: resource-400401b2ab31
+slug: lucide
+name: Lucide
+url: https://lucide.dev
+category: icons
+kind: asset
+access: open-source
+summary: Community-maintained consistent SVG icon toolkit
+status: active
+added_at: 2026-07-22
+added_via: curator
+last_checked: null
+best_for:
+  - interface-icon-selection
+  - design-system-icons
+  - framework-icon-implementation

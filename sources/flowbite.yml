@@ -1,0 +1,12 @@
+id: resource-ff2d5139380c
+slug: flowbite
+name: Flowbite
+url: https://flowbite.com
+category: ui-libraries
+kind: library
+access: freemium
+summary: Tailwind CSS components, blocks, and templates
+status: active
+added_at: 2026-07-22
+added_via: curator
+last_checked: null

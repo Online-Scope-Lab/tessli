@@ -1,0 +1,16 @@
+id: resource-a69034dde468
+slug: rive
+name: Rive
+url: https://rive.app
+category: motion-3d
+kind: library
+access: freemium
+summary: Interactive vector animation design and runtime platform
+status: active
+added_at: 2026-07-22
+added_via: curator
+last_checked: null
+best_for:
+  - interactive-animation-design
+  - stateful-product-motion
+  - cross-platform-animation-handoff

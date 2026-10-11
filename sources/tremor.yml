@@ -1,0 +1,12 @@
+id: resource-0146920ab9c3
+slug: tremor
+name: Tremor
+url: https://www.tremor.so
+category: ui-libraries
+kind: library
+access: open-source
+summary: React components for dashboards and data visualization
+status: active
+added_at: 2026-07-22
+added_via: curator
+last_checked: null

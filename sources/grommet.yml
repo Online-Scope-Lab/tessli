@@ -1,0 +1,12 @@
+id: resource-f85c83306720
+slug: grommet
+name: Grommet
+url: https://v2.grommet.io
+category: ui-libraries
+kind: library
+access: open-source
+summary: Responsive and accessible React component framework
+status: active
+added_at: 2026-07-22
+added_via: curator
+last_checked: null

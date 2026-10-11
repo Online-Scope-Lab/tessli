@@ -1,0 +1,12 @@
+id: resource-52e69e90943d
+slug: skeleton
+name: Skeleton
+url: https://www.skeleton.dev
+category: ui-libraries
+kind: library
+access: open-source
+summary: Svelte and Tailwind design system and component library
+status: active
+added_at: 2026-07-22
+added_via: curator
+last_checked: null

@@ -1,0 +1,18 @@
+id: resource-374543d4f72b
+slug: motion
+name: Motion
+url: https://motion.dev
+category: motion-3d
+kind: library
+access: freemium
+summary: Production-grade animation library for JavaScript and React
+status: active
+added_at: 2026-07-22
+added_via: curator
+last_checked: null
+best_for:
+  - micro-interactions
+  - page-transitions
+  - layout-animation
+limitations:
+  - Requires React for motion/react integration

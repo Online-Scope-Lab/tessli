@@ -1,0 +1,18 @@
+id: resource-affc29967a7c
+slug: shadcn-ui
+name: shadcn/ui
+url: https://ui.shadcn.com
+category: ui-libraries
+kind: library
+access: open-source
+summary: Copyable React components built with Radix UI and Tailwind CSS
+status: active
+added_at: 2026-07-22
+added_via: curator
+last_checked: null
+best_for:
+  - frontend-building
+  - accessible-components
+  - design-system-setup
+limitations:
+  - Components are unstyled primitives requiring Tailwind styling

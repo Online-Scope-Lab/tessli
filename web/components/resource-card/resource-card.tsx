@@ -22,12 +22,9 @@ export type ResourceCardData = Readonly<{
   description: string;
   category: string;
   access: ResourceCardAccess;
-  usefulFor: readonly string[];
-  tags: readonly string[];
-  status: "active" | "needs-review" | "unavailable";
+  status: "active" | "needs-review" | "archived";
   faviconUrl?: string;
   previewImageUrl?: string;
-  previewSource?: "manual" | "open-graph" | "favicon" | "generated";
 }>;
 
 type ResourceCardMedia = Readonly<{
@@ -132,10 +129,7 @@ export function ResourceCard({
   const titleId = useId();
   const descriptionId = useId();
   const activeMedia = candidates[mediaIndex] ?? null;
-  const visibleTags = Array.from(
-    new Set([categoryLabel, ...resource.usefulFor, ...resource.tags]),
-  ).slice(0, 3);
-  const unavailable = resource.status === "unavailable";
+  const archived = resource.status === "archived";
 
   useEffect(() => {
     const image = imageRef.current;
@@ -238,9 +232,7 @@ export function ResourceCard({
                 {badgeText}
               </Tag>
             )}
-            {visibleTags.map((tag) => (
-              <Tag key={tag}>{tag}</Tag>
-            ))}
+            <Tag>{categoryLabel}</Tag>
           </div>
 
           <footer className={styles.footer}>
@@ -248,7 +240,7 @@ export function ResourceCard({
               {accessLabels[resource.access]}
             </span>
             <span className={styles.status}>
-              {unavailable ? "Unavailable" : "Open resource"}
+              {archived ? "Archived" : "Open resource"}
             </span>
           </footer>
         </div>
@@ -264,10 +256,8 @@ export function ResourceCard({
           >
             Inspect
           </a>
-          {resource.status === "unavailable" ? (
-            <span className={styles.unavailableAction}>
-              Provider unavailable
-            </span>
+          {archived ? (
+            <span className={styles.unavailableAction}>Archived</span>
           ) : (
             <a
               data-resource-visit={resource.id}

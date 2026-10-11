@@ -1,0 +1,12 @@
+id: resource-513680f6b723
+slug: heroui
+name: HeroUI
+url: https://www.heroui.com
+category: ui-libraries
+kind: library
+access: open-source
+summary: Accessible React component library with Tailwind styling
+status: active
+added_at: 2026-07-22
+added_via: curator
+last_checked: null

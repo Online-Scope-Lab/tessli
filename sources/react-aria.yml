@@ -1,0 +1,16 @@
+id: resource-9ad947201ac6
+slug: react-aria
+name: React Aria
+url: https://react-spectrum.adobe.com/react-aria
+category: ui-libraries
+kind: library
+access: open-source
+summary: Accessible hooks and components for React applications
+status: active
+added_at: 2026-07-22
+added_via: curator
+last_checked: null
+best_for:
+  - accessible-design-system
+  - complex-interaction-design
+  - internationalized-react-ui

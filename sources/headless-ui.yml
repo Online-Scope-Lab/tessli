@@ -1,0 +1,16 @@
+id: resource-3bfbe7e95242
+slug: headless-ui
+name: Headless UI
+url: https://headlessui.com
+category: ui-libraries
+kind: library
+access: open-source
+summary: Unstyled accessible components for React and Vue
+status: active
+added_at: 2026-07-22
+added_via: curator
+last_checked: null
+best_for:
+  - accessible-ui-implementation
+  - tailwind-component-foundation
+  - react-vue-interface-build

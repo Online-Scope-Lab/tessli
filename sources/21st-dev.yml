@@ -1,0 +1,17 @@
+id: resource-28acba4a9d55
+slug: 21st-dev
+name: 21st.dev
+url: https://21st.dev
+category: ui-libraries
+kind: library
+access: free
+summary: Community-built React and Tailwind components designed for AI-assisted development
+status: active
+added_at: 2026-07-22
+added_via: curator
+last_checked: null
+best_for:
+  - component-discovery
+  - agent-ui-implementation
+limitations:
+  - Free semantic search; paid tiers for advanced agent generation

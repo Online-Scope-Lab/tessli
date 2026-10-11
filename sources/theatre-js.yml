@@ -1,0 +1,16 @@
+id: resource-e0917de2c7a9
+slug: theatre-js
+name: Theatre.js
+url: https://www.theatrejs.com
+category: motion-3d
+kind: library
+access: open-source
+summary: Motion-design and animation tooling for the web
+status: active
+added_at: 2026-07-22
+added_via: curator
+last_checked: null
+best_for:
+  - authored-motion-sequencing
+  - web-scene-animation
+  - designer-developer-motion-handoff

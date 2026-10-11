@@ -10,10 +10,8 @@ type SourceActionsProps = Readonly<{
 export function SourceActions({ resource }: SourceActionsProps) {
   return (
     <div className={styles.wrapper}>
-      {resource.status === "unavailable" ? (
-        <span className={styles.unavailable}>
-          Provider currently unavailable
-        </span>
+      {resource.status === "archived" ? (
+        <span className={styles.unavailable}>Archived source</span>
       ) : (
         <a
           className={buttonClassName("secondary")}

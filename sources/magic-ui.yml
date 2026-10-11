@@ -1,0 +1,12 @@
+id: resource-b2c26900098f
+slug: magic-ui
+name: Magic UI
+url: https://magicui.design
+category: ui-libraries
+kind: library
+access: freemium
+summary: Animated React and Tailwind components
+status: active
+added_at: 2026-07-22
+added_via: curator
+last_checked: null

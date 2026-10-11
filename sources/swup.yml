@@ -1,0 +1,12 @@
+id: resource-e91aab4f89fc
+slug: swup
+name: Swup
+url: https://swup.js.org
+category: motion-3d
+kind: library
+access: open-source
+summary: Page-transition and navigation enhancement library
+status: active
+added_at: 2026-07-22
+added_via: curator
+last_checked: null

@@ -1,12 +1,17 @@
 {
-  "version": 1,
+  "version": 2,
   "source": {
-    "path": "lib_data/design-resource-library-295.csv",
-    "sha256": "c20d5389fdd5d187177543146c020c97fdc2f2f1f71001e8dee2c596eaa34c83",
-    "rowCount": 295
+    "path": "sources",
+    "sha256": "d63c0eae1c380eaef90f32cfa588ccb8654f8e15c512c8f737b0285b5b4d14dd",
+    "fileCount": 295
   },
   "summary": {
     "resources": 295,
+    "status": {
+      "active": 295,
+      "needs-review": 0,
+      "archived": 0
+    },
     "categories": 11,
     "access": {
       "free": 130,
@@ -14,12 +19,6 @@
       "paid": 8,
       "open-source": 81,
       "free-trial": 1
-    },
-    "subscriptionRequired": {
-      "no": 211,
-      "optional": 75,
-      "yes": 8,
-      "after-trial": 1
     },
     "collections": 6,
     "collectionItems": 60,
@@ -29,68 +28,68 @@
     {
       "category": "website-inspiration",
       "label": "Website inspiration and design directories",
-      "expected": 40,
-      "actual": 40
+      "total": 40,
+      "nonArchived": 40
     },
     {
       "category": "product-ui-ux",
       "label": "Product UI, UX flows, and mobile-app inspiration",
-      "expected": 25,
-      "actual": 25
+      "total": 25,
+      "nonArchived": 25
     },
     {
       "category": "landing-marketing",
       "label": "Landing pages, SaaS, ecommerce, email, and marketing inspiration",
-      "expected": 25,
-      "actual": 25
+      "total": 25,
+      "nonArchived": 25
     },
     {
       "category": "ui-libraries",
       "label": "UI component and frontend libraries",
-      "expected": 45,
-      "actual": 45
+      "total": 45,
+      "nonArchived": 45
     },
     {
       "category": "design-systems",
       "label": "Design systems and pattern libraries",
-      "expected": 25,
-      "actual": 25
+      "total": 25,
+      "nonArchived": 25
     },
     {
       "category": "motion-3d",
       "label": "Motion, animation, WebGL, and 3D",
-      "expected": 20,
-      "actual": 20
+      "total": 20,
+      "nonArchived": 20
     },
     {
       "category": "typography",
       "label": "Typography, fonts, and type tools",
-      "expected": 20,
-      "actual": 20
+      "total": 20,
+      "nonArchived": 20
     },
     {
       "category": "color-accessibility",
       "label": "Color, gradients, and accessibility",
-      "expected": 20,
-      "actual": 20
+      "total": 20,
+      "nonArchived": 20
     },
     {
       "category": "icons",
       "label": "Icon libraries and icon tools",
-      "expected": 30,
-      "actual": 30
+      "total": 30,
+      "nonArchived": 30
     },
     {
       "category": "visual-assets",
       "label": "Illustrations, mockups, assets, and stock",
-      "expected": 25,
-      "actual": 25
+      "total": 25,
+      "nonArchived": 25
     },
     {
       "category": "design-tools-ai",
       "label": "Design tools, AI UI tools, and visual builders",
-      "expected": 20,
-      "actual": 20
+      "total": 20,
+      "nonArchived": 20
     }
   ],
   "duplicates": {
@@ -101,30 +100,30 @@
         "count": 2,
         "entries": [
           {
-            "row": 50,
-            "name": "UX Bites",
-            "url": "https://builtformars.com/ux-bites"
-          },
-          {
-            "row": 66,
+            "file": "sources/built-for-mars.yml",
             "name": "Built for Mars",
             "url": "https://builtformars.com"
+          },
+          {
+            "file": "sources/ux-bites.yml",
+            "name": "UX Bites",
+            "url": "https://builtformars.com/ux-bites"
           }
         ]
       },
       {
-        "domain": "radix-ui.com",
+        "domain": "figma.com",
         "count": 2,
         "entries": [
           {
-            "row": 115,
-            "name": "Radix UI",
-            "url": "https://www.radix-ui.com"
+            "file": "sources/figma-community.yml",
+            "name": "Figma Community",
+            "url": "https://www.figma.com/community"
           },
           {
-            "row": 236,
-            "name": "Radix Icons",
-            "url": "https://www.radix-ui.com/icons"
+            "file": "sources/figma.yml",
+            "name": "Figma",
+            "url": "https://www.figma.com"
           }
         ]
       },
@@ -133,12 +132,12 @@
         "count": 2,
         "entries": [
           {
-            "row": 182,
+            "file": "sources/google-fonts.yml",
             "name": "Google Fonts",
             "url": "https://fonts.google.com"
           },
           {
-            "row": 222,
+            "file": "sources/material-symbols.yml",
             "name": "Material Symbols",
             "url": "https://fonts.google.com/icons"
           }
@@ -149,88 +148,87 @@
         "count": 2,
         "entries": [
           {
-            "row": 240,
+            "file": "sources/icons8.yml",
             "name": "Icons8",
             "url": "https://icons8.com/icons"
           },
           {
-            "row": 257,
+            "file": "sources/ouch.yml",
             "name": "Ouch",
             "url": "https://icons8.com/illustrations"
           }
         ]
       },
       {
-        "domain": "figma.com",
+        "domain": "radix-ui.com",
         "count": 2,
         "entries": [
           {
-            "row": 269,
-            "name": "Figma Community",
-            "url": "https://www.figma.com/community"
+            "file": "sources/radix-icons.yml",
+            "name": "Radix Icons",
+            "url": "https://www.radix-ui.com/icons"
           },
           {
-            "row": 277,
-            "name": "Figma",
-            "url": "https://www.figma.com"
+            "file": "sources/radix-ui.yml",
+            "name": "Radix UI",
+            "url": "https://www.radix-ui.com"
           }
         ]
       }
     ]
   },
-  "slugCollisions": [],
   "issues": {
     "errors": [],
     "warnings": [
       {
         "code": "duplicate-domain",
-        "message": "Multiple curated resources share a domain and require human review, not automatic removal.",
+        "message": "Multiple non-archived sources share a domain and require human review, not automatic removal.",
         "domain": "builtformars.com",
         "count": 2,
         "entries": [
           {
-            "row": 50,
-            "name": "UX Bites",
-            "url": "https://builtformars.com/ux-bites"
-          },
-          {
-            "row": 66,
+            "file": "sources/built-for-mars.yml",
             "name": "Built for Mars",
             "url": "https://builtformars.com"
+          },
+          {
+            "file": "sources/ux-bites.yml",
+            "name": "UX Bites",
+            "url": "https://builtformars.com/ux-bites"
           }
         ]
       },
       {
         "code": "duplicate-domain",
-        "message": "Multiple curated resources share a domain and require human review, not automatic removal.",
-        "domain": "radix-ui.com",
+        "message": "Multiple non-archived sources share a domain and require human review, not automatic removal.",
+        "domain": "figma.com",
         "count": 2,
         "entries": [
           {
-            "row": 115,
-            "name": "Radix UI",
-            "url": "https://www.radix-ui.com"
+            "file": "sources/figma-community.yml",
+            "name": "Figma Community",
+            "url": "https://www.figma.com/community"
           },
           {
-            "row": 236,
-            "name": "Radix Icons",
-            "url": "https://www.radix-ui.com/icons"
+            "file": "sources/figma.yml",
+            "name": "Figma",
+            "url": "https://www.figma.com"
           }
         ]
       },
       {
         "code": "duplicate-domain",
-        "message": "Multiple curated resources share a domain and require human review, not automatic removal.",
+        "message": "Multiple non-archived sources share a domain and require human review, not automatic removal.",
         "domain": "fonts.google.com",
         "count": 2,
         "entries": [
           {
-            "row": 182,
+            "file": "sources/google-fonts.yml",
             "name": "Google Fonts",
             "url": "https://fonts.google.com"
           },
           {
-            "row": 222,
+            "file": "sources/material-symbols.yml",
             "name": "Material Symbols",
             "url": "https://fonts.google.com/icons"
           }
@@ -238,17 +236,17 @@
       },
       {
         "code": "duplicate-domain",
-        "message": "Multiple curated resources share a domain and require human review, not automatic removal.",
+        "message": "Multiple non-archived sources share a domain and require human review, not automatic removal.",
         "domain": "icons8.com",
         "count": 2,
         "entries": [
           {
-            "row": 240,
+            "file": "sources/icons8.yml",
             "name": "Icons8",
             "url": "https://icons8.com/icons"
           },
           {
-            "row": 257,
+            "file": "sources/ouch.yml",
             "name": "Ouch",
             "url": "https://icons8.com/illustrations"
           }
@@ -256,19 +254,19 @@
       },
       {
         "code": "duplicate-domain",
-        "message": "Multiple curated resources share a domain and require human review, not automatic removal.",
-        "domain": "figma.com",
+        "message": "Multiple non-archived sources share a domain and require human review, not automatic removal.",
+        "domain": "radix-ui.com",
         "count": 2,
         "entries": [
           {
-            "row": 269,
-            "name": "Figma Community",
-            "url": "https://www.figma.com/community"
+            "file": "sources/radix-icons.yml",
+            "name": "Radix Icons",
+            "url": "https://www.radix-ui.com/icons"
           },
           {
-            "row": 277,
-            "name": "Figma",
-            "url": "https://www.figma.com"
+            "file": "sources/radix-ui.yml",
+            "name": "Radix UI",
+            "url": "https://www.radix-ui.com"
           }
         ]
       }

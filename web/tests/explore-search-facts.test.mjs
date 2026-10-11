@@ -77,7 +77,7 @@ test("query state is debounced and ready for validated catalogue integration", a
   assert.match(search, /resources match/);
   assert.doesNotMatch(
     search,
-    /fetch\(|XMLHttpRequest|localStorage|URLSearchParams|design-resource-library-295\.csv/,
+    /fetch\(|XMLHttpRequest|localStorage|URLSearchParams|sources\/[a-z0-9-]+\.yml/,
   );
 });
 

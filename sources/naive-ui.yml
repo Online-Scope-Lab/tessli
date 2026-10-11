@@ -1,0 +1,12 @@
+id: resource-b35f39183c29
+slug: naive-ui
+name: Naive UI
+url: https://www.naiveui.com
+category: ui-libraries
+kind: library
+access: open-source
+summary: TypeScript-based Vue 3 component library
+status: active
+added_at: 2026-07-22
+added_via: curator
+last_checked: null

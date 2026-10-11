@@ -137,11 +137,7 @@ export function validateSourceProfileContract() {
         ),
       );
     }
-    if (
-      profile.accessModel.access !== catalogueResource.access ||
-      profile.accessModel.subscriptionRequired !==
-        catalogueResource.subscriptionRequired
-    ) {
+    if (profile.accessModel.access !== catalogueResource.access) {
       errors.push(
         issue(
           "access-model",

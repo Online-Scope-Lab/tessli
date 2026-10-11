@@ -1,0 +1,12 @@
+id: resource-175cd488da6c
+slug: melt-ui
+name: Melt UI
+url: https://melt-ui.com
+category: ui-libraries
+kind: library
+access: open-source
+summary: Headless builders for accessible Svelte interfaces
+status: active
+added_at: 2026-07-22
+added_via: curator
+last_checked: null

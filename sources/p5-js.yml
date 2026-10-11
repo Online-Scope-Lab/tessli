@@ -1,0 +1,12 @@
+id: resource-e3968c0ccc25
+slug: p5-js
+name: p5.js
+url: https://p5js.org
+category: motion-3d
+kind: library
+access: open-source
+summary: Creative-coding library for interactive graphics
+status: active
+added_at: 2026-07-22
+added_via: curator
+last_checked: null

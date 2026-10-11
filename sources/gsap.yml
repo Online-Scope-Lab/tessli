@@ -1,0 +1,16 @@
+id: resource-9042d48e084f
+slug: gsap
+name: GSAP
+url: https://gsap.com
+category: motion-3d
+kind: library
+access: free
+summary: High-performance JavaScript animation platform
+status: active
+added_at: 2026-07-22
+added_via: curator
+last_checked: null
+best_for:
+  - sequenced-web-animation
+  - interaction-prototyping
+  - scroll-driven-motion

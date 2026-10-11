@@ -1,0 +1,17 @@
+id: resource-e0bd932107d2
+slug: refero
+name: Refero
+url: https://refero.design
+category: product-ui-ux
+kind: gallery
+access: freemium
+summary: Real product-interface screenshots and design references
+status: active
+added_at: 2026-07-22
+added_via: curator
+last_checked: null
+best_for:
+  - ux-pattern-research
+  - web-application-flows
+limitations:
+  - Refero Pro account required for full access

@@ -1,0 +1,12 @@
+id: resource-4eee7a21dbf7
+slug: webaim-contrast-checker
+name: WebAIM Contrast Checker
+url: https://webaim.org/resources/contrastchecker
+category: color-accessibility
+kind: tool
+access: free
+summary: WCAG foreground and background contrast testing
+status: active
+added_at: 2026-07-22
+added_via: curator
+last_checked: null

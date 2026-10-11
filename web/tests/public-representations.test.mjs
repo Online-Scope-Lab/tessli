@@ -33,7 +33,7 @@ const profiled = {
   category: "website-inspiration",
   sourceType: "inspiration-directory",
   sourceTypeBasis: "category-classification",
-  accessModel: { access: "free", subscriptionRequired: "no" },
+  accessModel: { access: "free" },
   bestFor: ["hierarchy", "component evaluation"],
   capabilities: ["inspiration", "components"],
   contentObjects: ["components", "websites"],

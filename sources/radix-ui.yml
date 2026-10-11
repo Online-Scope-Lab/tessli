@@ -1,0 +1,16 @@
+id: resource-01db82f90e23
+slug: radix-ui
+name: Radix UI
+url: https://www.radix-ui.com
+category: ui-libraries
+kind: library
+access: open-source
+summary: Accessible unstyled UI primitives for React
+status: active
+added_at: 2026-07-22
+added_via: curator
+last_checked: null
+best_for:
+  - accessible-component-foundation
+  - design-system-architecture
+  - custom-react-ui

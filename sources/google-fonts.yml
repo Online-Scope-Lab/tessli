@@ -1,0 +1,16 @@
+id: resource-75ecf91b7063
+slug: google-fonts
+name: Google Fonts
+url: https://fonts.google.com
+category: typography
+kind: asset
+access: free
+summary: Open font library for web and product design
+status: active
+added_at: 2026-07-22
+added_via: curator
+last_checked: null
+best_for:
+  - font-shortlisting
+  - web-font-implementation
+  - typography-prototyping

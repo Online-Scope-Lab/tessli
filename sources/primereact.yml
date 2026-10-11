@@ -1,0 +1,12 @@
+id: resource-e704e009b79a
+slug: primereact
+name: PrimeReact
+url: https://primereact.org
+category: ui-libraries
+kind: library
+access: freemium
+summary: Large React component suite with premium templates and themes
+status: active
+added_at: 2026-07-22
+added_via: curator
+last_checked: null

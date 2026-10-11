@@ -1,0 +1,12 @@
+id: resource-c69cb09bf119
+slug: aos
+name: AOS
+url: https://michalsnik.github.io/aos
+category: motion-3d
+kind: library
+access: open-source
+summary: Animate-on-scroll JavaScript library
+status: active
+added_at: 2026-07-22
+added_via: curator
+last_checked: null

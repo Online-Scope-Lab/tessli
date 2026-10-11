@@ -125,7 +125,7 @@ test("Playbook membership still matches each stated workflow", async () => {
   );
 });
 
-test("Playbook source provenance is deterministic and separate from CSV provenance", async () => {
+test("Playbook source provenance is deterministic and separate from source-file provenance", async () => {
   const [{ catalogue, report }, { sourceBuffer, source }] = await Promise.all([
     releaseBuild(),
     collectionInputs(),
@@ -133,8 +133,8 @@ test("Playbook source provenance is deterministic and separate from CSV provenan
   const sourceSha256 = sourceProvenanceSha256(sourceBuffer);
 
   assert.deepEqual(catalogue.collections, source.collections);
-  assert.equal(report.source.path, "lib_data/design-resource-library-295.csv");
-  assert.equal(report.source.rowCount, 295);
+  assert.equal(report.source.path, "sources");
+  assert.equal(report.source.fileCount, catalogue.resources.length);
   assert.deepEqual(report.collectionSource, {
     path: COLLECTION_SOURCE_PATH,
     sha256: sourceSha256,

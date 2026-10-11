@@ -1,0 +1,18 @@
+id: resource-1557d6500f28
+slug: coolors
+name: Coolors
+url: https://coolors.co
+category: color-accessibility
+kind: tool
+access: freemium
+summary: Palette generation, browsing, extraction, and color tools
+status: active
+added_at: 2026-07-22
+added_via: curator
+last_checked: null
+best_for:
+  - color-token-creation
+  - palette-exploration
+  - contrast-verification
+limitations:
+  - Pro export formats require subscription

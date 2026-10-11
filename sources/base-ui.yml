@@ -1,0 +1,12 @@
+id: resource-4b829d9e48f8
+slug: base-ui
+name: Base UI
+url: https://base-ui.com
+category: ui-libraries
+kind: library
+access: open-source
+summary: Unstyled accessible React component library
+status: active
+added_at: 2026-07-22
+added_via: curator
+last_checked: null

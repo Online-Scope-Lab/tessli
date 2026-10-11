@@ -158,7 +158,6 @@ function metadataFields(profile: SourceProfile): readonly MetadataField[] {
       label: "access",
       values: [
         profile.accessModel.access,
-        profile.accessModel.subscriptionRequired,
         ...profile.accessRoutes.map((route) => route.kind),
       ],
       weight: 2,

@@ -1,0 +1,16 @@
+id: resource-bfe4ba65c95b
+slug: velvetyne
+name: Velvetyne
+url: https://velvetyne.fr
+category: typography
+kind: asset
+access: free
+summary: Experimental libre and open-source typefaces
+status: active
+added_at: 2026-07-22
+added_via: curator
+last_checked: null
+best_for:
+  - experimental-font-shortlisting
+  - libre-type-research
+  - modifiable-font-workflow

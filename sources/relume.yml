@@ -1,0 +1,18 @@
+id: resource-e81793f16a04
+slug: relume
+name: Relume
+url: https://www.relume.io
+category: design-tools-ai
+kind: tool
+access: freemium
+summary: AI sitemaps, wireframes, and Webflow or Figma component libraries
+status: active
+added_at: 2026-07-22
+added_via: curator
+last_checked: null
+best_for:
+  - sitemap-architecture
+  - wireframing
+  - component-library-setup
+limitations:
+  - Free tier includes limited components; full access is subscription-based

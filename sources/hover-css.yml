@@ -1,0 +1,12 @@
+id: resource-c1e0d74b5033
+slug: hover-css
+name: Hover.css
+url: https://ianlunn.github.io/Hover
+category: motion-3d
+kind: library
+access: open-source
+summary: CSS hover-effect library
+status: active
+added_at: 2026-07-22
+added_via: curator
+last_checked: null

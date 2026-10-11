@@ -1,0 +1,12 @@
+id: resource-31696885b4e5
+slug: blueprint
+name: Blueprint
+url: https://blueprintjs.com
+category: ui-libraries
+kind: library
+access: open-source
+summary: React components for complex data-dense desktop interfaces
+status: active
+added_at: 2026-07-22
+added_via: curator
+last_checked: null

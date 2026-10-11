@@ -1,0 +1,154 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:tessli:schema:source:v1",
+  "title": "Tessli Source",
+  "description": "One curated design source, stored as sources/<slug>.yml. The generator validates every file against this schema and builds web/data/catalogue.json from them.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "id",
+    "slug",
+    "name",
+    "url",
+    "category",
+    "kind",
+    "access",
+    "summary",
+    "status",
+    "added_at",
+    "added_via",
+    "last_checked"
+  ],
+  "properties": {
+    "id": {
+      "description": "Frozen identifier. Never derived from the URL and never changed once published.",
+      "type": "string",
+      "maxLength": 120,
+      "pattern": "^resource-[a-z0-9]+(?:-[a-z0-9]+)*$"
+    },
+    "slug": {
+      "description": "URL slug. Must equal the file name without .yml.",
+      "$ref": "#/$defs/identifier"
+    },
+    "name": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 160,
+      "pattern": "\\S"
+    },
+    "url": {
+      "type": "string",
+      "format": "uri",
+      "maxLength": 2048,
+      "pattern": "^https?://"
+    },
+    "category": {
+      "description": "One of the category ids defined in web/scripts/catalogue-lib.mjs.",
+      "$ref": "#/$defs/identifier"
+    },
+    "kind": {
+      "type": "string",
+      "enum": [
+        "gallery",
+        "library",
+        "design-system",
+        "tool",
+        "asset",
+        "reference"
+      ]
+    },
+    "access": {
+      "type": "string",
+      "enum": ["free", "open-source", "freemium", "paid", "free-trial"]
+    },
+    "summary": {
+      "description": "What you will find there. New submissions aim for 40-200 characters; migrated rows keep their original text verbatim.",
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 800,
+      "pattern": "\\S"
+    },
+    "status": {
+      "type": "string",
+      "enum": ["active", "needs-review", "archived"]
+    },
+    "added_at": {
+      "type": "string",
+      "format": "date"
+    },
+    "added_via": {
+      "type": "string",
+      "enum": ["curator", "community"]
+    },
+    "last_checked": {
+      "description": "Date a human last opened and checked the source, or null when no check is recorded.",
+      "oneOf": [{ "type": "null" }, { "type": "string", "format": "date" }]
+    },
+    "frameworks": {
+      "type": "array",
+      "minItems": 1,
+      "uniqueItems": true,
+      "items": { "$ref": "#/$defs/text" }
+    },
+    "license": {
+      "$ref": "#/$defs/text"
+    },
+    "best_for": {
+      "type": "array",
+      "minItems": 1,
+      "maxItems": 3,
+      "uniqueItems": true,
+      "items": { "$ref": "#/$defs/text" }
+    },
+    "limitations": {
+      "type": "array",
+      "minItems": 1,
+      "maxItems": 2,
+      "uniqueItems": true,
+      "items": { "$ref": "#/$defs/text" }
+    },
+    "replaced_by": {
+      "description": "Slug of the active source that replaces an archived one.",
+      "$ref": "#/$defs/identifier"
+    },
+    "archived_reason": {
+      "$ref": "#/$defs/text"
+    },
+    "submission_issue": {
+      "description": "GitHub issue number of the community suggestion this source came from.",
+      "type": "integer",
+      "minimum": 1
+    }
+  },
+  "allOf": [
+    {
+      "if": {
+        "properties": { "status": { "const": "archived" } },
+        "required": ["status"]
+      },
+      "then": { "required": ["archived_reason"] },
+      "else": {
+        "not": {
+          "anyOf": [
+            { "required": ["archived_reason"] },
+            { "required": ["replaced_by"] }
+          ]
+        }
+      }
+    }
+  ],
+  "$defs": {
+    "identifier": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 120,
+      "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$"
+    },
+    "text": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 300,
+      "pattern": "\\S"
+    }
+  }
+}

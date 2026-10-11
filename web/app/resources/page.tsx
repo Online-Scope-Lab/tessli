@@ -73,12 +73,9 @@ function cardForProfile(profile: SourceProfile): ResourceCardData {
     description: resource.description,
     category: resource.category,
     access: resource.access as ResourceCardAccess,
-    usefulFor: resource.usefulFor,
-    tags: resource.tags,
     status: resource.status as ResourceCardData["status"],
     faviconUrl: resource.faviconUrl,
     previewImageUrl: resource.previewImageUrl,
-    previewSource: resource.previewSource as ResourceCardData["previewSource"],
   };
 }
 

@@ -42,12 +42,9 @@ function resourceCard(id: string): ResourceCardData {
     description: item.description,
     category: item.category,
     access: item.access as ResourceCardAccess,
-    usefulFor: item.usefulFor,
-    tags: item.tags,
     status: item.status as ResourceCardData["status"],
     faviconUrl: item.faviconUrl,
     previewImageUrl: item.previewImageUrl,
-    previewSource: item.previewSource as ResourceCardData["previewSource"],
   };
 }
 

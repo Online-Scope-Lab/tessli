@@ -1,0 +1,16 @@
+id: resource-3b9d710cd447
+slug: free-faces
+name: Free Faces
+url: https://www.freefaces.gallery
+category: typography
+kind: asset
+access: free
+summary: Curated typefaces available under free licenses
+status: active
+added_at: 2026-07-22
+added_via: curator
+last_checked: null
+best_for:
+  - free-font-shortlisting
+  - visual-typeface-discovery
+  - licence-comparison

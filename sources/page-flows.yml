@@ -1,0 +1,17 @@
+id: resource-d9b680b771cc
+slug: page-flows
+name: Page Flows
+url: https://pageflows.com
+category: product-ui-ux
+kind: gallery
+access: freemium
+summary: Recorded user flows and screen sequences from real products
+status: active
+added_at: 2026-07-22
+added_via: curator
+last_checked: null
+best_for:
+  - user-onboarding-design
+  - interaction-flow-mapping
+limitations:
+  - Pro videos require paid subscription

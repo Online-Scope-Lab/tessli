@@ -1,0 +1,12 @@
+id: resource-3ea4382bc91e
+slug: mui
+name: MUI
+url: https://mui.com
+category: ui-libraries
+kind: library
+access: freemium
+summary: React implementation of Material Design plus premium advanced components
+status: active
+added_at: 2026-07-22
+added_via: curator
+last_checked: null

@@ -1,0 +1,12 @@
+id: resource-4eba5c99801f
+slug: evergreen
+name: Evergreen
+url: https://evergreen.segment.com
+category: ui-libraries
+kind: library
+access: open-source
+summary: React UI framework for enterprise web products
+status: active
+added_at: 2026-07-22
+added_via: curator
+last_checked: null

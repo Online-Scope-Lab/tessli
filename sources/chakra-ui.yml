@@ -1,0 +1,12 @@
+id: resource-a76da7af7625
+slug: chakra-ui
+name: Chakra UI
+url: https://chakra-ui.com
+category: ui-libraries
+kind: library
+access: open-source
+summary: Accessible composable React components
+status: active
+added_at: 2026-07-22
+added_via: curator
+last_checked: null

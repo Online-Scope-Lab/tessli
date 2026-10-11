@@ -1,0 +1,12 @@
+id: resource-b47c9612d739
+slug: element-plus
+name: Element Plus
+url: https://element-plus.org
+category: ui-libraries
+kind: library
+access: open-source
+summary: Vue 3 component library for desktop applications
+status: active
+added_at: 2026-07-22
+added_via: curator
+last_checked: null

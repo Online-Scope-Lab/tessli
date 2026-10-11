@@ -1,0 +1,16 @@
+id: resource-9ab2847bb0d5
+slug: autoanimate
+name: AutoAnimate
+url: https://auto-animate.formkit.com
+category: motion-3d
+kind: library
+access: open-source
+summary: Automatic transition animations for web interfaces
+status: active
+added_at: 2026-07-22
+added_via: curator
+last_checked: null
+best_for:
+  - automatic-list-transitions
+  - lightweight-layout-motion
+  - progressive-motion-enhancement
