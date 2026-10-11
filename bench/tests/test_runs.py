@@ -15,7 +15,22 @@ from validate_pair import pair_errors
 
 class RunsTest(unittest.TestCase):
     def setUp(self):
-        self._tmp = tempfile.TemporaryDirectory()
+        # new_run refuses a workspace root whose path names the setup, so the
+        # workspaces must sit under a neutral temp directory.
+        parent = next(
+            (
+                candidate
+                for candidate in (Path(tempfile.gettempdir()).resolve(), Path("/tmp"))
+                if candidate.is_dir() and not new_run.revealing_path_parts(candidate.resolve())
+            ),
+            None,
+        )
+        if parent is None:
+            self.skipTest(
+                f"temp directory {tempfile.gettempdir()} names the setup and /tmp is unavailable; "
+                "set TMPDIR to a neutral directory"
+            )
+        self._tmp = tempfile.TemporaryDirectory(dir=parent)
         self.tmp = Path(self._tmp.name)
         self.frozen = self.tmp / "frozen.json"
         lib.write_json(self.frozen, FROZEN)

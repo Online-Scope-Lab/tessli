@@ -46,7 +46,7 @@ The answer covers one builder (agent harness and model) on six fictional greenfi
 
 ## Isolation
 
-Each build runs in a fresh copy of the starter in a directory outside the repository and outside any Git repository, named only by an opaque run id (`r` and 12 hex digits). It contains no `.git`, no bench files and nothing that names the comparison; `new_run.py` checks this before the build. The builder's working directory is that copy; it must not be given the path of this repository.
+Each build runs in a fresh copy of the starter in a directory outside the repository and outside any Git repository, named only by an opaque run id (`r` and 12 hex digits). It contains no `.git`, no bench files and nothing that names the comparison; `new_run.py` checks this before the build. The builder's working directory is that copy; it must not be given the path of this repository. The workspace root's own path must be neutral too: `new_run.py` refuses one whose path mentions bench, baseline, tessli, experiment or eval.
 
 ## Blinding
 
