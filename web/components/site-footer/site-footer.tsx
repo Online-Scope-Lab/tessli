@@ -12,7 +12,6 @@ export function SiteFooter() {
         <div className={styles.intro}>
           <Link className={styles.wordmark} href="/" aria-label="Tessli home">
             <BrandMark className={styles.wordmarkMark} />
-            Tessli
           </Link>
           <p>
             UI with the reasoning attached: components and sections that explain

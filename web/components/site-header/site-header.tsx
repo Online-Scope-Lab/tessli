@@ -4,8 +4,6 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useCallback, useEffect, useRef, useState } from "react";
 
-import { BrandMark } from "@/components/brand-mark/brand-mark";
-
 import { CloseIcon, MenuIcon } from "./icons";
 import {
   availablePrimaryNavigationItems,
@@ -178,7 +176,6 @@ export function SiteHeader() {
     <header className={`${styles.header} ${isScrolled ? styles.scrolled : ""}`}>
       <div className={`tessli-container ${styles.inner}`}>
         <Link className={styles.wordmark} href="/" aria-label="Tessli home">
-          <BrandMark className={styles.wordmarkMark} />
           Tessli
         </Link>
 
