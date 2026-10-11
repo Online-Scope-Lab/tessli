@@ -65,7 +65,7 @@ export default async function PreviewPage({
       data-preview-state={state}
       className="text-foreground"
     >
-      <main>
+      <main aria-label={`${item.notes.title} preview`}>
         <h1 className="sr-only">
           {item.notes.title}, {state} state, {theme} theme
         </h1>
