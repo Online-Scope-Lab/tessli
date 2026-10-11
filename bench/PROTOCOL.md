@@ -32,17 +32,17 @@ The answer covers one builder (agent harness and model) on six fictional greenfi
 | `model` | always `withheld-by-operator` in committed files (see below) |
 | `model_record_sha256` | SHA-256 of the operator's private model record |
 | `reasoning_level` | the reasoning or effort setting |
-| `tools` | every tool the builder may use |
+| `tools` | every tool the builder may use: one list for both conditions, including reading `http://127.0.0.1` with curl (the Tessli project notes use it to read the local registry) |
 | `network_policy` | what the builder may reach (the same in both conditions) |
-| `time_allowance_minutes` | wall-clock limit per build |
-| `turn_allowance` | prompts the builder receives; `1` means the task prompt only, with no follow-up or repair turns |
+| `time_allowance_minutes` | wall-clock limit per build, enforced by the operator (for example with `timeout`) |
+| `turn_allowance` | prompts the builder receives; `1` means the task prompt only, with no follow-up or repair turns (it does not limit the builder's steps within that turn) |
 | `verification_steps` | what the operator runs after the build |
 
 `new_run.py` adds, automatically: the bench commit (it refuses a scored run when the starter, conditions, briefs, rules or registry have uncommitted changes), the starter's hash, the Node.js and npm versions, the SHA-256 of both rendered prompts and of the brief, and for Tessli runs the hashes of the overlay, `TESSLI.md` and the registry. `record_run.py` records elapsed time, turns, tokens (when the harness reports them) and the hash of the finished workspace, which is checked again before pairing.
 
 **The model is withheld from committed files.** Repository policy for this automation forbids writing model identifiers into committed files, so every manifest's `model` field says `withheld-by-operator`. Before the first build the operator writes a private record (the exact model identifier, the harness version and the date) and commits only its SHA-256 as `model_record_sha256`. The record is published with the results, and anyone can check it against the hash.
 
-**Network policy.** Both conditions get the same network: the npm registry and `ui.shadcn.com` (or one local mirror of it set through `REGISTRY_URL`, used identically in both), so `npx shadcn add` works the same way. No web search or browsing in either condition. The local Tessli registry runs only during Tessli builds.
+**Network policy.** Both conditions get the same network: the npm registry and `ui.shadcn.com` (or one local mirror of it set through `REGISTRY_URL`, used identically in both: built with [`scripts/build_shadcn_mirror.mjs`](scripts/build_shadcn_mirror.mjs) from the shadcn sources at the CLI's tag, served on `127.0.0.1`, and its manifest hash recorded in `network_policy`), so `npx shadcn add` works the same way. No web search or browsing in either condition. The local Tessli registry runs only during Tessli builds.
 
 ## Isolation
 

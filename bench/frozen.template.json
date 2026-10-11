@@ -4,9 +4,9 @@
   "model_record_sha256": "RECORD_BEFORE_RUN: SHA-256 of the private model record",
   "reasoning_level": "RECORD_BEFORE_RUN",
   "tools": [
-    "RECORD_BEFORE_RUN: every tool the builder may use, e.g. shell, file read/write"
+    "RECORD_BEFORE_RUN: every tool the builder may use, the same for both conditions, e.g. shell, file read/write, curl to http://127.0.0.1 only"
   ],
-  "network_policy": "RECORD_BEFORE_RUN: e.g. npm registry and ui.shadcn.com only; no web search",
+  "network_policy": "RECORD_BEFORE_RUN: e.g. npm registry and ui.shadcn.com (or the local base-registry mirror: URL and mirror sha256) only; no web search",
   "time_allowance_minutes": 60,
   "turn_allowance": 1,
   "verification_steps": [
