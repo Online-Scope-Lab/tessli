@@ -48,6 +48,22 @@ const pages = [
       "profile.json",
     ],
   },
+  {
+    name: "library",
+    path: "/library",
+    text: "UI with the reasoning attached.",
+    markers: ["data-library-grid", 'data-library-item="pricing-tiers"'],
+  },
+  {
+    name: "library-item",
+    path: "/library/pricing-tiers",
+    text: "Common AI default vs. this",
+    markers: [
+      "data-preview-workbench",
+      "npx shadcn@latest add online-scope-lab/tessli/pricing-tiers",
+      "Community — not yet reviewed by a maintainer",
+    ],
+  },
   { name: "about", path: "/about", text: "Keep reading" },
   { name: "privacy", path: "/privacy", text: "Keep reading" },
   { name: "terms", path: "/terms", text: "Keep reading" },
@@ -83,6 +99,17 @@ const extraRouteChecks = [
   ["/saved", 404, "Page not found"],
   ["/boards", 404, "Page not found"],
   ["/collections/not-a-real-collection", 404, "Page not found"],
+  ["/library/faq", 200, "FAQ that answers real objections"],
+  ["/library/empty-state", 200, "Empty state that says why and what next"],
+  ["/library?kind=section", 200, "Showing 2 of 3 items."],
+  ["/library/not-a-real-item", 404, "Page not found"],
+  // Bare previews: the item only, no site header.
+  ["/preview/faq", 200, 'data-theme="tessli"'],
+  ["/preview/faq?theme=dark", 200, 'data-theme="dark"'],
+  ["/preview/empty-state?state=error", 200, 'data-preview-state="error"'],
+  ["/preview/faq?theme=sepia", 404, "Page not found"],
+  ["/preview/empty-state?state=nope", 404, "Page not found"],
+  ["/preview/not-a-real-item", 404, "Page not found"],
 ];
 
 function escapeRegExp(value) {
@@ -106,6 +133,19 @@ for (const [path, status, text] of extraRouteChecks) {
   const body = await response.text();
   assert.equal(response.status, status, `${path} status`);
   assert.match(body, new RegExp(escapeRegExp(text), "i"), `${path} content`);
+}
+
+for (const path of ["/preview/faq", "/preview/pricing-tiers?theme=neutral"]) {
+  const body = await (await fetch(`${origin}${path}`)).text();
+  // The rendered markup only: the RSC payload in <script> also carries the
+  // root not-found boundary, which has the site chrome.
+  const markup = body.replace(/<script[\s\S]*?<\/script>/g, "");
+  assert.doesNotMatch(
+    markup,
+    /<header|<footer|Skip to content/,
+    `${path} is bare`,
+  );
+  assert.match(markup, /<meta name="robots" content="noindex, nofollow"/, path);
 }
 
 async function assertOptionalDiscoveryMethod(path, method) {
@@ -147,7 +187,7 @@ assert.match(
   /^Sitemap:\s*.+\/sitemap\.xml\s*$/imu,
   "/robots.txt sitemap",
 );
-for (const pathname of ["/submit", "/suggest", "/lab/"]) {
+for (const pathname of ["/submit", "/suggest", "/lab/", "/preview/"]) {
   assert.match(
     robots,
     new RegExp(`^Disallow:\\s*${escapeRegExp(pathname)}\\s*$`, "imu"),
@@ -222,6 +262,23 @@ const machineRouteChecks = [
       "## How to access",
       "## Important limitations",
       "## Consider instead",
+    ],
+  },
+  {
+    path: "/library/pricing-tiers/item.json",
+    contentType: "application/json",
+    kind: "library-item",
+  },
+  {
+    path: "/library/pricing-tiers/item.md",
+    contentType: "text/markdown",
+    headings: [
+      "# Tessli library item — Pricing tiers compared on the limits that matter",
+      "## Install",
+      "npx shadcn@latest add online-scope-lab/tessli/pricing-tiers",
+      "## Common AI default",
+      "## Why this is better",
+      "```tsx",
     ],
   },
   {
@@ -338,7 +395,13 @@ for (const check of machineRouteChecks) {
   if (check.kind === "source") assertSourcePacket(JSON.parse(body), check.path);
   else if (check.kind === "collection")
     assertCollectionPacket(JSON.parse(body), check.path);
-  else
+  else if (check.kind === "library-item") {
+    const packet = JSON.parse(body);
+    assert.equal(packet.contract, "tessli.public-library-item.v1", check.path);
+    assert.equal(packet.item.slug, "pricing-tiers", check.path);
+    assert.equal(packet.item.status, "community", check.path);
+    assert.match(packet.item.source.code, /export function PricingTiers/);
+  } else
     for (const heading of check.headings) {
       assert.match(
         body,
@@ -377,6 +440,7 @@ for (const check of machineRouteChecks) {
 for (const path of [
   "/resources/not-a-real-source/profile.json",
   "/collections/not-a-real-collection/collection.json",
+  "/library/not-a-real-item/item.json",
 ]) {
   const response = await fetch(`${origin}${path}`);
   assert.equal(response.status, 404, `${path} remains not found`);

@@ -13,7 +13,7 @@ async function read(relativePath) {
 
 test("V3 Browse is task-first and does not surface coverage or result views", async () => {
   const [page, filters] = await Promise.all([
-    read("app/resources/page.tsx"),
+    read("app/(site)/resources/page.tsx"),
     read("components/browse/browse-filters.tsx"),
   ]);
 
@@ -40,7 +40,7 @@ test("V3 Browse retains accessible filter recovery and task-preserving clear beh
 
 test("V3 Browse has empty-state reset and query recovery without legacy result layouts", async () => {
   const [page, css] = await Promise.all([
-    read("app/resources/page.tsx"),
+    read("app/(site)/resources/page.tsx"),
     read("components/browse/browse.module.css"),
   ]);
 

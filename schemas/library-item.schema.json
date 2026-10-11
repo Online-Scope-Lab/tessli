@@ -1,0 +1,185 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:tessli:schema:library-item:v1",
+  "title": "Tessli library item taste notes",
+  "description": "The YAML frontmatter of web/registry/items/<slug>/notes.md (plan §6.2). web/scripts/build-registry.mjs validates every item against this schema and writes it into the registry item's meta.tessli.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "id",
+    "kind",
+    "category",
+    "title",
+    "summary",
+    "use_when",
+    "avoid_when",
+    "rules",
+    "ai_default",
+    "why_this_is_better",
+    "failures",
+    "states",
+    "responsive",
+    "a11y",
+    "status",
+    "reviewed_by",
+    "reviewed_at",
+    "contributors",
+    "provenance",
+    "license"
+  ],
+  "properties": {
+    "id": {
+      "description": "Stable item id; equals the folder name and is never renamed.",
+      "type": "string",
+      "maxLength": 60,
+      "pattern": "^[a-z][a-z0-9]*(?:-[a-z0-9]+)*$"
+    },
+    "kind": {
+      "description": "component: one UI piece; section: a full-width page section; page: a whole screen.",
+      "enum": ["component", "section", "page"]
+    },
+    "category": {
+      "enum": [
+        "hero",
+        "features",
+        "pricing",
+        "social-proof",
+        "faq",
+        "cta",
+        "settings",
+        "tables",
+        "dashboards",
+        "forms",
+        "auth",
+        "empty-states",
+        "navigation",
+        "mobile"
+      ]
+    },
+    "title": { "type": "string", "$ref": "#/$defs/line", "maxLength": 80 },
+    "summary": {
+      "description": "One sentence on the job this item does.",
+      "type": "string",
+      "$ref": "#/$defs/line",
+      "minLength": 20,
+      "maxLength": 200
+    },
+    "use_when": { "type": "array", "$ref": "#/$defs/lines", "minItems": 1 },
+    "avoid_when": { "type": "array", "$ref": "#/$defs/lines", "minItems": 1 },
+    "rules": {
+      "description": "Ids of the rules this item applies (published at /rules). Empty until the rule set lands.",
+      "type": "array",
+      "uniqueItems": true,
+      "maxItems": 8,
+      "items": { "type": "string", "pattern": "^[A-Z]{1,2}-\\d{2}$" }
+    },
+    "ai_default": {
+      "description": "The generic default a model usually produces for the same job.",
+      "type": "string",
+      "$ref": "#/$defs/line",
+      "minLength": 20,
+      "maxLength": 600
+    },
+    "why_this_is_better": { "type": "array", "$ref": "#/$defs/lines", "minItems": 1 },
+    "failures": {
+      "description": "How people break this item when adapting it.",
+      "type": "array",
+      "$ref": "#/$defs/lines",
+      "minItems": 1
+    },
+    "states": {
+      "description": "State names. The first is rendered by demo.tsx; the rest are keys of the `states` export of states.tsx.",
+      "type": "array",
+      "minItems": 1,
+      "uniqueItems": true,
+      "items": { "type": "string", "pattern": "^[a-z][a-z0-9]*(?:-[a-z0-9]+)*$" }
+    },
+    "responsive": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["desktop", "mobile"],
+      "properties": {
+        "desktop": { "$ref": "#/$defs/line" },
+        "mobile": { "$ref": "#/$defs/line" }
+      }
+    },
+    "a11y": { "type": "array", "$ref": "#/$defs/lines", "minItems": 1 },
+    "status": {
+      "description": "community: merged and CI-checked. reviewed: a maintainer signed it off. Only maintainers set reviewed.",
+      "enum": ["community", "reviewed"]
+    },
+    "reviewed_by": {
+      "description": "GitHub handles of the reviewing maintainers. Set only by maintainers.",
+      "type": "array",
+      "uniqueItems": true,
+      "items": { "$ref": "#/$defs/handle" }
+    },
+    "reviewed_at": {
+      "anyOf": [{ "type": "null" }, { "type": "string", "format": "date" }]
+    },
+    "contributors": {
+      "type": "array",
+      "uniqueItems": true,
+      "items": { "$ref": "#/$defs/handle" }
+    },
+    "provenance": { "enum": ["original", "adapted"] },
+    "source_url": {
+      "description": "Required when provenance is adapted: where the original came from.",
+      "type": "string",
+      "format": "uri"
+    },
+    "source_license": {
+      "description": "Required when provenance is adapted: the original's licence.",
+      "type": "string",
+      "$ref": "#/$defs/line",
+      "maxLength": 80
+    },
+    "license": { "const": "MIT" }
+  },
+  "allOf": [
+    {
+      "if": { "properties": { "status": { "const": "reviewed" } } },
+      "then": {
+        "properties": {
+          "reviewed_by": { "type": "array", "minItems": 1 },
+          "reviewed_at": { "type": "string" }
+        }
+      },
+      "else": {
+        "properties": {
+          "reviewed_by": { "type": "array", "maxItems": 0 },
+          "reviewed_at": { "type": "null" }
+        }
+      }
+    },
+    {
+      "if": { "properties": { "provenance": { "const": "adapted" } } },
+      "then": { "required": ["source_url", "source_license"] },
+      "else": {
+        "not": {
+          "anyOf": [
+            { "required": ["source_url"] },
+            { "required": ["source_license"] }
+          ]
+        }
+      }
+    }
+  ],
+  "$defs": {
+    "line": {
+      "type": "string",
+      "minLength": 1,
+      "pattern": "^\\S(?:.*\\S)?$"
+    },
+    "lines": {
+      "type": "array",
+      "maxItems": 12,
+      "items": { "type": "string", "$ref": "#/$defs/line", "maxLength": 300 }
+    },
+    "handle": {
+      "description": "A GitHub handle without the @.",
+      "type": "string",
+      "pattern": "^[A-Za-z0-9](?:[A-Za-z0-9-]{0,37}[A-Za-z0-9])?$"
+    }
+  }
+}

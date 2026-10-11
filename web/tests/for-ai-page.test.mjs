@@ -58,7 +58,7 @@ test("MCP server consumes shared names and descriptions without expanding scope"
 });
 
 test("For AI page leads with the task-to-agent workflow and current access truth", async () => {
-  const page = await read("app/for-ai/page.tsx");
+  const page = await read("app/(site)/for-ai/page.tsx");
 
   assert.match(page, /title: "For AI"/);
   assert.match(page, /data-for-ai-page/);
@@ -124,7 +124,7 @@ test("For AI route is discoverable only after its page exists", async () => {
 });
 
 test("For AI visual contract is route-scoped, responsive, and overflow safe", async () => {
-  const css = await read("app/for-ai/for-ai.module.css");
+  const css = await read("app/(site)/for-ai/for-ai.module.css");
 
   assert.match(css, /\.hero \{/);
   assert.match(css, /\.codeBlock \{[\s\S]*?overflow-x: auto/);

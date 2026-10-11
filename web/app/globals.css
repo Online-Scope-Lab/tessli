@@ -1,5 +1,8 @@
 @import "tailwindcss";
 
+/* Library previews (registry/themes.css) switch dark mode with data-theme. */
+@custom-variant dark (&:where([data-theme="dark"], [data-theme="dark"] *));
+
 /*
  * Tessli design tokens.
  *
@@ -68,19 +71,27 @@
   --motion-fast: 140ms;
   --motion-menu: 220ms;
 
-  /* Semantic aliases (shadcn names). Library items use only these. */
+  /*
+   * Semantic aliases (shadcn names). Library items use only these; inside a
+   * library preview, registry/themes.css redefines them for the chosen theme.
+   */
   --background: var(--canvas);
   --foreground: var(--text-strong);
   --card: var(--surface);
   --card-foreground: var(--text-strong);
+  --popover: var(--surface);
+  --popover-foreground: var(--text-strong);
   --primary: var(--accent);
   --primary-foreground: var(--text-strong);
+  --secondary: var(--surface-muted);
+  --secondary-foreground: var(--text-strong);
   --muted: var(--surface-muted);
   --muted-foreground: var(--text-muted);
   /* --accent is Tessli's orange signal above; its foreground is charcoal. */
   --accent-foreground: var(--text-strong);
   --destructive: var(--danger);
   --border: var(--line);
+  --input: var(--line-strong);
   --ring: var(--focus);
   --radius: var(--radius-control-md);
 }
@@ -147,13 +158,18 @@
   --color-foreground: var(--foreground);
   --color-card: var(--card);
   --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
   --color-primary: var(--primary);
   --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
   --color-muted: var(--muted);
   --color-muted-foreground: var(--muted-foreground);
   --color-accent-foreground: var(--accent-foreground);
   --color-destructive: var(--destructive);
   --color-border: var(--border);
+  --color-input: var(--input);
   --color-ring: var(--ring);
 
   --spacing-1: var(--space-1);
@@ -170,64 +186,84 @@
   --spacing-24: var(--space-24);
 
   --radius-control: var(--radius);
+  /* shadcn's radius scale, derived from --radius, for library items. */
+  --radius-sm: calc(var(--radius) * 0.6);
+  --radius-md: calc(var(--radius) * 0.8);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) * 1.4);
 
   --default-transition-duration: var(--motion-fast);
   --default-transition-timing-function: var(--ease-standard);
 }
 
-* {
-  box-sizing: border-box;
-}
+/*
+ * Element defaults sit in the base layer, below Tailwind utilities, so library
+ * items in /preview can restyle links, buttons and focus rings with utilities
+ * exactly as they would in a shadcn project. Site CSS modules use classes and
+ * still win over these.
+ */
+@layer base {
+  * {
+    box-sizing: border-box;
+  }
 
-html {
-  min-width: 0;
-  scroll-behavior: smooth;
-}
+  html {
+    min-width: 0;
+    scroll-behavior: smooth;
+  }
 
-body {
-  min-width: 0;
-  margin: 0;
-  background-color: var(--canvas);
-  color: var(--text-strong);
-  font-family: var(--font-ui);
-  font-size: var(--text-body-md);
-  font-variation-settings: "wdth" 98;
-  line-height: 1.55;
-  text-rendering: optimizeLegibility;
-}
+  body {
+    min-width: 0;
+    margin: 0;
+    background-color: var(--canvas);
+    color: var(--text-strong);
+    font-family: var(--font-ui);
+    font-size: var(--text-body-md);
+    font-variation-settings: "wdth" 98;
+    line-height: 1.55;
+    text-rendering: optimizeLegibility;
+  }
 
-html[data-grain="on"] body {
-  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 180 180' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.022'/%3E%3C/svg%3E");
-  background-blend-mode: multiply;
-  background-attachment: fixed;
-  background-size: 180px 180px;
-}
+  html[data-grain="on"] body {
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 180 180' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.022'/%3E%3C/svg%3E");
+    background-blend-mode: multiply;
+    background-attachment: fixed;
+    background-size: 180px 180px;
+  }
 
-button,
-input,
-select,
-textarea {
-  font: inherit;
-}
+  button,
+  input,
+  select,
+  textarea {
+    font: inherit;
+  }
 
-button,
-a {
-  -webkit-tap-highlight-color: transparent;
-}
+  button,
+  a {
+    -webkit-tap-highlight-color: transparent;
+  }
 
-a {
-  color: inherit;
-}
+  a {
+    color: inherit;
+  }
 
-img,
-svg {
-  display: block;
-  max-width: 100%;
-}
+  img,
+  svg {
+    display: block;
+    max-width: 100%;
+  }
 
-:focus-visible {
-  outline: 3px solid color-mix(in srgb, var(--focus) 82%, transparent);
-  outline-offset: 3px;
+  :focus-visible {
+    outline: 3px solid color-mix(in srgb, var(--focus) 82%, transparent);
+    outline-offset: 3px;
+  }
+
+  /* shadcn projects default every border to --border; previews do the same. */
+  [data-theme] *,
+  [data-theme] ::before,
+  [data-theme] ::after {
+    border-color: var(--border);
+  }
 }
 
 .tessli-container {

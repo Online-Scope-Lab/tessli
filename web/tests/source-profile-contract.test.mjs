@@ -355,7 +355,7 @@ test("an archived source page shows its reason and a non-archived replacement", 
   assert.equal(getArchiveNotice(index.get("fixture-review"), index.get), null);
 
   const page = fs.readFileSync(
-    path.join(__dirname, "../app/resources/[slug]/page.tsx"),
+    path.join(__dirname, "../app/(site)/resources/[slug]/page.tsx"),
     "utf8",
   );
   const actions = fs.readFileSync(
@@ -559,7 +559,7 @@ test("every public listing, search and count reads only non-archived sources", (
   const read = (relativePath) =>
     fs.readFileSync(path.join(__dirname, "..", relativePath), "utf8");
   for (const file of [
-    "app/resources/page.tsx",
+    "app/(site)/resources/page.tsx",
     "app/sitemap.ts",
     "lib/task-retrieval.ts",
     "lib/similar-sources.ts",
@@ -570,9 +570,9 @@ test("every public listing, search and count reads only non-archived sources", (
   }
   for (const file of [
     "components/explore-facts/explore-facts.tsx",
-    "app/about/page.tsx",
+    "app/(site)/about/page.tsx",
     "app/not-found.tsx",
-    "app/lab/page.tsx",
+    "app/(site)/lab/page.tsx",
   ]) {
     assert.match(read(file), /getBrowsableSourceCounts\(\)/, file);
   }

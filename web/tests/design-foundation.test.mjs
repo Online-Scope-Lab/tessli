@@ -65,7 +65,7 @@ test("grain and responsive grid safeguards are present", async () => {
 });
 
 test("foundation lab contains all required specimen sections", async () => {
-  const page = await read("app/lab/page.tsx");
+  const page = await read("app/(site)/lab/page.tsx");
 
   for (const marker of [
     "Typography with character",
@@ -222,7 +222,7 @@ test("the site keeps its tells sharp: one eyebrow, external-only arrows", async 
     .sort();
   // The home hero, plus its specimen on the internal /lab page.
   assert.deepEqual(eyebrowUsers, [
-    "app/lab/page.tsx",
+    "app/(site)/lab/page.tsx",
     "components/explore-hero/explore-hero.tsx",
   ]);
 

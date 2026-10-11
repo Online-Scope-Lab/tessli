@@ -180,17 +180,22 @@ The palette is sampled from the approved direction and adjusted for accessibilit
 
 Semantic aliases (shadcn names) map onto these tokens. Library items use only the aliases, so they take on the installing project's theme:
 
-| Alias                                | Tessli token                                            |
-| ------------------------------------ | ------------------------------------------------------- |
-| `--background` / `--foreground`      | `--canvas` / `--text-strong`                            |
-| `--card` / `--card-foreground`       | `--surface` / `--text-strong`                           |
-| `--primary` / `--primary-foreground` | `--accent` / `--text-strong`                            |
-| `--muted` / `--muted-foreground`     | `--surface-muted` / `--text-muted`                      |
-| `--accent` / `--accent-foreground`   | `--accent` (the orange signal itself) / `--text-strong` |
-| `--destructive`                      | `--danger`                                              |
-| `--border`                           | `--line`                                                |
-| `--ring`                             | `--focus`                                               |
-| `--radius`                           | `--radius-control-md`                                   |
+| Alias                                    | Tessli token                                            |
+| ---------------------------------------- | ------------------------------------------------------- |
+| `--background` / `--foreground`          | `--canvas` / `--text-strong`                            |
+| `--card` / `--card-foreground`           | `--surface` / `--text-strong`                           |
+| `--popover` / `--popover-foreground`     | `--surface` / `--text-strong`                           |
+| `--secondary` / `--secondary-foreground` | `--surface-muted` / `--text-strong`                     |
+| `--primary` / `--primary-foreground`     | `--accent` / `--text-strong`                            |
+| `--muted` / `--muted-foreground`         | `--surface-muted` / `--text-muted`                      |
+| `--accent` / `--accent-foreground`       | `--accent` (the orange signal itself) / `--text-strong` |
+| `--destructive`                          | `--danger`                                              |
+| `--border`                               | `--line`                                                |
+| `--input`                                | `--line-strong`                                         |
+| `--ring`                                 | `--focus`                                               |
+| `--radius`                               | `--radius-control-md`                                   |
+
+Library previews (`/preview/<slug>`) do not use these site aliases. `web/registry/themes.css` defines three complete shadcn variable sets, scoped to `[data-theme="tessli" | "neutral" | "dark"]`: **Tessli** (the canvas, charcoal and orange above, with `--accent` as the soft `#ebe4dc` hover surface shadcn expects and `--muted-foreground` darkened to `#6f6862` for AA on muted surfaces), **Neutral** (cool grey product UI on white, system font) and **Dark** (neutral dark, system font). `tests/library-themes.test.mjs` checks their WCAG 2.2 AA contrast.
 
 Usage rules:
 
@@ -311,6 +316,8 @@ Two older triggers remain where moving them would change real layouts: `1100px` 
 - `web/app/globals.css` is the single token source. `@theme static` and `@theme inline` expose colour, type, spacing, radius, shadow and motion tokens as Tailwind utilities (for example `bg-canvas`, `text-ink-body`, `text-body-md`, `rounded-control-md`, `shadow-sm`, `ease-standard`, `bg-primary`).
 - `web/components/ui/` holds the shared primitives: `Button` (`primary`, `secondary`, `quiet`; renders a link when given `href`), `Field` (label, input or textarea, hint, error), `Tag` (`neutral`, `signal`) and `Eyebrow`. Use them instead of redefining action, field or tag styles in a page module.
 - `/lab` is the internal, `noindex` specimen of the tokens and primitives.
+- Element defaults (`body`, links, form fonts, `:focus-visible`) sit in `@layer base`, below Tailwind utilities, so library items restyle them with utilities as they would in a shadcn project. Site CSS modules use classes and still win.
+- Library items use shadcn/ui primitives, not the site primitives: the copies the site renders live in `web/registry/shadcn/`, separate from `web/components/ui/`.
 
 ## 14. Tells to avoid
 

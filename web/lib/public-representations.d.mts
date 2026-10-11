@@ -109,8 +109,51 @@ export interface PublicCollectionDocument {
   boundaries: readonly string[];
 }
 
+export interface PublicLibraryItemInput {
+  slug: string;
+  type: string;
+  notes: Record<string, unknown> & {
+    title: string;
+    kind: string;
+    category: string;
+    summary: string;
+    status: string;
+  };
+  body: string;
+  registryDependencies: readonly string[];
+  dependencies: readonly string[];
+  sourcePath: string;
+  source: string;
+}
+
+export interface PublicLibraryItemDocument {
+  contract: "tessli.public-library-item.v1";
+  canonicalPath: string;
+  representations: PublicRepresentationLinks;
+  preview: string;
+  item: {
+    slug: string;
+    title: string;
+    kind: string;
+    category: string;
+    summary: string;
+    status: string;
+    install: string;
+    registry: {
+      type: string;
+      registryDependencies: readonly string[];
+      dependencies: readonly string[];
+    };
+    notes: Record<string, unknown>;
+    explanation: string;
+    source: { path: string; code: string };
+  };
+  boundaries: readonly string[];
+}
+
 export const PUBLIC_SOURCE_REPRESENTATION_CONTRACT: "tessli.public-source.v3";
 export const PUBLIC_COLLECTION_REPRESENTATION_CONTRACT: "tessli.public-collection.v2";
+export const PUBLIC_LIBRARY_ITEM_REPRESENTATION_CONTRACT: "tessli.public-library-item.v1";
 
 export function createPublicSourceRepresentation(
   profile: unknown,
@@ -126,6 +169,13 @@ export function serializePublicSourceMarkdown(
 ): string;
 export function serializePublicCollectionMarkdown(
   document: PublicCollectionDocument,
+): string;
+export function createPublicLibraryItemRepresentation(
+  item: PublicLibraryItemInput,
+  installPrefix: string,
+): PublicLibraryItemDocument;
+export function serializePublicLibraryItemMarkdown(
+  document: PublicLibraryItemDocument,
 ): string;
 export function createPublicRepresentationHeaders(
   input: PublicRepresentationHeadersInput,

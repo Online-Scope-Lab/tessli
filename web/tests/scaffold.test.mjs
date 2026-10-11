@@ -28,9 +28,13 @@ test("package scripts and runtime constraints are present", async () => {
     "lint",
     "test",
     "format:check",
+    "registry:build",
+    "registry:check",
+    "test:items",
   ]) {
     assert.equal(typeof packageJson.scripts[script], "string");
   }
+  assert.match(packageJson.scripts.check, /npm run registry:check/);
 });
 
 test("App Router root layout owns html and body", async () => {

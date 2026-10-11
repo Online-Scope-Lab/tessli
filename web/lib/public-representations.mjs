@@ -1,6 +1,8 @@
 export const PUBLIC_SOURCE_REPRESENTATION_CONTRACT = "tessli.public-source.v3";
 export const PUBLIC_COLLECTION_REPRESENTATION_CONTRACT =
   "tessli.public-collection.v2";
+export const PUBLIC_LIBRARY_ITEM_REPRESENTATION_CONTRACT =
+  "tessli.public-library-item.v1";
 
 const CACHE_CONTROL =
   "public, max-age=0, s-maxage=86400, stale-while-revalidate=604800";
@@ -384,4 +386,120 @@ export function createPublicOptionsHeaders() {
     "Cross-Origin-Resource-Policy": "cross-origin",
     "X-Content-Type-Options": "nosniff",
   };
+}
+
+const LIBRARY_ITEM_BOUNDARIES = [
+  "Community items are merged and pass automated checks (schema, build, accessibility, overflow and console errors in three themes at five widths); only items with status reviewed have been checked by a maintainer.",
+  "The rules list holds rule ids; the public rule set is not published yet.",
+  "Tessli does not claim that using an item improves AI-generated UI; that claim waits for a published evaluation.",
+];
+
+/**
+ * The public JSON document for one library item (`/library/<slug>/item.json`).
+ * `item` is one entry of web/data/library.json.
+ */
+export function createPublicLibraryItemRepresentation(item, installPrefix) {
+  const canonicalPath = `/library/${item.slug}`;
+  const notes = item.notes;
+  return {
+    contract: PUBLIC_LIBRARY_ITEM_REPRESENTATION_CONTRACT,
+    canonicalPath,
+    representations: {
+      json: `${canonicalPath}/item.json`,
+      markdown: `${canonicalPath}/item.md`,
+    },
+    preview: `/preview/${item.slug}`,
+    item: {
+      slug: item.slug,
+      title: notes.title,
+      kind: notes.kind,
+      category: notes.category,
+      summary: notes.summary,
+      status: notes.status,
+      install: `${installPrefix}${item.slug}`,
+      registry: {
+        type: item.type,
+        registryDependencies: [...item.registryDependencies],
+        dependencies: [...item.dependencies],
+      },
+      notes: structuredClone(notes),
+      explanation: item.body,
+      source: { path: item.sourcePath, code: item.source },
+    },
+    boundaries: [...LIBRARY_ITEM_BOUNDARIES],
+  };
+}
+
+export function serializePublicLibraryItemMarkdown(document) {
+  const item = document.item;
+  const notes = item.notes;
+  const lines = [
+    `# Tessli library item — ${inline(item.title)}`,
+    "",
+    inline(item.summary),
+    "",
+    `Kind: ${inline(item.kind)}`,
+    `Category: ${inline(item.category)}`,
+    `Status: ${
+      notes.status === "reviewed"
+        ? `reviewed by ${notes.reviewed_by.map((handle) => `@${handle}`).join(", ")} on ${notes.reviewed_at}`
+        : "community (not yet reviewed by a maintainer)"
+    }`,
+    `Tessli page: ${document.canonicalPath}`,
+    `Preview: ${document.preview}`,
+    "",
+    "## Install",
+    "",
+    "```sh",
+    item.install,
+    "```",
+    "",
+  ];
+  pushList(lines, "Use when", notes.use_when);
+  pushList(lines, "Avoid when", notes.avoid_when);
+  pushList(lines, "Rules", notes.rules);
+  lines.push("## Common AI default", "", inline(notes.ai_default), "");
+  pushList(lines, "Why this is better", notes.why_this_is_better);
+  pushList(lines, "Common failures when adapting it", notes.failures);
+  pushList(lines, "States", notes.states);
+  lines.push(
+    "## Responsive behaviour",
+    "",
+    `- Desktop: ${inline(notes.responsive.desktop)}`,
+    `- Mobile: ${inline(notes.responsive.mobile)}`,
+    "",
+  );
+  pushList(lines, "Accessibility", notes.a11y);
+  lines.push("## Notes", "", normalizeLineEndings(item.explanation).trim(), "");
+  lines.push(
+    "## Credits",
+    "",
+    `- Contributors: ${
+      notes.contributors.length
+        ? notes.contributors.map((handle) => `@${handle}`).join(", ")
+        : "none credited yet"
+    }`,
+    `- Provenance: ${inline(notes.provenance)}${
+      notes.provenance === "adapted"
+        ? ` from ${inline(notes.source_url)} (${inline(notes.source_license)})`
+        : ""
+    }`,
+    `- Licence: ${inline(notes.license)}`,
+    "",
+    "## Source",
+    "",
+    `\`${item.source.path}\``,
+    "",
+    "```tsx",
+    normalizeLineEndings(item.source.code).replace(/\n+$/u, ""),
+    "```",
+    "",
+    "## Interpretation boundaries",
+    "",
+  );
+  for (const boundary of document.boundaries) {
+    lines.push(`- ${inline(boundary)}`);
+  }
+  lines.push("");
+  return markdown(lines);
 }

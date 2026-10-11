@@ -13,7 +13,7 @@ async function read(relativePath) {
 
 test("Collection detail is an ordered research checklist that starts at stage 1", async () => {
   const [page, resourceList] = await Promise.all([
-    read("app/collections/[slug]/page.tsx"),
+    read("app/(site)/collections/[slug]/page.tsx"),
     read("components/collection-resources/collection-resource-list.tsx"),
   ]);
 
@@ -47,7 +47,7 @@ test("Collection detail is an ordered research checklist that starts at stage 1"
 
 test("Collection-detail checklist recomposes and keeps focusable actions usable", async () => {
   const [pageCss, resourceCss] = await Promise.all([
-    read("app/collections/[slug]/collection-detail.module.css"),
+    read("app/(site)/collections/[slug]/collection-detail.module.css"),
     read("components/collection-resources/collection-resource-list.module.css"),
   ]);
 

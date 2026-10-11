@@ -1,6 +1,7 @@
 import type { MetadataRoute } from "next";
 
 import { getPublishedCollections } from "@/lib/collections";
+import { getLibraryItems } from "@/lib/library";
 import { getBrowsableSourceProfiles } from "@/lib/source-profiles";
 
 function siteOrigin() {
@@ -17,6 +18,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
   const origin = siteOrigin();
   const staticRoutes = [
     "",
+    "/library",
     "/resources",
     "/collections",
     "/for-ai",
@@ -28,8 +30,14 @@ export default function sitemap(): MetadataRoute.Sitemap {
     "/content-policy",
   ];
 
+  // /preview is a bare render for iframes and agents; it is not listed.
   return [
     ...staticRoutes.map((route) => ({ url: `${origin}${route}` })),
+    ...getLibraryItems().flatMap((item) => [
+      { url: `${origin}/library/${item.slug}` },
+      { url: `${origin}/library/${item.slug}/item.json` },
+      { url: `${origin}/library/${item.slug}/item.md` },
+    ]),
     ...getPublishedCollections().flatMap((collection) => [
       { url: `${origin}/collections/${collection.slug}` },
       { url: `${origin}/collections/${collection.slug}/collection.json` },

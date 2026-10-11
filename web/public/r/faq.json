@@ -1,0 +1,68 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "faq",
+  "type": "registry:block",
+  "title": "FAQ that answers real objections",
+  "description": "Answers the questions buyers ask before committing, with direct answers and a real contact route, using native disclosure widgets.",
+  "registryDependencies": [],
+  "dependencies": [],
+  "files": [
+    {
+      "path": "web/registry/items/faq/faq.tsx",
+      "type": "registry:component",
+      "content": "import * as React from \"react\";\n\nimport { cn } from \"@/registry/shadcn/lib/utils\";\n\nexport type FaqItem = {\n  /** The question as a buyer would ask it, not a marketing prompt. */\n  question: string;\n  /** A direct answer first, then the detail. Keep it to a few sentences. */\n  answer: React.ReactNode;\n};\n\nexport type FaqProps = Omit<React.ComponentProps<\"section\">, \"title\"> & {\n  title: React.ReactNode;\n  /** One sentence on what these questions cover. */\n  description?: React.ReactNode;\n  items: FaqItem[];\n  /** Where to go when the answer is not here: a real contact route. */\n  contact?: React.ReactNode;\n  /** Open the first answer on load. Off by default. */\n  openFirst?: boolean;\n};\n\nexport function Faq({\n  title,\n  description,\n  items,\n  contact,\n  openFirst = false,\n  className,\n  ...props\n}: FaqProps) {\n  const headingId = React.useId();\n\n  return (\n    <section\n      aria-labelledby={headingId}\n      data-slot=\"faq\"\n      className={cn(\"bg-background text-foreground\", className)}\n      {...props}\n    >\n      <div className=\"mx-auto grid w-full max-w-6xl gap-8 px-4 py-12 sm:px-6 sm:py-16 lg:grid-cols-[minmax(0,1fr)_minmax(0,2fr)] lg:gap-16 lg:px-8 lg:py-24\">\n        <div className=\"lg:sticky lg:top-8 lg:self-start\">\n          <h2\n            id={headingId}\n            className=\"text-3xl leading-tight font-semibold tracking-tight text-balance sm:text-4xl\"\n          >\n            {title}\n          </h2>\n          {description ? (\n            <p className=\"mt-4 max-w-prose text-base leading-relaxed text-pretty text-muted-foreground\">\n              {description}\n            </p>\n          ) : null}\n          {contact ? (\n            <div className=\"mt-6 max-w-prose text-sm leading-relaxed text-muted-foreground\">\n              {contact}\n            </div>\n          ) : null}\n        </div>\n\n        <div className=\"border-t border-border\">\n          {items.map((item, index) => (\n            <details\n              key={item.question}\n              open={openFirst && index === 0}\n              className=\"group border-b border-border\"\n            >\n              <summary className=\"flex min-h-11 cursor-pointer list-none items-start justify-between gap-4 rounded-sm py-4 text-left text-base leading-snug font-medium focus-visible:ring-[3px] focus-visible:ring-ring/50 focus-visible:outline-none [&::-webkit-details-marker]:hidden\">\n                <span>{item.question}</span>\n                <svg\n                  aria-hidden=\"true\"\n                  viewBox=\"0 0 16 16\"\n                  className=\"mt-1 size-4 shrink-0 text-muted-foreground transition-transform duration-200 group-open:rotate-45 motion-reduce:transition-none\"\n                  fill=\"none\"\n                  stroke=\"currentColor\"\n                  strokeWidth=\"1.5\"\n                  strokeLinecap=\"round\"\n                >\n                  <path d=\"M8 3v10M3 8h10\" />\n                </svg>\n              </summary>\n              <div className=\"max-w-prose pr-8 pb-5 text-sm leading-relaxed text-pretty text-muted-foreground\">\n                {item.answer}\n              </div>\n            </details>\n          ))}\n        </div>\n      </div>\n    </section>\n  );\n}\n"
+    }
+  ],
+  "categories": ["faq"],
+  "docs": "Taste notes, states and rules: https://tessli.vercel.app/library/faq",
+  "meta": {
+    "tessli": {
+      "id": "faq",
+      "kind": "section",
+      "category": "faq",
+      "title": "FAQ that answers real objections",
+      "summary": "Answers the questions buyers ask before committing, with direct answers and a real contact route, using native disclosure widgets.",
+      "use_when": [
+        "A marketing or pricing page has four to eight recurring questions about data, billing, cancellation or access.",
+        "The answers are short and stable enough to live on the page."
+      ],
+      "avoid_when": [
+        "The questions need long, step-by-step answers; link to documentation instead.",
+        "You have fewer than three real questions; answer them in the page copy.",
+        "The content is support troubleshooting that changes often; keep it in a help centre."
+      ],
+      "rules": [],
+      "ai_default": "A centred \"Frequently Asked Questions\" heading over a JavaScript accordion of filler questions such as \"What is [product]?\" and \"Why choose us?\", answered with marketing copy, only one item open at a time, and no way to reach a person.",
+      "why_this_is_better": [
+        "Questions are real objections (export, cancellation, billing, sharing, offline) in the words a buyer would use.",
+        "Each answer starts with the direct answer (\"Yes.\", \"Only the people you invite.\") before the detail.",
+        "Native details and summary elements need no JavaScript, work with the keyboard and screen readers out of the box, and let people open several answers at once.",
+        "A heading that says what the questions are about, plus a real contact route for anything not covered.",
+        "On wide screens the heading column stays in view beside the questions instead of a centred single column."
+      ],
+      "failures": [
+        "Padding the list with questions nobody asks to make the section look complete.",
+        "Hiding prices, limits or cancellation terms in an FAQ instead of stating them where people decide.",
+        "Replacing the native disclosure with a custom accordion that loses keyboard and find-in-page support.",
+        "Linking the contact line to a form that does not exist yet."
+      ],
+      "states": ["default"],
+      "responsive": {
+        "desktop": "Two columns from 1024px; the heading, description and contact route stay in view beside the questions.",
+        "mobile": "One column; the heading block comes first, then full-width questions with 44px touch targets."
+      },
+      "a11y": [
+        "The section is labelled by its h2; questions are summary elements inside details, so their expanded state is announced natively.",
+        "The plus icon is decorative (aria-hidden) and rotates into a cross; the open state never relies on the icon alone.",
+        "Each summary is at least 44px tall and shows a focus ring.",
+        "The rotation honours reduced motion."
+      ],
+      "status": "community",
+      "reviewed_by": [],
+      "reviewed_at": null,
+      "contributors": [],
+      "provenance": "original",
+      "license": "MIT"
+    }
+  }
+}

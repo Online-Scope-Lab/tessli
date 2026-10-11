@@ -13,7 +13,7 @@ async function read(relativePath) {
 
 test("V3.11 Collections index renders the six canonical research paths", async () => {
   const [page, card, sourceText] = await Promise.all([
-    read("app/collections/page.tsx"),
+    read("app/(site)/collections/page.tsx"),
     read("components/collection-card/collection-card.tsx"),
     readFile(
       path.resolve(webRoot, "..", "lib_data", "tessli-launch-collections.json"),
@@ -63,7 +63,7 @@ test("V3.11 Collection cards state their research-path decision anatomy", async 
 
 test("V3.11 index removes audit and popularity framing and includes an empty state", async () => {
   const [page, card] = await Promise.all([
-    read("app/collections/page.tsx"),
+    read("app/(site)/collections/page.tsx"),
     read("components/collection-card/collection-card.tsx"),
   ]);
   const primaryFlow = `${page}\n${card}`;
@@ -79,7 +79,7 @@ test("V3.11 index removes audit and popularity framing and includes an empty sta
 
 test("V3.11 index and cards preserve responsive and focus safeguards", async () => {
   const [indexCss, cardCss] = await Promise.all([
-    read("app/collections/collections.module.css"),
+    read("app/(site)/collections/collections.module.css"),
     read("components/collection-card/collection-card.module.css"),
   ]);
 

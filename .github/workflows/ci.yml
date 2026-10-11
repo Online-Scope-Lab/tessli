@@ -16,7 +16,7 @@ concurrency:
 jobs:
   verify:
     runs-on: ubuntu-latest
-    timeout-minutes: 20
+    timeout-minutes: 30
     env:
       NEXT_TELEMETRY_DISABLED: "1"
     defaults:
@@ -53,6 +53,15 @@ jobs:
 
       - name: Check catalogue drift
         run: npm run catalogue:check
+
+      - name: Check library registry drift
+        run: npm run registry:check
+
+      # Validates the root registry.json the way `shadcn add online-scope-lab/tessli/<item>`
+      # reads it (file paths, schema). Validation is offline; npx fetches the pinned CLI.
+      - name: Validate shadcn registry
+        working-directory: .
+        run: npx --yes shadcn@4.21.4 registry validate ./registry.json
 
       - name: Build
         run: npm run build
@@ -132,6 +141,14 @@ jobs:
           node tests/browse-pages-browser.mjs 2>&1 | tee -a artifacts/browser-tests.log
           node tests/global-navigation-browser.mjs 2>&1 | tee -a artifacts/browser-tests.log
           node tests/for-ai-browser.mjs 2>&1 | tee -a artifacts/browser-tests.log
+
+      - name: Install Playwright Chromium
+        run: npx playwright install --with-deps chromium
+
+      # Every library item, state and theme at 1440/1024/768/390/320: overflow,
+      # console errors and axe-core WCAG 2.2 AA. Screenshots go to artifacts/items/.
+      - name: Library item previews
+        run: npm run test:items
 
       - name: Upload screenshots and browser logs
         if: always()

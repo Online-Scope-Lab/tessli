@@ -77,14 +77,21 @@ test("header visual contract uses underline, utilities, and a viewport modal", a
   assert.doesNotMatch(css, /\.accountLink|\.mobileAccountLink|backdrop-filter/);
 });
 
-test("root layout mounts one global header and isolates site content", async () => {
-  const layout = await read("app/layout.tsx");
-  const home = await read("app/page.tsx");
-  const lab = await read("app/lab/page.tsx");
+test("site chrome mounts one global header and isolates site content", async () => {
+  const layout = await read("components/site-chrome/site-chrome.tsx");
+  const siteLayout = await read("app/(site)/layout.tsx");
+  const rootLayout = await read("app/layout.tsx");
+  const notFound = await read("app/not-found.tsx");
+  const home = await read("app/(site)/page.tsx");
+  const lab = await read("app/(site)/lab/page.tsx");
 
   assert.match(layout, /<SiteHeader \/>/);
   assert.match(layout, /href="#main-content"/);
   assert.match(layout, /data-site-content/);
+  // Every site page and the 404 page get the chrome; /preview renders bare.
+  assert.match(siteLayout, /<SiteChrome>/);
+  assert.match(notFound, /<SiteChrome>/);
+  assert.doesNotMatch(rootLayout, /SiteHeader|SiteFooter|SiteChrome/);
   assert.match(home, /id="main-content"/);
   assert.match(lab, /id="main-content"/);
   assert.doesNotMatch(lab, /<header/);

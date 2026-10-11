@@ -1,0 +1,67 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "pricing-tiers",
+  "type": "registry:block",
+  "title": "Pricing tiers compared on the limits that matter",
+  "description": "Two or three plans compared on the few limits buyers actually weigh, with one recommended plan and an honest billing-period switch.",
+  "registryDependencies": ["button"],
+  "dependencies": [],
+  "files": [
+    {
+      "path": "web/registry/items/pricing-tiers/pricing-tiers.tsx",
+      "type": "registry:component",
+      "content": "\"use client\";\n\nimport * as React from \"react\";\n\nimport { cn } from \"@/registry/shadcn/lib/utils\";\nimport { buttonVariants } from \"@/registry/shadcn/ui/button\";\n\nexport type BillingPeriod = \"monthly\" | \"annual\";\n\nexport type PricingLimit = {\n  id: string;\n  /** What buyers compare: \"Members\", \"Version history\". */\n  label: string;\n};\n\nexport type PricingPlan = {\n  id: string;\n  name: string;\n  /** Who the plan is for, in one short sentence. */\n  description: string;\n  /** Price per seat per month for each billing period. 0 renders \"Free\". */\n  price: Record<BillingPeriod, number>;\n  /** The value for each limit id, written out (\"Up to 50\", not a tick). */\n  limits: Record<string, string>;\n  cta: { label: string; href: string };\n  /** At most one plan. It gets the only primary button and a text label. */\n  recommended?: boolean;\n};\n\nexport type PricingTiersProps = Omit<\n  React.ComponentProps<\"section\">,\n  \"title\"\n> & {\n  title: React.ReactNode;\n  description?: React.ReactNode;\n  /** Two or three plans. Use a comparison table or calculator beyond that. */\n  plans: PricingPlan[];\n  /** The three to five limits the plans actually differ on, in order. */\n  limits: PricingLimit[];\n  currency?: string;\n  locale?: string;\n  /** Unit after the price, e.g. \"per member / month\". */\n  unit?: string;\n  recommendedLabel?: string;\n  defaultPeriod?: BillingPeriod;\n  /** Taxes, trial terms or anything a buyer must know before paying. */\n  footnote?: React.ReactNode;\n};\n\nfunction formatPrice(value: number, currency: string, locale: string) {\n  return new Intl.NumberFormat(locale, {\n    style: \"currency\",\n    currency,\n    minimumFractionDigits: Number.isInteger(value) ? 0 : 2,\n    maximumFractionDigits: 2,\n  }).format(value);\n}\n\nexport function PricingTiers({\n  title,\n  description,\n  plans,\n  limits,\n  currency = \"USD\",\n  locale = \"en-US\",\n  unit = \"per member / month\",\n  recommendedLabel = \"Recommended\",\n  defaultPeriod = \"monthly\",\n  footnote,\n  className,\n  ...props\n}: PricingTiersProps) {\n  const [period, setPeriod] = React.useState<BillingPeriod>(defaultPeriod);\n  const id = React.useId();\n  const headingId = `${id}-heading`;\n\n  // The annual saving is derived from the prices, never typed in by hand.\n  const savings = plans\n    .filter((plan) => plan.price.monthly > 0)\n    .map((plan) => 1 - plan.price.annual / plan.price.monthly);\n  const bestSaving = savings.length ? Math.max(...savings) : 0;\n  const savingLabel =\n    bestSaving > 0 ? `save up to ${Math.round(bestSaving * 100)}%` : null;\n\n  return (\n    <section\n      aria-labelledby={headingId}\n      data-slot=\"pricing-tiers\"\n      className={cn(\"bg-background text-foreground\", className)}\n      {...props}\n    >\n      <div className=\"mx-auto w-full max-w-6xl px-4 py-12 sm:px-6 sm:py-16 lg:px-8 lg:py-24\">\n        <div className=\"flex flex-col gap-6 md:flex-row md:items-end md:justify-between\">\n          <div className=\"max-w-2xl\">\n            <h2\n              id={headingId}\n              className=\"text-3xl leading-tight font-semibold tracking-tight text-balance sm:text-4xl\"\n            >\n              {title}\n            </h2>\n            {description ? (\n              <p className=\"mt-4 text-base leading-relaxed text-pretty text-muted-foreground\">\n                {description}\n              </p>\n            ) : null}\n          </div>\n\n          <fieldset className=\"shrink-0\">\n            <legend className=\"mb-2 text-sm font-medium\">Billing period</legend>\n            <div className=\"inline-flex rounded-md border border-border bg-muted p-1\">\n              {([\"monthly\", \"annual\"] as const).map((option) => (\n                <label\n                  key={option}\n                  className=\"relative flex min-h-11 cursor-pointer items-center rounded-sm px-4 text-sm font-medium text-muted-foreground has-[:checked]:bg-background has-[:checked]:text-foreground has-[:checked]:shadow-xs has-[:focus-visible]:ring-[3px] has-[:focus-visible]:ring-ring/50\"\n                >\n                  <input\n                    type=\"radio\"\n                    name={`${id}-period`}\n                    value={option}\n                    checked={period === option}\n                    onChange={() => setPeriod(option)}\n                    className=\"sr-only\"\n                  />\n                  {option === \"monthly\" ? \"Monthly\" : \"Annual\"}\n                  {option === \"annual\" && savingLabel ? (\n                    <span className=\"ml-1.5 font-normal\">({savingLabel})</span>\n                  ) : null}\n                </label>\n              ))}\n            </div>\n          </fieldset>\n        </div>\n\n        <ul\n          className={cn(\n            \"mt-10 grid gap-6\",\n            // Three plans need 1024px to stay readable side by side.\n            plans.length === 2 ? \"md:grid-cols-2\" : \"lg:grid-cols-3\",\n          )}\n        >\n          {plans.map((plan) => {\n            const price = plan.price[period];\n            return (\n              <li\n                key={plan.id}\n                className={cn(\n                  // Side by side, each plan is a subgrid over the same seven\n                  // rows, so names, prices, actions and limits line up.\n                  \"flex flex-col rounded-lg border bg-card p-6 text-card-foreground\",\n                  plans.length === 2\n                    ? \"md:row-span-7 md:grid md:grid-rows-subgrid md:gap-y-0\"\n                    : \"lg:row-span-7 lg:grid lg:grid-rows-subgrid lg:gap-y-0\",\n                  plan.recommended\n                    ? \"border-2 border-primary\"\n                    : \"border-border\",\n                )}\n              >\n                <p\n                  className={cn(\n                    \"min-h-5 text-sm font-medium\",\n                    !plan.recommended &&\n                      (plans.length === 2\n                        ? \"hidden md:block\"\n                        : \"hidden lg:block\"),\n                  )}\n                >\n                  {plan.recommended ? recommendedLabel : null}\n                </p>\n                <h3 className=\"mt-1 text-xl font-semibold tracking-tight\">\n                  {plan.name}\n                </h3>\n                <p className=\"mt-1 text-sm leading-relaxed text-muted-foreground\">\n                  {plan.description}\n                </p>\n\n                <p className=\"mt-6 flex flex-wrap items-baseline gap-x-2\">\n                  <span className=\"text-4xl font-semibold tracking-tight tabular-nums\">\n                    {price === 0\n                      ? \"Free\"\n                      : formatPrice(price, currency, locale)}\n                  </span>\n                  {price === 0 ? null : (\n                    <span className=\"text-sm text-muted-foreground\">\n                      {unit}\n                    </span>\n                  )}\n                </p>\n                <p className=\"mt-1 min-h-5 text-sm text-muted-foreground\">\n                  {price === 0\n                    ? \"No card needed\"\n                    : period === \"annual\"\n                      ? `Billed yearly at ${formatPrice(price * 12, currency, locale)} per member`\n                      : \"Billed monthly\"}\n                </p>\n\n                <a\n                  href={plan.cta.href}\n                  className={cn(\n                    buttonVariants({\n                      variant: plan.recommended ? \"default\" : \"outline\",\n                      size: \"lg\",\n                    }),\n                    \"mt-6 h-11 w-full\",\n                  )}\n                >\n                  {plan.cta.label}\n                </a>\n\n                <dl className=\"mt-6 border-t border-border text-sm\">\n                  {limits.map((limit) => (\n                    <div\n                      key={limit.id}\n                      className=\"flex items-baseline justify-between gap-4 border-b border-border py-3 last:border-b-0\"\n                    >\n                      <dt className=\"text-muted-foreground\">{limit.label}</dt>\n                      <dd className=\"text-right font-medium\">\n                        {plan.limits[limit.id] ?? \"—\"}\n                      </dd>\n                    </div>\n                  ))}\n                </dl>\n              </li>\n            );\n          })}\n        </ul>\n\n        {footnote ? (\n          <div className=\"mt-8 max-w-prose text-sm leading-relaxed text-muted-foreground\">\n            {footnote}\n          </div>\n        ) : null}\n      </div>\n    </section>\n  );\n}\n"
+    }
+  ],
+  "categories": ["pricing"],
+  "docs": "Taste notes, states and rules: https://tessli.vercel.app/library/pricing-tiers",
+  "meta": {
+    "tessli": {
+      "id": "pricing-tiers",
+      "kind": "section",
+      "category": "pricing",
+      "title": "Pricing tiers compared on the limits that matter",
+      "summary": "Two or three plans compared on the few limits buyers actually weigh, with one recommended plan and an honest billing-period switch.",
+      "use_when": [
+        "The product has two or three self-serve plans that differ on a few clear limits.",
+        "Monthly and annual billing are both offered and the difference should be visible before checkout."
+      ],
+      "avoid_when": [
+        "There are more than three plans, or pricing is usage-based; use a calculator or a full comparison table.",
+        "Every plan needs a sales conversation; show what is included and one contact route instead.",
+        "The plans differ on dozens of features; link to a full comparison table below a short summary."
+      ],
+      "rules": [],
+      "ai_default": "Three identical rounded cards, the middle one raised with a gradient border and a \"Most popular\" pill, a dozen ticked features per card that mostly repeat, the same \"Get started\" button on every card, and an annual toggle whose saving is a hard-coded percentage.",
+      "why_this_is_better": [
+        "Plans are compared on three named limits, written out as values (\"Up to 50\", \"1 year\") in the same order on every plan, so the difference is readable at a glance.",
+        "Only the recommended plan gets the primary button; it is marked with a text label as well as a border, so the recommendation does not depend on colour.",
+        "The annual saving is computed from the prices, and the billed-yearly total is shown, so the switch never promises a discount the numbers do not support.",
+        "Each call to action says what happens next (\"Start 14-day trial\", \"Choose Business\") instead of repeating \"Get started\".",
+        "A footnote states taxes and trial terms near the price, not on another page."
+      ],
+      "failures": [
+        "Adding a fourth plan to the same grid, which breaks the comparison on tablets and phones.",
+        "Listing features every plan has, which buries the limits that differ.",
+        "Marking more than one plan as recommended, or giving every plan a primary button.",
+        "Typing a saving percentage by hand that no longer matches the prices."
+      ],
+      "states": ["default", "annual"],
+      "responsive": {
+        "desktop": "Plans side by side (three plans from 1024px, two from 768px), each a subgrid over the same rows so names, prices, actions and limits line up; the billing switch sits beside the heading.",
+        "mobile": "Plans stack in order with the recommended plan unchanged in position; each keeps its own labelled list of limits, so nothing depends on column alignment."
+      },
+      "a11y": [
+        "The billing period is a fieldset with a visible legend and two native radio buttons, operable with arrow keys and labelled with the saving in text.",
+        "Plan names are h3 headings inside a list; prices and limits are text, and the recommended plan is named in text, not only by its border.",
+        "Calls to action are links at least 44px tall with a visible focus ring."
+      ],
+      "status": "community",
+      "reviewed_by": [],
+      "reviewed_at": null,
+      "contributors": [],
+      "provenance": "original",
+      "license": "MIT"
+    }
+  }
+}

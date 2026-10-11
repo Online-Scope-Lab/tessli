@@ -1,0 +1,222 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry.json",
+  "name": "tessli",
+  "homepage": "https://tessli.vercel.app/library",
+  "items": [
+    {
+      "name": "empty-state",
+      "type": "registry:component",
+      "title": "Empty state that says why and what next",
+      "description": "Replaces a list, table or feed that has nothing to show, and tells people why it is empty and the one thing to do next.",
+      "registryDependencies": [],
+      "dependencies": [],
+      "files": [
+        {
+          "path": "web/registry/items/empty-state/empty-state.tsx",
+          "type": "registry:component"
+        }
+      ],
+      "categories": [
+        "empty-states"
+      ],
+      "docs": "Taste notes, states and rules: https://tessli.vercel.app/library/empty-state",
+      "meta": {
+        "tessli": {
+          "id": "empty-state",
+          "kind": "component",
+          "category": "empty-states",
+          "title": "Empty state that says why and what next",
+          "summary": "Replaces a list, table or feed that has nothing to show, and tells people why it is empty and the one thing to do next.",
+          "use_when": [
+            "A region that normally holds content is empty on first use, after a search or filter, or because loading failed.",
+            "There is one clear next action, such as creating, importing, clearing a filter or retrying."
+          ],
+          "avoid_when": [
+            "The whole screen is empty because the user has no access; show a permission message with who to ask instead.",
+            "Content is still loading; show a skeleton or progress state, not an empty state.",
+            "The empty region is minor (a sidebar list, a small widget); a single muted sentence is enough."
+          ],
+          "rules": [],
+          "ai_default": "A large centred illustration or icon, the headline \"Nothing here yet\", a vague line such as \"Get started by creating your first item\", and the same generic message for first use, no search results and failed loads.",
+          "why_this_is_better": [
+            "The title names what is empty in the user's words (\"No notes in Field research yet\"), so it reads correctly out of context and to screen readers.",
+            "First use, no results and error are different states with different copy and actions, because they have different causes.",
+            "No results echoes the query and says what the search covered, so people can tell a typo from missing content.",
+            "The error state says what failed and what is safe (\"Nothing was deleted\") before offering a retry, and is labelled in text, not only by colour.",
+            "It sits where the content would be, left-aligned with the page, instead of a centred illustration that pushes the action below the fold.",
+            "One primary action, at most one secondary, both at least 44px tall."
+          ],
+          "failures": [
+            "Adding an illustration that is larger than the message and pushes the action off small screens.",
+            "Repeating a primary action that the toolbar above already offers, so two buttons compete for the same job.",
+            "Using one generic \"No data\" message for every cause.",
+            "Turning the error state into a red banner with no explanation of what is safe or what to do."
+          ],
+          "states": [
+            "first-use",
+            "no-results",
+            "error"
+          ],
+          "responsive": {
+            "desktop": "Bordered region aligned with the surrounding content; actions sit side by side under the text, which keeps a readable measure.",
+            "mobile": "Same order; padding tightens and actions become full-width buttons stacked in priority order."
+          },
+          "a11y": [
+            "A real heading (level set by headingLevel to match the page outline) names the region through aria-labelledby.",
+            "The error variant adds a text label above the title, so the state is not conveyed by colour alone.",
+            "Actions are native buttons or links at least 44px tall with a visible focus ring.",
+            "If the state appears after an action (a search, a failed save), announce it from your own live region; the component does not announce on its own."
+          ],
+          "status": "community",
+          "reviewed_by": [],
+          "reviewed_at": null,
+          "contributors": [],
+          "provenance": "original",
+          "license": "MIT"
+        }
+      }
+    },
+    {
+      "name": "faq",
+      "type": "registry:block",
+      "title": "FAQ that answers real objections",
+      "description": "Answers the questions buyers ask before committing, with direct answers and a real contact route, using native disclosure widgets.",
+      "registryDependencies": [],
+      "dependencies": [],
+      "files": [
+        {
+          "path": "web/registry/items/faq/faq.tsx",
+          "type": "registry:component"
+        }
+      ],
+      "categories": [
+        "faq"
+      ],
+      "docs": "Taste notes, states and rules: https://tessli.vercel.app/library/faq",
+      "meta": {
+        "tessli": {
+          "id": "faq",
+          "kind": "section",
+          "category": "faq",
+          "title": "FAQ that answers real objections",
+          "summary": "Answers the questions buyers ask before committing, with direct answers and a real contact route, using native disclosure widgets.",
+          "use_when": [
+            "A marketing or pricing page has four to eight recurring questions about data, billing, cancellation or access.",
+            "The answers are short and stable enough to live on the page."
+          ],
+          "avoid_when": [
+            "The questions need long, step-by-step answers; link to documentation instead.",
+            "You have fewer than three real questions; answer them in the page copy.",
+            "The content is support troubleshooting that changes often; keep it in a help centre."
+          ],
+          "rules": [],
+          "ai_default": "A centred \"Frequently Asked Questions\" heading over a JavaScript accordion of filler questions such as \"What is [product]?\" and \"Why choose us?\", answered with marketing copy, only one item open at a time, and no way to reach a person.",
+          "why_this_is_better": [
+            "Questions are real objections (export, cancellation, billing, sharing, offline) in the words a buyer would use.",
+            "Each answer starts with the direct answer (\"Yes.\", \"Only the people you invite.\") before the detail.",
+            "Native details and summary elements need no JavaScript, work with the keyboard and screen readers out of the box, and let people open several answers at once.",
+            "A heading that says what the questions are about, plus a real contact route for anything not covered.",
+            "On wide screens the heading column stays in view beside the questions instead of a centred single column."
+          ],
+          "failures": [
+            "Padding the list with questions nobody asks to make the section look complete.",
+            "Hiding prices, limits or cancellation terms in an FAQ instead of stating them where people decide.",
+            "Replacing the native disclosure with a custom accordion that loses keyboard and find-in-page support.",
+            "Linking the contact line to a form that does not exist yet."
+          ],
+          "states": [
+            "default"
+          ],
+          "responsive": {
+            "desktop": "Two columns from 1024px; the heading, description and contact route stay in view beside the questions.",
+            "mobile": "One column; the heading block comes first, then full-width questions with 44px touch targets."
+          },
+          "a11y": [
+            "The section is labelled by its h2; questions are summary elements inside details, so their expanded state is announced natively.",
+            "The plus icon is decorative (aria-hidden) and rotates into a cross; the open state never relies on the icon alone.",
+            "Each summary is at least 44px tall and shows a focus ring.",
+            "The rotation honours reduced motion."
+          ],
+          "status": "community",
+          "reviewed_by": [],
+          "reviewed_at": null,
+          "contributors": [],
+          "provenance": "original",
+          "license": "MIT"
+        }
+      }
+    },
+    {
+      "name": "pricing-tiers",
+      "type": "registry:block",
+      "title": "Pricing tiers compared on the limits that matter",
+      "description": "Two or three plans compared on the few limits buyers actually weigh, with one recommended plan and an honest billing-period switch.",
+      "registryDependencies": [
+        "button"
+      ],
+      "dependencies": [],
+      "files": [
+        {
+          "path": "web/registry/items/pricing-tiers/pricing-tiers.tsx",
+          "type": "registry:component"
+        }
+      ],
+      "categories": [
+        "pricing"
+      ],
+      "docs": "Taste notes, states and rules: https://tessli.vercel.app/library/pricing-tiers",
+      "meta": {
+        "tessli": {
+          "id": "pricing-tiers",
+          "kind": "section",
+          "category": "pricing",
+          "title": "Pricing tiers compared on the limits that matter",
+          "summary": "Two or three plans compared on the few limits buyers actually weigh, with one recommended plan and an honest billing-period switch.",
+          "use_when": [
+            "The product has two or three self-serve plans that differ on a few clear limits.",
+            "Monthly and annual billing are both offered and the difference should be visible before checkout."
+          ],
+          "avoid_when": [
+            "There are more than three plans, or pricing is usage-based; use a calculator or a full comparison table.",
+            "Every plan needs a sales conversation; show what is included and one contact route instead.",
+            "The plans differ on dozens of features; link to a full comparison table below a short summary."
+          ],
+          "rules": [],
+          "ai_default": "Three identical rounded cards, the middle one raised with a gradient border and a \"Most popular\" pill, a dozen ticked features per card that mostly repeat, the same \"Get started\" button on every card, and an annual toggle whose saving is a hard-coded percentage.",
+          "why_this_is_better": [
+            "Plans are compared on three named limits, written out as values (\"Up to 50\", \"1 year\") in the same order on every plan, so the difference is readable at a glance.",
+            "Only the recommended plan gets the primary button; it is marked with a text label as well as a border, so the recommendation does not depend on colour.",
+            "The annual saving is computed from the prices, and the billed-yearly total is shown, so the switch never promises a discount the numbers do not support.",
+            "Each call to action says what happens next (\"Start 14-day trial\", \"Choose Business\") instead of repeating \"Get started\".",
+            "A footnote states taxes and trial terms near the price, not on another page."
+          ],
+          "failures": [
+            "Adding a fourth plan to the same grid, which breaks the comparison on tablets and phones.",
+            "Listing features every plan has, which buries the limits that differ.",
+            "Marking more than one plan as recommended, or giving every plan a primary button.",
+            "Typing a saving percentage by hand that no longer matches the prices."
+          ],
+          "states": [
+            "default",
+            "annual"
+          ],
+          "responsive": {
+            "desktop": "Plans side by side (three plans from 1024px, two from 768px), each a subgrid over the same rows so names, prices, actions and limits line up; the billing switch sits beside the heading.",
+            "mobile": "Plans stack in order with the recommended plan unchanged in position; each keeps its own labelled list of limits, so nothing depends on column alignment."
+          },
+          "a11y": [
+            "The billing period is a fieldset with a visible legend and two native radio buttons, operable with arrow keys and labelled with the saving in text.",
+            "Plan names are h3 headings inside a list; prices and limits are text, and the recommended plan is named in text, not only by its border.",
+            "Calls to action are links at least 44px tall with a visible focus ring."
+          ],
+          "status": "community",
+          "reviewed_by": [],
+          "reviewed_at": null,
+          "contributors": [],
+          "provenance": "original",
+          "license": "MIT"
+        }
+      }
+    }
+  ]
+}

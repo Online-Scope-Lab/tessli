@@ -11,7 +11,7 @@ Rules for coding agents and contributors working in this repository. Short on pu
 ## How to work
 
 - One focused PR per change, branched from the latest `main`. Never rewrite `main` history.
-- Run `npm run check` from `web/` before opening a PR. It runs the hero hash check, `format:check`, `typecheck`, `lint`, `test`, `catalogue:check` and `build`; CI (`.github/workflows/ci.yml`) runs the same steps plus the browser tests.
+- Run `npm run check` from `web/` before opening a PR. It runs the hero hash check, `format:check`, `typecheck`, `lint`, `test`, `catalogue:check`, `registry:check` and `build`; CI (`.github/workflows/ci.yml`) runs the same steps plus `shadcn registry validate`, the browser tests and the item preview tests (`npm run test:items`).
 - For visible changes, attach screenshots at 1440, 1024, 768, 390 and 320 px, with no horizontal overflow.
 - Never skip, disable or weaken a test to get green. A test that only checks removed behaviour is deleted with it; a test that also checks something kept is edited.
 - Record a non-obvious decision as one dated line in [`docs/decisions.md`](docs/decisions.md).
@@ -26,6 +26,7 @@ Rules for coding agents and contributors working in this repository. Short on pu
 
 - Semantic theme tokens only (`--background`, `--foreground`, `--primary`, `--muted`, `--border`, `--radius`…); no hard-coded brand colours.
 - Every item must work in the Tessli, Neutral and Dark themes.
+- An item is one folder in `web/registry/items/<slug>/` (start from `web/registry/_template/`). The item file imports shadcn primitives as `@/registry/shadcn/ui/<name>` and `cn` from `@/registry/shadcn/lib/utils`, which `shadcn add` rewrites to the installing project's paths. Run `npm run registry:build` after any change and commit the generated files.
 - Items you build have status `community`. Only a human maintainer signs an item `reviewed`.
 - Original work only. Adapted open-source work names its source and licence. No ports of paid kits.
 

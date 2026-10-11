@@ -35,7 +35,7 @@ test("public header and footer promote only implemented routes", async () => {
     ]);
 
   for (const route of new Set(["/", ...headerRoutes, ...footerRoutes])) {
-    await access(path.join(webRoot, `app${route}/page.tsx`));
+    await access(path.join(webRoot, `app/(site)${route}/page.tsx`));
   }
 
   for (const route of headerRoutes) {
@@ -60,9 +60,9 @@ test("public header and footer promote only implemented routes", async () => {
 
 test("unfinished and internal-lab routes are non-indexable", async () => {
   const [submit, suggest, lab] = await Promise.all([
-    read("app/submit/page.tsx"),
-    read("app/suggest/page.tsx"),
-    read("app/lab/page.tsx"),
+    read("app/(site)/submit/page.tsx"),
+    read("app/(site)/suggest/page.tsx"),
+    read("app/(site)/lab/page.tsx"),
   ]);
 
   for (const route of [submit, suggest, lab]) {

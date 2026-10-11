@@ -34,7 +34,7 @@ test("Playbook adapter resolves staged roles from canonical catalogue data", asy
 });
 
 test("Collections index uses research-path framing and canonical collections", async () => {
-  const page = await read("app/collections/page.tsx");
+  const page = await read("app/(site)/collections/page.tsx");
 
   assert.match(page, /title: "Collections"/);
   assert.match(page, /Which guided research path matches my goal\?/);
@@ -69,7 +69,7 @@ test("Collection cards expose goal, audience, stages, and expected decision", as
 
 test("Playbook detail exposes intent, stages, roles, and exports", async () => {
   const [detail, resourceList, resourceCard] = await Promise.all([
-    read("app/collections/[slug]/page.tsx"),
+    read("app/(site)/collections/[slug]/page.tsx"),
     read("components/collection-resources/collection-resource-list.tsx"),
     read("components/resource-card/resource-card.tsx"),
   ]);
@@ -104,8 +104,8 @@ test("Playbook detail exposes intent, stages, roles, and exports", async () => {
 test("Collection layouts use bounded grids and responsive collapse", async () => {
   const [cardCss, indexCss, detailCss, resourceCss] = await Promise.all([
     read("components/collection-card/collection-card.module.css"),
-    read("app/collections/collections.module.css"),
-    read("app/collections/[slug]/collection-detail.module.css"),
+    read("app/(site)/collections/collections.module.css"),
+    read("app/(site)/collections/[slug]/collection-detail.module.css"),
     read("components/collection-resources/collection-resource-list.module.css"),
   ]);
 

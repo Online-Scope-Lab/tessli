@@ -13,7 +13,7 @@ const read = (file) => readFile(path.join(webRoot, file), "utf8");
 
 test("public content routes replace preview shells with factual Phase 1 pages", async () => {
   const pages = await Promise.all(
-    routes.map((route) => read(`app/${route}/page.tsx`)),
+    routes.map((route) => read(`app/(site)/${route}/page.tsx`)),
   );
   for (const page of pages) {
     assert.match(page, /<PublicContentPage/);

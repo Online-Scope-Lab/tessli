@@ -1,0 +1,102 @@
+/*
+ * Library preview themes.
+ *
+ * Library items use only the shadcn semantic variables below, so they take on
+ * the installing project's theme. These three sets exist so a reviewer can see
+ * an item in more than one theme; they apply only inside an element with
+ * data-theme (the /preview route's wrapper), never to the Tessli site itself.
+ *
+ * - tessli:  the Tessli brand (warm canvas, charcoal text, restrained orange),
+ *            from the tokens in app/globals.css and design.md §6.
+ * - neutral: a cool grey product-UI theme.
+ * - dark:    a neutral dark theme.
+ *
+ * `@theme inline` in app/globals.css maps each variable to Tailwind utilities
+ * (bg-background, text-muted-foreground, border-border, rounded-lg …), and the
+ * `dark:` variant follows data-theme="dark". tests/library-themes.test.mjs
+ * checks the WCAG 2.2 AA text-contrast pairs for every theme.
+ */
+
+[data-theme="tessli"] {
+  color-scheme: light;
+  --font-ui: var(--font-instrument-sans), "Avenir Next", system-ui, sans-serif;
+  --radius: 0.4375rem;
+  --background: #fcf8f3;
+  --foreground: #151412;
+  --card: #fffefc;
+  --card-foreground: #151412;
+  --popover: #fffefc;
+  --popover-foreground: #151412;
+  --primary: #f05217;
+  --primary-foreground: #151412;
+  --secondary: #f5f0ea;
+  --secondary-foreground: #151412;
+  --muted: #f5f0ea;
+  --muted-foreground: #6f6862;
+  --accent: #ebe4dc;
+  --accent-foreground: #151412;
+  --destructive: #b63129;
+  --border: #d8d1c8;
+  --input: #bdb5ab;
+  --ring: #1d4ed8;
+}
+
+[data-theme="neutral"] {
+  color-scheme: light;
+  --font-ui:
+    ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto,
+    "Helvetica Neue", Arial, sans-serif;
+  --radius: 0.5rem;
+  --background: #ffffff;
+  --foreground: #0f172a;
+  --card: #ffffff;
+  --card-foreground: #0f172a;
+  --popover: #ffffff;
+  --popover-foreground: #0f172a;
+  --primary: #1e293b;
+  --primary-foreground: #f8fafc;
+  --secondary: #f1f5f9;
+  --secondary-foreground: #0f172a;
+  --muted: #f1f5f9;
+  --muted-foreground: #556070;
+  --accent: #e2e8f0;
+  --accent-foreground: #0f172a;
+  --destructive: #b91c1c;
+  --border: #e2e8f0;
+  --input: #94a3b8;
+  --ring: #475569;
+}
+
+[data-theme="dark"] {
+  color-scheme: dark;
+  --font-ui:
+    ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto,
+    "Helvetica Neue", Arial, sans-serif;
+  --radius: 0.5rem;
+  --background: #111214;
+  --foreground: #ededef;
+  --card: #18191c;
+  --card-foreground: #ededef;
+  --popover: #18191c;
+  --popover-foreground: #ededef;
+  --primary: #ededef;
+  --primary-foreground: #18191c;
+  --secondary: #26282c;
+  --secondary-foreground: #ededef;
+  --muted: #202226;
+  --muted-foreground: #a3a6ad;
+  --accent: #2b2e33;
+  --accent-foreground: #ededef;
+  --destructive: #f87171;
+  --border: #2f3237;
+  --input: #4a4e55;
+  --ring: #a3a6ad;
+}
+
+[data-theme] {
+  min-height: 100vh;
+  background-color: var(--background);
+  color: var(--foreground);
+  font-family: var(--font-ui);
+  font-variation-settings: normal;
+}

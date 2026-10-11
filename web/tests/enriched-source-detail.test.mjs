@@ -15,7 +15,7 @@ async function read(relativePath) {
 
 test("source detail uses recorded intelligence as guidance and keeps diagnostics quiet", async () => {
   const [page, detail] = await Promise.all([
-    read("app/resources/[slug]/page.tsx"),
+    read("app/(site)/resources/[slug]/page.tsx"),
     read("components/source-detail/intelligence-detail.tsx"),
   ]);
 

@@ -38,7 +38,7 @@ const routeShells = footerRoutes.filter(
 
 test("every internal footer destination has an App Router page", async () => {
   for (const route of footerRoutes) {
-    await access(path.join(webRoot, `app${route}/page.tsx`));
+    await access(path.join(webRoot, `app/(site)${route}/page.tsx`));
   }
 });
 
@@ -82,7 +82,7 @@ test("footer contains truthful research groups and safe external links", async (
 
 test("route shells are honest, visitor-facing, and never collect data", async () => {
   for (const route of routeShells) {
-    const page = await read(`app${route}/page.tsx`);
+    const page = await read(`app/(site)${route}/page.tsx`);
     assert.match(page, /<RoutePlaceholder/);
     assert.doesNotMatch(page, /<form|fetch\(|action=/);
     assert.doesNotMatch(page, /\bSlices?\s+\d/i);
@@ -118,7 +118,7 @@ test("header exposes only working primary and utility routes", async () => {
 });
 
 test("global footer stays inside the modal-inert site content wrapper", async () => {
-  const layout = await read("app/layout.tsx");
+  const layout = await read("components/site-chrome/site-chrome.tsx");
 
   assert.match(
     layout,

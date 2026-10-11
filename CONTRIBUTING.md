@@ -19,9 +19,16 @@ A **Suggest a source** issue gets one automatic comment (`.github/workflows/sugg
 
 ### Contribute an item
 
-**Honest status: the library is not open for item contributions yet.** Tessli v1.2 is in progress. Today the site is the curated Sources directory. The library, the item template (`web/registry/_template/`) and the CI checks for items arrive in Phase 2, and the first items are built and reviewed by the maintainers to set the bar. Until then, the most useful contributions are source suggestions, design submissions, problem reports and fixes to the existing site.
+An item is one folder, `web/registry/items/<slug>/`, opened as a PR. The first items were built by the maintainers to set the bar; read one (for example `web/registry/items/pricing-tiers/`) before you start.
 
-When the template lands, an item will be a folder you copy, fill in and open as a PR. The [item checklist](#item-checklist) below is the bar it will be reviewed against.
+1. Copy `web/registry/_template/` to `web/registry/items/<slug>/`, where `<slug>` is a lowercase, hyphenated name that will never change.
+2. Rename `example-item.tsx` to `<slug>.tsx` and build the item there. It is one file that imports only React, shadcn/ui primitives as `@/registry/shadcn/ui/<name>` (for example `@/registry/shadcn/ui/button`) and `cn` from `@/registry/shadcn/lib/utils`. The shadcn CLI rewrites those to the installing project's `@/components/ui/<name>` and `@/lib/utils`. A primitive that isn't in `web/registry/shadcn/ui/` yet is vendored from shadcn/ui in the same PR.
+3. Write `demo.tsx` (the first state in `notes.md`) with realistic, clearly fictional content. If the item has more states (empty, error, loading…), export them from `states.tsx` as `export const states = { "state-name": Component }`; otherwise delete `states.tsx`.
+4. Fill in every field of `notes.md` honestly, then a few short paragraphs of reasoning. [`schemas/library-item.schema.json`](schemas/library-item.schema.json) is the full field list. Leave `status: community`, `reviewed_by: []` and `reviewed_at: null`: only a maintainer marks an item reviewed.
+5. From `web/`, run `npm run registry:build` (it validates the item and regenerates `registry.json`, `web/public/r/<slug>.json`, `web/data/library.json` and `web/registry/__index__.tsx`), then `npm run check`.
+6. Look at it: `npm run dev`, then open `/preview/<slug>?theme=tessli|neutral|dark` (add `&state=<name>` for other states) at 1440, 1024, 768, 390 and 320 px, and `/library/<slug>`. After `npm run build`, `npm run test:items` runs the same automated checks as CI (overflow, console errors and axe-core WCAG 2.2 AA) and saves screenshots to `web/artifacts/items/`.
+
+The [item checklist](#item-checklist) below is the bar every item is reviewed against.
 
 ### Add a source
 
@@ -64,7 +71,7 @@ Before opening a PR, run the checks from `web/`:
 npm run check
 ```
 
-It runs the hero artwork hash check, `format:check`, `typecheck`, `lint`, `test`, `catalogue:check` and `build`: everything CI runs except the browser tests. (`npm run format` fixes formatting.)
+It runs the hero artwork hash check, `format:check`, `typecheck`, `lint`, `test`, `catalogue:check`, `registry:check` and `build`: everything CI runs except the shadcn registry validation and the browser and item preview tests. (`npm run format` fixes formatting.)
 
 Branch from the latest `main`, keep one focused change per PR, and fill in the pull request template.
 

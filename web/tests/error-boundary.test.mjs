@@ -7,9 +7,9 @@ import { fileURLToPath } from "node:url";
 const currentFile = fileURLToPath(import.meta.url);
 const webRoot = path.resolve(path.dirname(currentFile), "..");
 
-test("root error boundary provides a safe recovery path", async () => {
+test("site error boundary provides a safe recovery path", async () => {
   const errorBoundary = await readFile(
-    path.join(webRoot, "app", "error.tsx"),
+    path.join(webRoot, "app", "(site)", "error.tsx"),
     "utf8",
   );
 

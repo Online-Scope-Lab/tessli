@@ -6,7 +6,7 @@ const catalogue = JSON.parse(
   await readFile(new URL("../data/catalogue.json", import.meta.url), "utf8"),
 );
 const page = await readFile(
-  new URL("../app/resources/[slug]/page.tsx", import.meta.url),
+  new URL("../app/(site)/resources/[slug]/page.tsx", import.meta.url),
   "utf8",
 );
 const detail = await readFile(
@@ -17,7 +17,10 @@ const detail = await readFile(
   "utf8",
 );
 const styles = await readFile(
-  new URL("../app/resources/[slug]/source-detail.module.css", import.meta.url),
+  new URL(
+    "../app/(site)/resources/[slug]/source-detail.module.css",
+    import.meta.url,
+  ),
   "utf8",
 );
 const sitemap = await readFile(

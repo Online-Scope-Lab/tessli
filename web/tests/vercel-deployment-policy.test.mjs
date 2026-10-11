@@ -42,5 +42,21 @@ test("the Next.js cutover preserves the browser security-header contract", async
     headers.get("Referrer-Policy"),
     "strict-origin-when-cross-origin",
   );
-  assert.equal(headers.get("X-Frame-Options"), "DENY");
+  // Framing is denied everywhere except the library previews, which the
+  // library pages embed from the same origin.
+  assert.equal(headers.has("X-Frame-Options"), false);
+  const headersFor = (source) =>
+    new Map(
+      config.headers
+        ?.find((entry) => entry.source === source)
+        ?.headers?.map((header) => [header.key, header.value]) ?? [],
+    );
+  assert.equal(headersFor("/((?!preview/).*)").get("X-Frame-Options"), "DENY");
+  const preview = headersFor("/preview/(.*)");
+  assert.equal(preview.get("X-Frame-Options"), "SAMEORIGIN");
+  assert.equal(
+    preview.get("Content-Security-Policy"),
+    "frame-ancestors 'self'",
+  );
+  assert.equal(preview.get("X-Robots-Tag"), "noindex");
 });

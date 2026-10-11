@@ -1,0 +1,194 @@
+{
+  "version": 1,
+  "generatedBy": "web/scripts/build-registry.mjs",
+  "installPrefix": "npx shadcn@latest add online-scope-lab/tessli/",
+  "categories": [
+    { "id": "hero", "label": "Hero" },
+    { "id": "features", "label": "Features" },
+    { "id": "pricing", "label": "Pricing" },
+    { "id": "social-proof", "label": "Social proof" },
+    { "id": "faq", "label": "FAQ" },
+    { "id": "cta", "label": "Call to action" },
+    { "id": "settings", "label": "Settings" },
+    { "id": "tables", "label": "Tables" },
+    { "id": "dashboards", "label": "Dashboards" },
+    { "id": "forms", "label": "Forms" },
+    { "id": "auth", "label": "Sign-in and sign-up" },
+    { "id": "empty-states", "label": "Empty states" },
+    { "id": "navigation", "label": "Navigation" },
+    { "id": "mobile", "label": "Mobile" }
+  ],
+  "items": [
+    {
+      "slug": "empty-state",
+      "type": "registry:component",
+      "notes": {
+        "id": "empty-state",
+        "kind": "component",
+        "category": "empty-states",
+        "title": "Empty state that says why and what next",
+        "summary": "Replaces a list, table or feed that has nothing to show, and tells people why it is empty and the one thing to do next.",
+        "use_when": [
+          "A region that normally holds content is empty on first use, after a search or filter, or because loading failed.",
+          "There is one clear next action, such as creating, importing, clearing a filter or retrying."
+        ],
+        "avoid_when": [
+          "The whole screen is empty because the user has no access; show a permission message with who to ask instead.",
+          "Content is still loading; show a skeleton or progress state, not an empty state.",
+          "The empty region is minor (a sidebar list, a small widget); a single muted sentence is enough."
+        ],
+        "rules": [],
+        "ai_default": "A large centred illustration or icon, the headline \"Nothing here yet\", a vague line such as \"Get started by creating your first item\", and the same generic message for first use, no search results and failed loads.",
+        "why_this_is_better": [
+          "The title names what is empty in the user's words (\"No notes in Field research yet\"), so it reads correctly out of context and to screen readers.",
+          "First use, no results and error are different states with different copy and actions, because they have different causes.",
+          "No results echoes the query and says what the search covered, so people can tell a typo from missing content.",
+          "The error state says what failed and what is safe (\"Nothing was deleted\") before offering a retry, and is labelled in text, not only by colour.",
+          "It sits where the content would be, left-aligned with the page, instead of a centred illustration that pushes the action below the fold.",
+          "One primary action, at most one secondary, both at least 44px tall."
+        ],
+        "failures": [
+          "Adding an illustration that is larger than the message and pushes the action off small screens.",
+          "Repeating a primary action that the toolbar above already offers, so two buttons compete for the same job.",
+          "Using one generic \"No data\" message for every cause.",
+          "Turning the error state into a red banner with no explanation of what is safe or what to do."
+        ],
+        "states": ["first-use", "no-results", "error"],
+        "responsive": {
+          "desktop": "Bordered region aligned with the surrounding content; actions sit side by side under the text, which keeps a readable measure.",
+          "mobile": "Same order; padding tightens and actions become full-width buttons stacked in priority order."
+        },
+        "a11y": [
+          "A real heading (level set by headingLevel to match the page outline) names the region through aria-labelledby.",
+          "The error variant adds a text label above the title, so the state is not conveyed by colour alone.",
+          "Actions are native buttons or links at least 44px tall with a visible focus ring.",
+          "If the state appears after an action (a search, a failed save), announce it from your own live region; the component does not announce on its own."
+        ],
+        "status": "community",
+        "reviewed_by": [],
+        "reviewed_at": null,
+        "contributors": [],
+        "provenance": "original",
+        "license": "MIT"
+      },
+      "body": "An empty state is the first screen many people see, and the screen they see when something goes wrong. The common default treats all of those moments the same: an illustration and \"Nothing here yet\". This item treats them as three different situations.\n\n**First use** explains what will appear and offers the action that fills it. **No results** repeats the query and the search scope, then offers a wider search or a reset. **Error** says what failed and what is safe, then offers a retry.\n\nThe component is deliberately plain: a heading, a sentence or two, and actions. Put it where the content would have been, at the same alignment, so the page does not jump when content arrives.",
+      "registryDependencies": [],
+      "dependencies": [],
+      "sourcePath": "web/registry/items/empty-state/empty-state.tsx",
+      "source": "import * as React from \"react\";\n\nimport { cn } from \"@/registry/shadcn/lib/utils\";\n\ntype HeadingLevel = 2 | 3 | 4;\n\nexport type EmptyStateProps = Omit<React.ComponentProps<\"section\">, \"title\"> & {\n  /** Says what is empty, in the user's words: \"No notes in Field research yet\". */\n  title: React.ReactNode;\n  /** One or two sentences: why it is empty and what will appear here. */\n  description?: React.ReactNode;\n  /**\n   * `neutral` for first use and no results; `error` when something failed.\n   * Error adds a text label, so the state never relies on colour alone.\n   */\n  variant?: \"neutral\" | \"error\";\n  /** Text shown before the title in the error variant. */\n  errorLabel?: string;\n  /** Match the surrounding outline; the empty state replaces a region's content. */\n  headingLevel?: HeadingLevel;\n  /** Actions: one primary, at most one secondary. */\n  actions?: React.ReactNode;\n};\n\nexport function EmptyState({\n  title,\n  description,\n  variant = \"neutral\",\n  errorLabel = \"Error\",\n  headingLevel = 2,\n  actions,\n  children,\n  className,\n  ...props\n}: EmptyStateProps) {\n  const headingId = React.useId();\n  const Heading = `h${headingLevel}` as const;\n  const isError = variant === \"error\";\n\n  return (\n    <section\n      aria-labelledby={headingId}\n      data-slot=\"empty-state\"\n      data-variant={variant}\n      className={cn(\n        \"rounded-lg border bg-card px-5 py-6 text-card-foreground sm:px-8 sm:py-8\",\n        isError ? \"border-destructive/50\" : \"border-dashed border-border\",\n        className,\n      )}\n      {...props}\n    >\n      <div className=\"max-w-prose\">\n        <Heading\n          id={headingId}\n          className=\"text-lg leading-snug font-semibold tracking-tight text-balance\"\n        >\n          {isError ? (\n            <span className=\"mb-1 block text-sm font-semibold text-destructive\">\n              {errorLabel}\n            </span>\n          ) : null}\n          {title}\n        </Heading>\n        {description ? (\n          <div className=\"mt-2 text-sm leading-relaxed text-pretty text-muted-foreground\">\n            {description}\n          </div>\n        ) : null}\n        {children ? <div className=\"mt-4 text-sm\">{children}</div> : null}\n      </div>\n      {actions ? (\n        <div className=\"mt-6 flex flex-col gap-3 sm:flex-row sm:flex-wrap sm:items-center\">\n          {actions}\n        </div>\n      ) : null}\n    </section>\n  );\n}\n"
+    },
+    {
+      "slug": "faq",
+      "type": "registry:block",
+      "notes": {
+        "id": "faq",
+        "kind": "section",
+        "category": "faq",
+        "title": "FAQ that answers real objections",
+        "summary": "Answers the questions buyers ask before committing, with direct answers and a real contact route, using native disclosure widgets.",
+        "use_when": [
+          "A marketing or pricing page has four to eight recurring questions about data, billing, cancellation or access.",
+          "The answers are short and stable enough to live on the page."
+        ],
+        "avoid_when": [
+          "The questions need long, step-by-step answers; link to documentation instead.",
+          "You have fewer than three real questions; answer them in the page copy.",
+          "The content is support troubleshooting that changes often; keep it in a help centre."
+        ],
+        "rules": [],
+        "ai_default": "A centred \"Frequently Asked Questions\" heading over a JavaScript accordion of filler questions such as \"What is [product]?\" and \"Why choose us?\", answered with marketing copy, only one item open at a time, and no way to reach a person.",
+        "why_this_is_better": [
+          "Questions are real objections (export, cancellation, billing, sharing, offline) in the words a buyer would use.",
+          "Each answer starts with the direct answer (\"Yes.\", \"Only the people you invite.\") before the detail.",
+          "Native details and summary elements need no JavaScript, work with the keyboard and screen readers out of the box, and let people open several answers at once.",
+          "A heading that says what the questions are about, plus a real contact route for anything not covered.",
+          "On wide screens the heading column stays in view beside the questions instead of a centred single column."
+        ],
+        "failures": [
+          "Padding the list with questions nobody asks to make the section look complete.",
+          "Hiding prices, limits or cancellation terms in an FAQ instead of stating them where people decide.",
+          "Replacing the native disclosure with a custom accordion that loses keyboard and find-in-page support.",
+          "Linking the contact line to a form that does not exist yet."
+        ],
+        "states": ["default"],
+        "responsive": {
+          "desktop": "Two columns from 1024px; the heading, description and contact route stay in view beside the questions.",
+          "mobile": "One column; the heading block comes first, then full-width questions with 44px touch targets."
+        },
+        "a11y": [
+          "The section is labelled by its h2; questions are summary elements inside details, so their expanded state is announced natively.",
+          "The plus icon is decorative (aria-hidden) and rotates into a cross; the open state never relies on the icon alone.",
+          "Each summary is at least 44px tall and shows a focus ring.",
+          "The rotation honours reduced motion."
+        ],
+        "status": "community",
+        "reviewed_by": [],
+        "reviewed_at": null,
+        "contributors": [],
+        "provenance": "original",
+        "license": "MIT"
+      },
+      "body": "An FAQ earns its place when it removes a reason not to buy. That means real objections: can I leave with my data, what happens if I stop paying, who can see my work. Filler questions about what the product is belong in the hero, not here.\n\nThe section uses native `details` and `summary` elements. They are keyboard- and screen-reader-accessible without any script, and people can open more than one answer to compare them. Keep answers to a few sentences and lead with the direct answer.\n\nThe contact line is part of the item, not decoration: if the answer is not on the page, say who answers and how fast, and only if that is true.",
+      "registryDependencies": [],
+      "dependencies": [],
+      "sourcePath": "web/registry/items/faq/faq.tsx",
+      "source": "import * as React from \"react\";\n\nimport { cn } from \"@/registry/shadcn/lib/utils\";\n\nexport type FaqItem = {\n  /** The question as a buyer would ask it, not a marketing prompt. */\n  question: string;\n  /** A direct answer first, then the detail. Keep it to a few sentences. */\n  answer: React.ReactNode;\n};\n\nexport type FaqProps = Omit<React.ComponentProps<\"section\">, \"title\"> & {\n  title: React.ReactNode;\n  /** One sentence on what these questions cover. */\n  description?: React.ReactNode;\n  items: FaqItem[];\n  /** Where to go when the answer is not here: a real contact route. */\n  contact?: React.ReactNode;\n  /** Open the first answer on load. Off by default. */\n  openFirst?: boolean;\n};\n\nexport function Faq({\n  title,\n  description,\n  items,\n  contact,\n  openFirst = false,\n  className,\n  ...props\n}: FaqProps) {\n  const headingId = React.useId();\n\n  return (\n    <section\n      aria-labelledby={headingId}\n      data-slot=\"faq\"\n      className={cn(\"bg-background text-foreground\", className)}\n      {...props}\n    >\n      <div className=\"mx-auto grid w-full max-w-6xl gap-8 px-4 py-12 sm:px-6 sm:py-16 lg:grid-cols-[minmax(0,1fr)_minmax(0,2fr)] lg:gap-16 lg:px-8 lg:py-24\">\n        <div className=\"lg:sticky lg:top-8 lg:self-start\">\n          <h2\n            id={headingId}\n            className=\"text-3xl leading-tight font-semibold tracking-tight text-balance sm:text-4xl\"\n          >\n            {title}\n          </h2>\n          {description ? (\n            <p className=\"mt-4 max-w-prose text-base leading-relaxed text-pretty text-muted-foreground\">\n              {description}\n            </p>\n          ) : null}\n          {contact ? (\n            <div className=\"mt-6 max-w-prose text-sm leading-relaxed text-muted-foreground\">\n              {contact}\n            </div>\n          ) : null}\n        </div>\n\n        <div className=\"border-t border-border\">\n          {items.map((item, index) => (\n            <details\n              key={item.question}\n              open={openFirst && index === 0}\n              className=\"group border-b border-border\"\n            >\n              <summary className=\"flex min-h-11 cursor-pointer list-none items-start justify-between gap-4 rounded-sm py-4 text-left text-base leading-snug font-medium focus-visible:ring-[3px] focus-visible:ring-ring/50 focus-visible:outline-none [&::-webkit-details-marker]:hidden\">\n                <span>{item.question}</span>\n                <svg\n                  aria-hidden=\"true\"\n                  viewBox=\"0 0 16 16\"\n                  className=\"mt-1 size-4 shrink-0 text-muted-foreground transition-transform duration-200 group-open:rotate-45 motion-reduce:transition-none\"\n                  fill=\"none\"\n                  stroke=\"currentColor\"\n                  strokeWidth=\"1.5\"\n                  strokeLinecap=\"round\"\n                >\n                  <path d=\"M8 3v10M3 8h10\" />\n                </svg>\n              </summary>\n              <div className=\"max-w-prose pr-8 pb-5 text-sm leading-relaxed text-pretty text-muted-foreground\">\n                {item.answer}\n              </div>\n            </details>\n          ))}\n        </div>\n      </div>\n    </section>\n  );\n}\n"
+    },
+    {
+      "slug": "pricing-tiers",
+      "type": "registry:block",
+      "notes": {
+        "id": "pricing-tiers",
+        "kind": "section",
+        "category": "pricing",
+        "title": "Pricing tiers compared on the limits that matter",
+        "summary": "Two or three plans compared on the few limits buyers actually weigh, with one recommended plan and an honest billing-period switch.",
+        "use_when": [
+          "The product has two or three self-serve plans that differ on a few clear limits.",
+          "Monthly and annual billing are both offered and the difference should be visible before checkout."
+        ],
+        "avoid_when": [
+          "There are more than three plans, or pricing is usage-based; use a calculator or a full comparison table.",
+          "Every plan needs a sales conversation; show what is included and one contact route instead.",
+          "The plans differ on dozens of features; link to a full comparison table below a short summary."
+        ],
+        "rules": [],
+        "ai_default": "Three identical rounded cards, the middle one raised with a gradient border and a \"Most popular\" pill, a dozen ticked features per card that mostly repeat, the same \"Get started\" button on every card, and an annual toggle whose saving is a hard-coded percentage.",
+        "why_this_is_better": [
+          "Plans are compared on three named limits, written out as values (\"Up to 50\", \"1 year\") in the same order on every plan, so the difference is readable at a glance.",
+          "Only the recommended plan gets the primary button; it is marked with a text label as well as a border, so the recommendation does not depend on colour.",
+          "The annual saving is computed from the prices, and the billed-yearly total is shown, so the switch never promises a discount the numbers do not support.",
+          "Each call to action says what happens next (\"Start 14-day trial\", \"Choose Business\") instead of repeating \"Get started\".",
+          "A footnote states taxes and trial terms near the price, not on another page."
+        ],
+        "failures": [
+          "Adding a fourth plan to the same grid, which breaks the comparison on tablets and phones.",
+          "Listing features every plan has, which buries the limits that differ.",
+          "Marking more than one plan as recommended, or giving every plan a primary button.",
+          "Typing a saving percentage by hand that no longer matches the prices."
+        ],
+        "states": ["default", "annual"],
+        "responsive": {
+          "desktop": "Plans side by side (three plans from 1024px, two from 768px), each a subgrid over the same rows so names, prices, actions and limits line up; the billing switch sits beside the heading.",
+          "mobile": "Plans stack in order with the recommended plan unchanged in position; each keeps its own labelled list of limits, so nothing depends on column alignment."
+        },
+        "a11y": [
+          "The billing period is a fieldset with a visible legend and two native radio buttons, operable with arrow keys and labelled with the saving in text.",
+          "Plan names are h3 headings inside a list; prices and limits are text, and the recommended plan is named in text, not only by its border.",
+          "Calls to action are links at least 44px tall with a visible focus ring."
+        ],
+        "status": "community",
+        "reviewed_by": [],
+        "reviewed_at": null,
+        "contributors": [],
+        "provenance": "original",
+        "license": "MIT"
+      },
+      "body": "Pricing pages go wrong when every plan looks the same and lists everything. Buyers compare a few limits, so this item makes those limits the structure: the same three rows on every plan, values written out, in the same order.\n\nOnly one plan is recommended, and only that plan gets the primary button. The billing switch is a pair of native radio buttons; the saving it shows is calculated from the prices you pass in, so it cannot drift out of date.\n\nPass two or three plans. Beyond that, the grid stops working on smaller screens and a comparison table or calculator serves people better.",
+      "registryDependencies": ["button"],
+      "dependencies": [],
+      "sourcePath": "web/registry/items/pricing-tiers/pricing-tiers.tsx",
+      "source": "\"use client\";\n\nimport * as React from \"react\";\n\nimport { cn } from \"@/registry/shadcn/lib/utils\";\nimport { buttonVariants } from \"@/registry/shadcn/ui/button\";\n\nexport type BillingPeriod = \"monthly\" | \"annual\";\n\nexport type PricingLimit = {\n  id: string;\n  /** What buyers compare: \"Members\", \"Version history\". */\n  label: string;\n};\n\nexport type PricingPlan = {\n  id: string;\n  name: string;\n  /** Who the plan is for, in one short sentence. */\n  description: string;\n  /** Price per seat per month for each billing period. 0 renders \"Free\". */\n  price: Record<BillingPeriod, number>;\n  /** The value for each limit id, written out (\"Up to 50\", not a tick). */\n  limits: Record<string, string>;\n  cta: { label: string; href: string };\n  /** At most one plan. It gets the only primary button and a text label. */\n  recommended?: boolean;\n};\n\nexport type PricingTiersProps = Omit<\n  React.ComponentProps<\"section\">,\n  \"title\"\n> & {\n  title: React.ReactNode;\n  description?: React.ReactNode;\n  /** Two or three plans. Use a comparison table or calculator beyond that. */\n  plans: PricingPlan[];\n  /** The three to five limits the plans actually differ on, in order. */\n  limits: PricingLimit[];\n  currency?: string;\n  locale?: string;\n  /** Unit after the price, e.g. \"per member / month\". */\n  unit?: string;\n  recommendedLabel?: string;\n  defaultPeriod?: BillingPeriod;\n  /** Taxes, trial terms or anything a buyer must know before paying. */\n  footnote?: React.ReactNode;\n};\n\nfunction formatPrice(value: number, currency: string, locale: string) {\n  return new Intl.NumberFormat(locale, {\n    style: \"currency\",\n    currency,\n    minimumFractionDigits: Number.isInteger(value) ? 0 : 2,\n    maximumFractionDigits: 2,\n  }).format(value);\n}\n\nexport function PricingTiers({\n  title,\n  description,\n  plans,\n  limits,\n  currency = \"USD\",\n  locale = \"en-US\",\n  unit = \"per member / month\",\n  recommendedLabel = \"Recommended\",\n  defaultPeriod = \"monthly\",\n  footnote,\n  className,\n  ...props\n}: PricingTiersProps) {\n  const [period, setPeriod] = React.useState<BillingPeriod>(defaultPeriod);\n  const id = React.useId();\n  const headingId = `${id}-heading`;\n\n  // The annual saving is derived from the prices, never typed in by hand.\n  const savings = plans\n    .filter((plan) => plan.price.monthly > 0)\n    .map((plan) => 1 - plan.price.annual / plan.price.monthly);\n  const bestSaving = savings.length ? Math.max(...savings) : 0;\n  const savingLabel =\n    bestSaving > 0 ? `save up to ${Math.round(bestSaving * 100)}%` : null;\n\n  return (\n    <section\n      aria-labelledby={headingId}\n      data-slot=\"pricing-tiers\"\n      className={cn(\"bg-background text-foreground\", className)}\n      {...props}\n    >\n      <div className=\"mx-auto w-full max-w-6xl px-4 py-12 sm:px-6 sm:py-16 lg:px-8 lg:py-24\">\n        <div className=\"flex flex-col gap-6 md:flex-row md:items-end md:justify-between\">\n          <div className=\"max-w-2xl\">\n            <h2\n              id={headingId}\n              className=\"text-3xl leading-tight font-semibold tracking-tight text-balance sm:text-4xl\"\n            >\n              {title}\n            </h2>\n            {description ? (\n              <p className=\"mt-4 text-base leading-relaxed text-pretty text-muted-foreground\">\n                {description}\n              </p>\n            ) : null}\n          </div>\n\n          <fieldset className=\"shrink-0\">\n            <legend className=\"mb-2 text-sm font-medium\">Billing period</legend>\n            <div className=\"inline-flex rounded-md border border-border bg-muted p-1\">\n              {([\"monthly\", \"annual\"] as const).map((option) => (\n                <label\n                  key={option}\n                  className=\"relative flex min-h-11 cursor-pointer items-center rounded-sm px-4 text-sm font-medium text-muted-foreground has-[:checked]:bg-background has-[:checked]:text-foreground has-[:checked]:shadow-xs has-[:focus-visible]:ring-[3px] has-[:focus-visible]:ring-ring/50\"\n                >\n                  <input\n                    type=\"radio\"\n                    name={`${id}-period`}\n                    value={option}\n                    checked={period === option}\n                    onChange={() => setPeriod(option)}\n                    className=\"sr-only\"\n                  />\n                  {option === \"monthly\" ? \"Monthly\" : \"Annual\"}\n                  {option === \"annual\" && savingLabel ? (\n                    <span className=\"ml-1.5 font-normal\">({savingLabel})</span>\n                  ) : null}\n                </label>\n              ))}\n            </div>\n          </fieldset>\n        </div>\n\n        <ul\n          className={cn(\n            \"mt-10 grid gap-6\",\n            // Three plans need 1024px to stay readable side by side.\n            plans.length === 2 ? \"md:grid-cols-2\" : \"lg:grid-cols-3\",\n          )}\n        >\n          {plans.map((plan) => {\n            const price = plan.price[period];\n            return (\n              <li\n                key={plan.id}\n                className={cn(\n                  // Side by side, each plan is a subgrid over the same seven\n                  // rows, so names, prices, actions and limits line up.\n                  \"flex flex-col rounded-lg border bg-card p-6 text-card-foreground\",\n                  plans.length === 2\n                    ? \"md:row-span-7 md:grid md:grid-rows-subgrid md:gap-y-0\"\n                    : \"lg:row-span-7 lg:grid lg:grid-rows-subgrid lg:gap-y-0\",\n                  plan.recommended\n                    ? \"border-2 border-primary\"\n                    : \"border-border\",\n                )}\n              >\n                <p\n                  className={cn(\n                    \"min-h-5 text-sm font-medium\",\n                    !plan.recommended &&\n                      (plans.length === 2\n                        ? \"hidden md:block\"\n                        : \"hidden lg:block\"),\n                  )}\n                >\n                  {plan.recommended ? recommendedLabel : null}\n                </p>\n                <h3 className=\"mt-1 text-xl font-semibold tracking-tight\">\n                  {plan.name}\n                </h3>\n                <p className=\"mt-1 text-sm leading-relaxed text-muted-foreground\">\n                  {plan.description}\n                </p>\n\n                <p className=\"mt-6 flex flex-wrap items-baseline gap-x-2\">\n                  <span className=\"text-4xl font-semibold tracking-tight tabular-nums\">\n                    {price === 0\n                      ? \"Free\"\n                      : formatPrice(price, currency, locale)}\n                  </span>\n                  {price === 0 ? null : (\n                    <span className=\"text-sm text-muted-foreground\">\n                      {unit}\n                    </span>\n                  )}\n                </p>\n                <p className=\"mt-1 min-h-5 text-sm text-muted-foreground\">\n                  {price === 0\n                    ? \"No card needed\"\n                    : period === \"annual\"\n                      ? `Billed yearly at ${formatPrice(price * 12, currency, locale)} per member`\n                      : \"Billed monthly\"}\n                </p>\n\n                <a\n                  href={plan.cta.href}\n                  className={cn(\n                    buttonVariants({\n                      variant: plan.recommended ? \"default\" : \"outline\",\n                      size: \"lg\",\n                    }),\n                    \"mt-6 h-11 w-full\",\n                  )}\n                >\n                  {plan.cta.label}\n                </a>\n\n                <dl className=\"mt-6 border-t border-border text-sm\">\n                  {limits.map((limit) => (\n                    <div\n                      key={limit.id}\n                      className=\"flex items-baseline justify-between gap-4 border-b border-border py-3 last:border-b-0\"\n                    >\n                      <dt className=\"text-muted-foreground\">{limit.label}</dt>\n                      <dd className=\"text-right font-medium\">\n                        {plan.limits[limit.id] ?? \"—\"}\n                      </dd>\n                    </div>\n                  ))}\n                </dl>\n              </li>\n            );\n          })}\n        </ul>\n\n        {footnote ? (\n          <div className=\"mt-8 max-w-prose text-sm leading-relaxed text-muted-foreground\">\n            {footnote}\n          </div>\n        ) : null}\n      </div>\n    </section>\n  );\n}\n"
+    }
+  ]
+}

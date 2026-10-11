@@ -27,7 +27,7 @@ test("robots metadata advertises the sitemap and blocks unpublished routes", asy
   assert.match(robots, /sitemap/i);
   assert.match(robots, /sitemap\.xml/);
 
-  for (const pathname of ["/submit", "/suggest", "/lab/"]) {
+  for (const pathname of ["/submit", "/suggest", "/lab/", "/preview/"]) {
     assert.match(robots, quotedPath(pathname), `robots disallows ${pathname}`);
   }
 
@@ -80,6 +80,7 @@ test("sitemap lists only public discovery routes and machine representations", a
   const sitemap = await read("app/sitemap.ts");
 
   for (const pathname of [
+    "/library",
     "/resources",
     "/collections",
     "/for-ai",
@@ -87,6 +88,11 @@ test("sitemap lists only public discovery routes and machine representations", a
   ]) {
     assert.match(sitemap, quotedPath(pathname), `sitemap includes ${pathname}`);
   }
+
+  assert.match(sitemap, /getLibraryItems\(\)\.flatMap/);
+  assert.match(sitemap, /\$\{origin\}\/library\/\$\{item\.slug\}/);
+  assert.match(sitemap, /item\.json/);
+  assert.match(sitemap, /item\.md/);
 
   assert.match(sitemap, /getPublishedCollections\(\)\.flatMap/);
   assert.match(sitemap, /\$\{origin\}\/collections\/\$\{collection\.slug\}/);
@@ -104,6 +110,7 @@ test("sitemap lists only public discovery routes and machine representations", a
     "/saved",
     "/boards",
     "/lab",
+    "/preview",
   ]) {
     assert.doesNotMatch(
       sitemap,

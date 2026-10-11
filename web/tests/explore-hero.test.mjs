@@ -12,7 +12,7 @@ async function read(relativePath) {
 }
 
 test("Home preserves the existing hero and delegates its new content below the fold", async () => {
-  const page = await read("app/page.tsx");
+  const page = await read("app/(site)/page.tsx");
 
   assert.match(page, /import \{ ExploreHero \}/);
   assert.match(page, /import \{ HomeTaskEntry \}/);
@@ -73,7 +73,7 @@ test("global overflow QA is independent from the grain control", async () => {
   const [layout, probe, grainToggle] = await Promise.all([
     read("app/layout.tsx"),
     read("components/viewport-overflow-probe/viewport-overflow-probe.tsx"),
-    read("app/lab/grain-toggle.tsx"),
+    read("app/(site)/lab/grain-toggle.tsx"),
   ]);
 
   assert.match(layout, /<ViewportOverflowProbe \/>/);

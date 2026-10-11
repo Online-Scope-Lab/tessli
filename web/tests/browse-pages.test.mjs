@@ -13,7 +13,7 @@ async function read(relativePath) {
 
 test("canonical Browse derives one paginated result set from source profiles", async () => {
   const [page, browse, filters] = await Promise.all([
-    read("app/resources/page.tsx"),
+    read("app/(site)/resources/page.tsx"),
     read("lib/browse.ts"),
     read("components/browse/browse-filters.tsx"),
   ]);
@@ -43,7 +43,7 @@ test("canonical Browse derives one paginated result set from source profiles", a
 
 test("canonical Browse uses repository data without remote state", async () => {
   const [resources, filters, navigation] = await Promise.all([
-    read("app/resources/page.tsx"),
+    read("app/(site)/resources/page.tsx"),
     read("components/browse/browse-filters.tsx"),
     read("components/site-header/navigation.ts"),
   ]);
@@ -103,7 +103,7 @@ test("Browse cards expose internal profiles plus independent provider actions", 
 
 test("canonical Browse renders one responsive result tree without duplicate desktop and mobile catalogues", async () => {
   const [page, results, css] = await Promise.all([
-    read("app/resources/page.tsx"),
+    read("app/(site)/resources/page.tsx"),
     read("components/browse/browse-results.tsx"),
     read("components/browse/browse.module.css"),
   ]);
@@ -124,7 +124,7 @@ test("canonical Browse renders one responsive result tree without duplicate desk
 
 test("minimum source profile routes cover all source slugs without overstating enrichment", async () => {
   const [detail, guide, actions] = await Promise.all([
-    read("app/resources/[slug]/page.tsx"),
+    read("app/(site)/resources/[slug]/page.tsx"),
     read("components/source-detail/intelligence-detail.tsx"),
     read("components/source-detail/source-actions.tsx"),
   ]);
