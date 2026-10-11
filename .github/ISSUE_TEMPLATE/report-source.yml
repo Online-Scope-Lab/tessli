@@ -1,0 +1,53 @@
+name: Report a source problem
+description: A listed source has a broken link, wrong information, or should be archived.
+title: "[Source problem]: "
+labels: ["source:problem"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Sources are never deleted silently. A source that should go is archived with a reason, so its history
+        and old links survive. Thanks for helping keep the directory accurate.
+  - type: input
+    id: source
+    attributes:
+      label: Source URL or Tessli slug
+      description: The source's own URL, or its Tessli page (for example /resources/land-book).
+    validations:
+      required: true
+  - type: dropdown
+    id: problem
+    attributes:
+      label: What is wrong?
+      options:
+        - Broken link (404, unreachable, or expired domain)
+        - Redirects to a different product or brand
+        - Wrong information (description, category, access or licence)
+        - Should be archived (shut down, off-scope, duplicate, or no longer useful)
+        - Something else
+    validations:
+      required: true
+  - type: textarea
+    id: details
+    attributes:
+      label: Details
+      description: What you saw, what you expected, and when you checked. Link evidence where you can.
+    validations:
+      required: true
+  - type: input
+    id: replacement
+    attributes:
+      label: Replacement or correct URL (optional)
+      description: If the source moved or a better equivalent exists. No referral, affiliate or tracking parameters.
+      placeholder: https://
+  - type: dropdown
+    id: affiliation
+    attributes:
+      label: Your relationship to this source
+      options:
+        - No affiliation
+        - I work on or for it
+        - I created it
+        - Paid or sponsored relationship
+    validations:
+      required: true

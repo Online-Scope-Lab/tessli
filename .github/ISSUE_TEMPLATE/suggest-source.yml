@@ -1,0 +1,141 @@
+name: Suggest a source
+description: Propose a design or frontend reference for the Tessli catalogue.
+title: "[Source]: "
+labels: ["source:suggestion"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Tessli lists sources a designer or frontend developer can **browse** for references,
+        components, patterns, type, icons, colour, motion or accessibility guidance.
+        Not accepted: general app builders, ad/marketing libraries, stock marketplaces,
+        directories of other directories, affiliate links.
+        A maintainer opens and checks every suggestion before it is added. Suggesting a source does not mean it will be listed.
+  - type: input
+    id: name
+    attributes:
+      label: Source name
+      placeholder: Component Gallery
+    validations:
+      required: true
+  - type: input
+    id: url
+    attributes:
+      label: Canonical URL
+      description: The page someone should land on. https only. No referral, affiliate or tracking parameters.
+      placeholder: https://
+    validations:
+      required: true
+  - type: dropdown
+    id: category
+    attributes:
+      label: Category
+      options:
+        - Website inspiration
+        - Sections and UI patterns
+        - Product UI and flows
+        - Landing, ecommerce and email
+        - UI components
+        - Design systems
+        - Motion and 3D
+        - Typography
+        - Colour
+        - Accessibility
+        - Icons
+        - Illustrations and assets
+        - Design and build tools
+    validations:
+      required: true
+  - type: dropdown
+    id: kind
+    attributes:
+      label: What kind of source is it?
+      options:
+        - Gallery / showcase
+        - Pattern or flow library
+        - Component library or registry
+        - Design system / guidelines
+        - Font library or foundry
+        - Type tool
+        - Icon set
+        - Illustration or asset library
+        - Generator / colour tool
+        - Accessibility tool or guide
+        - Motion / 3D library or tool
+        - Design or build tool
+        - Reference guide
+    validations:
+      required: true
+  - type: dropdown
+    id: access
+    attributes:
+      label: Access model
+      options:
+        - Free
+        - Open source
+        - Freemium (useful free tier)
+        - Paid
+        - Not sure
+    validations:
+      required: true
+  - type: textarea
+    id: summary
+    attributes:
+      label: What will someone find there?
+      description: One or two specific sentences. Content type, scope and rough size. No marketing adjectives.
+      placeholder: Side-by-side examples of ~60 component types taken from public design systems, with links to each implementation.
+    validations:
+      required: true
+  - type: textarea
+    id: why
+    attributes:
+      label: Why include it?
+      description: How is it different from similar sources already in Tessli? Name 1-3 peers it complements or beats.
+    validations:
+      required: true
+  - type: dropdown
+    id: frameworks
+    attributes:
+      label: Frameworks or tools (if relevant)
+      multiple: true
+      options:
+        - Not applicable
+        - React
+        - Vue
+        - Svelte
+        - Angular
+        - Web components
+        - Tailwind CSS
+        - Plain HTML/CSS
+        - Figma
+        - Framer
+        - Webflow
+  - type: input
+    id: license
+    attributes:
+      label: Licence (if known)
+      placeholder: MIT, OFL-1.1, CC0, proprietary, mixed
+  - type: dropdown
+    id: affiliation
+    attributes:
+      label: Your relationship to this source
+      options:
+        - No affiliation
+        - I work on or for it
+        - I created it
+        - Paid or sponsored relationship
+    validations:
+      required: true
+  - type: checkboxes
+    id: checks
+    attributes:
+      label: Before submitting
+      options:
+        - label: I searched the catalogue and open issues; it is not already listed or proposed.
+          required: true
+        - label: The URL opens without login and shows meaningful content (or I chose Paid).
+          required: true
+        - label: The URL contains no referral, affiliate or tracking parameters.
+          required: true
+        - label: I am a human submitter, and I have opened and looked at this source myself.
+          required: true

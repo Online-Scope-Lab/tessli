@@ -3,7 +3,7 @@
 Status: **active visual contract**
 Last updated: 2026-07-29
 
-This document is the concise source of truth for Tessli's visual identity. Page structure, component behaviour, data rules, architecture, and delivery slices live in the linked documents under `docs/`.
+This document is the concise source of truth for Tessli's visual identity. Component behaviour, data rules and quality checks live in the documents indexed in [`docs/README.md`](docs/README.md).
 
 ## 1. Product character
 
@@ -105,6 +105,18 @@ Rules:
 ### Loading
 
 Use variable fonts through `next/font` so they are self-hosted at build time, avoid browser requests to Google, and reduce layout shift. Do not commit unlicensed font files. Both chosen families are released under SIL OFL 1.1.
+
+### Why these fonts
+
+Chosen in July 2026 after comparing five open (SIL OFL) candidates. The full research notes are preserved at the `v1.1-archive` tag.
+
+- **Newsreader** (selected, display): designed for content-rich on-screen use, variable, editorial warmth, and works at both display and reading sizes.
+- **Instrument Sans** (selected, interface): variable width and weight, subtle personality, twelve stylistic sets, and holds up in dense product UI.
+- **Instrument Serif** (rejected): close to the early visual direction, but paired with Inter it had become an obvious template/AI-site look, and its single display weight gives little hierarchy control.
+- **Fraunces** (reserved): distinctive variable axes, but its expressive forms can make the directory feel playful or retro and are easy to over-style. It is the only alternate to test if Newsreader stops working for the wordmark or hero; don't restart an open-ended font search.
+- **Figtree** (fallback): friendly and usable, but more geometric and generic than the editorial direction. Fallback only if Instrument Sans fails in-browser testing.
+
+Any font change must pass an in-browser specimen first: the wordmark, hero headline, navigation, card title and description, category labels, numerals and dates, form copy and long source names.
 
 ## 5. Type scale
 
@@ -263,7 +275,7 @@ Reference breakpoints:
 --bp-2xl: 1440px;
 ```
 
-Breakpoints are behaviour triggers, not device labels. Exact transitions are documented in `docs/page-contracts.md`.
+Breakpoints are behaviour triggers, not device labels. Each page's exact transitions live in its CSS module; check them at the widths in [`docs/quality-gates.md`](docs/quality-gates.md).
 
 ## 13. Anti-patterns
 

@@ -1,156 +1,57 @@
-# Tessli Quality Gates
+# Quality gates
 
-No page is complete because it “looks close” in one desktop screenshot.
+A checklist for any visible change. A page isn't done because it looks close in one desktop screenshot. Visual rules live in [`design.md`](../design.md); library items also meet the [item checklist](../CONTRIBUTING.md#item-checklist).
 
-## 1. Visual QA
+## Widths
 
-Capture at minimum:
+- [ ] Checked at 1440×900, 1024×768, 768×1024 and 390×844.
+- [ ] 320px gate: no horizontal overflow wherever the surface can compress that far.
+- [ ] Mobile is recomposed, not a shrunken desktop layout.
+- [ ] Screenshots of each width are attached to the PR.
 
-- 1440×900;
-- 1024×768;
-- 768×1024;
-- 390×844;
-- 320px width overflow gate where the surface can compress that far.
+## Visual and type
 
-Check:
+- [ ] Newsreader only in display roles; Instrument Sans for all UI. Fonts load; no faux bold or italic.
+- [ ] Headline wrapping, container alignment and section rhythm as intended.
+- [ ] Orange stays restrained; borders carry hierarchy; grain stays subtle.
+- [ ] Hero artwork keeps its scale, crop and empty alt text.
+- [ ] Tabular numbers for counts; readable line lengths; no major layout shift from font fallback.
+- [ ] No untouched generic component defaults.
 
-- font loaded and correct;
-- intended headline wrapping;
-- container alignment;
-- artwork scale/crop;
-- section rhythm;
-- orange restraint;
-- border consistency;
-- grain subtlety;
-- card heights;
-- no accidental generic component defaults.
+## Accessibility
 
-## 2. Typography QA
+- [ ] Contrast: normal text at least 4.5:1, large text at least 3:1 (WCAG 2.2 AA).
+- [ ] Complete keyboard navigation with a visible `:focus-visible` indicator.
+- [ ] Touch targets about 44×44px.
+- [ ] Every field has a label; errors are connected to their controls.
+- [ ] Live regions announce search, filter and result changes.
+- [ ] `prefers-reduced-motion` respected: non-essential transforms and transitions removed.
+- [ ] Forced-colours mode stays usable.
+- [ ] Semantic landmarks and heading order; no invalid nested interactive markup; no hover-only information.
 
-- Newsreader appears only in approved display roles;
-- Instrument Sans used for UI;
-- no faux bold/italic;
-- variable weights render correctly;
-- tabular numbers for counts;
-- line lengths remain readable;
-- fallback does not create major layout shift.
+## Interaction
 
-## 3. Accessibility
+- [ ] Links and cards work with click, keyboard, modifier click and middle click.
+- [ ] Menus and sheets close on Escape and return focus to their trigger; mobile sheets manage focus.
+- [ ] URL filters survive a refresh.
+- [ ] Loading controls don't resize.
+- [ ] Empty, error and loading states exist.
 
-- normal text contrast at least 4.5:1;
-- large text contrast at least 3:1;
-- visible focus indicator;
-- complete keyboard navigation;
-- touch targets approximately 44×44px;
-- labels for all fields;
-- errors connected to controls;
-- live regions for search/result feedback;
-- decorative hero uses empty alt;
-- reduced-motion preference respected;
-- forced-colours mode remains usable.
+## Truthfulness
 
-## 4. Interaction
+- [ ] Counts are calculated from current data, never hard-coded.
+- [ ] No fake users, ratings, curators, trends, reviews, logos, testimonials or activity.
+- [ ] Prices and access models are labelled as subject to change; dates are shown only when tracked.
+- [ ] Broken or unavailable sources degrade clearly.
+- [ ] Public discovery (`robots.txt`, `llms.txt`, sitemap) advertises only routes that work.
 
-- cards open correctly with click, keyboard, modifier click, and middle click;
-- save control does not trigger navigation;
-- menus close on Escape and return focus;
-- mobile sheets trap focus appropriately;
-- URL filters restore on refresh;
-- loading controls do not resize;
-- destructive actions require confirmation or undo.
+## Media and performance
 
-## 5. Data truthfulness
+- [ ] Source media keeps fixed aspect ratios and stays useful when every image fails (see [`data-and-media-contract.md`](data-and-media-contract.md)).
+- [ ] Below-the-fold images load lazily; no remote SVG injection.
+- [ ] LCP under 2.5s on a reasonable mobile test; CLS under 0.1; no render-blocking third-party font request.
 
-- counts calculated from current data;
-- no fake users, ratings, curators, trends, reviews, or activity;
-- prices/access models labelled as potentially changing;
-- last-verified dates only shown when tracked;
-- broken resources degrade clearly.
+## Security
 
-Routine source pages and agent packets foreground task fit, access action, important limitation, and differentiated alternatives. Sourced facts, curator judgment, project decisions, and unresolved questions remain distinct. Provenance, freshness, governance, and operational verification are available as secondary diagnostics; repository evidence is not live provider verification.
-
-## 6. Machine contracts and discovery
-
-For every data or machine slice, verify:
-
-- deterministic output, stable IDs/slugs, and all 295 catalogue rows preserved;
-- website, JSON, Markdown, and MCP consume the same canonical truth where applicable;
-- task retrieval returns no more than eight explained results with stable ordering;
-- recorded access routes state an action and auth boundary without invented provider capabilities;
-- public static discovery (`robots.txt`, `llms.txt`, sitemap, and For AI links) advertises only implemented public interfaces;
-- no remote calls during normal build/test, no secrets, and no browser-local Board exposure.
-
-## 7. Media resilience
-
-Test:
-
-- valid OG image;
-- portrait image;
-- oversized image;
-- missing image;
-- favicon only;
-- broken URL;
-- SVG URL;
-- slow image;
-- hotlink-blocked image.
-
-Cards must retain dimensions and usefulness in every case.
-
-Approved repository-managed previews and the fallback chain are the default. A live iframe is optional only after the separately approved V3.15 pilot: allowlist, sandbox/security/performance/mobile checks, fixed-ratio fallback, and no agent dependency are mandatory.
-
-## 8. Performance targets
-
-Initial public route targets:
-
-- LCP under 2.5 seconds on a reasonable mobile test;
-- CLS under 0.1;
-- no render-blocking third-party font request;
-- hero production asset near or below 250 KB where visually acceptable;
-- thumbnails lazy-loaded below fold;
-- avoid large client JavaScript for static catalogue filtering;
-- no Three.js for the initial hero.
-
-## 9. Security
-
-- no user HTML rendered unsanitised;
-- no arbitrary remote SVG injection;
-- metadata fetcher rejects private networks and unsafe protocols;
-- RLS enabled and tested for every exposed user table;
-- service keys server-only;
-- auth redirect URLs restricted;
-- form rate limits;
-- external links protected.
-
-The local MCP remains local and read-only. A hosted remote MCP is not implied before V3.16 and, when approved, requires origin validation, input limits, rate limits, timeouts, safe logs, monitoring, and public-data-only access.
-
-## 10. Browser support
-
-Minimum test:
-
-- latest Chrome;
-- latest Safari;
-- latest Firefox;
-- iOS Safari;
-- Android Chrome.
-
-Pay special attention to:
-
-- variable font rendering;
-- sticky header;
-- horizontal category scrolling;
-- viewport height in mobile sheets;
-- WebP transparency;
-- focus-visible behaviour.
-
-## 11. Definition of done
-
-A slice is done only when:
-
-- contract acceptance criteria pass;
-- screenshots reviewed;
-- responsive states reviewed;
-- accessibility checks pass;
-- error/empty/loading states exist;
-- no known regression;
-- documentation updated;
-- changes committed in a focused PR.
+- [ ] No unsanitised user HTML; external links are safe (`rel="noopener noreferrer"` where they open a new tab).
+- [ ] No secrets in the tree; normal build and test make no network calls.

@@ -47,10 +47,5 @@ test("universal Save remains local-only and does not expand into Boards or cloud
   const list = await read(
     "components/collection-resources/collection-resource-list.tsx",
   );
-  const slice = await read("../docs/slices/3.1-universal-local-save.md");
-
   assert.doesNotMatch(list, /fetch\(|supabase|board|account/i);
-  assert.match(slice, /no project Boards or notes/i);
-  assert.match(slice, /no cloud persistence/i);
-  assert.match(slice, /no authentication activation/i);
 });

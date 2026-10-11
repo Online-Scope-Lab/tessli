@@ -1,0 +1,8 @@
+blank_issues_enabled: false
+contact_links:
+  - name: Contributing guide
+    url: https://github.com/Online-Scope-Lab/tessli/blob/main/CONTRIBUTING.md
+    about: How to suggest sources, submit designs and contribute code.
+  - name: Code of conduct concerns
+    url: https://github.com/Online-Scope-Lab/tessli/blob/main/CODE_OF_CONDUCT.md#enforcement
+    about: Report conduct issues privately to the maintainers, not in a public issue.

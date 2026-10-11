@@ -1,0 +1,73 @@
+name: Submit a design
+description: Share a design for a component, section or page that developers can turn into a Tessli library item.
+title: "[Design]: "
+labels: ["design:needs-implementation"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Designers submit, developers implement, and both are credited on the item.
+        A maintainer reviews every submission. Submitting a design does not mean it will be built.
+        Please attach only work you made or have the right to share. Do not submit screenshots of paid UI kits
+        or of other people's products presented as your own.
+  - type: dropdown
+    id: kind
+    attributes:
+      label: What is it?
+      options:
+        - Component
+        - Section
+        - Page
+    validations:
+      required: true
+  - type: textarea
+    id: design
+    attributes:
+      label: Screenshot or Figma link
+      description: Drag images into this box, or paste a Figma link that anyone with the link can view.
+    validations:
+      required: true
+  - type: textarea
+    id: problem
+    attributes:
+      label: What problem does it solve?
+      description: The job this design does for the person using it, and when you would reach for it.
+      placeholder: Lets a buyer compare two plans on the three limits that actually differ, without a wall of ticked features.
+    validations:
+      required: true
+  - type: textarea
+    id: ai-default
+    attributes:
+      label: What does the common default get wrong?
+      description: Describe the generic version you usually see (from templates or AI tools) and why this design is better.
+      placeholder: Three identical cards, the middle one marked "Most popular", twelve ticked features each and the same button label on every card.
+    validations:
+      required: true
+  - type: textarea
+    id: notes
+    attributes:
+      label: States, responsive and accessibility notes (optional)
+      description: Loading, empty or error states; how it should behave on mobile; anything about keyboard use or contrast.
+  - type: dropdown
+    id: ai-assistance
+    attributes:
+      label: AI assistance
+      description: AI assistance is allowed but must be disclosed, and a human must have reviewed the result.
+      options:
+        - No AI assistance
+        - AI assisted, and I reviewed and edited the result
+    validations:
+      required: true
+  - type: textarea
+    id: ai-details
+    attributes:
+      label: If AI assisted, what did it do? (optional)
+  - type: checkboxes
+    id: rights
+    attributes:
+      label: Rights
+      options:
+        - label: This is my original work, or I have the right to share it, and I agree it may be implemented and published under the MIT licence.
+          required: true
+        - label: It contains no invented metrics, real company logos or testimonials presented as real.
+          required: true

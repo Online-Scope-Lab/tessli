@@ -1,0 +1,8 @@
+# Default owners for everything in the repository.
+# Both accounts belong to the project owner and have write access.
+* @itsdeepaks @deepak-onlinescope
+
+# Library items, design rules and source records need an owner review.
+/web/registry/ @itsdeepaks @deepak-onlinescope
+/rules/ @itsdeepaks @deepak-onlinescope
+/sources/ @itsdeepaks @deepak-onlinescope

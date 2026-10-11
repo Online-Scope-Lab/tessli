@@ -1,0 +1,22 @@
+# Trademarks and brand assets
+
+The code and taste notes in this repository are released under the [MIT licence](LICENSE). The following brand assets are **not** covered by that licence:
+
+- the **Tessli** name;
+- the Tessli **wordmark**;
+- the Tessli **hero artwork**: `web/public/brand/tessli-hero-geometry.webp` and `docs/ref-img/tessli-hero-geometry.webp`.
+
+All rights in these assets are held by **Online Scope**.
+
+## Forks and redistribution
+
+If you fork or redistribute this project, you must:
+
+- rename it so it is not presented as Tessli or as an official Tessli project;
+- remove the wordmark and the hero artwork and replace them with your own assets.
+
+## Allowed use
+
+Nominative use is fine. You may use the name "Tessli" to refer to this project truthfully, for example "built with components from Tessli" or "a fork of Tessli", as long as you don't imply endorsement by or affiliation with Online Scope.
+
+Questions about brand use go to the maintainers via [GitHub issues](https://github.com/Online-Scope-Lab/tessli/issues).

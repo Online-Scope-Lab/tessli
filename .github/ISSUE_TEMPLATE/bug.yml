@@ -1,0 +1,45 @@
+name: Bug report
+description: Something on the Tessli website or in this repository does not work as expected.
+title: "[Bug]: "
+labels: ["bug"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        For a problem with a listed source (broken link, wrong information), use **Report a source problem** instead.
+        Do not include passwords, tokens or other personal data.
+  - type: input
+    id: url
+    attributes:
+      label: Page or file
+      description: The page URL or repository path where it happens.
+      placeholder: /resources?category=typography
+    validations:
+      required: true
+  - type: textarea
+    id: what-happened
+    attributes:
+      label: What happened?
+      description: What you did, what you expected, and what happened instead.
+    validations:
+      required: true
+  - type: textarea
+    id: steps
+    attributes:
+      label: Steps to reproduce
+      placeholder: |
+        1. Open …
+        2. Click …
+        3. See …
+    validations:
+      required: true
+  - type: input
+    id: environment
+    attributes:
+      label: Browser, device and screen width
+      placeholder: Safari 18 on iPhone, 390px
+  - type: textarea
+    id: screenshots
+    attributes:
+      label: Screenshots or logs (optional)
+      description: Drag images here, or paste console output.

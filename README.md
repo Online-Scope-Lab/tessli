@@ -1,139 +1,34 @@
 # Tessli
 
-Tessli is a **human-curated, AI-native design-source router**. It helps people and coding agents find the right design or frontend source for a task, understand why it fits, choose how to access it, and retain the useful project decisions.
+**UI with the reasoning attached.**
 
-The current 295-source catalogue is the identity layer—not the entire product. Tessli joins:
+Tessli is becoming an open-source UI library that explains itself. Every component, section and page will ship with working code, a live preview and its reasoning: when to use it, when not to, the rules it follows, the generic default it replaces, and its states, responsive behaviour and accessibility. People will be able to browse it, copy it and learn from it; coding agents will install it with the standard shadcn CLI and read the same reasoning as structured data. Beside the library sits a curated, community-maintained directory of external design sources. Everything is contributed and reviewed on GitHub.
 
-1. task-led source discovery for people;
-2. concise source guidance, previews, limitations, alternatives, and project decisions;
-3. machine-readable source data, local MCP, and later remote agent access over the same canonical truth.
+## Status: v1.2 in progress
 
-Read the authoritative direction and execution plan first:
+Be clear about what exists today:
 
-- [`docs/product-realignment-v3.md`](docs/product-realignment-v3.md)
-- [`docs/product-direction.md`](docs/product-direction.md)
-- [`PRD.md`](PRD.md)
-- [`build-slices.md`](build-slices.md)
-- [`AGENTS.md`](AGENTS.md)
+- **Live now:** the curated **Sources** directory (browse, source pages, collections), public Markdown/JSON for each source, and a local read-only MCP server ([`docs/tessli-native-mcp.md`](docs/tessli-native-mcp.md)).
+- **Being built:** the library itself, its item template, preview themes and CI checks. No library items exist yet.
+- **Not built:** accounts, a database, analytics or payments. GitHub issues and pull requests are the backend.
 
-`docs/product-realignment-v3.md` is the active V3 implementation map. [`docs/product-plan-v2.md`](docs/product-plan-v2.md) preserves V2 execution evidence only; it is not a second active roadmap.
+The plan and its phases are in [`docs/v1.2/plan.md`](docs/v1.2/plan.md).
 
-## Current application baseline
+## Quick start
 
-The current application now includes the first reusable Tessli research loop:
+You need Node.js 22 or later and npm. The app lives in `web/`.
 
-- one canonical paginated `/resources` browser;
-- truthful internal profiles for all 295 sources;
-- 255 Listed, 40 Profiled, and 0 Verified coverage;
-- enriched intelligence for the 40 Profiled sources;
-- explainable Similar Sources;
-- browser-local Saved with search, filters, sorting, removal, and undo;
-- browser-local project Boards with goals, audience, constraints, source notes, selected/rejected/undecided decisions, rationale, and unresolved questions;
-- deterministic browser-local Markdown research-pack copy and download;
-- deterministic public Markdown/JSON for every source and published collection;
-- a reproducible Online Scope Studio homepage proof brief, Board, baseline, and research pack;
-- an isolated, browser-tested OSS homepage candidate with retained implementation evidence;
-- six repository-maintained staged Playbooks;
-- a working For AI route documenting current local MCP and public representations;
-- public About, curation, privacy, terms, and content-policy pages;
-- responsive and browser-tested interaction states.
-
-Authentication, cloud workspaces, submissions, moderation, large pattern catalogues, provider proxying, and public UI-taste claims remain deferred.
-
-## Active V3 execution loop
-
-V3.0 authority reconciliation, V3.1 public IA hygiene, V3.2 AccessRoute pilot, V3.3 Motion source-guide proof, V3.4 Canonical Browse focus, V3.5 Homepage task entry, V3.6 resource-card consistency, V3.7 deterministic task retrieval, V3.8 local MCP v2, V3.9 compact public machine representations, V3.10 machine discovery, V3.11 Collections as research paths, V3.12 Saved-to-Board flow, V3.13 Board agent handoff, V3.14 For AI redesign, and V3.15 live-preview pilot are complete. V3.16’s disabled-by-default transport preflight is implemented; enabling hosted remote MCP still needs a public-transport and security decision.
-
-```text
-V3.14 For AI redesign (complete)
-→ V3.15 Live-preview pilot (complete)
-→ V3.16 Hosted remote MCP preflight (disabled by default; public transport and security decision required)
-```
-
-Machine work follows the stable source-guide contract:
-
-```text
-V3.7 deterministic task retrieval
-→ V3.8 local MCP v2
-→ V3.9 compact public representations
-→ V3.10 machine discovery (complete)
-→ V3.16 remote MCP preflight (disabled by default)
-→ V3.17 supported cross-model validation
-```
-
-The full ordered sequence, dependencies, acceptance criteria, and explicit deferrals are in [`docs/product-realignment-v3.md`](docs/product-realignment-v3.md).
-
-## Current V2 baseline
-
-V2 delivered the canonical catalogue, Browse, source profiles, Saved, Boards, public representations, current local MCP, and preserved proof artifacts. Those are the V3 foundation. Historical V2 evidence remains accurate, but it does not define the next implementation slice.
-
-## Source coverage levels
-
-Tessli distinguishes research depth honestly:
-
-- **Listed** — source identity, type, access, description, and status;
-- **Profiled** — capabilities, best use cases, content objects, platforms/frameworks, integrations, workflow fit, and limitations;
-- **Verified** — evidence, dates, agent-interface details, credential/persistence/redistribution rules, human review, and freshness.
-
-Current canonical baseline:
-
-```text
-255 Listed
-40 Profiled
-0 Verified
-```
-
-All 295 sources must not imply equal intelligence depth.
-
-## Model access today
-
-### Without MCP
-
-Tessli supports stable semantic source pages, deterministic Board research packs, and compact public source/Collection Markdown and JSON that can be searched, shared, pasted, or uploaded to models. V3.10 makes these supported interfaces discoverable.
-
-### With MCP
-
-The repository currently contains five read-only local-MCP-v2 tools:
-
-- `find_sources`;
-- `get_source`;
-- `find_alternatives`;
-- `get_collection`;
-- `create_research_brief`.
-
-These tools use deterministic task retrieval, source guidance, alternatives, Collections, and research briefs. V3.16 now contains a disabled-by-default remote-MCP transport preflight; no hosted endpoint is publicly enabled until its transport, abuse-limit, monitoring, and security decision is complete.
-
-## Boundaries
-
-Tessli does not scrape, proxy, mirror, or redistribute paid/private source content merely because it indexes a provider.
-
-It is not:
-
-- a screenshot piracy archive;
-- a universal aesthetic scoring engine;
-- an unreviewed AI-generated pattern dump;
-- permission to copy another product's interface;
-- proof of AI taste based on catalogue size alone.
-
-The UI-taste direction remains a later evidence-backed possibility, not the current public promise.
-
-## Next.js application workspace
-
-The application lives in `web/`.
-
-```powershell
+```bash
 cd web
 npm ci
 npm run dev
 ```
 
-Open `http://localhost:3000`.
+Open <http://localhost:3000>.
 
-The developer component lab is available at `http://localhost:3000/lab`. It remains an internal/development surface and should not be treated as a public product route.
+Checks to run before a pull request (from `web/`):
 
-Quality commands:
-
-```powershell
+```bash
 npm run format:check
 npm run typecheck
 npm run lint
@@ -142,51 +37,23 @@ npm run catalogue:check
 npm run build
 ```
 
-Relevant slices may require additional profile, media, coverage, MCP, browser, or release checks.
+A single `npm run check` will replace this list once CI is consolidated. `npm run format` fixes formatting.
 
-## Data source
+The source catalogue is generated deterministically from repository data (`lib_data/`) into `web/data/`; `npm run catalogue:generate` rebuilds it and `npm run catalogue:check` verifies it. Normal build and test make no network calls.
 
-`lib_data/design-resource-library-295.csv` remains traceable as the original release source.
+## Contributing
 
-The Next.js workspace consumes deterministic generated catalogue data:
+Suggest a source, submit a design, report a problem or send a fix. See [`CONTRIBUTING.md`](CONTRIBUTING.md) for the paths, local setup, the item checklist, DCO sign-off and the AI-assistance disclosure. Coding agents also read [`AGENTS.md`](AGENTS.md). Everyone follows the [Code of Conduct](CODE_OF_CONDUCT.md).
 
-```text
-web/data/catalogue.json
-web/data/catalogue-validation.json
-```
+## Licence
 
-Regenerate and verify from `web/`:
+Code and taste notes are released under the [MIT licence](LICENSE). The Tessli name, wordmark and hero artwork are **not** covered by it; see [`TRADEMARKS.md`](TRADEMARKS.md).
 
-```powershell
-npm run catalogue:generate
-npm run catalogue:check
-```
+## More
 
-Normal build and test remain network-free. Generated output records source provenance and fails when committed catalogue output drifts from its contract.
+- [`design.md`](design.md): the visual system (type, colour, grain, spacing, motion).
+- [`docs/README.md`](docs/README.md): index of the remaining docs.
+- [`docs/decisions.md`](docs/decisions.md): dated decisions.
+- [`docs/v1.2/plan.md`](docs/v1.2/plan.md): the product and build plan.
 
-The catalogue and profiles may become outdated as providers change pricing, access, availability, integrations, licensing, and terms. Verify important current claims with original sources and retain evidence dates.
-
-## Deployment and rollback
-
-The root `vercel.json` targets `web/package.json` with Vercel's Next.js builder.
-
-Every deployment must be verified against the relevant route and browser matrix. A READY badge alone is not evidence that the correct application is serving. At minimum, probe `/`, `/collections`, `/resources`, `/saved`, `/about`, and expected not-found behaviour.
-
-The previous repository-root static production deployment remains recorded as the historical rollback target for the Phase 1 cutover. Current release evidence, known-good deployment identifiers, production preconditions, and rollback procedure remain under `docs/slices/9.2-phase-1-release-hardening.md` and `docs/slices/9.3-production-replacement.md`.
-
-The new product direction does not rewrite or erase the verified Phase 1 deployment history. Future route replacement must define its own rollout and rollback evidence.
-
-## Delivery rules
-
-Every implementation slice follows:
-
-1. current `main`;
-2. `docs/product-realignment-v3.md`;
-3. `docs/product-direction.md`;
-4. `PRD.md`;
-5. `build-slices.md`;
-6. `AGENTS.md`;
-7. `design.md` for visible UI work;
-8. relevant contracts, schemas, code, tests, and slice evidence.
-
-One independently reviewable slice is implemented per branch and pull request.
+Earlier planning, slice evidence, proofs and experiments are preserved at the `v1.1-archive` tag.

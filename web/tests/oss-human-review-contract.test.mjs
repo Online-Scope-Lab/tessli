@@ -131,7 +131,7 @@ test("malformed local data degrades to a bounded empty draft", () => {
 });
 
 test("review template and packet contain no invented human judgment", async () => {
-  const [templateText, packet, slice] = await Promise.all([
+  const [templateText, packet] = await Promise.all([
     readFile(
       new URL(
         "../../docs/proofs/oss-homepage/human-review-template.json",
@@ -142,13 +142,6 @@ test("review template and packet contain no invented human judgment", async () =
     readFile(
       new URL(
         "../../docs/proofs/oss-homepage/human-review-packet.md",
-        import.meta.url,
-      ),
-      "utf8",
-    ),
-    readFile(
-      new URL(
-        "../../docs/slices/5.3-oss-homepage-human-review.md",
         import.meta.url,
       ),
       "utf8",
@@ -172,8 +165,6 @@ test("review template and packet contain no invented human judgment", async () =
   assert.match(packet, /Blind review is not used here/u);
   assert.match(packet, /awaiting genuine reviewer input/u);
   assert.match(packet, /cannot be completed by automated checks alone/u);
-  assert.match(slice, /no human score is prefilled, inferred, generated/u);
-  assert.match(slice, /Slice 5\.4 remains blocked until/u);
 });
 
 test("review route and client remain isolated and local-only", async () => {

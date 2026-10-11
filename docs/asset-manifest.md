@@ -10,6 +10,8 @@ docs/ref-img/
 
 They are art-direction references, not production UI. Their hashes below make later visual comparisons reproducible without modifying their pixels.
 
+The hero artwork's origin and rights chain are not recorded here. It is excluded from the MIT licence regardless, with Online Scope as rights holder; see [`TRADEMARKS.md`](../TRADEMARKS.md) and [`decisions.md`](decisions.md).
+
 ## Hero artwork
 
 Canonical source:
@@ -35,6 +37,7 @@ web/public/brand/tessli-hero-geometry.webp
 - size: `61,732 bytes`
 - SHA-256: `0bf8d0fcea17d10b041b2bc08422679acf4fffd7c54fc70c1b18aba9d1d85583`
 - use: decorative hero art only; it must retain intrinsic dimensions and an empty alt attribute.
+- CI checks this SHA-256; never modify the file.
 
 A separate mobile crop requires approval after the real Newsreader headline wrapping is reviewed in-browser. Do not merely shrink the desktop composition below 390px.
 
@@ -78,4 +81,4 @@ These are canonical desktop art-direction captures. They preserve composition, h
 - Production hero may be re-exported after crop approval, but preserve transparency and the warm stone/charcoal/orange palette.
 - Do not apply a second heavy grain layer over the hero.
 - Resource thumbnails are not included as production assets; they follow `docs/data-and-media-contract.md`.
-- External site logos and images must use the documented manual preview → Open Graph → favicon → generated mark fallback chain.
+- External site logos and images use the frozen preview → favicon → lettermark fallback chain.

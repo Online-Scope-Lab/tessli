@@ -7,13 +7,10 @@ on:
       - ".github/workflows/web-ci.yml"
       - ".gitignore"
       - "README.md"
-      - "build-slices.md"
       - "lib_data/design-resource-library-295.csv"
       - "lib_data/tessli-launch-collections.json"
       - "schemas/**"
       - "docs/data-and-media-contract.md"
-      - "docs/product-plan-v2.md"
-      - "docs/slices/**"
   push:
     branches: [main]
     paths:
@@ -21,13 +18,10 @@ on:
       - ".github/workflows/web-ci.yml"
       - ".gitignore"
       - "README.md"
-      - "build-slices.md"
       - "lib_data/design-resource-library-295.csv"
       - "lib_data/tessli-launch-collections.json"
       - "schemas/**"
       - "docs/data-and-media-contract.md"
-      - "docs/product-plan-v2.md"
-      - "docs/slices/**"
 
 permissions:
   contents: read

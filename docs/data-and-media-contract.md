@@ -1,4 +1,6 @@
-# Tessli Data and Media Contract
+# Tessli data and media contract
+
+The catalogue models behind the Sources directory, and the frozen media fallback. The media pipeline (discovery, coverage, candidate review, screenshot capture) and the verification workflow are out of scope in v1.2: their documentation is removed, their code goes in cleanup step C5, and both stay recoverable from the `v1.1-archive` tag.
 
 ## 1. Catalogue model
 
@@ -25,11 +27,11 @@ type Resource = {
 };
 ```
 
-The current CSV is migrated into deterministic typed JSON under `web/data/`. The migration preserves all 295 entries, records source SHA-256 provenance, and reports invalid URLs, missing descriptions, exact duplicate URLs, duplicate domains, slug collisions, or unknown source labels.
+The CSV at `lib_data/design-resource-library-295.csv` is migrated into deterministic typed JSON under `web/data/` (`npm run catalogue:generate`; `npm run catalogue:check` fails on drift). The migration records source SHA-256 provenance and reports invalid URLs, missing descriptions, exact duplicate URLs, duplicate domains, slug collisions, or unknown source labels. IDs and slugs are stable. A source row is never dropped silently: a source that should go is archived with a reason, so its ID, history and old links survive.
 
-`Resource.url` remains the canonical provider destination. Planned `AccessRoute` values belong to the richer SourceProfile contract, not this catalogue record: V3.2 will add that vocabulary without duplicating routes or claiming provider access that has not been recorded.
+`Resource.url` remains the canonical provider destination. Recorded access routes belong to the richer source-profile data, not this catalogue record, and never claim provider access that has not been recorded.
 
-Approved media is a separate, repository-managed sidecar at `lib_data/resource-media.json`, validated by `schemas/resource-media.schema.json`. It is keyed by stable resource ID and deterministically merged into the generated catalogue. Its approval count and SHA-256 are included in `web/data/catalogue-validation.json`; this preserves the CSV as catalogue truth while keeping media review explicit.
+Approved media is a separate, frozen, repository-managed sidecar at `lib_data/resource-media.json`, validated by `schemas/resource-media.schema.json`. It is keyed by stable resource ID and deterministically merged into the generated catalogue. Its approval count and SHA-256 are included in `web/data/catalogue-validation.json`.
 
 `free-trial` is preserved as its own access value because the source contains one explicitly researched free-trial resource. It must not be silently converted to freemium or paid.
 
@@ -69,163 +71,34 @@ type Collection = {
 
 Do not invent curators. Repository-maintained collections may use “Curated by Tessli”.
 
-## 4. User data model
+## 4. Search model
 
-Saved and Boards are currently browser-local. The following is inactive future cloud-schema groundwork, not a public feature or current persistence contract:
+Browse search is deterministic over repository-managed data, with no network enrichment. The index covers name, domain, description, category, access, useful-for tags and tags, precomputed as one normalized string per entry. UI input is debounced and filters live in URL state.
 
-```text
-profiles
-saved_resources
-user_collections
-user_collection_items
-resource_notes
-submissions
-feature_suggestions
-resource_reports
-```
+Task retrieval (used by the local MCP) is a separate deterministic contract: structured task input returns at most eight explained sources with fit reasons, caveats, alternatives and recorded access routes. It uses no embeddings, LLM ranking, provider calls or public endpoint.
 
-Every user-owned table includes `user_id` and Row Level Security policies so users can access only their own private data.
+## 5. Media fallback chain (frozen)
 
-## 5. Search model
+No new media is discovered, captured or approved in v1.2. Source cards and pages use what is already approved, in this order:
 
-Catalogue Browse search remains deterministic over repository-managed data. It supports filtering and query recovery without network enrichment.
+1. **preview**: the approved preview image (manual or Open Graph) from `lib_data/resource-media.json`, or the catalogue `previewImageUrl`;
+2. **favicon**: the site favicon in a designed tile;
+3. **lettermark**: a generated letter mark.
 
-Search index includes:
+The layout stays complete when every external image fails. A generated lettermark is not evidence that media research happened.
 
-- name;
-- domain;
-- description;
-- category;
-- access;
-- useful-for tags;
-- tags.
+## 6. Rendering external images
 
-Precompute one normalized searchable string per entry. Debounce UI input. Keep filters in URL state.
+- Store URLs and metadata, never binary copies of third-party images.
+- Every media URL is HTTPS, public-hosted, credential-free and a declared raster type (JPEG, PNG, WebP, AVIF).
+- Fixed aspect-ratio media boxes; native `<img>` with `loading="lazy"` below the fold, `decoding="async"` and `referrerPolicy="no-referrer"`.
+- Failure advances to the next step of the fallback chain.
+- Never inject remote SVG markup into the DOM.
+- No wildcard `next/image` optimiser or open proxy: the catalogue spans many unrelated domains.
+- The build never fetches external media.
 
-V3.7 adds a separate deterministic task-retrieval contract rather than replacing Browse search: structured task input returns at most eight explained sources with fit reasons, caveats, alternatives, and recorded access routes. It does not introduce embeddings, LLM ranking, provider calls, or a public endpoint.
+Tessli does not scrape, mirror or redistribute destination content beyond the approved metadata above. Paid or private content is never copied because a source is listed.
 
-Move to Postgres full-text search only when catalogue size, moderation, or server-driven ranking justifies it.
+## 7. Hero and reference assets
 
-## 6. Media fallback chain
-
-Resource cards use:
-
-1. approved manual preview;
-2. official Open Graph image URL;
-3. official Twitter image URL;
-4. site favicon in a designed tile;
-5. generated letter mark.
-
-The card layout must remain complete when every external image fails.
-
-## 7. External image policy
-
-The user preference is to avoid storing every website image in Tessli's database. The initial implementation therefore stores **URLs and metadata, not binary image files**.
-
-### Initial implementation
-
-- approved preview metadata is merged during catalogue build, but the build never fetches external media;
-- every sidecar URL must be HTTPS, public-hosted, credential-free, and a declared raster image type;
-- sidecar rows include a checked date and, for previews, manual or Open Graph provenance;
-- extract declared icons and Open Graph image URLs;
-- UI uses fixed aspect-ratio media boxes;
-- use native `<img>` for arbitrary third-party domains;
-- `loading="lazy"`;
-- `decoding="async"`;
-- `referrerPolicy="no-referrer"`;
-- timeout/failure fallback;
-- never inject remote SVG markup into the DOM.
-
-### Why not unrestricted `next/image`
-
-Next.js requires strict remote image patterns to prevent arbitrary image optimisation. Tessli's catalogue contains many unrelated domains, so a wildcard optimiser is not the safe default.
-
-### Later reliability layer
-
-A first-party media proxy/cache may be introduced with:
-
-- URL allowlist derived from approved catalogue entries;
-- protocol validation;
-- private-IP/localhost blocking;
-- redirect limit;
-- content-type validation;
-- maximum byte size;
-- timeout;
-- malware/unsafe SVG handling;
-- caching in object storage;
-- takedown and refresh support.
-
-Discovery, refresh, screenshot capture, proxying, and caching are intentionally deferred. They require a separate security and operational review rather than being introduced as part of the static source contract. An optional live iframe enhancement is separately deferred to V3.15; it requires an approved small allowlist, sandbox/security/performance/mobile checks, and the same complete static fallback. It is never an agent access mechanism.
-
-## 8. Metadata enrichment
-
-For each approved resource, attempt:
-
-1. canonical URL;
-2. page title;
-3. meta description;
-4. Open Graph image;
-5. favicon links;
-6. theme colour;
-7. last checked;
-8. HTTP status.
-
-Do not scrape, mirror, or redistribute destination content beyond necessary metadata and approved previews. Agents receive the canonical provider URL and recorded access route; Tessli does not substitute a provider browser, API, MCP, registry, or source repository.
-
-## 9. Hero and reference assets
-
-Tracked assets:
-
-```text
-docs/ref-img/tessli-hero-geometry.webp
-web/public/brand/tessli-hero-geometry.webp
-docs/ref-img/explore-desktop.webp
-docs/ref-img/collections-desktop.webp
-docs/ref-img/saved-desktop.webp
-docs/ref-img/full-reference-desktop.webp
-```
-
-Hero image:
-
-- canonical art-direction source is 1200×800 WebP;
-- decorative;
-- production derivative is 900×614 WebP (61,732 bytes);
-- future mobile crop created only after mobile hero composition is approved.
-
-The original page captures are canonical art-direction references only. They must not be rendered inside the production application. See `docs/asset-manifest.md` for immutable dimensions and fingerprints.
-
-## 10. Privacy and analytics
-
-- local saves remain in browser storage before sign-in;
-- no personal data is required to browse;
-- analytics must not be implied in copy before selected and documented;
-- if optional analytics/cookies are introduced, consent and privacy copy must match actual behaviour.
-
-## 11. Candidate discovery and review
-
-Unverified media research is stored separately at `lib_data/resource-media-candidates.json` and validated by `schemas/resource-media-candidates.schema.json`.
-
-Full-catalogue research coverage is stored at
-`lib_data/resource-media-coverage.json` and validated by
-`schemas/resource-media-coverage.schema.json`. The coverage manifest contains
-all 295 stable resource IDs in canonical catalogue order. It is separate from
-the bounded candidate queue so completeness can be measured without weakening
-the 50-record review limit or publishing candidates automatically.
-
-Candidate records:
-
-- never enrich production catalogue output automatically;
-- preserve the resource ID, catalogue name, and canonical destination;
-- distinguish pending, candidate, blocked, failed, no-raster, uncertain, and rejected outcomes;
-- record source page, checked date, redirects, response-header content type, and reviewer state when discovery occurs;
-- accept only HTTPS, credential-free, public-hosted JPEG, PNG, WebP, or AVIF URLs;
-- reject remote SVGs, literal IP hosts, local/private destinations, unsafe ports, and excessive redirects;
-- require manual review before any record is copied into approved media.
-
-The offline review generator and check are deterministic and network-free. The explicit discovery command is not part of normal build, test, or CI and may process only selected catalogue resources. See `docs/resource-media-workflow.md` for the contributor procedure and approval checklist.
-
-The generated-letter UI fallback is not evidence that media research occurred.
-Every coverage record starts `pending` and may reach `approved-media`,
-`no-suitable-raster`, `blocked`, `failed`, or `rejected`. Every terminal outcome
-records a checked date. Coverage is complete only when all 295 IDs are present
-and none remain pending.
+The hero artwork and the reference images under `docs/ref-img/` are listed, with dimensions and hashes, in [`asset-manifest.md`](asset-manifest.md). They are excluded from the MIT licence; see [`TRADEMARKS.md`](../TRADEMARKS.md).
