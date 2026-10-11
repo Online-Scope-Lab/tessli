@@ -80,7 +80,7 @@
         "provenance": "original",
         "license": "MIT"
       },
-      "body": "An empty state is the first screen many people see, and the screen they see when something goes wrong. The common default treats all of those moments the same: an illustration and \"Nothing here yet\". This item treats them as three different situations.\n\n**First use** explains what will appear and offers the action that fills it. **No results** repeats the query and the search scope, then offers a wider search or a reset. **Error** says what failed and what is safe, then offers a retry.\n\nThe component is deliberately plain: a heading, a sentence or two, and actions. Put it where the content would have been, at the same alignment, so the page does not jump when content arrives.",
+      "body": "An empty state is the first screen many people see, and the screen they see when something goes wrong. The common default treats all of those moments the same: an illustration and \"Nothing here yet\". This item treats them as three different situations.\n\n**First use** explains what will appear and offers the action that fills it. **No results** repeats the query and the search scope, then offers a wider search or a reset. **Error** says what failed and what is safe, then offers a retry. Loading is out of scope: pair this item with a skeleton or progress state to cover all of ST-01.\n\nThe component is deliberately plain: a heading, a sentence or two, and actions. Put it where the content would have been, at the same alignment, so the page does not jump when content arrives.",
       "registryDependencies": [],
       "dependencies": [],
       "sourcePath": "web/registry/items/empty-state/empty-state.tsx",

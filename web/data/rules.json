@@ -134,7 +134,7 @@
         "design.md §5 (type scale)",
         "Review dimension: consistency (docs/quality-gates.md)"
       ],
-      "body": "",
+      "body": "The limit of four sizes per section is a curator choice, not a number from design.md §5, which defines the scale but sets no count. A maintainer should confirm or change it when signing this rule.",
       "items": []
     },
     {
@@ -217,7 +217,7 @@
         "AGENTS.md §13, v1.1 (tag v1.1-archive): research and database surfaces may be denser than marketing surfaces",
         "Review dimension: density (docs/quality-gates.md)"
       ],
-      "body": "",
+      "body": "The 48px row height and 1.5 line-height in the check are curator choices; the cited sources say data surfaces may be denser but give no numbers. A maintainer should confirm or change them when signing this rule.",
       "items": []
     },
     {
@@ -808,7 +808,7 @@
       "statement": "Make everything work by keyboard, close overlays on Escape, and hide nothing behind hover.",
       "why": "Many people navigate by keyboard or switch device, and touch screens have no hover. Anything reachable only by mouse or hover is missing for them.",
       "check": "Keyboard alone reaches and operates everything; Escape closes overlays and focus returns.",
-      "anti_pattern": "Menus that open only on hover, tooltips holding essential information, and dialogs that trap focus or drop it on close.",
+      "anti_pattern": "Menus that open only on hover, tooltips holding essential information, and dialogs you can't leave by keyboard or Escape, or that drop focus on close.",
       "status": "draft",
       "reviewed_by": [],
       "reviewed_at": null,
