@@ -41,11 +41,15 @@ const pages = [
   {
     name: "for-ai",
     path: "/for-ai",
-    text: "From task to reviewed implementation.",
+    text: "Code and reasoning, in the formats agents read.",
     markers: [
+      "data-for-ai-install",
       "data-for-ai-workflow",
       'data-for-ai-remote-status="unavailable"',
+      "npx shadcn@latest add online-scope-lab/tessli/rules",
+      "item.json",
       "profile.json",
+      "What Tessli does not claim.",
     ],
   },
   {
@@ -233,6 +237,14 @@ assert.match(
   "/llms.txt content type",
 );
 for (const fragment of [
+  "/library",
+  "/library/<slug>/item.json",
+  "/rules/TESSLI.md",
+  "npx shadcn@latest add online-scope-lab/tessli/<slug>",
+  "npx shadcn@latest add online-scope-lab/tessli/rules",
+  "[Pricing tiers compared on the limits that matter](/library/pricing-tiers)",
+  "search_items, get_item, get_rules, find_sources, get_source",
+  "skills/tessli/SKILL.md",
   "/resources",
   "/collections",
   "/resources/landingfolio/profile.json",
@@ -247,6 +259,13 @@ for (const fragment of [
   );
 }
 assert.match(llms, /local\s+MCP/i, "/llms.txt local MCP boundary");
+// Counts come from the data: no literal template or placeholder survives.
+assert.match(
+  llms,
+  /^Today: \d+ library items \(\d+ reviewed by a maintainer\), \d+ rules in \d+ areas/mu,
+  "/llms.txt counts",
+);
+assert.doesNotMatch(llms, /\$\{|undefined|NaN/u, "/llms.txt fully rendered");
 assert.match(
   llms,
   /No accounts:[\s\S]{0,80}no sign-in/i,

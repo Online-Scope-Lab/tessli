@@ -5,37 +5,32 @@
 .hero {
   max-width: 940px;
   border-bottom: 1px solid var(--line-strong);
-  padding-bottom: clamp(48px, 7vw, 80px);
-}
-
-.ledgerLabel {
-  margin: 0;
-  color: var(--text-muted);
-  font-size: var(--text-body-sm);
-  font-weight: 650;
+  padding-bottom: clamp(40px, 6vw, 72px);
 }
 
 .hero h1,
 .sectionHeading h2,
-.boundaries h2 {
+.notClaimed h2 {
   margin: 0;
-  font-family: var(--font-newsreader), Georgia, serif;
+  font-family: var(--font-display);
+  font-optical-sizing: auto;
   font-weight: 620;
-  letter-spacing: -0.035em;
-  line-height: 0.98;
+  letter-spacing: var(--tracking-title);
+  text-wrap: balance;
 }
 
 .hero h1 {
-  max-width: 11ch;
+  max-width: 18ch;
   font-size: var(--text-title);
+  line-height: 0.98;
 }
 
 .lede {
-  max-width: 63ch;
+  max-width: 62ch;
   margin: var(--space-5) 0 0;
   color: var(--text-body);
   font-size: var(--text-body-lg);
-  line-height: 1.58;
+  line-height: 1.55;
 }
 
 .heroActions,
@@ -49,46 +44,81 @@
   margin-top: var(--space-8);
 }
 
-.section,
-.workflowSection {
-  padding-top: clamp(54px, 8vw, 94px);
+.inlineLinks {
+  gap: var(--space-1) var(--space-6);
+  margin-top: var(--space-4);
+}
+
+.section {
+  padding-top: clamp(54px, 8vw, 88px);
 }
 
 .sectionHeading {
-  display: flex;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
   align-items: end;
-  justify-content: space-between;
   gap: var(--space-8);
   margin-bottom: var(--space-6);
 }
 
 .sectionHeading h2,
-.boundaries h2 {
-  max-width: 18ch;
+.notClaimed h2 {
+  max-width: 20ch;
   font-size: var(--text-h2);
+  line-height: 1.04;
 }
 
 .sectionHeading > p {
-  max-width: 51ch;
+  max-width: 54ch;
   margin: 0;
   color: var(--text-muted);
   font-size: var(--text-body-sm);
   line-height: 1.58;
 }
 
-.workflow {
-  display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
+.section h3 {
   margin: 0;
-  border-top: 1px solid var(--line);
-  border-left: 1px solid var(--line);
-  padding: 0;
-  list-style: none;
+  font-size: var(--text-h3);
+  font-weight: 650;
+  letter-spacing: -0.01em;
+  line-height: 1.3;
 }
 
-.workflow li {
+.section code {
+  font-family:
+    ui-monospace, "SFMono-Regular", Consolas, "Liberation Mono", monospace;
+  font-size: 0.9em;
+}
+
+.section a {
+  color: var(--text-strong);
+  font-weight: 600;
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 0.2em;
+}
+
+.inlineLinks a,
+.afterList a,
+.externalLink {
+  display: inline-flex;
+  min-height: 44px;
+  align-items: center;
+  font-size: var(--text-body-sm);
+}
+
+/* Bordered panels: install commands and MCP setup. */
+
+.panelGrid {
   display: grid;
-  grid-template-columns: auto minmax(0, 1fr);
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  border-top: 1px solid var(--line);
+  border-left: 1px solid var(--line);
+}
+
+.panelGrid article {
+  display: grid;
+  align-content: start;
   gap: var(--space-4);
   min-width: 0;
   border-right: 1px solid var(--line);
@@ -96,194 +126,94 @@
   padding: clamp(22px, 3vw, 32px);
 }
 
-.workflow li > span {
-  color: var(--accent-text);
-  font-family: var(--font-newsreader), Georgia, serif;
-  font-size: 1.25rem;
-  font-weight: 620;
-}
-
-.workflow h3,
-.contextGrid h3,
-.sourceResult h3,
-.accessGrid h3,
-.setupGrid h3 {
+.panelGrid p,
+.steps p,
+.contentGrid li,
+.files dd,
+.notClaimed li {
+  max-width: 62ch;
   margin: 0;
-  font-size: var(--text-h3);
-  font-weight: 650;
-  letter-spacing: -0.015em;
-}
-
-.workflow p,
-.contextGrid p,
-.sourceResult > p,
-.accessGrid p,
-.setupGrid p,
-.remoteStatus,
-.boundaries > p {
-  margin: var(--space-3) 0 0;
   color: var(--text-body);
-  line-height: 1.58;
+  line-height: 1.55;
 }
 
-.contextGrid {
+.panelGrid article > .codeBlock {
+  margin: 0;
+}
+
+/* Install panels: the commands line up across both columns. */
+.commandPanels article {
+  display: flex;
+  flex-direction: column;
+}
+
+.commandPanels article > p {
+  flex-grow: 1;
+}
+
+.externalLink {
+  justify-self: start;
+}
+
+/* TESSLI.md facts and excerpt. */
+
+.rulesFile {
   display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: var(--space-6);
+  grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr);
+  gap: var(--space-8);
+  align-items: start;
 }
 
-.contextGrid article {
-  border-top: 1px solid var(--line-strong);
-  padding-top: var(--space-5);
-}
-
-.exampleLedger {
-  display: grid;
-  grid-template-columns: minmax(0, 0.86fr) minmax(0, 1.14fr);
-  border: 1px solid var(--line-strong);
-}
-
-.taskBrief,
-.sourceResult {
-  min-width: 0;
-  padding: clamp(24px, 4vw, 42px);
-}
-
-.taskBrief {
-  border-right: 1px solid var(--line-strong);
-  background: var(--surface-muted);
-}
-
-.taskBrief > p:not(.ledgerLabel) {
-  max-width: 19ch;
-  margin: var(--space-5) 0 0;
-  font-family: var(--font-newsreader), Georgia, serif;
-  font-size: clamp(1.65rem, 3vw, 2.45rem);
-  font-weight: 580;
-  letter-spacing: -0.025em;
-  line-height: 1.04;
-}
-
-.taskBrief dl {
-  display: grid;
-  gap: 0;
-  margin: var(--space-8) 0 0;
+.facts {
+  margin: 0;
   border-top: 1px solid var(--line);
 }
 
-.taskBrief dl > div {
+.facts > div {
   display: grid;
-  grid-template-columns: minmax(80px, 0.3fr) minmax(0, 1fr);
+  grid-template-columns: minmax(7rem, 0.35fr) minmax(0, 1fr);
   gap: var(--space-4);
   border-bottom: 1px solid var(--line);
   padding: var(--space-3) 0;
 }
 
-.taskBrief dt {
+.facts dt {
   color: var(--text-muted);
-  font-size: var(--text-label);
-  font-weight: 700;
-  text-transform: uppercase;
+  font-size: var(--text-body-sm);
+  font-weight: 600;
 }
 
-.taskBrief dd {
+.facts dd {
   margin: 0;
-  color: var(--text-body);
+  color: var(--text-strong);
   font-size: var(--text-body-sm);
   line-height: 1.5;
 }
 
-.sourceResult h3 {
-  margin-top: var(--space-4);
-  font-family: var(--font-newsreader), Georgia, serif;
-  font-size: clamp(1.9rem, 3.4vw, 2.8rem);
-  font-weight: 620;
-  letter-spacing: -0.03em;
-}
-
-.sourceResult ul {
-  display: grid;
-  gap: var(--space-3);
-  margin: var(--space-6) 0 0;
-  padding-left: 1.2rem;
-  color: var(--text-body);
-  line-height: 1.52;
-}
-
-.sourceResult a,
-.accessGrid a,
-.setupGrid a {
-  display: inline-flex;
-  min-height: 44px;
-  align-items: center;
-  color: var(--text-strong);
-  font-size: var(--text-body-sm);
-  font-weight: 650;
-  text-underline-offset: 0.24em;
-}
-
-.sourceResult > a {
-  margin-top: var(--space-6);
-}
-
-.accessGrid,
-.setupGrid {
-  display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  border-top: 1px solid var(--line);
-  border-left: 1px solid var(--line);
-}
-
-.accessGrid article,
-.setupGrid article {
+.excerpt {
   min-width: 0;
-  border-right: 1px solid var(--line);
-  border-bottom: 1px solid var(--line);
-  padding: clamp(24px, 4vw, 40px);
-}
-
-.accessGrid h3 {
-  margin-top: var(--space-4);
-}
-
-.accessGrid a {
-  margin-top: var(--space-6);
-}
-
-.inlineLinks {
-  margin-top: var(--space-6);
-}
-
-.inlineLinks a {
-  margin-top: 0;
-}
-
-.mcpSection {
-  scroll-margin-top: 90px;
-}
-
-.setupGrid h3 {
-  font-family: var(--font-newsreader), Georgia, serif;
-  font-size: clamp(1.45rem, 2.3vw, 1.85rem);
-  font-weight: 610;
-}
-
-.setupGrid code {
-  font-size: 0.9em;
 }
 
 .codeBlock {
   max-width: 100%;
-  margin: var(--space-6) 0 0;
+  margin: 0;
   overflow-x: auto;
   border: 1px solid #3c3934;
   background: var(--charcoal-art);
   padding: var(--space-5);
   color: #fffaf4;
-  font-family: "SFMono-Regular", Consolas, "Liberation Mono", monospace;
+  font-family:
+    ui-monospace, "SFMono-Regular", Consolas, "Liberation Mono", monospace;
   font-size: 0.82rem;
   line-height: 1.62;
   white-space: pre;
+}
+
+/* Short excerpts wrap instead of scrolling. */
+.codeBlock.wrap {
+  overflow-x: visible;
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
 }
 
 .codeBlock:focus-visible {
@@ -291,71 +221,150 @@
   outline-offset: 3px;
 }
 
-.setupGrid a {
-  margin-top: var(--space-6);
-}
+/* A real sequence, so it keeps its numbers. */
 
-.remoteStatus {
-  margin-top: var(--space-5);
-  border-left: 3px solid var(--accent);
-  padding: var(--space-4) 0 var(--space-4) var(--space-5);
-}
-
-.routeList {
-  display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
+.steps {
   margin: 0;
   border-top: 1px solid var(--line);
-  border-left: 1px solid var(--line);
+  padding: 0;
+  list-style: none;
 }
 
-.routeList > div {
-  min-width: 0;
-  border-right: 1px solid var(--line);
+.steps li {
+  display: grid;
+  grid-template-columns: 2.5rem minmax(10rem, 0.32fr) minmax(0, 1fr);
+  align-items: baseline;
+  gap: var(--space-4);
   border-bottom: 1px solid var(--line);
-  padding: clamp(22px, 3vw, 32px);
+  padding: var(--space-5) 0;
 }
 
-.routeList dt {
+.steps li > span {
   color: var(--accent-text);
-  font-family: var(--font-newsreader), Georgia, serif;
-  font-size: 1.3rem;
+  font-family: var(--font-display);
+  font-size: 1.25rem;
+  font-variant-numeric: tabular-nums;
   font-weight: 620;
 }
 
-.routeList dd {
+.afterList {
   margin: var(--space-3) 0 0;
+}
+
+/* MCP tools and status. */
+
+.mcpSection {
+  scroll-margin-top: 90px;
+}
+
+.section .subheading {
+  margin: var(--space-10) 0 var(--space-4);
+}
+
+.tools,
+.files {
+  margin: 0;
+  border-top: 1px solid var(--line);
+}
+
+.tools > div,
+.files > div {
+  display: grid;
+  grid-template-columns: minmax(12rem, 0.32fr) minmax(0, 1fr);
+  gap: var(--space-4);
+  border-bottom: 1px solid var(--line);
+  padding: var(--space-4) 0;
+}
+
+.tools dt,
+.files dt {
+  min-width: 0;
+  color: var(--text-strong);
+  font-weight: 600;
+  overflow-wrap: anywhere;
+}
+
+.tools dd {
+  display: grid;
+  gap: var(--space-1);
+  margin: 0;
   color: var(--text-body);
   line-height: 1.55;
 }
 
-.boundaries {
-  max-width: 900px;
-  border-top: 1px solid var(--text-strong);
-  border-bottom: 1px solid var(--text-strong);
-  padding-bottom: clamp(38px, 6vw, 60px);
+.tools dd span {
+  color: var(--text-muted);
+  font-size: var(--text-body-sm);
 }
 
-.boundaries h2 {
-  max-width: 17ch;
-}
-
-.boundaries > p {
+.remoteStatus {
   max-width: 72ch;
-  font-size: var(--text-body-lg);
+  margin: var(--space-6) 0 0;
+  border-left: 3px solid var(--accent);
+  padding: var(--space-3) 0 var(--space-3) var(--space-5);
+  color: var(--text-body);
+  line-height: 1.55;
 }
 
-.sourceResult a:focus-visible,
-.accessGrid a:focus-visible,
-.setupGrid a:focus-visible {
-  outline: 3px solid var(--focus);
-  outline-offset: 3px;
+/* What an agent gets. */
+
+.contentGrid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: var(--space-8);
+}
+
+.contentGrid article {
+  min-width: 0;
+  border-top: 1px solid var(--line-strong);
+  padding-top: var(--space-5);
+}
+
+.contentGrid ul {
+  display: grid;
+  gap: var(--space-2);
+  margin: var(--space-4) 0 0;
+  padding-left: 1.1rem;
+  list-style: disc;
+}
+
+.contentGrid li::marker,
+.notClaimed li::marker {
+  color: var(--text-muted);
+}
+
+/* What Tessli does not claim. */
+
+.notClaimed {
+  max-width: 900px;
+}
+
+.notClaimed h2 {
+  max-width: none;
+  border-top: 1px solid var(--text-strong);
+  padding-top: var(--space-6);
+}
+
+.notClaimed ul {
+  display: grid;
+  gap: var(--space-4);
+  margin: var(--space-6) 0 0;
+  border-bottom: 1px solid var(--text-strong);
+  padding: 0 0 clamp(32px, 5vw, 48px) 1.1rem;
+  list-style: disc;
+}
+
+.notClaimed strong {
+  color: var(--text-strong);
+  font-weight: 650;
 }
 
 @media (max-width: 1023px) {
-  .workflow,
-  .contextGrid,
-  .routeList {
+  .rulesFile {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .contentGrid {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 }
@@ -366,27 +375,29 @@
   }
 
   .sectionHeading {
-    display: grid;
+    grid-template-columns: minmax(0, 1fr);
     align-items: start;
     gap: var(--space-3);
   }
 
-  .sectionHeading h2 {
-    max-width: none;
+  .panelGrid,
+  .contentGrid {
+    grid-template-columns: minmax(0, 1fr);
   }
 
-  .workflow,
-  .contextGrid,
-  .exampleLedger,
-  .accessGrid,
-  .setupGrid,
-  .routeList {
-    grid-template-columns: 1fr;
+  .steps li {
+    grid-template-columns: 2rem minmax(0, 1fr);
+    gap: var(--space-2) var(--space-3);
   }
 
-  .taskBrief {
-    border-right: 0;
-    border-bottom: 1px solid var(--line-strong);
+  .steps li > p {
+    grid-column: 2;
+  }
+
+  .tools > div,
+  .files > div {
+    grid-template-columns: minmax(0, 1fr);
+    gap: var(--space-2);
   }
 }
 
@@ -399,27 +410,19 @@
     width: 100%;
   }
 
-  .workflow li,
-  .taskBrief,
-  .sourceResult,
-  .accessGrid article,
-  .setupGrid article,
-  .routeList > div {
+  .panelGrid article {
     padding: var(--space-5);
   }
 
-  .taskBrief dl > div {
-    grid-template-columns: 1fr;
-    gap: var(--space-2);
+  .facts > div {
+    grid-template-columns: minmax(0, 1fr);
+    gap: var(--space-1);
   }
 }
 
 @media (forced-colors: active) {
-  .workflow,
-  .exampleLedger,
-  .accessGrid,
-  .setupGrid,
-  .routeList,
+  .panelGrid,
+  .panelGrid article,
   .codeBlock {
     border-color: CanvasText;
   }

@@ -11,8 +11,9 @@ Be clear about what exists today:
 - **Live now:**
   - the **Library** at `/library`: twelve community starter items (six sections, from a product hero to a closing call to action with footer; a data table and an empty state; and pages for sign-in, account settings, a dashboard overview and a mobile list with detail), each with a live preview in three themes (Tessli, Neutral, Dark) at three widths, its taste notes, code, and `item.json`/`item.md` for agents. None is reviewed by a maintainer yet.
   - the **Rules** at `/rules`: 39 draft rules for hierarchy, typography, spacing, colour, components, copy, states, responsive behaviour, motion and accessibility, each with why it matters, how to check it, the default it guards against, its sources and the items that apply it. None is reviewed by a maintainer yet. [`rules/TESSLI.md`](rules/TESSLI.md) is the compact index for agents.
-  - the curated **Sources** directory (browse, source pages, collections), public Markdown/JSON for each source, and a local read-only MCP server ([`docs/tessli-native-mcp.md`](docs/tessli-native-mcp.md)).
-- **Being built:** MCP tools for items and rules, and the Contribute page.
+  - the curated **Sources** directory (browse, source pages, collections) and public Markdown/JSON for each source.
+  - **For AI** at `/for-ai`: the shadcn install, `TESSLI.md`, a local read-only MCP server, `llms.txt` and an Agent Skill (see [For AI](#for-ai) below).
+- **Being built:** the Contribute page.
 - **Not built:** accounts, a database, analytics or payments. GitHub issues and pull requests are the backend.
 
 The plan and its phases are in [`docs/v1.2/plan.md`](docs/v1.2/plan.md).
@@ -52,6 +53,17 @@ npx shadcn@latest add online-scope-lab/tessli/rules
 The shadcn CLI reads the generated root [`registry.json`](registry.json). Items live in `web/registry/items/<slug>/` (the item, a demo, optional states and `notes.md` taste notes validated by [`schemas/library-item.schema.json`](schemas/library-item.schema.json)); Rules live in `rules/<ID>.md`, validated by [`schemas/rule.schema.json`](schemas/rule.schema.json). `npm run registry:build` regenerates `registry.json`, `web/public/r/*.json`, `web/data/library.json`, `web/data/rules.json` and `rules/TESSLI.md`, and `npm run registry:check` verifies them. `npm run test:items` (after a build) renders every item in every state and theme at five widths with Playwright and axe-core.
 
 Each source is one file, `sources/<slug>.yml`. The catalogue is generated deterministically from those files (plus the curated order, media and collections in `lib_data/`) into `web/data/`; `npm run catalogue:generate` rebuilds it and `npm run catalogue:check` verifies it. Normal build and test make no network calls.
+
+## For AI
+
+Coding agents get the same code, notes and rules people see, in four ways:
+
+- **shadcn CLI:** `npx shadcn@latest add online-scope-lab/tessli/<slug>` for an item, `…/rules` for `TESSLI.md`.
+- **Local MCP server** with five read-only tools: `search_items`, `get_item`, `get_rules`, `find_sources` and `get_source`. Run `npm run mcp` in `web/`; point your MCP client at `node /absolute/path/to/tessli/web/mcp/server.ts`. Setup and ranking: [`docs/tessli-native-mcp.md`](docs/tessli-native-mcp.md). There is no hosted MCP.
+- **Plain files:** `/llms.txt`, `/rules/TESSLI.md`, `/library/<slug>/item.json` and `item.md`, `/resources/<slug>/profile.json` and `profile.md`.
+- **Agent Skill:** [`skills/tessli/SKILL.md`](skills/tessli/SKILL.md): read the rules, find an item, install it, adapt it to the project's tokens, then check it against the rules at 1440, 768 and 390 px.
+
+Tessli does not claim that any of this improves AI-generated UI. That waits for the published, human-scored evaluation in the plan (§9).
 
 ## Contributing
 

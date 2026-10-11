@@ -55,17 +55,40 @@ test("llms discovery route is static, deterministic, and bounded to public truth
   );
 
   for (const fragment of [
+    "/library",
+    "/library/<slug>/item.json",
+    "/library/<slug>/item.md",
+    "/rules/<ID>",
     "/resources",
+    "/resources/<slug>/profile.json",
+    "/resources/<slug>/profile.md",
     "/collections",
     "/resources/landingfolio/profile.json",
     "/resources/landingfolio/profile.md",
     "/collections/saas-landing-pages/collection.json",
     "/collections/saas-landing-pages/collection.md",
+    "/for-ai#local-mcp",
+    "skills/tessli/SKILL.md",
   ]) {
-    assert.match(route, new RegExp(fragment.replaceAll("/", "\\/")));
+    assert.match(route, new RegExp(escapeRegex(fragment)));
   }
 
-  assert.match(route, /local\s+MCP/i);
+  // Install commands, paths and counts come from the data, never literals.
+  for (const source of [
+    /installCommand\("<slug>"\)/,
+    /rulesInstallCommand\(\)/,
+    /RULES_INDEX_PATH/,
+    /getLibraryItems\(\)/,
+    /getRules\(\)/,
+    /getBrowsableSourceCounts\(\)/,
+    /getPublishedCollections\(\)/,
+    /TESSLI_MCP_TOOL_NAMES/,
+  ]) {
+    assert.match(route, source);
+  }
+  assert.doesNotMatch(route, /\b\d+ (?:library )?(?:items|rules|sources)\b/);
+
+  assert.match(route, /local, read-only stdio process/i);
   assert.match(route, /no hosted(?: or remote)? MCP endpoint/i);
   assert.match(route, /(?:no|not)\b[\s\S]{0,80}\bbulk\b/i);
   assert.match(route, /No accounts:[\s\S]{0,80}no sign-in/i);
@@ -74,6 +97,10 @@ test("llms discovery route is static, deterministic, and bounded to public truth
   assert.match(route, /(?:no|not)\b[\s\S]{0,80}\bcrawl/i);
   assert.match(route, /(?:no|not)\b[\s\S]{0,80}\buniversal\b/i);
   assert.match(route, /(?:no|not)\b[\s\S]{0,80}\btaste\b/i);
+  assert.match(route, /does not claim[\s\S]{0,80}improve AI output/i);
+  // The only "taste" and "improve" mentions are inside the does-not-claim line.
+  assert.equal(route.match(/\btaste\b/giu)?.length, 1);
+  assert.equal(route.match(/\bimprove/giu)?.length, 1);
 });
 
 test("sitemap lists only public discovery routes and machine representations", async () => {

@@ -152,10 +152,20 @@ async function screenshot(filename) {
 await mkdir(outputDirectory, { recursive: true });
 await Promise.all([send("Page.enable"), send("Runtime.enable")]);
 
+const sections = [
+  "data-for-ai-install",
+  "data-for-ai-rules-file",
+  "data-for-ai-workflow",
+  "data-for-ai-local-mcp",
+  "data-for-ai-agent-gets",
+  "data-for-ai-representations",
+  "data-for-ai-not-claimed",
+];
+
 await setViewport(1440, 900, false);
 await navigate(
   "/for-ai",
-  'Boolean(document.querySelector("[data-for-ai-page] [data-for-ai-workflow]")) && Boolean(document.querySelector("[data-for-ai-remote-status=\\"unavailable\\"]"))',
+  'Boolean(document.querySelector("[data-for-ai-page] [data-for-ai-install]")) && Boolean(document.querySelector("[data-for-ai-remote-status=\\"unavailable\\"]"))',
 );
 
 assert.equal(await evaluate('document.querySelectorAll("main").length'), 1);
@@ -166,16 +176,14 @@ assert.equal(
   ),
   "For AI",
 );
+// Every section is present, in order.
 assert.equal(
   await evaluate(
-    `[
-      "data-for-ai-workflow",
-      "data-for-ai-example",
-      "data-for-ai-representations",
-      "data-for-ai-local-mcp",
-      "data-for-ai-access-routes",
-      "data-for-ai-boundaries"
-    ].every((attribute) => Boolean(document.querySelector("[" + attribute + "]")))`,
+    `(() => {
+      const page = document.querySelector("[data-for-ai-page]");
+      const nodes = ${JSON.stringify(sections)}.map((attribute) => page.querySelector("[" + attribute + "]"));
+      return nodes.every(Boolean) && nodes.every((node, index) => index === 0 || nodes[index - 1].compareDocumentPosition(node) & Node.DOCUMENT_POSITION_FOLLOWING);
+    })()`,
   ),
   true,
 );
@@ -187,51 +195,64 @@ assert.equal(
 );
 assert.equal(
   await evaluate(
-    "(/remote/i.test(document.body.textContent) && /hosted/i.test(document.body.textContent) && /unavailable/i.test(document.body.textContent))",
-  ),
-  true,
-);
-assert.equal(
-  await evaluate(
     `[
-      "Turn research into an agent’s next clear move.",
-      "From task to reviewed implementation.",
-      "Guidance with a reason to use it.",
-      "A result a builder can act on.",
-      "Use a source guide or public representation.",
-      "Local MCP is the current transport",
-      "Choose the recorded access route",
-      "Keep project context private and provider boundaries clear"
-    ].every((heading) => Array.from(document.querySelectorAll("h1, h2")).some((node) => node.textContent?.trim() === heading || node.textContent?.trim() === heading + "."))`,
+      "Code and reasoning, in the formats agents read.",
+      "Install with the shadcn CLI.",
+      "TESSLI.md keeps every rule in reach.",
+      "How an agent uses Tessli.",
+      "Local MCP server.",
+      "What an agent gets.",
+      "Plain files at stable URLs.",
+      "What Tessli does not claim."
+    ].every((heading) => Array.from(document.querySelectorAll("h1, h2")).some((node) => node.textContent?.trim() === heading))`,
   ),
   true,
 );
+// Heading outline: one h1, no skipped levels.
 assert.equal(
   await evaluate(
     `(() => {
-      const page = document.querySelector("[data-for-ai-page]");
-      const steps = [
-        "data-for-ai-workflow",
-        "data-for-ai-example",
-        "data-for-ai-representations",
-        "data-for-ai-local-mcp",
-        "data-for-ai-access-routes",
-        "data-for-ai-boundaries"
-      ].map((attribute) => page.querySelector("[" + attribute + "]"));
-      return steps.every(Boolean) && steps.every((node, index) => index === 0 || steps[index - 1].compareDocumentPosition(node) & Node.DOCUMENT_POSITION_FOLLOWING);
+      const levels = Array.from(document.querySelectorAll("main h1, main h2, main h3, main h4"), (node) => Number(node.tagName[1]));
+      return levels[0] === 1 && levels.every((level, index) => index === 0 || level <= levels[index - 1] + 1);
     })()`,
   ),
   true,
 );
+// The install commands, the rules excerpt, the five tools and the steps.
+const content = await evaluate(`(() => ({
+  commands: Array.from(document.querySelectorAll("[data-for-ai-install] [data-install-command]"), (node) => node.textContent.trim()),
+  copyLabels: Array.from(document.querySelectorAll("[data-for-ai-install] [data-copy-install]"), (node) => node.getAttribute("aria-label")),
+  statusRegions: document.querySelectorAll("[data-for-ai-install] [role=\\"status\\"]").length,
+  excerpt: document.querySelector("[data-for-ai-rules-file] pre")?.textContent ?? "",
+  tools: Array.from(document.querySelectorAll("[data-for-ai-tools] dt"), (node) => node.textContent.trim()),
+  steps: document.querySelectorAll("[data-for-ai-workflow] ol > li").length,
+  mcpText: document.querySelector("[data-for-ai-local-mcp]").textContent,
+}))()`);
+assert.deepEqual(content.commands, [
+  "npx shadcn@latest add online-scope-lab/tessli/pricing-tiers",
+  "npx shadcn@latest add online-scope-lab/tessli/rules",
+]);
+assert.deepEqual(content.copyLabels, [
+  "Copy the item install command",
+  "Copy the rules install command",
+]);
+assert.equal(content.statusRegions, 2);
+assert.match(content.excerpt, /^- H-01 /);
+assert.deepEqual(content.tools, [
+  "search_items",
+  "get_item",
+  "get_rules",
+  "find_sources",
+  "get_source",
+]);
+assert.equal(content.steps, 5);
+assert.match(content.mcpText, /npm run mcp/);
+assert.match(content.mcpText, /mcp\/server\.ts/);
+assert.match(content.mcpText, /no hosted or remote Tessli MCP/i);
+
 assert.equal(
   await evaluate(
     '!/\\bBoards?\\b/.test(document.querySelector("main").textContent) && !document.querySelector("a[href=\\"/boards\\"], a[href=\\"/saved\\"]") && Boolean(document.querySelector("a[href=\\"#local-mcp\\"]")) && Boolean(document.getElementById("local-mcp"))',
-  ),
-  true,
-);
-assert.equal(
-  await evaluate(
-    '!["Coverage, confidence, freshness", "Evidence confidence", "Recorded freshness", "Retrieval is not taste"].some((copy) => document.body.textContent.includes(copy))',
   ),
   true,
 );
@@ -249,24 +270,50 @@ assert.equal(
   await evaluate('document.querySelectorAll("pre[tabindex=\\"0\\"]").length'),
   2,
 );
+// The scrollable code blocks are focusable; the wrapped excerpt never scrolls.
+assert.equal(
+  await evaluate(
+    'Array.from(document.querySelectorAll("pre")).every((node) => node.tabIndex === 0 || node.closest("[data-install-command]") || node.matches("[data-install-command]") || node.scrollWidth <= node.clientWidth)',
+  ),
+  true,
+);
 assert.equal(
   await evaluate("document.documentElement.scrollWidth <= window.innerWidth"),
   true,
 );
 
-const representationStatuses = await evaluate(`Promise.all([
-  ...Array.from(document.querySelectorAll("[data-for-ai-representations] a[href$=\\"/profile.json\\"], [data-for-ai-representations] a[href$=\\"/profile.md\\"]"), (link) => link.getAttribute("href"))
-].filter(Boolean).map(async (pathname) => {
-  const response = await fetch(pathname);
-  return [pathname, response.status, response.headers.get("content-type")];
-}))`);
-assert.equal(representationStatuses.length, 2);
+// Every plain-file link on the page answers with the right content type.
+const representationStatuses = await evaluate(`Promise.all(
+  Array.from(document.querySelectorAll("[data-for-ai-representations] a[href]"), (link) => link.getAttribute("href"))
+    .map(async (pathname) => {
+      const response = await fetch(pathname);
+      return [pathname, response.status, response.headers.get("content-type")];
+    })
+)`);
 assert.deepEqual(
-  representationStatuses.map((entry) => entry[1]),
-  [200, 200],
+  representationStatuses.map(([pathname]) => pathname),
+  [
+    "/llms.txt",
+    "/rules/TESSLI.md",
+    "/library/pricing-tiers/item.json",
+    "/library/pricing-tiers/item.md",
+    "/resources/land-book/profile.json",
+    "/resources/land-book/profile.md",
+  ],
 );
-assert.match(representationStatuses[0][2], /application\/json/);
-assert.match(representationStatuses[1][2], /text\/markdown/);
+const expectedTypes = {
+  ".txt": /text\/plain/,
+  ".md": /text\/markdown/,
+  ".json": /application\/json/,
+};
+for (const [pathname, status, contentType] of representationStatuses) {
+  assert.equal(status, 200, pathname);
+  assert.match(
+    contentType,
+    expectedTypes[pathname.slice(pathname.lastIndexOf("."))],
+    pathname,
+  );
+}
 await screenshot("for-ai-1440x900.png");
 
 for (const [width, height, mobile] of [
@@ -300,5 +347,5 @@ for (const [width, height, mobile] of [
 socket.close();
 assert.deepEqual(browserFailures, []);
 console.log(
-  "For AI route, representations, responsive layout, and boundaries passed.",
+  "For AI route, install commands, MCP setup, plain files, responsive layout and non-claims passed.",
 );

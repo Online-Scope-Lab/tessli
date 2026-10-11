@@ -19,14 +19,14 @@ async function read(relativePath) {
 }
 
 test("shared MCP catalogue preserves the exact five-tool public contract", () => {
-  assert.equal(TESSLI_MCP_SERVER_NAME, "tessli-native-metadata");
-  assert.equal(TESSLI_MCP_SERVER_VERSION, "0.2.0");
+  assert.equal(TESSLI_MCP_SERVER_NAME, "tessli");
+  assert.equal(TESSLI_MCP_SERVER_VERSION, "0.3.0");
   assert.deepEqual(TESSLI_MCP_TOOL_NAMES, [
+    "search_items",
+    "get_item",
+    "get_rules",
     "find_sources",
     "get_source",
-    "find_alternatives",
-    "get_collection",
-    "create_research_brief",
   ]);
   assert.equal(TESSLI_MCP_TOOL_CATALOGUE.length, 5);
   assert.equal(new Set(TESSLI_MCP_TOOL_NAMES).size, 5);
@@ -37,6 +37,10 @@ test("shared MCP catalogue preserves the exact five-tool public contract", () =>
     assert.ok(tool.inputs.length > 0);
     assert.ok(tool.returns.length > 0);
     assert.ok(tool.limit.length > 0);
+    assert.doesNotMatch(
+      `${tool.description} ${tool.returns}`,
+      /\btaste\b|improves? AI/iu,
+    );
   }
 });
 
@@ -44,68 +48,98 @@ test("MCP server consumes shared names and descriptions without expanding scope"
   const server = await read("mcp/server.ts");
 
   assert.match(server, /from "\.\.\/lib\/mcp-tool-catalogue\.ts"/);
-  assert.match(server, /getTessliMcpToolMetadata\("find_sources"\)/);
-  assert.match(server, /getTessliMcpToolMetadata\("create_research_brief"\)/);
+  for (const name of TESSLI_MCP_TOOL_NAMES) {
+    assert.match(server, new RegExp(`getTessliMcpToolMetadata\\("${name}"\\)`));
+  }
+  assert.equal(server.match(/server\.registerTool\(/g)?.length, 5);
   assert.match(server, /name: TESSLI_MCP_SERVER_NAME/);
   assert.match(server, /version: TESSLI_MCP_SERVER_VERSION/);
-  assert.match(server, /title: findSourcesTool\.title/);
-  assert.match(server, /description: researchBriefTool\.description/);
+  assert.match(server, /title: searchItemsTool\.title/);
+  assert.match(server, /description: sourceTool\.description/);
   assert.doesNotMatch(
     server,
-    /search_resources|get_resource_profile|compare_resources|verify_resource/,
+    /search_resources|get_resource_profile|compare_resources|verify_resource|find_alternatives|get_collection|create_research_brief/,
   );
   assert.doesNotMatch(server, /Http|SSE|OAuth|\.listen\s*\(/);
 });
 
-test("For AI page leads with the task-to-agent workflow and current access truth", async () => {
+test("For AI page covers install, the rules file, MCP, plain files and its non-claims", async () => {
   const page = await read("app/(site)/for-ai/page.tsx");
 
   assert.match(page, /title: "For AI"/);
   assert.match(page, /data-for-ai-page/);
   assert.match(page, /id="main-content"/);
-  assert.match(page, /data-for-ai-workflow/);
-  assert.match(page, /data-for-ai-example/);
-  assert.match(page, /data-for-ai-representations/);
-  assert.match(page, /data-for-ai-local-mcp/);
+  for (const marker of [
+    "data-for-ai-install",
+    "data-for-ai-rules-file",
+    "data-for-ai-workflow",
+    "data-for-ai-local-mcp",
+    "data-for-ai-tools",
+    "data-for-ai-agent-gets",
+    "data-for-ai-representations",
+    "data-for-ai-not-claimed",
+  ]) {
+    assert.match(page, new RegExp(marker), marker);
+  }
   assert.match(page, /data-for-ai-remote-status="unavailable"/);
-  assert.match(page, /data-for-ai-access-routes/);
-  assert.match(page, /data-for-ai-boundaries/);
-  assert.match(page, /Turn research into an agent’s next clear move./);
-  assert.match(page, /From task to reviewed implementation./);
-  assert.match(page, /Guidance with a reason to use it\./);
-  assert.match(page, /A result a builder can act on\./);
-  assert.match(page, /Use a source guide or public representation\./);
-  // One eyebrow site-wide (home hero); numbers only for the real workflow sequence.
-  assert.doesNotMatch(page, /styles\.eyebrow|styles\.cardNumber/);
-  assert.match(page, /String\(index \+ 1\)\.padStart\(2, "0"\)/);
+  for (const heading of [
+    "Code and reasoning, in the formats agents read.",
+    "Install with the shadcn CLI.",
+    "TESSLI.md keeps every rule in reach.",
+    "How an agent uses Tessli.",
+    "Local MCP server.",
+    "What an agent gets.",
+    "Plain files at stable URLs.",
+    "What Tessli does not claim.",
+  ]) {
+    assert.ok(page.includes(heading), heading);
+  }
+
+  // Commands, counts and tool names come from the data and the catalogue.
+  assert.match(page, /installCommand\(exampleItem\.slug\)/);
+  assert.match(page, /rulesInstallCommand\(\)/);
+  assert.match(page, /getRulesIndex\(\)/);
+  assert.match(page, /TESSLI_MCP_TOOL_CATALOGUE\.map/);
+  assert.match(page, /RULES_INDEX_PATH/);
+  assert.doesNotMatch(page, /\b\d+ (?:items|rules|sources)\b/);
+  // The client runs the server file directly: `npm run` writes a banner to
+  // standard output, which would corrupt the stdio stream.
+  const packageJson = JSON.parse(await read("package.json"));
+  assert.equal(packageJson.scripts.mcp, "node mcp/server.ts");
+  assert.match(page, /npm run mcp/);
+  assert.match(page, /"command": "node"/);
+  assert.match(
+    page,
+    /"args": \["\/absolute\/path\/to\/tessli\/web\/mcp\/server\.ts"\]/,
+  );
+  assert.match(page, /skills\/tessli\/SKILL\.md/);
+  assert.match(page, /href="\/llms\.txt"/);
+  assert.match(page, /item\.json/);
+  assert.match(page, /item\.md/);
+  assert.match(page, /profile\.json/);
+  assert.match(page, /profile\.md/);
+  assert.match(page, /href="#local-mcp"/);
+  assert.match(page, /id="local-mcp"/);
+  assert.match(page, /There is no hosted or remote Tessli MCP/);
+  assert.match(page, /read-only/);
+
+  // One eyebrow site-wide (home hero); numbers only for the real sequence.
+  assert.doesNotMatch(page, /styles\.eyebrow|styles\.cardNumber|padStart/);
+  assert.match(page, /\{index \+ 1\}/);
   assert.doesNotMatch(page, /→/);
   assert.match(
     page,
     /Open the Tessli repository <span aria-hidden="true">↗<\/span>/,
   );
-  assert.match(page, /<Button href="\/resources">Start with a task<\/Button>/);
-  assert.match(page, /Local MCP is the current transport./);
-  assert.match(page, /Choose the recorded access route./);
-  assert.match(
-    page,
-    /Keep project context private and provider boundaries clear/,
-  );
-  assert.match(page, /npm run mcp/);
-  assert.match(page, /profile\.json/);
-  assert.match(page, /profile\.md/);
-  assert.match(page, /href="#local-mcp"/);
-  assert.match(page, /id="local-mcp"/);
   assert.doesNotMatch(page, /\bBoards?\b|href="\/(?:boards|saved)"/);
-  assert.match(page, /Remote and hosted MCP are unavailable today/);
-  assert.match(page, /checked-out repository/);
-  assert.match(page, /read-only/);
   assert.doesNotMatch(
     page,
     /getSourceContractSummary|SOURCE_FRESHNESS_WINDOWS/,
   );
-  assert.doesNotMatch(page, /coverageGrid|policyGrid|coverageCounts/);
   assert.doesNotMatch(page, /\b(?:coverage|evidence|verification)\b/i);
+  // Never a taste or improvement claim; the non-claim says it in plain words.
   assert.doesNotMatch(page, /\btaste\b/i);
+  assert.match(page, /That it makes AI-generated UI better\./);
 });
 
 test("For AI route is discoverable only after its page exists", async () => {
@@ -132,11 +166,14 @@ test("For AI visual contract is route-scoped, responsive, and overflow safe", as
   assert.match(css, /@media \(max-width: 767px\)/);
   assert.match(css, /@media \(max-width: 480px\)/);
   assert.match(css, /@media \(forced-colors: active\)/);
-  // Actions moved to the shared Button; its transitions follow the global reduced-motion rule.
+  // Actions use the shared Button; its transitions follow the global reduced-motion rule.
   assert.doesNotMatch(css, /\.primaryAction|\.secondaryAction|\.eyebrow/);
   assert.match(css, /\.heroActions > \* \{\s*width: 100%;/);
+  // Display type uses the brand tokens, not a hard-coded family or tracking.
+  assert.match(css, /font-family: var\(--font-display\)/);
+  assert.doesNotMatch(css, /--font-newsreader|letter-spacing: -0\.03/);
   assert.doesNotMatch(
     css,
-    /backdrop-filter|filter: blur|border-radius: 1[2-9]px|animation:/,
+    /backdrop-filter|filter: blur|border-radius: 1[2-9]px|animation:|!important/,
   );
 });
