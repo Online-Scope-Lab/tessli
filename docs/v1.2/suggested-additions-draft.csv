@@ -1,0 +1,72 @@
+group,name,url,why,confidence_exists_and_active
+components,Ark UI,https://ark-ui.com,"Headless multi-framework (React/Vue/Solid/Svelte) primitives from the Chakra team; Park UI already depends on it",high
+components,Reka UI,https://reka-ui.com,"Vue headless primitives (formerly Radix Vue); basis of shadcn-vue",high
+components,shadcn-vue,https://www.shadcn-vue.com,"shadcn/ui port for Vue; fills Vue copy-paste gap",high
+components,shadcn-svelte,https://www.shadcn-svelte.com,"shadcn/ui port for Svelte",high
+components,Nuxt UI,https://ui.nuxt.com,"Major Vue/Nuxt component library with blocks/templates",high
+components,Ariakit,https://ariakit.org,"Accessible headless React toolkit with strong examples",high
+components,Web Awesome,https://webawesome.com,"Framework-agnostic web components (Shoelace successor, Font Awesome team)",high
+components,Untitled UI,https://www.untitledui.com,"Large Figma UI kit + open-source React components and icons",high
+components,assistant-ui,https://www.assistant-ui.com,"React components for AI chat interfaces",high
+components,React Email,https://react.email,"Email components and templates; pairs with email galleries",high
+components,AI Elements (Vercel),https://ai-sdk.dev/elements,"shadcn-registry components for AI chat/agent UIs",medium
+components,Tailark,https://tailark.com,"shadcn-based marketing blocks",medium
+components,Shadcnblocks,https://www.shadcnblocks.com,"Large shadcn block/section library (freemium)",medium
+components,Animate UI,https://animate-ui.com,"Animated shadcn-registry components",medium
+components,Intent UI,https://intentui.com,"React Aria + Tailwind copy-paste components",medium
+components,Spartan,https://www.spartan.ng,"shadcn-style components for Angular (only one Angular entry today)",medium
+components,shadcn registry directory,https://ui.shadcn.com/docs/directory,"Official index of community shadcn registries; good alternative to listing many small registries",medium
+patterns,Component Gallery,https://component.gallery,"Components compared across ~90 public design systems; replaces Design Systems Repo",high
+patterns,ScreensDesign,https://screensdesign.com,"Mobile app screen/video library; the redirect target of UI Sources, Design Vault, Scrnshts",high
+patterns,Codrops,https://tympanus.net/codrops,"Long-running creative-frontend demos and tutorials (WebGL, motion, layout)",high
+patterns,Laws of UX,https://lawsofux.com,"Concise UX principles reference",high
+patterns,Nielsen Norman Group,https://www.nngroup.com/articles,"Evidence-based UI pattern guidance",high
+patterns,Baymard Institute,https://baymard.com,"Ecommerce UX research and benchmark; much of it paid",high
+patterns,GoodUI,https://goodui.org,"A/B-tested UI patterns; some paid",medium
+patterns,Storybook Showcase,https://storybook.js.org/showcase,"Browsable public component libraries and design systems",high
+patterns,Design Systems Surf,https://designsystems.surf,"Searchable design-system directory/components",medium
+patterns,Details.so,https://details.so,"Redirect target of inspo.page; verify what it is before adding",low
+inspiration,Cosmos,https://www.cosmos.so,"Visual curation/moodboarding widely used by designers",high
+inspiration,Are.na,https://www.are.na,"Research-oriented visual bookmarking with public channels",high
+inspiration,Savee,https://savee.com,"Designer bookmarking/inspiration feed (verify current domain)",medium
+inspiration,Dribbble,https://dribbble.com,"Largest shot gallery; concept-heavy, decide deliberately",high
+inspiration,Behance,https://www.behance.net,"Case studies and brand/UI projects; decide deliberately",high
+typography,Utopia,https://utopia.fyi,"Fluid type and space scale calculators",high
+typography,Typescale,https://typescale.com,"Modular type-scale previewer",high
+typography,Modern Font Stacks,https://modernfontstacks.com,"System font stacks for zero-download typography",high
+typography,Wakamai Fondue,https://wakamaifondue.com,"Inspect a font's features/axes and generate CSS",high
+typography,Uncut,https://uncut.wtf,"Curated free/libre typefaces (contemporary)",high
+typography,Collletttivo,https://www.collletttivo.it,"Open-source type collective",medium
+typography,Pangram Pangram,https://pangrampangram.com,"Contemporary foundry with free personal trials",high
+typography,Future Fonts,https://www.futurefonts.com,"Work-in-progress typefaces from indie designers (verify domain)",medium
+typography,Practical Typography,https://practicaltypography.com,"Reference guide for typographic rules",high
+icons,Hugeicons,https://hugeicons.com,"Large modern icon system with free tier",high
+icons,Simple Icons,https://simpleicons.org,"Brand logo icons (CC0 SVGs)",high
+icons,svgl,https://svgl.app,"Brand SVG logos with light/dark variants",high
+motion,Jitter,https://jitter.video,"Browser motion-design tool for UI animation",high
+motion,Easings.net,https://easings.net,"Easing-curve reference",high
+motion,cubic-bezier.com,https://cubic-bezier.com,"Canonical bezier editor (stable, not updated)",high
+motion,Animations.dev,https://animations.dev,"Web animation course/reference (paid)",high
+motion,Poly Haven,https://polyhaven.com,"CC0 HDRIs, textures, models for WebGL/3D",high
+motion,ShaderGradient,https://shadergradient.co,"Animated shader-gradient generator",medium
+motion,Paper Shaders,https://shaders.paper.design,"Open-source shader backgrounds/effects",medium
+color,Radix Colors,https://www.radix-ui.com/colors,"Accessible UI colour scales; supersedes Open Color",high
+color,OKLCH Color Picker,https://oklch.com,"OKLCH picker/converter (Evil Martians)",high
+color,UI Colors,https://uicolors.app,"Tailwind-style scale generator",high
+color,Harmonizer,https://harmonizer.evilmartians.com,"OKLCH/APCA-based palette harmonisation",medium
+accessibility,ARIA Authoring Practices Guide,https://www.w3.org/WAI/ARIA/apg,"Canonical accessible-widget patterns",high
+accessibility,The A11Y Project,https://www.a11yproject.com,"Community checklist and resources",high
+accessibility,Inclusive Components,https://inclusive-components.design,"Deep accessible-component essays (stale but canonical)",high
+accessibility,Accessible Palette,https://accessiblepalette.com,"Contrast-safe palette builder",medium
+design-systems,Geist,https://vercel.com/geist,"Vercel design system",high
+design-systems,Gestalt,https://gestalt.pinterest.systems,"Pinterest design system",high
+design-systems,Orbit,https://orbit.kiwi,"Kiwi.com travel design system",high
+design-systems,Open UI,https://open-ui.org,"Cross-library component research feeding HTML standards",high
+design-systems,Design Tokens Community Group,https://www.designtokens.org,"Design-token format specification",high
+design-systems,Nord Design System,https://nordhealth.design,"Web-components design system with strong docs",high
+assets,Unsplash,https://unsplash.com,"Free photography for UI placeholders",high
+assets,Shots.so,https://shots.so,"Device/browser mockup generator",high
+assets,Data Viz Project,https://datavizproject.com,"Chart-type reference",high
+tools,Subframe,https://www.subframe.com,"Visual UI builder emitting React/Tailwind",medium
+tools,Paper,https://paper.design,"Design canvas built on HTML/CSS",medium
+tools,Onlook,https://onlook.com,"Open-source visual editor for React apps",medium
