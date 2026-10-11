@@ -1,0 +1,124 @@
+name: CI
+
+# No path filters: every pull request, docs-only included, gets a check.
+on:
+  pull_request:
+  push:
+    branches: [main]
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ci-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    env:
+      NEXT_TELEMETRY_DISABLED: "1"
+    defaults:
+      run:
+        working-directory: web
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v7
+        with:
+          node-version: 22
+          cache: npm
+          cache-dependency-path: web/package-lock.json
+
+      - name: Install locked dependencies
+        run: npm ci
+
+      - name: Verify approved hero artwork
+        run: npm run check:hero
+
+      - name: Check formatting
+        run: npm run format:check
+
+      - name: Check types
+        run: npm run typecheck
+
+      - name: Lint
+        run: npm run lint
+
+      - name: Test
+        run: npm test
+
+      - name: Check catalogue drift
+        run: npm run catalogue:check
+
+      - name: Build
+        run: npm run build
+
+      - name: Browser smoke and focused browser tests
+        shell: bash
+        run: |
+          # Every tests/*-browser.mjs must be run below.
+          for test_file in tests/*-browser.mjs; do
+            if ! grep -qF "node ${test_file} " ../.github/workflows/ci.yml; then
+              echo "::error::${test_file} is not run by ci.yml"
+              exit 1
+            fi
+          done
+
+          mkdir -p artifacts
+          npm run start -- --hostname 127.0.0.1 > artifacts/next.log 2>&1 &
+          server_pid=$!
+          chrome_pid=""
+          cleanup() {
+            if [ -n "$chrome_pid" ]; then kill "$chrome_pid" 2>/dev/null || true; fi
+            kill "$server_pid" 2>/dev/null || true
+          }
+          trap cleanup EXIT
+
+          server_ready=false
+          for attempt in $(seq 1 30); do
+            if curl --fail --silent --show-error --output /dev/null http://127.0.0.1:3000/; then
+              server_ready=true
+              break
+            fi
+            sleep 1
+          done
+          if [ "$server_ready" != "true" ]; then
+            cat artifacts/next.log
+            exit 1
+          fi
+
+          chrome_bin="$(command -v google-chrome || command -v chromium || command -v chromium-browser)"
+          test -n "$chrome_bin"
+          "$chrome_bin" \
+            --headless=new \
+            --no-sandbox \
+            --disable-gpu \
+            --disable-dev-shm-usage \
+            --remote-allow-origins=* \
+            --remote-debugging-port=9222 \
+            --user-data-dir="$RUNNER_TEMP/tessli-cdp" \
+            about:blank > artifacts/chrome.log 2>&1 &
+          chrome_pid=$!
+
+          node tests/smoke-browser.mjs 2>&1 | tee artifacts/browser-tests.log
+          node tests/explore-search-browser.mjs 2>&1 | tee -a artifacts/browser-tests.log
+          node tests/home-task-entry-browser.mjs 2>&1 | tee -a artifacts/browser-tests.log
+          node tests/resource-card-browser.mjs 2>&1 | tee -a artifacts/browser-tests.log
+          node tests/card-surface-parity-browser.mjs 2>&1 | tee -a artifacts/browser-tests.log
+          node tests/collections-browser.mjs 2>&1 | tee -a artifacts/browser-tests.log
+          node tests/browse-pages-browser.mjs 2>&1 | tee -a artifacts/browser-tests.log
+          node tests/global-navigation-browser.mjs 2>&1 | tee -a artifacts/browser-tests.log
+          node tests/for-ai-browser.mjs 2>&1 | tee -a artifacts/browser-tests.log
+
+      - name: Upload screenshots and browser logs
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: tessli-browser-artifacts
+          path: web/artifacts/**
+          if-no-files-found: warn
+          retention-days: 7

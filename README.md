@@ -26,18 +26,13 @@ npm run dev
 
 Open <http://localhost:3000>.
 
-Checks to run before a pull request (from `web/`):
+Before a pull request, run one command from `web/`:
 
 ```bash
-npm run format:check
-npm run typecheck
-npm run lint
-npm test
-npm run catalogue:check
-npm run build
+npm run check
 ```
 
-A single `npm run check` will replace this list once CI is consolidated. `npm run format` fixes formatting.
+It runs the hero artwork hash check, `format:check`, `typecheck`, `lint`, `test`, `catalogue:check` and `build`: everything CI runs except the browser tests. `npm run format` fixes formatting.
 
 The source catalogue is generated deterministically from repository data (`lib_data/`) into `web/data/`; `npm run catalogue:generate` rebuilds it and `npm run catalogue:check` verifies it. Normal build and test make no network calls.
 

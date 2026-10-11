@@ -8,7 +8,7 @@
 
 ## Checks run
 
-- [ ] `npm run format:check` · `typecheck` · `lint` · `test` · `catalogue:check` · `build` (from `web/`)
+- [ ] `npm run check` (from `web/`)
 
 ## AI assistance
 

@@ -35,15 +35,10 @@ npm run dev
 Before opening a PR, run the checks from `web/`:
 
 ```bash
-npm run format:check
-npm run typecheck
-npm run lint
-npm test
-npm run catalogue:check
-npm run build
+npm run check
 ```
 
-(`npm run format` fixes formatting. A single `npm run check` command will replace this list.)
+It runs the hero artwork hash check, `format:check`, `typecheck`, `lint`, `test`, `catalogue:check` and `build`: everything CI runs except the browser tests. (`npm run format` fixes formatting.)
 
 Branch from the latest `main`, keep one focused change per PR, and fill in the pull request template.
 

@@ -11,7 +11,7 @@ Rules for coding agents and contributors working in this repository. Short on pu
 ## How to work
 
 - One focused PR per change, branched from the latest `main`. Never rewrite `main` history.
-- Run the checks from `web/` before opening a PR: `npm run format:check`, `npm run typecheck`, `npm run lint`, `npm test`, `npm run catalogue:check`, `npm run build`. (A single `npm run check` replaces this list once CI is consolidated.)
+- Run `npm run check` from `web/` before opening a PR. It runs the hero hash check, `format:check`, `typecheck`, `lint`, `test`, `catalogue:check` and `build`; CI (`.github/workflows/ci.yml`) runs the same steps plus the browser tests.
 - For visible changes, attach screenshots at 1440, 1024, 768, 390 and 320 px, with no horizontal overflow.
 - Never skip, disable or weaken a test to get green. A test that only checks removed behaviour is deleted with it; a test that also checks something kept is edited.
 - Record a non-obvious decision as one dated line in [`docs/decisions.md`](docs/decisions.md).

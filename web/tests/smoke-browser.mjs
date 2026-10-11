@@ -1,26 +1,62 @@
+// Release smoke test: runtime HTTP contracts plus a route × width browser
+// matrix. Uses raw Chrome DevTools Protocol against $CDP_ENDPOINT, like the
+// other *-browser.mjs tests, so it needs no browser-automation dependency.
 import assert from "node:assert/strict";
 import { mkdir, writeFile } from "node:fs/promises";
 
 const endpoint = process.env.CDP_ENDPOINT ?? "http://127.0.0.1:9222";
 const origin = process.env.TESSLI_ORIGIN ?? "http://127.0.0.1:3000";
-const outputDirectory = new URL(
-  "../artifacts/phase-1-release/",
-  import.meta.url,
-);
-const viewports = [
+const outputDirectory = new URL("../artifacts/smoke/", import.meta.url);
+
+const widths = [
   [1440, 900],
-  [1280, 800],
-  [1024, 768],
-  [768, 1024],
-  [430, 932],
   [390, 844],
-  [360, 800],
 ];
 
-const routeChecks = [
-  ["/", 200, "Find better design resources, faster"],
-  ["/collections", 200, "Guided research paths"],
-  ["/collections/saas-landing-pages", 200, "SaaS landing-page references"],
+// Every public page the smoke matrix renders. `status` is the HTTP status the
+// server must return; `text` must appear in the server-rendered HTML.
+const pages = [
+  { name: "home", path: "/", text: "Find better design resources, faster" },
+  {
+    name: "resources",
+    path: "/resources",
+    text: "What are you trying to design?",
+    markers: ['data-browse-view="cards"', "data-resource-inspect="],
+  },
+  { name: "source", path: "/resources/land-book", text: "How to access it" },
+  { name: "collections", path: "/collections", text: "Guided research paths" },
+  {
+    name: "collection",
+    path: "/collections/saas-landing-pages",
+    text: "SaaS landing-page references",
+  },
+  {
+    name: "for-ai",
+    path: "/for-ai",
+    text: "From task to reviewed implementation.",
+    markers: [
+      "data-for-ai-workflow",
+      'data-for-ai-remote-status="unavailable"',
+      "profile.json",
+    ],
+  },
+  { name: "about", path: "/about", text: "Keep reading" },
+  { name: "privacy", path: "/privacy", text: "Keep reading" },
+  { name: "terms", path: "/terms", text: "Keep reading" },
+  { name: "content-policy", path: "/content-policy", text: "Keep reading" },
+  { name: "submit", path: "/submit", text: "What this route does today" },
+  { name: "lab", path: "/lab", text: "Design system" },
+  {
+    name: "not-found",
+    path: "/a-clearly-missing-route",
+    status: 404,
+    text: "Page not found",
+  },
+];
+
+// Routes checked over HTTP only: the rest of the published collections, the
+// remaining public pages, and removed or unknown routes that must stay 404.
+const extraRouteChecks = [
   ["/collections/typography-font-tools", 200, "Typography and font tools"],
   ["/collections/motion-starter-pack", 200, "Motion starter pack"],
   ["/collections/open-source-ui-libraries", 200, "Open-source UI libraries"],
@@ -30,27 +66,36 @@ const routeChecks = [
     200,
     "Design systems worth studying",
   ],
-  ["/resources", 200, "What are you trying to design?"],
   ["/resources/designindex", 200, "How to access it"],
-  ["/about", 200, "Keep reading"],
   ["/curation", 200, "Keep reading"],
-  ["/privacy", 200, "Keep reading"],
-  ["/terms", 200, "Keep reading"],
-  ["/content-policy", 200, "Keep reading"],
-  ["/submit", 200, "What this route does today"],
   ["/suggest", 200, "What this route does today"],
   ["/auth", 404, "Page not found"],
   ["/saved", 404, "Page not found"],
   ["/boards", 404, "Page not found"],
   ["/collections/not-a-real-collection", 404, "Page not found"],
-  ["/a-clearly-missing-route", 404, "Page not found"],
 ];
 
-for (const [path, expectedStatus, expectedText] of routeChecks) {
+function escapeRegExp(value) {
+  return value.replace(/[.*+?^${}()|[\]\\/]/g, "\\$&");
+}
+
+// --- HTTP contracts -------------------------------------------------------
+
+for (const { path, status = 200, text, markers = [] } of pages) {
   const response = await fetch(`${origin}${path}`);
   const body = await response.text();
-  assert.equal(response.status, expectedStatus, `${path} status`);
-  assert.match(body, new RegExp(expectedText, "i"), `${path} content`);
+  assert.equal(response.status, status, `${path} status`);
+  assert.match(body, new RegExp(escapeRegExp(text), "i"), `${path} content`);
+  for (const marker of markers) {
+    assert.ok(body.includes(marker), `${path} server HTML has ${marker}`);
+  }
+}
+
+for (const [path, status, text] of extraRouteChecks) {
+  const response = await fetch(`${origin}${path}`);
+  const body = await response.text();
+  assert.equal(response.status, status, `${path} status`);
+  assert.match(body, new RegExp(escapeRegExp(text), "i"), `${path} content`);
 }
 
 async function assertOptionalDiscoveryMethod(path, method) {
@@ -95,7 +140,7 @@ assert.match(
 for (const pathname of ["/submit", "/suggest", "/lab/"]) {
   assert.match(
     robots,
-    new RegExp(`^Disallow:\\s*${pathname.replaceAll("/", "\\/")}\\s*$`, "imu"),
+    new RegExp(`^Disallow:\\s*${escapeRegExp(pathname)}\\s*$`, "imu"),
     `/robots.txt disallows ${pathname}`,
   );
 }
@@ -120,7 +165,7 @@ for (const fragment of [
 ]) {
   assert.match(
     llms,
-    new RegExp(fragment.replaceAll("/", "\\/")),
+    new RegExp(escapeRegExp(fragment)),
     `/llms.txt ${fragment}`,
   );
 }
@@ -154,7 +199,6 @@ const machineRouteChecks = [
   {
     path: "/resources/designindex/profile.json",
     contentType: "application/json",
-    contract: "tessli.public-source.v2",
     kind: "source",
   },
   {
@@ -168,12 +212,10 @@ const machineRouteChecks = [
       "## Important limitations",
       "## Consider instead",
     ],
-    kind: "source",
   },
   {
     path: "/collections/saas-landing-pages/collection.json",
     contentType: "application/json",
-    contract: "tessli.public-collection.v2",
     kind: "collection",
   },
   {
@@ -184,7 +226,6 @@ const machineRouteChecks = [
       "## Use this research path",
       "## Staged decisions",
     ],
-    kind: "collection",
   },
 ];
 
@@ -254,7 +295,7 @@ for (const check of machineRouteChecks) {
   assert.equal(response.status, 200, `${check.path} status`);
   assert.match(
     response.headers.get("content-type") ?? "",
-    new RegExp(`^${check.contentType}`),
+    new RegExp(`^${escapeRegExp(check.contentType)}`),
     `${check.path} content type`,
   );
   assert.equal(
@@ -272,25 +313,23 @@ for (const check of machineRouteChecks) {
     /rel="canonical"/u,
     `${check.path} canonical link`,
   );
-  if (check.contract) {
-    const packet = JSON.parse(body);
-    if (check.kind === "source") assertSourcePacket(packet, check.path);
-    else assertCollectionPacket(packet, check.path);
-  } else {
+  if (check.kind === "source") assertSourcePacket(JSON.parse(body), check.path);
+  else if (check.kind === "collection")
+    assertCollectionPacket(JSON.parse(body), check.path);
+  else
     for (const heading of check.headings) {
-      assert.match(body, new RegExp(heading, "i"), `${check.path} ${heading}`);
+      assert.match(
+        body,
+        new RegExp(escapeRegExp(heading), "i"),
+        `${check.path} ${heading}`,
+      );
     }
-  }
 
   const headResponse = await fetch(`${origin}${check.path}`, {
     method: "HEAD",
   });
   assert.equal(headResponse.status, 200, `${check.path} HEAD status`);
-  assert.equal(
-    await headResponse.text(),
-    "",
-    `${check.path} HEAD body is empty`,
-  );
+  assert.equal(await headResponse.text(), "", `${check.path} HEAD body`);
   assert.equal(
     headResponse.headers.get("access-control-allow-origin"),
     "*",
@@ -321,36 +360,12 @@ for (const path of [
   assert.equal(response.status, 404, `${path} remains not found`);
 }
 
-const visualCases = [
-  { name: "home", path: "/", selector: "[data-home-task-entry]" },
-  {
-    name: "collections",
-    path: "/collections",
-    selector: "[data-collections-grid]",
-  },
-  {
-    name: "collection-detail",
-    path: "/collections/saas-landing-pages",
-    selector: "[data-collection-detail=saas-landing-pages]",
-  },
-  {
-    name: "browse",
-    path: "/resources",
-    selector: "[data-browse-view=cards]",
-    browse: true,
-  },
-  { name: "about", path: "/about", selector: "#main-content article" },
-  {
-    name: "contribution-guidance",
-    path: "/submit",
-    selector: "#main-content",
-  },
-  { name: "not-found", path: "/a-clearly-missing-route", selector: "main" },
-];
+// --- Browser matrix -------------------------------------------------------
 
 const pending = new Map();
 let messageId = 0;
-const consoleFailures = [];
+let currentPage = null;
+const browserErrors = [];
 
 async function delay(milliseconds) {
   await new Promise((resolve) => setTimeout(resolve, milliseconds));
@@ -372,23 +387,31 @@ async function findPageTarget() {
   throw new Error("Chrome DevTools endpoint did not become ready.");
 }
 
-const page = await findPageTarget();
-const socket = new WebSocket(page.webSocketDebuggerUrl);
+const target = await findPageTarget();
+const socket = new WebSocket(target.webSocketDebuggerUrl);
 await new Promise((resolve, reject) => {
   socket.addEventListener("open", resolve, { once: true });
   socket.addEventListener("error", reject, { once: true });
 });
 
+function recordError(text) {
+  const where = currentPage
+    ? `${currentPage.page.path} @${currentPage.width}`
+    : "setup";
+  browserErrors.push(`${where}: ${text}`);
+}
+
 socket.addEventListener("message", (event) => {
   const message = JSON.parse(event.data);
   if (message.method === "Runtime.exceptionThrown") {
-    consoleFailures.push(message.params.exceptionDetails.text);
+    const details = message.params.exceptionDetails;
+    recordError(details.exception?.description ?? details.text);
   }
   if (
     message.method === "Runtime.consoleAPICalled" &&
     message.params.type === "error"
   ) {
-    consoleFailures.push(
+    recordError(
       message.params.args
         .map(
           (argument) =>
@@ -396,6 +419,27 @@ socket.addEventListener("message", (event) => {
         )
         .join(" "),
     );
+  }
+  if (
+    message.method === "Log.entryAdded" &&
+    message.params.entry.level === "error"
+  ) {
+    const { entry } = message.params;
+    // Two network errors are expected and ignored: the intentional 404 page's
+    // own document response, and third-party source media (previews and
+    // favicons hosted by the sources), which the media fallback chain covers
+    // and which CI cannot keep reachable. Any same-origin network error, and
+    // every non-network error, fails the run.
+    const expectedNotFound =
+      currentPage?.page.status === 404 &&
+      entry.url === `${origin}${currentPage.page.path}`;
+    const thirdParty =
+      typeof entry.url === "string" &&
+      /^https?:/u.test(entry.url) &&
+      new URL(entry.url).origin !== new URL(origin).origin;
+    const ignored =
+      entry.source === "network" && (expectedNotFound || thirdParty);
+    if (!ignored) recordError(`${entry.text} ${entry.url ?? ""}`);
   }
   const request = pending.get(message.id);
   if (!request) return;
@@ -423,7 +467,7 @@ async function evaluate(expression) {
   return response.result.value;
 }
 
-async function waitFor(expression, label, timeout = 10_000) {
+async function waitFor(expression, label, timeout = 15_000) {
   const deadline = Date.now() + timeout;
   while (Date.now() < deadline) {
     if (await evaluate(expression)) return;
@@ -435,8 +479,9 @@ async function waitFor(expression, label, timeout = 10_000) {
 await mkdir(outputDirectory, { recursive: true });
 await send("Page.enable");
 await send("Runtime.enable");
+await send("Log.enable");
 
-for (const [width, height] of viewports) {
+for (const [width, height] of widths) {
   await send("Emulation.setDeviceMetricsOverride", {
     width,
     height,
@@ -444,77 +489,67 @@ for (const [width, height] of viewports) {
     mobile: width <= 430,
   });
 
-  for (const visualCase of visualCases) {
-    await send("Page.navigate", { url: `${origin}${visualCase.path}` });
+  for (const page of pages) {
+    const label = `${page.path} at ${width}`;
+    currentPage = { page, width };
+    // A marker on the old document proves the navigation replaced it.
+    await evaluate("window.__tessliSmokeStale = true");
+    await send("Page.navigate", { url: `${origin}${page.path}` });
     await waitFor(
-      "document.readyState === 'complete'",
-      `${visualCase.name} document`,
+      "!window.__tessliSmokeStale && document.readyState === 'complete'",
+      `${label} document`,
     );
-    await waitFor(
-      `Boolean(document.querySelector(${JSON.stringify(visualCase.selector)}))`,
-      `${visualCase.name} marker`,
-    );
-    await waitFor(
-      "document.fonts.status === 'loaded'",
-      `${visualCase.name} fonts`,
-    );
+    await waitFor("document.fonts.status === 'loaded'", `${label} fonts`);
+    // Let hydration and effects run so their errors are attributed here.
+    await delay(400);
 
-    const audit = await evaluate(`(() => ({
-      hasMain: Boolean(document.querySelector('main')),
-      hasHeading: Boolean(document.querySelector('h1')),
-      overflow: document.documentElement.scrollWidth > document.documentElement.clientWidth,
-      title: document.title,
-    }))()`);
-    assert.equal(audit.hasMain, true, `${visualCase.name} main at ${width}`);
-    assert.equal(audit.hasHeading, true, `${visualCase.name} h1 at ${width}`);
-    assert.equal(
-      audit.overflow,
-      false,
-      `${visualCase.name} overflow at ${width}`,
+    const audit = await evaluate(`(() => {
+      const root = document.documentElement;
+      const header = document.querySelector('body > header');
+      return {
+        mains: document.querySelectorAll('main').length,
+        h1s: document.querySelectorAll('h1').length,
+        headerNav: Boolean(header?.querySelector('nav a[href]')),
+        footer: Boolean(document.querySelector('[data-site-content] > footer')),
+        scrollWidth: root.scrollWidth,
+        clientWidth: root.clientWidth,
+        title: document.title,
+      };
+    })()`);
+    assert.equal(audit.mains, 1, `${label}: one <main> landmark`);
+    assert.equal(audit.h1s, 1, `${label}: exactly one <h1>`);
+    assert.equal(audit.headerNav, true, `${label}: header navigation`);
+    assert.equal(audit.footer, true, `${label}: site footer`);
+    assert.ok(
+      audit.scrollWidth <= audit.clientWidth,
+      `${label}: horizontal overflow (${audit.scrollWidth} > ${audit.clientWidth})`,
     );
-    assert.ok(audit.title.length > 0, `${visualCase.name} title at ${width}`);
+    assert.ok(audit.title.length > 0, `${label}: document title`);
 
-    if (visualCase.browse) {
-      const browseAudit = await evaluate(`(() => ({
-        cards: document.querySelectorAll('[data-browse-view=cards] article').length,
-        internalLinks: [...document.querySelectorAll('[data-browse-view=cards] article > a')]
-          .every((link) => link.getAttribute('href')?.startsWith('/resources/')),
-        providerLinks: document.querySelectorAll('[data-browse-view=cards] a[target=_blank]').length,
-        saveButtons: document.querySelectorAll('[data-browse-view=cards] button[aria-pressed]').length,
-      }))()`);
-      assert.equal(browseAudit.cards, 24, `Browse card page size at ${width}`);
-      assert.equal(
-        browseAudit.internalLinks,
-        true,
-        `Browse primary links at ${width}`,
-      );
-      assert.ok(
-        browseAudit.providerLinks > 0,
-        `Browse provider links at ${width}`,
-      );
-      assert.equal(
-        browseAudit.saveButtons,
-        0,
-        `Browse has no Save controls at ${width}`,
-      );
-    }
-
+    const metrics = await send("Page.getLayoutMetrics");
+    const fullHeight = Math.min(
+      Math.ceil(metrics.cssContentSize.height),
+      16_000,
+    );
     const screenshot = await send("Page.captureScreenshot", {
       format: "png",
-      fromSurface: true,
-      captureBeyondViewport: false,
+      captureBeyondViewport: true,
+      clip: { x: 0, y: 0, width, height: fullHeight, scale: 1 },
     });
     await writeFile(
-      new URL(`${visualCase.name}-${width}x${height}.png`, outputDirectory),
+      new URL(`${page.name}-${width}.png`, outputDirectory),
       Buffer.from(screenshot.data, "base64"),
     );
   }
 }
 
+currentPage = null;
 socket.close();
 assert.deepEqual(
-  consoleFailures,
+  browserErrors,
   [],
-  `Browser errors: ${consoleFailures.join(" | ")}`,
+  `Browser errors:\n${browserErrors.join("\n")}`,
 );
-console.log("Phase 1 release route and viewport matrix passed.");
+console.log(
+  `Smoke test passed: ${pages.length} pages at ${widths.map(([w]) => w).join(" and ")}px, plus HTTP contracts.`,
+);

@@ -11,6 +11,7 @@
     "start": "next start",
     "catalogue:generate": "node scripts/generate-catalogue.mjs",
     "catalogue:check": "node scripts/check-catalogue.mjs",
+    "check:hero": "node scripts/check-hero.mjs",
     "profiles:check": "node scripts/check-intelligence-profiles.mjs",
     "source-profiles:check": "node scripts/check-source-profile-contract.mjs",
     "mcp": "node mcp/server.ts",
@@ -18,7 +19,8 @@
     "lint": "eslint .",
     "test": "node --test tests/*.test.mjs && node scripts/check-intelligence-profiles.mjs && node scripts/check-source-profile-contract.mjs",
     "format": "prettier --write .",
-    "format:check": "prettier --check ."
+    "format:check": "prettier --check .",
+    "check": "npm run check:hero && npm run format:check && npm run typecheck && npm run lint && npm test && npm run catalogue:check && npm run build"
   },
   "dependencies": {
     "@modelcontextprotocol/sdk": "1.30.0",

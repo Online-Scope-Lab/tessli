@@ -7,5 +7,6 @@ web/out/
 web/coverage/
 web/artifacts/
 web/*.tsbuildinfo
+web/next-env.d.ts
 web/.env*
 !web/.env.example
