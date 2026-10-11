@@ -8,9 +8,17 @@ const endpoint = process.env.CDP_ENDPOINT ?? "http://127.0.0.1:9222";
 const origin = process.env.TESSLI_ORIGIN ?? "http://127.0.0.1:3000";
 const outputDirectory = new URL("../artifacts/smoke/", import.meta.url);
 
+// Full-page screenshots are saved at 1440 and 390. Every page also gets the
+// same landmark, heading, overflow and console audit at the in-between and
+// narrow widths the old release gate covered, without screenshots.
 const widths = [
-  [1440, 900],
-  [390, 844],
+  { width: 1440, height: 900, screenshot: true },
+  { width: 1280, height: 800 },
+  { width: 1024, height: 768 },
+  { width: 768, height: 1024 },
+  { width: 430, height: 932 },
+  { width: 390, height: 844, screenshot: true },
+  { width: 360, height: 800 },
 ];
 
 // Every public page the smoke matrix renders. `status` is the HTTP status the
@@ -481,7 +489,7 @@ await send("Page.enable");
 await send("Runtime.enable");
 await send("Log.enable");
 
-for (const [width, height] of widths) {
+for (const { width, height, screenshot: capture = false } of widths) {
   await send("Emulation.setDeviceMetricsOverride", {
     width,
     height,
@@ -526,6 +534,7 @@ for (const [width, height] of widths) {
     );
     assert.ok(audit.title.length > 0, `${label}: document title`);
 
+    if (!capture) continue;
     const metrics = await send("Page.getLayoutMetrics");
     const fullHeight = Math.min(
       Math.ceil(metrics.cssContentSize.height),
@@ -551,5 +560,8 @@ assert.deepEqual(
   `Browser errors:\n${browserErrors.join("\n")}`,
 );
 console.log(
-  `Smoke test passed: ${pages.length} pages at ${widths.map(([w]) => w).join(" and ")}px, plus HTTP contracts.`,
+  `Smoke test passed: ${pages.length} pages audited at ${widths.map(({ width }) => width).join(", ")}px (screenshots at ${widths
+    .filter(({ screenshot }) => screenshot)
+    .map(({ width }) => width)
+    .join(" and ")}px), plus HTTP contracts.`,
 );

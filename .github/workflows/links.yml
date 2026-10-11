@@ -44,6 +44,9 @@ jobs:
       - name: Restore link-check cache
         uses: actions/cache@v4
         with:
+          # Weekly runs always find last week's cache older than 3 days, so
+          # every scheduled run rechecks every URL; the cache only speeds up
+          # a manual rerun soon after.
           path: .lycheecache
           key: lychee-${{ github.run_id }}
           restore-keys: lychee-
@@ -64,9 +67,20 @@ jobs:
           output: lychee/report.md
           fail: false
 
+      # lychee exits 2 when links are broken and 1 on a runtime or config
+      # error. Only exit 2 reports links; any other non-zero code fails the
+      # run so a tool failure is not posted as broken sources.
+      - name: Fail on a lychee error
+        if: steps.lychee.outputs.exit_code != 0 && steps.lychee.outputs.exit_code != 2
+        env:
+          EXIT_CODE: ${{ steps.lychee.outputs.exit_code }}
+        run: |
+          echo "::error::lychee failed with exit code ${EXIT_CODE}; see the Check links step."
+          exit 1
+
       - name: Find the open "Broken source links" issue
         id: issue
-        if: steps.lychee.outputs.exit_code != 0
+        if: steps.lychee.outputs.exit_code == 2
         env:
           GH_TOKEN: ${{ github.token }}
         run: |
@@ -79,7 +93,7 @@ jobs:
           echo "number=${number}" >> "$GITHUB_OUTPUT"
 
       - name: Open or update the issue
-        if: steps.lychee.outputs.exit_code != 0
+        if: steps.lychee.outputs.exit_code == 2
         uses: peter-evans/create-issue-from-file@v5
         with:
           title: Broken source links
