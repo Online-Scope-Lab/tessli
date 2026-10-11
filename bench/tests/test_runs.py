@@ -80,6 +80,18 @@ class RunsTest(unittest.TestCase):
         self.assertNotEqual(code, 0)
         self.assertFalse(self.runs.exists())
 
+    def test_refuses_a_workspace_root_whose_path_gives_the_setup_away(self):
+        for name in ("bench-work", "Baseline", "tessli-builds", "experiments", "evals", "my-benchmark"):
+            root = self.tmp / name / "inner"
+            code, _ = quiet(new_run.main, ["--brief", "02", "--condition", "baseline", "--run-index", "1",
+                                           "--frozen", str(self.frozen), "--workspace-root", str(root),
+                                           "--runs-dir", str(self.runs), "--no-install", "--dry-run"])
+            self.assertNotEqual(code, 0, name)
+            self.assertFalse(root.exists(), name)
+        self.assertFalse(self.runs.exists())
+        self.assertEqual(new_run.revealing_path_parts(Path("/home/someone/work")), [])
+        self.assertEqual(new_run.revealing_path_parts(Path("/home/someone/bench-work")), ["bench-work"])
+
     def test_record_and_validate_a_dry_pair(self):
         self.new("baseline")
         self.new("tessli")

@@ -30,7 +30,13 @@ import bench_lib as lib
 
 SCHEMA = "taste-bench-score/1"
 PREFERENCES = ("A", "B", "tie")
-DECLARATIONS = ("human_reviewer", "scored_without_ai_assistance", "condition_unknown_while_scoring", "not_the_operator")
+DECLARATIONS = (
+    "human_reviewer",
+    "scored_without_ai_assistance",
+    "condition_unknown_while_scoring",
+    "other_scores_unseen_while_scoring",
+    "not_the_operator",
+)
 TOP_LEVEL = {"schema", "pair_id", "reviewer", "reviewer_kind", "submitted_at", "declarations", "dimensions", "overall_note"}
 MIN_NOTE_LENGTH = 15
 SOFTWARE_WORDS = re.compile(
@@ -156,32 +162,49 @@ def score_files(paths: list[Path]) -> list[Path]:
     return files
 
 
+def check_files(files: list[Path], pair_ids: set[str], not_before: datetime | None) -> list[tuple[Path, dict | None, list[str]]]:
+    """Check every score file: its contents, where it is stored and that no reviewer scored a pair twice.
+
+    Returns (path, document or None, problems) for each file, in order."""
+    results: list[tuple[Path, dict | None, list[str]]] = []
+    seen: set[tuple[str, str]] = set()
+    for path in files:
+        try:
+            data = json.loads(path.read_text(encoding="utf-8"))
+        except (OSError, json.JSONDecodeError) as error:
+            results.append((path, None, [f"not readable JSON ({error})"]))
+            continue
+        problems = score_errors(data, pair_ids=pair_ids, not_before=not_before)
+        if not problems:
+            pair, handle = data["pair_id"], data["reviewer"]["github"]
+            if path.parent.name != pair:
+                problems.append(f"file must live in {pair}/, not {path.parent.name}/")
+            if path.name.lower() != f"{handle.lower()}.json":
+                problems.append(f"file must be named after the reviewer's GitHub handle: {handle}.json, not {path.name}")
+            key = (pair, handle.lower())
+            if key in seen:
+                problems.append(f"{handle} scored pair {pair} twice")
+            seen.add(key)
+        results.append((path, data if not problems else None, problems))
+    return results
+
+
+def missing_commitment(commitment_path: Path) -> str:
+    return f"{commitment_path} not found: scores can only be checked against a committed blinding"
+
+
 def load_valid_scores(scores_dir: Path, commitment_path: Path) -> tuple[list[dict], list[str]]:
     """All score documents under scores_dir, or the errors that make any of them unusable."""
     pair_ids, not_before = load_commitment(commitment_path)
     if pair_ids is None:
-        return [], [f"{commitment_path} not found: scores can only be checked against a committed blinding"]
+        return [], [missing_commitment(commitment_path)]
+    if not scores_dir.is_dir():
+        return [], []
     documents: list[dict] = []
     errors: list[str] = []
-    seen: set[tuple[str, str]] = set()
-    if not scores_dir.is_dir():
-        return documents, errors
-    for path in score_files([scores_dir]):
-        try:
-            data = json.loads(path.read_text(encoding="utf-8"))
-        except (OSError, json.JSONDecodeError) as error:
-            errors.append(f"{path}: not readable JSON ({error})")
-            continue
-        problems = score_errors(data, pair_ids=pair_ids, not_before=not_before)
-        if not problems:
-            key = (data["pair_id"], data["reviewer"]["github"].lower())
-            if key in seen:
-                problems.append(f"{data['reviewer']['github']} scored pair {data['pair_id']} twice")
-            seen.add(key)
-            if path.parent.name != data["pair_id"]:
-                problems.append(f"file must live in {data['pair_id']}/, not {path.parent.name}/")
+    for path, data, problems in check_files(score_files([scores_dir]), pair_ids, not_before):
         errors.extend(f"{path}: {problem}" for problem in problems)
-        if not problems:
+        if data is not None:
             documents.append(data | {"_path": str(path)})
     return documents, errors
 
@@ -201,19 +224,15 @@ def main(argv: list[str] | None = None) -> int:
         return 3
 
     pair_ids, not_before = load_commitment(args.commitment)
+    if pair_ids is None:
+        print(f"CANNOT VALIDATE: {missing_commitment(args.commitment)}. Pass --commitment if it is elsewhere.")
+        return 2
     files = score_files(args.paths)
     if not files:
         print("No score files found")
         return 1
     failed = False
-    for path in files:
-        try:
-            data = json.loads(path.read_text(encoding="utf-8"))
-        except (OSError, json.JSONDecodeError) as error:
-            print(f"INVALID {path}: not readable JSON ({error})")
-            failed = True
-            continue
-        problems = score_errors(data, pair_ids=pair_ids, not_before=not_before)
+    for path, _data, problems in check_files(files, pair_ids, not_before):
         if problems:
             failed = True
             print(f"INVALID {path}")

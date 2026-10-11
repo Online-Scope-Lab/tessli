@@ -74,6 +74,7 @@ def score_form(pair: str) -> dict:
             "human_reviewer": False,
             "scored_without_ai_assistance": False,
             "condition_unknown_while_scoring": False,
+            "other_scores_unseen_while_scoring": False,
             "not_the_operator": False,
         },
         "dimensions": {key: {"A": None, "B": None, "preference": None, "note": ""} for key in lib.DIMENSIONS},
@@ -100,7 +101,8 @@ def render_packet(
         "",
         f"Brief {task['id']}: {task['title']}. Two builds of this brief, labelled **A** and **B**. "
         "The labels were assigned at random and this packet does not say how either build was made. "
-        "Review on your own: do not discuss the builds with other reviewers, and do not try to find out which is which "
+        "Review on your own: do not discuss the builds with other reviewers, do not open other reviewers' score files "
+        "or pull requests until your own pull request is open, and do not try to find out which is which "
         "until every score is committed.",
         "",
         f"Blinding commitment: `{commitment}`.",
@@ -111,7 +113,9 @@ def render_packet(
         "2. Compare A and B in every state at 1440, 768 and 390 px. Open an image for full size.",
         "3. Read the mechanical evidence. It is one input; it does not decide any score.",
         f"4. Copy `score-form.json` to `bench/scores/{pair}/<your-github-handle>.json`, fill in every field and open a pull request. "
-        "Every dimension needs a 1–5 score for A and for B, a preference (A, B or tie) and a note that points at something you can see.",
+        "Every dimension needs a 1–5 score for A and for B, a preference (A, B or tie) and a note that points at something you can see. "
+        "Other reviewers' score pull requests are public: do not open them, or anything under `bench/scores/`, "
+        "until yours is submitted.",
         "",
         "Scale: 1 = poor, would not ship · 2 = weak · 3 = acceptable · 4 = good · 5 = excellent, would ship as is. "
         "Higher is always better; for regression risk, 5 means the least risk.",
@@ -168,8 +172,9 @@ def render_packet(
         out.append(f"| {lib.DIMENSION_TITLES[key]} | {lib.DIMENSION_QUESTIONS[key]} |  |  |  |  |")
     out += [
         "",
-        "Before you submit, confirm the four declarations in the form: you are a human reviewer, you scored without AI "
-        "assistance, you did not know which build was which, and you are not the person who ran the builds.",
+        "Before you submit, confirm the five declarations in the form: you are a human reviewer, you scored without AI "
+        "assistance, you did not know which build was which, you did not see any other reviewer's scores before "
+        "submitting yours, and you are not the person who ran the builds.",
         "",
     ]
     return "\n".join(out)

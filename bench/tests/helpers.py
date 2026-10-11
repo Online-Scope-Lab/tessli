@@ -119,6 +119,7 @@ def valid_score(pair_id: str, github: str = "jane-doe", name: str = "Jane Doe", 
             "human_reviewer": True,
             "scored_without_ai_assistance": True,
             "condition_unknown_while_scoring": True,
+            "other_scores_unseen_while_scoring": True,
             "not_the_operator": True,
         },
         "dimensions": {

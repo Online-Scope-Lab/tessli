@@ -5,10 +5,13 @@ The workspace is a copy of bench/starter/ (plus the Tessli overlay and
 rules/TESSLI.md for the `tessli` condition) in a directory OUTSIDE this
 repository, named only by the opaque run id, so the builder can neither read
 the repository nor tell from a path that it is part of a comparison. The
-rendered prompts and manifest go to <runs-dir>/<run-id>/.
+workspace root must have a neutral path too (e.g. ~/work or ~/projects): a
+root whose path mentions the bench, a condition, an experiment or an
+evaluation is refused. The rendered prompts and manifest go to
+<runs-dir>/<run-id>/.
 
     python3 -I bench/scripts/new_run.py --brief 01 --condition tessli \
-        --run-index 1 --frozen bench/frozen.json --workspace-root ~/bench-work
+        --run-index 1 --frozen bench/frozen.json --workspace-root ~/work
 """
 
 from __future__ import annotations
@@ -39,6 +42,9 @@ FROZEN_KEYS = {
     "verification_steps": list,
 }
 PLACEHOLDER = "RECORD_BEFORE_RUN"
+# Words that would tell the builder, through its working directory, that it is
+# part of a comparison. Matched anywhere in any component of the resolved path.
+REVEALING_PATH_WORDS = re.compile(r"bench|baseline|tessli|experiment|eval", re.IGNORECASE)
 REGISTRY_URL = "http://127.0.0.1:4100"
 
 
@@ -90,8 +96,16 @@ def copy_tree(source: Path, destination: Path) -> None:
         shutil.copy2(path, target)
 
 
+def revealing_path_parts(path: Path) -> list[str]:
+    """Components of path whose names hint at the bench, a condition or an evaluation."""
+    return [part for part in path.parts if REVEALING_PATH_WORDS.search(part)]
+
+
 def isolation_errors(workspace: Path, condition: str) -> list[str]:
     errors = []
+    revealing = revealing_path_parts(workspace.resolve())
+    if revealing:
+        errors.append(f"the workspace path gives the setup away: {', '.join(revealing)}")
     if lib.enclosing_git_root(workspace) is not None:
         errors.append("the workspace is inside a Git repository")
     if lib.is_within(workspace, lib.REPO_ROOT):
@@ -144,6 +158,12 @@ def main(argv: list[str] | None = None) -> int:
         parser.error("--workspace-root must be outside the repository, so the builder cannot read it")
     if lib.enclosing_git_root(workspace_root) is not None:
         parser.error(f"--workspace-root is inside a Git repository ({lib.enclosing_git_root(workspace_root)})")
+    revealing = revealing_path_parts(workspace_root)
+    if revealing:
+        parser.error(
+            f"--workspace-root {workspace_root} gives the setup away to the builder ({', '.join(revealing)}); "
+            "use a neutral directory such as ~/work or ~/projects"
+        )
 
     commit = git("rev-parse", "HEAD")
     dirty = git("status", "--porcelain", "--", "bench/starter", "bench/conditions", "bench/briefs", "rules", "web/public/r")

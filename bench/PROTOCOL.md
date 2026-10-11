@@ -58,7 +58,7 @@ Each build runs in a fresh copy of the starter in a directory outside the reposi
 
 ## Review
 
-- **Reviewers:** at least three independent humans score every pair; ideally the same reviewers score all 18 pairs. The operator, who holds the mapping, does not review. Reviewers do not discuss builds with each other before the reveal and do not use AI assistance to score.
+- **Reviewers:** at least three independent humans score every pair; ideally the same reviewers score all 18 pairs. The operator, who holds the mapping, does not review. Reviewers do not discuss builds with each other before the reveal, do not open another reviewer's score file or pull request until their own for that pair is submitted, and do not use AI assistance to score.
 - **What they see:** the packet only, not the code. Code would reveal the condition (installed items and `TESSLI.md` are visible in it).
 - **Scores:** for each of the twelve dimensions in [`docs/quality-gates.md`](../docs/quality-gates.md#review-dimensions), a 1–5 score for A and for B (higher is always better; for regression risk, 5 means the least risk), a preference (A, B or tie) and a written note pointing at something visible. The questions each dimension asks are in every packet and in [`schemas/score.schema.json`](schemas/score.schema.json).
 
@@ -77,7 +77,7 @@ Each build runs in a fresh copy of the starter in a directory outside the reposi
 | Regression risk | How likely is it to break or mislead in real use: overflow, broken states, risky actions? |
 | Ship readiness | Could this be shipped as it is, with minor fixes at most? |
 
-- **Submission:** each reviewer commits `bench/scores/<pair-id>/<github-handle>.json` through a pull request from their own account. [`scripts/validate_scores.py`](scripts/validate_scores.py) rejects any file that is not attributed to a named human reviewer with a submission timestamp after the commitment, that leaves any field empty, or whose reviewer is software. Scores are human input only: no script in the bench writes, fills in or edits a score, and the validator refuses to run inside the harness or a coding-agent session. Scores are not edited after the reveal.
+- **Submission:** each reviewer commits `bench/scores/<pair-id>/<github-handle>.json` through a pull request from their own account. [`scripts/validate_scores.py`](scripts/validate_scores.py) rejects any file that is not attributed to a named human reviewer with a submission timestamp after the commitment, that leaves any field empty, whose reviewer is software, that is not named after the reviewer's GitHub handle or not in its pair's folder, or that repeats a reviewer's review of a pair. Score pull requests are public, so each reviewer declares in the file that they did not see any other reviewer's scores before submitting theirs. Scores are human input only: no script in the bench writes, fills in or edits a score, and the validator refuses to run inside the harness or a coding-agent session. Scores are not edited after the reveal.
 
 ## Agreement
 
@@ -113,6 +113,7 @@ Everything else (per-dimension wins, mean score differences, the mechanical evid
 - **Reviewers recruited by the owner.** Reviewers may know Tessli and favour its style. Mitigations: blind labels, the declarations in every score file, at least three reviewers per pair, and publishing every reviewer's handle and notes.
 - **The yardstick overlaps the rules.** Several Tessli rules cite the same review dimensions reviewers score, so the Tessli condition is measured on its own terms. The briefs and reviewer notes are written from each brief's requirements, not from the rules.
 - **An artificial handover.** The `?state=` contract, fixture data and a single prompt with no repair turns are the same for both conditions but are not how real projects are built.
+- **Reviewers can see each other's scores.** Score files arrive as public pull requests, so a later reviewer could read an earlier reviewer's scores, preferences and notes for the same pair before scoring it, which would inflate agreement. Mitigations: the packet and `scores/README.md` tell reviewers not to open other score pull requests or files until their own is submitted, every score file carries a declaration that they did not, and the pull request timestamps are published. These are honour-system controls; nothing technically stops a reviewer from looking.
 - **The operator knows the mapping.** The operator does not review, packets are generated mechanically, and the commitment is public before review starts.
 
 ## Publication

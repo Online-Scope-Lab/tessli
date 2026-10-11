@@ -17,7 +17,7 @@ Please read the [Code of Conduct](CODE_OF_CONDUCT.md) first. By contributing you
 
 ## Your first pull request
 
-You need Git, Node.js 22.18 or later and npm.
+You need Git, Node.js 22.18 or later, npm and Python 3.9 or later (`python3`, for the Taste Bench tests in `npm run check`).
 
 1. Fork the repository on GitHub, then clone your fork and install:
 

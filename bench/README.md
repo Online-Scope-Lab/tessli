@@ -19,14 +19,15 @@ bench/
 ├── tests/                 unit tests (npm run bench:test)
 ├── runs/                  one directory per build, by opaque run id (see runs/README.md)
 ├── packets/               the blinding commitment and one review packet per pair (see packets/README.md)
-└── scores/                human score files, one per reviewer per pair (see scores/README.md)
+├── scores/                human score files, one per reviewer per pair (see scores/README.md)
+└── results/               created at the reveal: reveal.json (reveal.py) and outcome.json (agreement.py)
 ```
 
 The scripts run under `python3 -I` (isolated mode); each one adds only its own directory to the import path. `capture.mjs` uses the Playwright and axe-core already installed for `web/`, so run `npm ci` in `web/` first.
 
 ## Running a batch
 
-Commands run from the repository root. `~/bench-work` and `~/bench-private` stand for any two directories outside this repository; neither may be inside a Git repository.
+Commands run from the repository root. `~/work` and `~/bench-private` stand for any two directories outside this repository; neither may be inside a Git repository. The builder's working directory is `~/work/<run-id>`, so its path must stay neutral: `new_run.py` refuses a workspace root whose path contains `bench`, `baseline`, `tessli`, `experiment` or `eval` (use something like `~/work` or `~/projects`).
 
 ### 1. Freeze the conditions
 
@@ -41,10 +42,10 @@ Write the private model record (exact model identifier, harness version, date) t
 For each brief 01–06 and run index 1–3, in the order the protocol gives:
 
 ```bash
-python3 -I bench/scripts/new_run.py --brief 01 --condition baseline --run-index 1 --workspace-root ~/bench-work
+python3 -I bench/scripts/new_run.py --brief 01 --condition baseline --run-index 1 --workspace-root ~/work
 ```
 
-It prints the run id, the workspace (`~/bench-work/<run-id>`, dependencies installed with `npm ci`) and the prompts (`bench/runs/<run-id>/prompt/system.md` and `task.md`). For a `tessli` run, also serve the registry for the whole build:
+It prints the run id, the workspace (`~/work/<run-id>`, dependencies installed with `npm ci`) and the prompts (`bench/runs/<run-id>/prompt/system.md` and `task.md`). For a `tessli` run, also serve the registry for the whole build:
 
 ```bash
 python3 -m http.server 4100 --bind 127.0.0.1 --directory web/public/r
@@ -54,16 +55,16 @@ Then:
 
 ```bash
 python3 -I bench/scripts/record_run.py start bench/runs/<run-id>
-# start the builder in ~/bench-work/<run-id> with system.md as its system prompt and task.md as its only message;
+# start the builder in ~/work/<run-id> with system.md as its system prompt and task.md as its only message;
 # stop it when it finishes or the time allowance runs out, and do not touch the workspace
-python3 -I bench/scripts/record_run.py finish bench/runs/<run-id> --workspace ~/bench-work/<run-id> \
+python3 -I bench/scripts/record_run.py finish bench/runs/<run-id> --workspace ~/work/<run-id> \
   --outcome completed --turns 1 [--input-tokens N --output-tokens N]
 ```
 
 ### 3. Capture
 
 ```bash
-node bench/scripts/capture.mjs --run bench/runs/<run-id> --workspace ~/bench-work/<run-id>
+node bench/scripts/capture.mjs --run bench/runs/<run-id> --workspace ~/work/<run-id>
 ```
 
 It runs `npm run build` and `npm run start` in the workspace (port 4310), then for every state loads `/?state=<name>` at 1440, 768 and 390 px: a full-page screenshot, horizontal overflow (also at 320 px), console and page errors, and axe-core with the WCAG 2.2 AA tags. Results: `bench/runs/<run-id>/evidence.json` and `screenshots/<state>-<width>.png`. One server at a time.
@@ -71,7 +72,7 @@ It runs `npm run build` and `npm run start` in the workspace (port 4310), then f
 ### 4. Pair and blind
 
 ```bash
-python3 -I bench/scripts/validate_pair.py --all bench/runs --workspace-root ~/bench-work
+python3 -I bench/scripts/validate_pair.py --all bench/runs --workspace-root ~/work
 BENCH_SEED=$(python3 -c "import secrets; print(secrets.token_hex(32))") \
   python3 -I bench/scripts/randomize_blind_labels.py --sealed ~/bench-private/mapping.json
 ```
@@ -81,15 +82,17 @@ BENCH_SEED=$(python3 -c "import secrets; print(secrets.token_hex(32))") \
 ### 5. Packets
 
 ```bash
-git worktree add ~/bench-artifacts bench-artifacts   # or a separate clone of that branch
+# first time only: create the branch as an orphan (no history from main) in a new worktree (Git 2.42 or later)
+git worktree add --orphan -b bench-artifacts ~/bench-artifacts
+# later, when the branch already exists on GitHub: git fetch origin bench-artifacts && git worktree add ~/bench-artifacts bench-artifacts
 python3 -I bench/scripts/prepare_blind_packet.py --sealed ~/bench-private/mapping.json --artifacts-out ~/bench-artifacts
 ```
 
-It writes `bench/packets/<pair-id>/PACKET.md` and `score-form.json`, and copies the screenshots to `~/bench-artifacts/packets/<pair-id>/<A|B>/`. Look at every screenshot (protocol, Blinding step 5), push the `bench-artifacts` branch, then commit the packets on `main` and send reviewers the links.
+It writes `bench/packets/<pair-id>/PACKET.md` and `score-form.json`, and copies the screenshots to `~/bench-artifacts/packets/<pair-id>/<A|B>/`. Look at every screenshot (protocol, Blinding step 5), commit them in `~/bench-artifacts` and push the branch (`git -C ~/bench-artifacts push -u origin bench-artifacts`), then commit the packets on `main` and send reviewers the links.
 
 ### 6. Review
 
-Reviewers follow their packet: copy `score-form.json` to `bench/scores/<pair-id>/<github-handle>.json`, fill in every field and open a pull request. Check each one in your own terminal:
+Reviewers follow their packet: copy `score-form.json` to `bench/scores/<pair-id>/<github-handle>.json`, fill in every field and open a pull request. Score pull requests are public, so remind every reviewer not to open other reviewers' score pull requests or files until their own is submitted (each score file declares this; see Threats to validity in the protocol). Check each one in your own terminal:
 
 ```bash
 python3 -I bench/scripts/validate_scores.py bench/scores

@@ -57,6 +57,7 @@
         "human_reviewer",
         "scored_without_ai_assistance",
         "condition_unknown_while_scoring",
+        "other_scores_unseen_while_scoring",
         "not_the_operator"
       ],
       "properties": {
@@ -68,6 +69,10 @@
         },
         "condition_unknown_while_scoring": {
           "const": true
+        },
+        "other_scores_unseen_while_scoring": {
+          "const": true,
+          "description": "You did not open any other reviewer's score file or pull request before submitting this one."
         },
         "not_the_operator": {
           "const": true

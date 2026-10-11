@@ -15,7 +15,7 @@ from pathlib import Path
 from helpers import SCRIPTS, lib, valid_score
 
 from prepare_blind_packet import score_form
-from validate_scores import score_errors
+from validate_scores import check_files, score_errors, score_files
 
 PAIR = "01-abc123"
 
@@ -90,35 +90,96 @@ class ScoreErrorsTest(unittest.TestCase):
         self.assertRejected(valid_score("09-ffffff"), "not in the committed list", pair_ids={PAIR})
 
 
+def write_score(root: Path, document: dict, folder: str | None = None, name: str | None = None) -> Path:
+    path = root / (folder or document["pair_id"]) / (name or f"{document['reviewer']['github']}.json")
+    path.parent.mkdir(parents=True, exist_ok=True)
+    path.write_text(json.dumps(document), encoding="utf-8")
+    return path
+
+
+class CheckFilesTest(unittest.TestCase):
+    def setUp(self):
+        self._tmp = tempfile.TemporaryDirectory()
+        self.root = Path(self._tmp.name)
+
+    def tearDown(self):
+        self._tmp.cleanup()
+
+    def problems(self, path: Path) -> list[str]:
+        results = check_files(score_files([self.root]), {PAIR}, None)
+        return next(problems for result_path, _data, problems in results if result_path == path)
+
+    def test_accepts_a_file_named_after_the_reviewer_in_its_pair_folder(self):
+        path = write_score(self.root, valid_score(PAIR))
+        self.assertEqual(self.problems(path), [])
+
+    def test_rejects_a_file_in_the_wrong_pair_folder(self):
+        path = write_score(self.root, valid_score(PAIR), folder="02-def456")
+        self.assertTrue(any("must live in" in problem for problem in self.problems(path)))
+
+    def test_rejects_a_file_not_named_after_the_reviewer(self):
+        path = write_score(self.root, valid_score(PAIR), name="someone-else.json")
+        self.assertTrue(any("named after the reviewer" in problem for problem in self.problems(path)))
+
+    def test_rejects_a_second_review_of_the_same_pair(self):
+        write_score(self.root, valid_score(PAIR, github="jane-doe"))
+        second = write_score(self.root, valid_score(PAIR, github="Jane-Doe"))
+        results = check_files(score_files([self.root]), {PAIR}, None)
+        self.assertEqual(sum(1 for _path, _data, problems in results if any("twice" in p for p in problems)), 1)
+        self.assertTrue(second.exists())
+
+
 class ValidateScoresCliTest(unittest.TestCase):
-    def run_cli(self, path: Path, extra_env: dict[str, str]) -> subprocess.CompletedProcess:
+    def setUp(self):
+        self._tmp = tempfile.TemporaryDirectory()
+        self.root = Path(self._tmp.name)
+        self.scores = self.root / "scores"
+        self.commitment = self.root / "commitment.json"
+        created = (datetime.now(timezone.utc) - timedelta(days=1)).replace(microsecond=0).isoformat()
+        lib.write_json(self.commitment, {"pair_ids": [PAIR], "created_at": created})
+
+    def tearDown(self):
+        self._tmp.cleanup()
+
+    def run_cli(self, path: Path, extra_env: dict[str, str], commitment: Path | None = None) -> subprocess.CompletedProcess:
         env = {key: value for key, value in os.environ.items() if key not in lib.AGENT_ENV_MARKERS}
         env.update(extra_env)
         return subprocess.run(
-            [sys.executable, "-I", str(SCRIPTS / "validate_scores.py"), str(path), "--commitment", str(path.parent / "none.json")],
+            [sys.executable, "-I", str(SCRIPTS / "validate_scores.py"), str(path),
+             "--commitment", str(commitment or self.commitment)],
             capture_output=True, text=True, env=env,
         )
 
     def test_refuses_inside_the_harness_or_an_agent_session(self):
-        with tempfile.TemporaryDirectory() as tmp:
-            path = Path(tmp) / f"{PAIR}.json"
-            path.write_text(json.dumps(valid_score(PAIR)), encoding="utf-8")
-            for marker in ("TESSLI_BENCH_HARNESS", "CLAUDECODE"):
-                result = self.run_cli(path, {marker: "1"})
-                self.assertEqual(result.returncode, 3, result.stdout)
-                self.assertIn("REFUSED", result.stdout)
+        path = write_score(self.scores, valid_score(PAIR))
+        for marker in ("TESSLI_BENCH_HARNESS", "CLAUDECODE"):
+            result = self.run_cli(path, {marker: "1"})
+            self.assertEqual(result.returncode, 3, result.stdout)
+            self.assertIn("REFUSED", result.stdout)
 
     def test_validates_files_for_a_person(self):
-        with tempfile.TemporaryDirectory() as tmp:
-            good = Path(tmp) / "good.json"
-            good.write_text(json.dumps(valid_score(PAIR)), encoding="utf-8")
-            result = self.run_cli(good, {})
-            self.assertEqual(result.returncode, 0, result.stdout)
-            bad = Path(tmp) / "bad.json"
-            bad.write_text(json.dumps(score_form(PAIR)), encoding="utf-8")
-            result = self.run_cli(bad, {})
-            self.assertEqual(result.returncode, 1)
-            self.assertIn("INVALID", result.stdout)
+        good = write_score(self.scores, valid_score(PAIR))
+        result = self.run_cli(self.scores, {})
+        self.assertEqual(result.returncode, 0, result.stdout)
+        self.assertIn("VALID", result.stdout)
+        bad = write_score(self.scores, score_form(PAIR), name="someone.json")
+        result = self.run_cli(bad, {})
+        self.assertEqual(result.returncode, 1)
+        self.assertIn("INVALID", result.stdout)
+        self.assertTrue(good.exists())
+
+    def test_cli_applies_folder_name_and_duplicate_checks(self):
+        write_score(self.scores, valid_score(PAIR), name="not-the-handle.json")
+        result = self.run_cli(self.scores, {})
+        self.assertEqual(result.returncode, 1, result.stdout)
+        self.assertIn("named after the reviewer", result.stdout)
+
+    def test_fails_without_a_commitment(self):
+        path = write_score(self.scores, valid_score(PAIR))
+        result = self.run_cli(path, {}, commitment=self.root / "none.json")
+        self.assertEqual(result.returncode, 2, result.stdout)
+        self.assertIn("CANNOT VALIDATE", result.stdout)
+        self.assertNotIn("VALID   ", result.stdout)
 
 
 if __name__ == "__main__":
