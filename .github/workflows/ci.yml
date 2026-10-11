@@ -1,6 +1,12 @@
 name: CI
 
 # No path filters: every pull request, docs-only included, gets a check.
+#
+# Fork-safe by design: it runs on `pull_request` (never `pull_request_target`),
+# so a pull request from a fork gets a read-only token and no secrets. Nothing
+# here needs either: no secrets are read, no step writes to the repository,
+# issues or pull requests, and the checkout does not keep the token. The only
+# outputs are the job log and a screenshot artifact.
 on:
   pull_request:
   push:
@@ -25,6 +31,8 @@ jobs:
     steps:
       - name: Check out repository
         uses: actions/checkout@v4
+        with:
+          persist-credentials: false
 
       - name: Set up Node.js
         uses: actions/setup-node@v7

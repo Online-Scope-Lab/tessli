@@ -4,13 +4,21 @@ name: Suggest-source check
 # the URL, looks for duplicates (archived sources included), validates the
 # fields and fetches the link once. It posts or updates ONE comment. It never
 # accepts, labels, closes or edits an issue, and never edits sources.
+#
+# Security model (the issue text is untrusted; anyone can open an issue):
+# - `issues` events always run this file and the checkout from the default
+#   branch, so only reviewed code runs. Nothing from a fork or pull request is
+#   checked out or executed.
+# - The issue body reaches the script only through an environment variable,
+#   never a shell command line or a `${{ }}` expression inside a script.
+# - The job that parses the body and fetches the link has a read-only token
+#   that is not persisted. Only the separate `comment` job can write, and it
+#   runs no repository code: it posts the report text the first job produced.
 on:
   issues:
     types: [opened, edited]
 
-permissions:
-  contents: read
-  issues: write
+permissions: {}
 
 concurrency:
   group: suggest-source-${{ github.event.issue.number }}
@@ -25,6 +33,11 @@ jobs:
       contains(github.event.issue.body, '### Canonical URL')
     runs-on: ubuntu-latest
     timeout-minutes: 5
+    permissions:
+      contents: read
+    outputs:
+      applicable: ${{ steps.check.outputs.applicable }}
+      report: ${{ steps.report.outputs.report }}
     steps:
       - name: Check out repository
         uses: actions/checkout@v4
@@ -51,16 +64,42 @@ jobs:
           REPORT_PATH: ${{ runner.temp }}/suggest-source-report.md
         run: node web/scripts/suggest-source-check.mjs
 
-      - name: Post or update the summary comment
+      # Hands the report to the comment job as a job output. A random
+      # delimiter keeps report text from ending the value early.
+      - name: Pass the report on
+        id: report
         if: steps.check.outputs.applicable == 'true'
-        uses: actions/github-script@v7
         env:
           REPORT_PATH: ${{ runner.temp }}/suggest-source-report.md
+        run: |
+          delimiter="REPORT_$(openssl rand -hex 16)"
+          {
+            echo "report<<${delimiter}"
+            cat "$REPORT_PATH"
+            echo
+            echo "${delimiter}"
+          } >> "$GITHUB_OUTPUT"
+
+  comment:
+    needs: check
+    if: needs.check.outputs.applicable == 'true'
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    permissions:
+      issues: write
+    steps:
+      - name: Post or update the summary comment
+        uses: actions/github-script@v7
+        env:
+          REPORT: ${{ needs.check.outputs.report }}
         with:
           script: |
-            const fs = require("node:fs");
             const marker = "<!-- tessli:suggest-source-check -->";
-            const body = fs.readFileSync(process.env.REPORT_PATH, "utf8");
+            const body = process.env.REPORT.trim();
+            if (!body.startsWith(marker)) {
+              core.setFailed("The report does not start with the check's marker.");
+              return;
+            }
             const { owner, repo } = context.repo;
             const issue_number = context.issue.number;
             const comments = await github.paginate(

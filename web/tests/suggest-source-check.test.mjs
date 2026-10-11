@@ -490,37 +490,48 @@ test("the suggest-source workflow is safe and only comments", async () => {
   const workflow = parseYaml(text);
 
   assert.deepEqual(workflow.on, { issues: { types: ["opened", "edited"] } });
-  assert.deepEqual(workflow.permissions, {
-    contents: "read",
-    issues: "write",
-  });
+  // No default token permissions; each job asks for only what it needs.
+  assert.deepEqual(workflow.permissions, {});
+  assert.deepEqual(Object.keys(workflow.jobs).sort(), ["check", "comment"]);
+
+  // The job that reads untrusted issue text and fetches the link cannot write.
   const job = workflow.jobs.check;
+  assert.deepEqual(job.permissions, { contents: "read" });
   assert.match(
     job.if,
     /startsWith\(github\.event\.issue\.title, '\[Source\]'\)/u,
   );
   assert.match(job.if, /### Canonical URL/u);
+  const checkout = job.steps.find((step) =>
+    String(step.uses).startsWith("actions/checkout@"),
+  );
+  assert.equal(checkout.with["persist-credentials"], false);
+  assert.equal(checkout.with.ref, undefined, "default-branch code only");
 
-  const steps = job.steps;
-  const run = steps.find((step) => step.id === "check");
+  const run = job.steps.find((step) => step.id === "check");
   assert.equal(run.run.trim(), "node web/scripts/suggest-source-check.mjs");
   assert.equal(run.env.ISSUE_BODY, "${{ github.event.issue.body }}");
-  // Issue text reaches the script only through env, never a shell line.
-  for (const step of steps) {
-    assert.doesNotMatch(step.run ?? "", /github\.event/u);
-    assert.doesNotMatch(
-      step.with?.script ?? "",
-      /github\.event\.issue\.(body|title)/u,
-    );
+  assert.equal(job.outputs.report, "${{ steps.report.outputs.report }}");
+
+  // The job that can write runs no repository code: one github-script step.
+  const comment = workflow.jobs.comment;
+  assert.equal(comment.needs, "check");
+  assert.deepEqual(comment.permissions, { issues: "write" });
+  assert.equal(comment.steps.length, 1);
+  const [post] = comment.steps;
+  assert.match(String(post.uses), /^actions\/github-script@/u);
+  assert.equal(post.env.REPORT, "${{ needs.check.outputs.report }}");
+
+  // Issue text reaches code only through env, never a shell line or script.
+  for (const step of [...job.steps, ...comment.steps]) {
+    assert.doesNotMatch(step.run ?? "", /\$\{\{/u);
+    assert.doesNotMatch(step.with?.script ?? "", /\$\{\{/u);
   }
-  const comment = steps.find((step) =>
-    String(step.uses).startsWith("actions/github-script@"),
-  );
-  assert.match(comment.with.script, /tessli:suggest-source-check/u);
-  assert.match(comment.with.script, /updateComment/u);
-  assert.match(comment.with.script, /createComment/u);
+  assert.match(post.with.script, /tessli:suggest-source-check/u);
+  assert.match(post.with.script, /updateComment/u);
+  assert.match(post.with.script, /createComment/u);
   assert.doesNotMatch(
     text,
-    /addLabels|removeLabel|issues\.update\b|state:\s*["']closed|git push|contents:\s*write/u,
+    /pull_request_target|addLabels|removeLabel|issues\.update\b|state:\s*["']closed|git push|contents:\s*write/u,
   );
 });

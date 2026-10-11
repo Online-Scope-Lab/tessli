@@ -21,6 +21,9 @@ import { parse as parseYaml } from "yaml";
 import { CATEGORY_DEFINITIONS, readSourceFiles } from "./catalogue-lib.mjs";
 
 export const COMMENT_MARKER = "<!-- tessli:suggest-source-check -->";
+/** CONTRIBUTING.md's one-file source guide, linked from every report. */
+export const ADD_SOURCE_GUIDE_URL =
+  "https://github.com/Online-Scope-Lab/tessli/blob/main/CONTRIBUTING.md#add-a-source";
 
 /** The fields of .github/ISSUE_TEMPLATE/suggest-source.yml, in form order. */
 export const FORM_FIELDS = [
@@ -516,6 +519,22 @@ export function renderReport({ validation, duplicates, link }) {
     lines.push(`- Not reachable: ${link.reason}.`);
   }
   lines.push("");
+
+  // Only values mapped from the form's fixed options appear here, never text
+  // the submitter typed.
+  const values = [];
+  if (validation.categoryId) values.push(`category: ${validation.categoryId}`);
+  if (validation.access) values.push(`access: ${validation.access}`);
+  lines.push(
+    "#### If a maintainer accepts it",
+    "",
+    `It becomes one new file, ${code("sources/<slug>.yml")}, in a pull request that a maintainer or any contributor can open: see [Add a source](${ADD_SOURCE_GUIDE_URL}). Set ${code("added_via: community")} and ${code("submission_issue")} to this issue's number${
+      values.length
+        ? `; from this form: ${values.map((value) => code(value)).join(", ")}`
+        : ""
+    }.`,
+    "",
+  );
   return `${lines.join("\n")}`;
 }
 
