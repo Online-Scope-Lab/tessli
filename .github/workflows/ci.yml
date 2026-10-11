@@ -104,6 +104,21 @@ jobs:
             about:blank > artifacts/chrome.log 2>&1 &
           chrome_pid=$!
 
+          # The browser tests give Chrome only ~10s to expose a page target; a cold
+          # runner can take longer, so wait here (up to 60s) before starting them.
+          cdp_ready=false
+          for attempt in $(seq 1 60); do
+            if curl --fail --silent http://127.0.0.1:9222/json/list | grep -q '"type": *"page"'; then
+              cdp_ready=true
+              break
+            fi
+            sleep 1
+          done
+          if [ "$cdp_ready" != "true" ]; then
+            cat artifacts/chrome.log
+            exit 1
+          fi
+
           node tests/smoke-browser.mjs 2>&1 | tee artifacts/browser-tests.log
           node tests/explore-search-browser.mjs 2>&1 | tee -a artifacts/browser-tests.log
           node tests/home-task-entry-browser.mjs 2>&1 | tee -a artifacts/browser-tests.log
