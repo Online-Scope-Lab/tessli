@@ -1,3 +1,0 @@
-planning_focus: [workflow-decomposition, recovery-paths, content-requirements, accessibility, verification-coverage]
-implementation_focus: [progress-clarity, validation-usability, error-recovery, keyboard-flow, completion-feedback]
-human_review_dimensions: [task_fit, information_hierarchy, visual_coherence, project_consistency, responsive_quality, interaction_completeness, accessibility, implementation_quality, overall_preference]

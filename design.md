@@ -32,7 +32,7 @@ Approved hero artwork:
 - canonical source: `docs/ref-img/tessli-hero-geometry.webp`
 - production derivative: `web/public/brand/tessli-hero-geometry.webp`
 
-The references define the **composition, atmosphere, hierarchy, and component language**. They are not literal specifications for fictional data, tiny generated text, or impossible measurements. `brand-preview/assets/` remains a legacy specimen set for the static preview; it is not the canonical source set and must not be used as production UI.
+The references define the **composition, atmosphere, hierarchy, and component language**. They are not literal specifications for fictional data, tiny generated text, or impossible measurements.
 
 ## 3. Non-negotiable design principles
 

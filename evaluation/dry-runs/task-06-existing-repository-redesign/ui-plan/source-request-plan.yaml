@@ -1,9 +1,0 @@
-version: 1
-local_inspection_complete: true
-evidence_needed:
-  - id: mobile-filter-accessibility-guidance
-    type: accessibility-guidance
-    query: accessible labeling and tab semantics for stacked mobile search and select filters
-    purpose: validate the proposed control semantics before implementation
-    preferred_source_order: [local-repository-guidance, WAI-ARIA-authoring-practices, Open-UI-research]
-    blocking: false

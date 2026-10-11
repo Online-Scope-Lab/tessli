@@ -66,26 +66,14 @@ test("public header and footer promote only implemented routes", async () => {
 });
 
 test("unfinished and internal-lab routes are non-indexable", async () => {
-  const [auth, submit, suggest, lab, resourceCardLab, proof, proofReview] =
-    await Promise.all([
-      read("app/auth/page.tsx"),
-      read("app/submit/page.tsx"),
-      read("app/suggest/page.tsx"),
-      read("app/lab/page.tsx"),
-      read("app/lab/resource-cards/page.tsx"),
-      read("app/proofs/oss-homepage/page.tsx"),
-      read("app/proofs/oss-homepage/review/page.tsx"),
-    ]);
+  const [auth, submit, suggest, lab] = await Promise.all([
+    read("app/auth/page.tsx"),
+    read("app/submit/page.tsx"),
+    read("app/suggest/page.tsx"),
+    read("app/lab/page.tsx"),
+  ]);
 
-  for (const route of [
-    auth,
-    submit,
-    suggest,
-    lab,
-    resourceCardLab,
-    proof,
-    proofReview,
-  ]) {
+  for (const route of [auth, submit, suggest, lab]) {
     assert.match(route, /index: false/);
     assert.match(route, /follow: false/);
   }
@@ -112,8 +100,5 @@ test("sitemap limits discovery to public routes and canonical documents", async 
   assert.match(sitemap, /getAllSourceProfiles\(\)/);
   assert.match(sitemap, /collection\.(?:json|md)/);
   assert.match(sitemap, /profile\.(?:json|md)/);
-  assert.doesNotMatch(
-    sitemap,
-    /"\/(?:saved|boards|auth|submit|suggest|lab|proofs)/u,
-  );
+  assert.doesNotMatch(sitemap, /"\/(?:saved|boards|auth|submit|suggest|lab)/u);
 });

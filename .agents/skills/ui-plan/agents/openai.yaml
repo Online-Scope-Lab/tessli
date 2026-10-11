@@ -1,4 +1,0 @@
-interface:
-  display_name: "UI Planning"
-  short_description: "Plan evidence-backed UI before coding"
-  default_prompt: "Use $ui-plan to prepare a compact UI Contract before implementation."

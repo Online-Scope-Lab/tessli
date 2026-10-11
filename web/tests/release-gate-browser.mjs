@@ -122,14 +122,7 @@ assert.match(
   /^Sitemap:\s*.+\/sitemap\.xml\s*$/imu,
   "/robots.txt sitemap",
 );
-for (const pathname of [
-  "/auth",
-  "/submit",
-  "/suggest",
-  "/boards",
-  "/lab/",
-  "/proofs/",
-]) {
+for (const pathname of ["/auth", "/submit", "/suggest", "/boards", "/lab/"]) {
   assert.match(
     robots,
     new RegExp(`^Disallow:\\s*${pathname.replaceAll("/", "\\/")}\\s*$`, "imu"),

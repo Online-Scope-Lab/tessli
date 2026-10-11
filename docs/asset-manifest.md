@@ -77,7 +77,6 @@ These are canonical desktop art-direction captures. They preserve composition, h
 
 - References are art-direction and layout targets, not sources of fictional data.
 - Do not use the reference screenshots inside the production Tessli application.
-- `brand-preview/assets/` is a legacy static-specimen set. It may be used to run the preview but is not a canonical source, production asset, or replacement for the tracked references above.
 - Production hero may be re-exported after crop approval, but preserve transparency and the warm stone/charcoal/orange palette.
 - Do not apply a second heavy grain layer over the hero.
 - Resource thumbnails are not included as production assets; they follow `docs/data-and-media-contract.md`.

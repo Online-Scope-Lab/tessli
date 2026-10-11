@@ -1,9 +1,0 @@
-{
-  "version": 1,
-  "algorithm": "SHA-256",
-  "commitment": "7cbd0c0cc2604f4cfb3c5c1be92ae139374b447310dcc4c66f296a8830597585",
-  "labels": [
-    "version-a",
-    "version-b"
-  ]
-}

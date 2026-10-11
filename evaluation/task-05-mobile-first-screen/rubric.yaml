@@ -1,3 +1,0 @@
-planning_focus: [mobile-priority, touch-targets, offline-states, hierarchy, verification-coverage]
-implementation_focus: [mobile-usability, action-reachability, readable-density, state-feedback, responsive-enhancement]
-human_review_dimensions: [task_fit, information_hierarchy, visual_coherence, project_consistency, responsive_quality, interaction_completeness, accessibility, implementation_quality, overall_preference]

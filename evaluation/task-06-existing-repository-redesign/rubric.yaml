@@ -1,3 +1,0 @@
-planning_focus: [repository-understanding, mobile-priority, scope-discipline, component-reuse, verification-coverage]
-implementation_focus: [overflow-resolution, control-labeling, mobile-scanability, desktop-regression-avoidance, data-flow-preservation]
-human_review_dimensions: [task_fit, information_hierarchy, visual_coherence, project_consistency, responsive_quality, interaction_completeness, accessibility, implementation_quality, overall_preference]

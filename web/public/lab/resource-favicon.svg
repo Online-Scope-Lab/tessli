@@ -1,6 +1,0 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="128" height="128" viewBox="0 0 128 128" role="img" aria-labelledby="title">
-  <title id="title">Resource favicon fixture</title>
-  <rect width="128" height="128" rx="18" fill="#252422"/>
-  <path d="M31 35h66v15H73v48H55V50H31V35Z" fill="#fcf8f3"/>
-  <circle cx="92" cy="91" r="13" fill="#f05217"/>
-</svg>

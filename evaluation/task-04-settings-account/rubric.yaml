@@ -1,3 +1,0 @@
-planning_focus: [information-architecture, safety, state-completeness, component-reuse, source-requests]
-implementation_focus: [grouping, save-feedback, permission-clarity, destructive-action-safety, responsive-structure]
-human_review_dimensions: [task_fit, information_hierarchy, visual_coherence, project_consistency, responsive_quality, interaction_completeness, accessibility, implementation_quality, overall_preference]

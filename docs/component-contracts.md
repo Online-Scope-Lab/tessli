@@ -19,7 +19,7 @@ These contracts describe working public interfaces only. Components being remove
 - active route uses a restrained orange underline, not a filled pill;
 - show only working routes/utilities;
 - Browse is the canonical source browser;
-- no Sign in, account, in-site submit form, Lab, proof, or review control;
+- no Sign in, account, in-site submit form, or Lab control;
 - mobile navigation opens a full-height accessible sheet;
 - Escape closes sheets/menus and focus returns to their triggers.
 
@@ -149,7 +149,7 @@ Auth, account menus and in-site forms are not part of v1.2. Contributions go thr
 - footer-only links: About, Curation, Privacy, Terms, Content policy;
 - responsive groups that stack simply on mobile;
 - no newsletter until operational;
-- no Auth, Lab, proof, or review destination.
+- no Auth or Lab destination.
 
 ## 14. Announcements
 

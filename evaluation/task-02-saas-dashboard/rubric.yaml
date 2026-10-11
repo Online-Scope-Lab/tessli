@@ -1,3 +1,0 @@
-planning_focus: [next-action-priority, hierarchy, state-definition, component-reuse, avoided-pattern-rationale]
-implementation_focus: [scanability, density, status-clarity, responsive-navigation, state-completeness]
-human_review_dimensions: [task_fit, information_hierarchy, visual_coherence, project_consistency, responsive_quality, interaction_completeness, accessibility, implementation_quality, overall_preference]

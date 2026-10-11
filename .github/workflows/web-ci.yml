@@ -77,9 +77,6 @@ jobs:
       - name: Build
         run: npm run build
 
-      - name: Measure OSS proof handoff
-        run: node scripts/measure-oss-proof-handoff.mjs
-
       - name: Run canonical route and browser matrix
         shell: bash
         run: |
@@ -121,7 +118,7 @@ jobs:
 
           chrome_bin="$(command -v google-chrome || command -v chromium || command -v chromium-browser)"
           test -n "$chrome_bin"
-          mkdir -p artifacts/responsive-ui artifacts/search-browser artifacts/phase-1-release artifacts/oss-proof-candidate artifacts/oss-human-review artifacts/global-navigation artifacts/playbooks artifacts/for-ai
+          mkdir -p artifacts/responsive-ui artifacts/search-browser artifacts/phase-1-release artifacts/global-navigation artifacts/playbooks artifacts/for-ai
           "$chrome_bin" \
             --headless=new \
             --no-sandbox \
@@ -141,8 +138,6 @@ jobs:
           node tests/full-reference-browser.mjs 2>&1 | tee -a artifacts/search-browser/interaction.log
           node tests/saved-resources-browser.mjs 2>&1 | tee -a artifacts/search-browser/interaction.log
           node tests/release-gate-browser.mjs 2>&1 | tee -a artifacts/search-browser/interaction.log
-          node tests/oss-homepage-browser.mjs 2>&1 | tee -a artifacts/search-browser/interaction.log
-          node tests/oss-human-review-browser.mjs 2>&1 | tee -a artifacts/search-browser/interaction.log
           node tests/global-navigation-browser.mjs 2>&1 | tee -a artifacts/search-browser/interaction.log
           node tests/for-ai-browser.mjs 2>&1 | tee -a artifacts/search-browser/interaction.log
 
@@ -155,11 +150,8 @@ jobs:
             web/artifacts/search-browser/*
             web/artifacts/responsive-ui/*.png
             web/artifacts/phase-1-release/*.png
-            web/artifacts/oss-proof-candidate/*.png
-            web/artifacts/oss-human-review/*.png
             web/artifacts/global-navigation/*.png
             web/artifacts/playbooks/*.png
             web/artifacts/for-ai/*.png
-            web/artifacts/oss-proof-metrics.json
           if-no-files-found: warn
           retention-days: 7
