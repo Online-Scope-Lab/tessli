@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 
 import { Button } from "@/components/ui/button";
 import {
+  goodFirstIssuesUrl,
   issueFormUrl,
   repositoryFileUrl,
   repositoryUrl,
@@ -53,7 +54,7 @@ const paths: readonly ContributionPath[] = [
     id: "contribute-item",
     title: "Contribute an item",
     who: "For developers who want to add to the library.",
-    body: "Copy the item template, build the item with shadcn/ui primitives and semantic tokens, and fill in its taste notes honestly: use when, avoid when, the rules it follows and the default it replaces.",
+    body: "Copy the item template, build the item with shadcn/ui primitives and semantic tokens, and fill in its taste notes honestly: use when, avoid when, the rules it follows and the default it replaces. Building a submitted design or a good first issue is a good place to start.",
     lands:
       "A pull request. CI checks the notes, the build and the preview in three themes and at five widths; then a maintainer reviews it.",
     links: [
@@ -65,6 +66,7 @@ const paths: readonly ContributionPath[] = [
         label: "Open the item template",
         href: repositoryFileUrl("web/registry/_template"),
       },
+      { label: "Find a good first issue", href: goodFirstIssuesUrl },
     ],
   },
   {

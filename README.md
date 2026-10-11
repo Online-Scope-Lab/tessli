@@ -65,9 +65,9 @@ Coding agents get the same code, notes and rules people see, in four ways:
 
 Tessli does not claim that any of this improves AI-generated UI. That waits for the published, human-scored evaluation in the plan (§9).
 
-## Contributing
+## Contribute
 
-Suggest a source, submit a design, report a problem or send a fix. See [`CONTRIBUTING.md`](CONTRIBUTING.md) for the paths, local setup, the item checklist, DCO sign-off and the AI-assistance disclosure. Coding agents also read [`AGENTS.md`](AGENTS.md). Everyone follows the [Code of Conduct](CODE_OF_CONDUCT.md).
+Everything is contributed on GitHub, in four ways: suggest a source, submit a design, contribute a library item, or report a problem. The site's [`/contribute`](https://tessli.vercel.app/contribute) page starts each one, and [`CONTRIBUTING.md`](CONTRIBUTING.md) is the step-by-step guide: your first pull request, adding a source as one file, building an item from the template, checking it in all three themes, DCO sign-off and the AI-assistance disclosure. New here? Pick a [good first issue](https://github.com/Online-Scope-Lab/tessli/contribute). Coding agents also read [`AGENTS.md`](AGENTS.md). Everyone follows the [Code of Conduct](CODE_OF_CONDUCT.md).
 
 ## Licence
 

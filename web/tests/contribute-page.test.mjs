@@ -4,7 +4,11 @@ import path from "node:path";
 import { test } from "node:test";
 import { fileURLToPath } from "node:url";
 
-import { issueFormUrl, repositoryFileUrl } from "../lib/repository.ts";
+import {
+  goodFirstIssuesUrl,
+  issueFormUrl,
+  repositoryFileUrl,
+} from "../lib/repository.ts";
 
 const currentFile = fileURLToPath(import.meta.url);
 const webRoot = path.resolve(path.dirname(currentFile), "..");
@@ -39,6 +43,10 @@ test("GitHub helpers build the exact issue-form and file URLs", () => {
     repositoryFileUrl("web/registry/_template"),
     "https://github.com/Online-Scope-Lab/tessli/tree/main/web/registry/_template",
   );
+  assert.equal(
+    goodFirstIssuesUrl,
+    "https://github.com/Online-Scope-Lab/tessli/contribute",
+  );
 });
 
 test("every linked issue form, document, anchor and template exists in the repository", async () => {
@@ -54,7 +62,7 @@ test("every linked issue form, document, anchor and template exists in the repos
     path.join(repoRoot, "CONTRIBUTING.md"),
     "utf8",
   );
-  assert.match(contributing, /^### Contribute an item$/m);
+  assert.match(contributing, /^#{2,3} Contribute an item$/m);
   for (const file of [
     "CODE_OF_CONDUCT.md",
     "TRADEMARKS.md",
@@ -75,6 +83,7 @@ test("/contribute offers four GitHub paths and no in-site form", async () => {
       'repositoryFileUrl("CONTRIBUTING.md", "contribute-an-item")',
     ],
     ["Contribute an item", 'repositoryFileUrl("web/registry/_template")'],
+    ["Contribute an item", "goodFirstIssuesUrl"],
     ["Report a problem", 'issueFormUrl("report-source.yml")'],
     ["Report a problem", 'issueFormUrl("bug.yml")'],
   ]) {

@@ -1,6 +1,8 @@
 /** Canonical public repository. Every repository link in the app reads from here. */
 export const repositoryUrl = "https://github.com/Online-Scope-Lab/tessli";
 export const repositoryCloneUrl = `${repositoryUrl}.git`;
+/** GitHub's list of the repository's open "good first issue" issues. */
+export const goodFirstIssuesUrl = `${repositoryUrl}/contribute`;
 
 /** A GitHub issue form in .github/ISSUE_TEMPLATE/. */
 export type IssueTemplate =

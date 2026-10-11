@@ -71,8 +71,21 @@ test("llms discovery route is static, deterministic, and bounded to public truth
     "/collections/saas-landing-pages/collection.md",
     "/for-ai#local-mcp",
     "skills/tessli/SKILL.md",
+    "## Contribute",
+    "/contribute",
   ]) {
     assert.match(route, new RegExp(escapeRegex(fragment)));
+  }
+
+  // The contribution paths come from the same helpers as /contribute.
+  for (const call of [
+    'issueFormUrl("suggest-source.yml")',
+    'issueFormUrl("submit-design.yml")',
+    'repositoryFileUrl("CONTRIBUTING.md", "contribute-an-item")',
+    'issueFormUrl("report-source.yml")',
+    'issueFormUrl("bug.yml")',
+  ]) {
+    assert.ok(route.includes(call), call);
   }
 
   // Install commands, paths and counts come from the data, never literals.

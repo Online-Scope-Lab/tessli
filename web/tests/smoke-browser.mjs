@@ -116,6 +116,7 @@ const pages = [
       "https://github.com/Online-Scope-Lab/tessli/issues/new?template=bug.yml",
       "https://github.com/Online-Scope-Lab/tessli/blob/main/CONTRIBUTING.md#contribute-an-item",
       "https://github.com/Online-Scope-Lab/tessli/tree/main/web/registry/_template",
+      "https://github.com/Online-Scope-Lab/tessli/contribute",
     ],
   },
   { name: "lab", path: "/lab", text: "Design system" },
@@ -284,6 +285,10 @@ for (const fragment of [
   "/resources/landingfolio/profile.md",
   "/collections/saas-landing-pages/collection.json",
   "/collections/saas-landing-pages/collection.md",
+  "/contribute",
+  "https://github.com/Online-Scope-Lab/tessli/issues/new?template=suggest-source.yml",
+  "https://github.com/Online-Scope-Lab/tessli/issues/new?template=submit-design.yml",
+  "https://github.com/Online-Scope-Lab/tessli/blob/main/CONTRIBUTING.md#contribute-an-item",
 ]) {
   assert.match(
     llms,

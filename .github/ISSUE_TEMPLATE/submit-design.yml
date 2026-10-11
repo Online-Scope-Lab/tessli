@@ -6,7 +6,8 @@ body:
   - type: markdown
     attributes:
       value: |
-        Designers submit, developers implement, and both are credited on the item.
+        Designers submit, developers implement, and both are credited on the item by their GitHub handles.
+        How a developer builds it: [Build a submitted design](https://github.com/Online-Scope-Lab/tessli/blob/main/CONTRIBUTING.md#build-a-submitted-design).
         A maintainer reviews every submission. Submitting a design does not mean it will be built.
         Please attach only work you made or have the right to share. Do not submit screenshots of paid UI kits
         or of other people's products presented as your own.

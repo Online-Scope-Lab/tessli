@@ -5,7 +5,11 @@ import {
   type LibraryItem,
 } from "@/lib/library";
 import { TESSLI_MCP_TOOL_NAMES } from "@/lib/mcp-tool-catalogue";
-import { repositoryUrl } from "@/lib/repository";
+import {
+  issueFormUrl,
+  repositoryFileUrl,
+  repositoryUrl,
+} from "@/lib/repository";
 import {
   getRules,
   getRulesByCategory,
@@ -98,6 +102,15 @@ Tessli's MCP server is a local, read-only stdio process that an MCP client start
 ## Agent Skill
 
 skills/tessli/SKILL.md in the repository (${repositoryUrl}) tells an agent how to use Tessli: read the rules, search the items, install one, adapt it to the project's tokens, then check it against the rules at 1440, 768 and 390 px.
+
+## Contribute
+
+Contributions happen on GitHub; Tessli has no accounts and no in-site forms. /contribute lists the paths:
+
+- Suggest a source: ${issueFormUrl("suggest-source.yml")}
+- Submit a design: ${issueFormUrl("submit-design.yml")}
+- Contribute a library item (a pull request): ${repositoryFileUrl("CONTRIBUTING.md", "contribute-an-item")}
+- Report a source problem or a bug: ${issueFormUrl("report-source.yml")} or ${issueFormUrl("bug.yml")}
 
 ## What Tessli does not claim
 

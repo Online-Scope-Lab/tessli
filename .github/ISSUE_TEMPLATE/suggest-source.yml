@@ -11,6 +11,8 @@ body:
         Not accepted: general app builders, ad/marketing libraries, stock marketplaces,
         directories of other directories, affiliate links.
         A maintainer opens and checks every suggestion before it is added. Suggesting a source does not mean it will be listed.
+        An automatic comment checks the URL, duplicates and the fields soon after you submit. To add the source yourself
+        as a one-file pull request, see [Add a source](https://github.com/Online-Scope-Lab/tessli/blob/main/CONTRIBUTING.md#add-a-source).
   - type: input
     id: name
     attributes:
@@ -81,7 +83,7 @@ body:
     id: summary
     attributes:
       label: What will someone find there?
-      description: One or two specific sentences. Content type, scope and rough size. No marketing adjectives.
+      description: One or two specific sentences, 40–200 characters. Content type, scope and rough size. No marketing adjectives.
       placeholder: Side-by-side examples of ~60 component types taken from public design systems, with links to each implementation.
     validations:
       required: true

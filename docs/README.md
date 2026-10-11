@@ -6,8 +6,15 @@ A short index of what lives in `docs/`. Start with the root [`README.md`](../REA
 
 - [`v1.2/plan.md`](v1.2/plan.md): the approved product and build plan.
 - [`v1.2/repo-cleanup.md`](v1.2/repo-cleanup.md): the cleanup steps (C0–C7).
+- [`v1.2/good-first-issues.md`](v1.2/good-first-issues.md): drafts of the first contributor issues, each with files, acceptance checks and how to verify.
+- [`v1.2/shadcn-directory-listing.md`](v1.2/shadcn-directory-listing.md): the `@tessli` entry for the shadcn registry directory, its pull request text and the pre-flight checklist.
 - [`v1.2/`](v1.2/): the catalogue audit, triage files and research notes behind the plan.
 - [`decisions.md`](decisions.md): one dated line per decision.
+
+## Contributing
+
+- [`../CONTRIBUTING.md`](../CONTRIBUTING.md): every contribution path, step by step, with the item checklist, DCO sign-off and AI-assistance disclosure.
+- [`../.github/ISSUE_TEMPLATE/`](../.github/ISSUE_TEMPLATE/): the issue forms (suggest a source, submit a design, report a source problem, bug report) and [`../.github/workflows/suggest-source.yml`](../.github/workflows/suggest-source.yml), the automatic first-pass check on source suggestions.
 
 ## Reference
 
