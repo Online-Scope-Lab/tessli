@@ -8,7 +8,7 @@ export default function AboutPage() {
       summary="Tessli is a manually curated index for designers, frontend developers, product builders, and small teams that need useful references without another noisy feed."
       relatedLinks={[
         { href: "/curation", label: "How curation works" },
-        { href: "/resources", label: "Browse Full Reference" },
+        { href: "/resources", label: "Browse sources" },
         { href: "/content-policy", label: "Content policy" },
       ]}
       sections={[

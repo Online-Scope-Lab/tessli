@@ -95,6 +95,30 @@ function definedCustomProperties(css) {
   return [...css.matchAll(/^\s*(--[\w-]+)\s*:/gm)].map((match) => match[1]);
 }
 
+// Tailwind v4 emits `@theme inline` variables only when a utility uses them,
+// so a CSS module that reads one gets an undefined value at runtime. Strip
+// those blocks before collecting the variables modules may read.
+function withoutInlineThemeBlocks(css) {
+  let output = "";
+  let index = 0;
+  const pattern = /@theme\s+inline\s*\{/g;
+  let match;
+  while ((match = pattern.exec(css))) {
+    output += css.slice(index, match.index);
+    let depth = 1;
+    let cursor = match.index + match[0].length;
+    while (depth > 0 && cursor < css.length) {
+      if (css[cursor] === "{") depth += 1;
+      if (css[cursor] === "}") depth -= 1;
+      cursor += 1;
+    }
+    assert.equal(depth, 0, "unterminated @theme inline block");
+    index = cursor;
+    pattern.lastIndex = cursor;
+  }
+  return output + css.slice(index);
+}
+
 test("every CSS variable used by the app is defined exactly once", async () => {
   const globals = await read("app/globals.css");
   const fonts = await read("app/fonts.ts");
@@ -104,7 +128,11 @@ test("every CSS variable used by the app is defined exactly once", async () => {
   );
   assert.deepEqual(duplicates, [], "tokens defined more than once");
 
-  const defined = new Set(definitions);
+  const defined = new Set(
+    definedCustomProperties(withoutInlineThemeBlocks(globals)),
+  );
+  assert.ok(!defined.has("--color-border"), "@theme inline must be excluded");
+  assert.ok(defined.has("--border"));
   // next/font injects these through the className on <html>.
   for (const match of fonts.matchAll(/variable: "(--[\w-]+)"/g)) {
     defined.add(match[1]);
