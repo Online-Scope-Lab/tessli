@@ -36,7 +36,16 @@
             "Content is still loading; show a skeleton or progress state, not an empty state.",
             "The empty region is minor (a sidebar list, a small widget); a single muted sentence is enough."
           ],
-          "rules": [],
+          "rules": [
+            "H-02",
+            "S-02",
+            "C-02",
+            "W-02",
+            "ST-01",
+            "ST-02",
+            "ST-04",
+            "A-01"
+          ],
           "ai_default": "A large centred illustration or icon, the headline \"Nothing here yet\", a vague line such as \"Get started by creating your first item\", and the same generic message for first use, no search results and failed loads.",
           "why_this_is_better": [
             "The title names what is empty in the user's words (\"No notes in Field research yet\"), so it reads correctly out of context and to screen readers.",
@@ -109,7 +118,16 @@
             "You have fewer than three real questions; answer them in the page copy.",
             "The content is support troubleshooting that changes often; keep it in a help centre."
           ],
-          "rules": [],
+          "rules": [
+            "H-02",
+            "S-02",
+            "K-01",
+            "W-04",
+            "R-03",
+            "M-01",
+            "M-02",
+            "A-06"
+          ],
           "ai_default": "A centred \"Frequently Asked Questions\" heading over a JavaScript accordion of filler questions such as \"What is [product]?\" and \"Why choose us?\", answered with marketing copy, only one item open at a time, and no way to reach a person.",
           "why_this_is_better": [
             "Questions are real objections (export, cancellation, billing, sharing, offline) in the words a buyer would use.",
@@ -181,7 +199,16 @@
             "Every plan needs a sales conversation; show what is included and one contact route instead.",
             "The plans differ on dozens of features; link to a full comparison table below a short summary."
           ],
-          "rules": [],
+          "rules": [
+            "H-01",
+            "T-03",
+            "C-02",
+            "C-04",
+            "K-03",
+            "W-02",
+            "ST-03",
+            "R-03"
+          ],
           "ai_default": "Three identical rounded cards, the middle one raised with a gradient border and a \"Most popular\" pill, a dozen ticked features per card that mostly repeat, the same \"Get started\" button on every card, and an annual toggle whose saving is a hard-coded percentage.",
           "why_this_is_better": [
             "Plans are compared on three named limits, written out as values (\"Up to 50\", \"1 year\") in the same order on every plan, so the difference is readable at a glance.",
@@ -217,6 +244,20 @@
           "license": "MIT"
         }
       }
+    },
+    {
+      "name": "rules",
+      "type": "registry:file",
+      "title": "Tessli UI rules (TESSLI.md)",
+      "description": "A compact index of Tessli's 39 UI rules (drafts until a maintainer signs them), installed as TESSLI.md at the project root for coding agents to read.",
+      "files": [
+        {
+          "path": "rules/TESSLI.md",
+          "type": "registry:file",
+          "target": "~/TESSLI.md"
+        }
+      ],
+      "docs": "Every rule with its reasons, checks and sources: https://tessli.vercel.app/rules"
     }
   ]
 }

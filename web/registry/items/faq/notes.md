@@ -11,7 +11,15 @@ avoid_when:
   - The questions need long, step-by-step answers; link to documentation instead.
   - You have fewer than three real questions; answer them in the page copy.
   - The content is support troubleshooting that changes often; keep it in a help centre.
-rules: []
+rules:
+  - H-02 # headings follow the outline
+  - S-02 # one shared edge
+  - K-01 # native elements first
+  - W-04 # answer first
+  - R-03 # break where the content breaks
+  - M-01 # motion only explains change
+  - M-02 # respect reduced motion
+  - A-06 # keyboard complete, nothing hover-only
 ai_default: >-
   A centred "Frequently Asked Questions" heading over a JavaScript accordion
   of filler questions such as "What is [product]?" and "Why choose us?",

@@ -87,8 +87,9 @@ test("adapted work names its source and licence", () => {
 
 test("the schema rejects malformed notes", () => {
   for (const changes of [
-    { rules: ["hierarchy"] },
-    { rules: ["H-2"] },
+    { rules: ["hierarchy", "H-01", "A-01"] },
+    { rules: ["H-2", "H-01", "A-01"] },
+    { rules: ["H-01", "A-01"] },
     { kind: "widget" },
     { category: "misc" },
     { license: "Apache-2.0" },
@@ -101,7 +102,7 @@ test("the schema rejects malformed notes", () => {
   ]) {
     assert.equal(validate(withNotes(changes)), false, JSON.stringify(changes));
   }
-  assert.equal(validate(withNotes({ rules: ["H-02", "CO-14"] })), true);
+  assert.equal(validate(withNotes({ rules: ["H-02", "ST-01", "A-01"] })), true);
 });
 
 test("folded YAML scalars are trimmed before validation", () => {
@@ -149,14 +150,16 @@ test("root registry.json is a shadcn GitHub registry over web/registry/items", a
   const { items } = await buildRegistry();
   assert.equal(registry.name, "tessli");
   assert.match(registry.homepage, /^https:\/\//);
+  // Library items first, then the `rules` file item (tests/rules.test.mjs).
   assert.deepEqual(
     registry.items.map((item) => item.name),
-    items.map((item) => item.slug),
+    [...items.map((item) => item.slug), "rules"],
   );
   assert.ok(!registry.items.some((item) => item.name === "example-item"));
-  assert.ok(registry.items.length >= 3);
+  const libraryEntries = registry.items.filter((item) => item.name !== "rules");
+  assert.ok(libraryEntries.length >= 3);
 
-  for (const entry of registry.items) {
+  for (const entry of libraryEntries) {
     const notes = entry.meta.tessli;
     assert.equal(notes.id, entry.name);
     assert.equal(entry.type, KIND_TO_TYPE[notes.kind]);

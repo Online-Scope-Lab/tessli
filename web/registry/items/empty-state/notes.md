@@ -11,7 +11,15 @@ avoid_when:
   - The whole screen is empty because the user has no access; show a permission message with who to ask instead.
   - Content is still loading; show a skeleton or progress state, not an empty state.
   - The empty region is minor (a sidebar list, a small widget); a single muted sentence is enough.
-rules: []
+rules:
+  - H-02 # headings follow the outline
+  - S-02 # one shared edge
+  - C-02 # never colour alone
+  - W-02 # action labels name the outcome
+  - ST-01 # every data region has its states
+  - ST-02 # empty states differ by cause
+  - ST-04 # errors explain and offer a way out
+  - A-01 # 44px touch targets
 ai_default: >-
   A large centred illustration or icon, the headline "Nothing here yet", a
   vague line such as "Get started by creating your first item", and the same

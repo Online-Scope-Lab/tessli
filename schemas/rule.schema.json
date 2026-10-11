@@ -1,0 +1,125 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:tessli:schema:rule:v1",
+  "title": "Tessli UI rule",
+  "description": "The YAML frontmatter of rules/<ID>.md (plan §6.5). web/scripts/build-registry.mjs validates every rule against this schema, checks that the id prefix matches the category, and generates rules/TESSLI.md and web/data/rules.json from the rule files.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "id",
+    "category",
+    "title",
+    "statement",
+    "why",
+    "check",
+    "anti_pattern",
+    "status",
+    "reviewed_by",
+    "reviewed_at",
+    "sources"
+  ],
+  "properties": {
+    "id": {
+      "description": "Stable rule id: a category prefix, a hyphen and two digits (H-01). Equals the file name, is never renamed and is never reused.",
+      "type": "string",
+      "pattern": "^(H|T|S|C|K|W|ST|R|M|A)-\\d{2}$"
+    },
+    "category": {
+      "description": "hierarchy (H), typography (T), spacing (S: spacing and density), colour (C), components (K), copy (W: copy and writing), states (ST), responsive (R), motion (M), accessibility (A).",
+      "enum": [
+        "hierarchy",
+        "typography",
+        "spacing",
+        "colour",
+        "components",
+        "copy",
+        "states",
+        "responsive",
+        "motion",
+        "accessibility"
+      ]
+    },
+    "title": {
+      "description": "A short name for the rule.",
+      "type": "string",
+      "$ref": "#/$defs/line",
+      "maxLength": 60
+    },
+    "statement": {
+      "description": "The rule as one imperative line. Terse, because rules/TESSLI.md quotes it.",
+      "type": "string",
+      "$ref": "#/$defs/line",
+      "minLength": 20,
+      "maxLength": 95
+    },
+    "why": {
+      "description": "Why it matters, in one to three sentences.",
+      "type": "string",
+      "$ref": "#/$defs/line",
+      "minLength": 40,
+      "maxLength": 500
+    },
+    "check": {
+      "description": "How to verify it: concrete and observable, ideally at 1440, 768 and 390 px. Terse, because rules/TESSLI.md quotes it.",
+      "type": "string",
+      "$ref": "#/$defs/line",
+      "minLength": 20,
+      "maxLength": 95
+    },
+    "anti_pattern": {
+      "description": "The common generic default this rule guards against.",
+      "type": "string",
+      "$ref": "#/$defs/line",
+      "minLength": 20,
+      "maxLength": 300
+    },
+    "status": {
+      "description": "draft until a maintainer signs the rule. Only maintainers set reviewed.",
+      "enum": ["draft", "reviewed"]
+    },
+    "reviewed_by": {
+      "description": "GitHub handles of the reviewing maintainers. Empty while the rule is a draft.",
+      "type": "array",
+      "uniqueItems": true,
+      "items": {
+        "type": "string",
+        "pattern": "^[A-Za-z0-9](?:[A-Za-z0-9-]{0,37}[A-Za-z0-9])?$"
+      }
+    },
+    "reviewed_at": {
+      "anyOf": [{ "type": "null" }, { "type": "string", "format": "date" }]
+    },
+    "sources": {
+      "description": "Where the rule comes from: real, checkable origins only (a design.md or docs section, a WCAG 2.2 success criterion, a plan section, a review dimension). No unsourced studies or statistics.",
+      "type": "array",
+      "minItems": 1,
+      "maxItems": 6,
+      "uniqueItems": true,
+      "items": { "type": "string", "$ref": "#/$defs/line", "maxLength": 160 }
+    }
+  },
+  "allOf": [
+    {
+      "if": { "properties": { "status": { "const": "reviewed" } } },
+      "then": {
+        "properties": {
+          "reviewed_by": { "type": "array", "minItems": 1 },
+          "reviewed_at": { "type": "string" }
+        }
+      },
+      "else": {
+        "properties": {
+          "reviewed_by": { "type": "array", "maxItems": 0 },
+          "reviewed_at": { "type": "null" }
+        }
+      }
+    }
+  ],
+  "$defs": {
+    "line": {
+      "type": "string",
+      "minLength": 1,
+      "pattern": "^\\S(?:.*\\S)?$"
+    }
+  }
+}

@@ -1,9 +1,11 @@
-// Library registry builder. Reads web/registry/items/<slug>/ and produces, in
-// memory, every generated file: the root registry.json that `shadcn add
-// online-scope-lab/tessli/<slug>` reads, one shadcn item JSON per item under
-// web/public/r/, the site's web/data/library.json and the preview index
-// web/registry/__index__.tsx. Deterministic and offline: same inputs, same
-// bytes. build-registry.mjs writes the files; `--check` compares them.
+// Library registry builder. Reads web/registry/items/<slug>/ and rules/<ID>.md
+// and produces, in memory, every generated file: the root registry.json that
+// `shadcn add online-scope-lab/tessli/<name>` reads, one shadcn item JSON per
+// item (plus the `rules` item) under web/public/r/, the site's
+// web/data/library.json and web/data/rules.json, the agent index
+// rules/TESSLI.md and the preview index web/registry/__index__.tsx.
+// Deterministic and offline: same inputs, same bytes. build-registry.mjs writes
+// the files; `--check` compares them.
 import { readdir, readFile, stat } from "node:fs/promises";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
@@ -11,6 +13,18 @@ import { fileURLToPath } from "node:url";
 import Ajv2020 from "ajv/dist/2020.js";
 import * as prettier from "prettier";
 import { parse as parseYaml } from "yaml";
+
+import {
+  itemRuleProblems,
+  loadRules,
+  RULE_SCHEMA_PATH,
+  RULES_DATA_PATH,
+  rulesData,
+  rulesRegistryItem,
+  TESSLI_INDEX_MAX_BYTES,
+  TESSLI_INDEX_PATH,
+  tessliIndex,
+} from "./rules-lib.mjs";
 
 export const WEB_ROOT = path.resolve(
   path.dirname(fileURLToPath(import.meta.url)),
@@ -377,13 +391,21 @@ async function formatted(text, filepath) {
 
 /**
  * Builds every generated file in memory.
- * @returns {Promise<{files: Map<string, string>, items: object[]}>} repo-relative path → contents
+ * @returns {Promise<{files: Map<string, string>, items: object[], rules: object[]}>} repo-relative path → contents
  */
 export async function buildRegistry() {
   const schema = JSON.parse(
     await readFile(path.join(REPO_ROOT, SCHEMA_PATH), "utf8"),
   );
   const validate = compileItemSchema(schema);
+  const ruleSchema = JSON.parse(
+    await readFile(path.join(REPO_ROOT, RULE_SCHEMA_PATH), "utf8"),
+  );
+  const ruleLoad = await loadRules(
+    REPO_ROOT,
+    compileItemSchema(ruleSchema),
+    parseNotes,
+  );
   const webPackage = JSON.parse(
     await readFile(path.join(WEB_ROOT, "package.json"), "utf8"),
   );
@@ -408,9 +430,28 @@ export async function buildRegistry() {
     problems.push(...result.problems);
     if (result.item) items.push(result.item);
   }
+  const { rules } = ruleLoad;
+  const rulesName = rulesRegistryItem(rules, SITE_ORIGIN).name;
+  if (slugs.includes(rulesName)) {
+    problems.push(
+      `${ITEMS_DIR}/${rulesName}: "${rulesName}" is reserved for the rules registry item.`,
+    );
+  }
+  problems.push(
+    ...ruleLoad.problems,
+    ...itemRuleProblems(items, rules, ITEMS_DIR),
+  );
+  const index = tessliIndex(rules, SITE_ORIGIN);
+  const indexBytes = Buffer.byteLength(index);
+  if (indexBytes >= TESSLI_INDEX_MAX_BYTES) {
+    problems.push(
+      `${TESSLI_INDEX_PATH}: ${indexBytes} bytes; it must stay under ${TESSLI_INDEX_MAX_BYTES}. Shorten rule statements or checks.`,
+    );
+  }
   if (problems.length) throw new RegistryError(problems);
 
   const registryItems = items.map(registryItem);
+  const rulesItem = rulesRegistryItem(rules, SITE_ORIGIN);
   const files = new Map();
 
   files.set(
@@ -420,7 +461,7 @@ export async function buildRegistry() {
         $schema: "https://ui.shadcn.com/schema/registry.json",
         name: REGISTRY_NAME,
         homepage: `${SITE_ORIGIN}/library`,
-        items: registryItems,
+        items: [...registryItems, rulesItem],
       },
       null,
       2,
@@ -443,6 +484,27 @@ export async function buildRegistry() {
       await formatted(JSON.stringify(publicItem), path.join(REPO_ROOT, target)),
     );
   }
+
+  const rulesTarget = `${PUBLIC_ITEMS_DIR}/${rulesItem.name}.json`;
+  files.set(
+    rulesTarget,
+    await formatted(
+      JSON.stringify({
+        $schema: "https://ui.shadcn.com/schema/registry-item.json",
+        ...rulesItem,
+        files: rulesItem.files.map((file) => ({ ...file, content: index })),
+      }),
+      path.join(REPO_ROOT, rulesTarget),
+    ),
+  );
+  files.set(TESSLI_INDEX_PATH, index);
+  files.set(
+    RULES_DATA_PATH,
+    await formatted(
+      JSON.stringify(rulesData(rules, items, index)),
+      path.join(REPO_ROOT, RULES_DATA_PATH),
+    ),
+  );
 
   const library = {
     version: 1,
@@ -479,7 +541,7 @@ export async function buildRegistry() {
     ),
   );
 
-  return { files, items };
+  return { files, items, rules };
 }
 
 /** Generated files on disk that the current build would not write (removed items). */

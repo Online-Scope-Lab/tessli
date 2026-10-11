@@ -67,9 +67,10 @@
     "use_when": { "type": "array", "$ref": "#/$defs/lines", "minItems": 1 },
     "avoid_when": { "type": "array", "$ref": "#/$defs/lines", "minItems": 1 },
     "rules": {
-      "description": "Ids of the rules this item applies (published at /rules). Empty until the rule set lands.",
+      "description": "Ids of the 3–8 rules this item applies, from rules/<ID>.md (published at /rules/<ID>). build-registry fails if an id does not exist.",
       "type": "array",
       "uniqueItems": true,
+      "minItems": 3,
       "maxItems": 8,
       "items": { "type": "string", "pattern": "^[A-Z]{1,2}-\\d{2}$" }
     },

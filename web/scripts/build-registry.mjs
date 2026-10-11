@@ -1,6 +1,7 @@
 // Builds the library registry from web/registry/items.
 //   npm run registry:build   writes registry.json (repo root), web/public/r/*.json,
-//                            web/data/library.json and web/registry/__index__.tsx
+//                            web/data/library.json, web/data/rules.json,
+//                            rules/TESSLI.md and web/registry/__index__.tsx
 //   npm run registry:check   fails if any of them differs from a fresh build
 import { mkdir, readFile, rm, writeFile } from "node:fs/promises";
 import path from "node:path";
@@ -26,7 +27,7 @@ try {
   throw error;
 }
 
-const { files, items } = result;
+const { files, items, rules } = result;
 const stale = await staleGeneratedFiles(files);
 
 if (check) {
@@ -49,7 +50,7 @@ if (check) {
     process.exit(1);
   }
   console.log(
-    `Library registry is up to date (${items.length} items, ${files.size} generated files).`,
+    `Library registry is up to date (${items.length} items, ${rules.length} rules, ${files.size} generated files).`,
   );
 } else {
   for (const [file, contents] of files) {
@@ -59,6 +60,6 @@ if (check) {
   }
   for (const file of stale) await rm(path.join(REPO_ROOT, file));
   console.log(
-    `Wrote ${files.size} library registry files for ${items.length} items.`,
+    `Wrote ${files.size} library registry files for ${items.length} items and ${rules.length} rules.`,
   );
 }

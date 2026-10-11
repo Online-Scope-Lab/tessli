@@ -31,7 +31,16 @@
         "Content is still loading; show a skeleton or progress state, not an empty state.",
         "The empty region is minor (a sidebar list, a small widget); a single muted sentence is enough."
       ],
-      "rules": [],
+      "rules": [
+        "H-02",
+        "S-02",
+        "C-02",
+        "W-02",
+        "ST-01",
+        "ST-02",
+        "ST-04",
+        "A-01"
+      ],
       "ai_default": "A large centred illustration or icon, the headline \"Nothing here yet\", a vague line such as \"Get started by creating your first item\", and the same generic message for first use, no search results and failed loads.",
       "why_this_is_better": [
         "The title names what is empty in the user's words (\"No notes in Field research yet\"), so it reads correctly out of context and to screen readers.",

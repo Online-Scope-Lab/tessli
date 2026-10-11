@@ -1,0 +1,826 @@
+{
+  "version": 1,
+  "generatedBy": "web/scripts/build-registry.mjs",
+  "indexPath": "rules/TESSLI.md",
+  "categories": [
+    { "id": "hierarchy", "prefix": "H", "label": "Hierarchy" },
+    { "id": "typography", "prefix": "T", "label": "Typography" },
+    { "id": "spacing", "prefix": "S", "label": "Spacing and density" },
+    { "id": "colour", "prefix": "C", "label": "Colour" },
+    { "id": "components", "prefix": "K", "label": "Components" },
+    { "id": "copy", "prefix": "W", "label": "Copy" },
+    { "id": "states", "prefix": "ST", "label": "States" },
+    { "id": "responsive", "prefix": "R", "label": "Responsive" },
+    { "id": "motion", "prefix": "M", "label": "Motion" },
+    { "id": "accessibility", "prefix": "A", "label": "Accessibility" }
+  ],
+  "rules": [
+    {
+      "id": "H-01",
+      "category": "hierarchy",
+      "title": "One primary action per surface",
+      "statement": "Give each section, card or dialog at most one primary-styled action.",
+      "why": "When two actions share the strongest style, people stop to compare them and neither reads as the next step. One primary action makes the intended path obvious; everything else becomes secondary or a link.",
+      "check": "Count primary-styled actions per section and dialog at 1440 and 390: one at most.",
+      "anti_pattern": "A hero with two equally filled buttons (\"Get started\" and \"Book a demo\"), or the same filled button repeated on every card in a grid.",
+      "status": "draft",
+      "reviewed_by": [],
+      "reviewed_at": null,
+      "sources": [
+        "design.md §3 (principle 4: one primary action per surface)",
+        "design.md §15 (multiple competing primary buttons)",
+        "docs/v1.2/plan.md §6.4 (hero default: two equal CTAs)",
+        "Review dimension: hierarchy (docs/quality-gates.md)"
+      ],
+      "body": "",
+      "items": [
+        {
+          "slug": "pricing-tiers",
+          "title": "Pricing tiers compared on the limits that matter"
+        }
+      ]
+    },
+    {
+      "id": "H-02",
+      "category": "hierarchy",
+      "title": "Headings follow the outline",
+      "statement": "One h1 per page; nest h2–h4 in order. Level follows structure, size follows style.",
+      "why": "Screen-reader users move through a page by its headings, so the outline is its table of contents. Choosing a level for its default size breaks that outline and makes a component wrong as soon as it is reused elsewhere.",
+      "check": "Run axe heading-order or list the outline: one h1, no skipped levels.",
+      "anti_pattern": "Every section title an h2 regardless of nesting, card titles that jump from h2 to h5 to get a smaller font, or styled divs standing in for headings.",
+      "status": "draft",
+      "reviewed_by": [],
+      "reviewed_at": null,
+      "sources": [
+        "WCAG 2.2 SC 1.3.1 Info and Relationships (A)",
+        "WCAG 2.2 SC 2.4.6 Headings and Labels (AA)",
+        "docs/quality-gates.md (Accessibility: semantic landmarks and heading order)"
+      ],
+      "body": "",
+      "items": [
+        {
+          "slug": "empty-state",
+          "title": "Empty state that says why and what next"
+        },
+        { "slug": "faq", "title": "FAQ that answers real objections" }
+      ]
+    },
+    {
+      "id": "H-03",
+      "category": "hierarchy",
+      "title": "One eyebrow at most",
+      "statement": "Use at most one uppercase eyebrow per page, and only if it adds information.",
+      "why": "A tracked-out label over every heading adds a layer of hierarchy that carries no information, and it is one of the most recognisable marks of generated UI. A heading that makes its point needs no label.",
+      "check": "Count uppercase, letter-spaced labels over headings: one per page at most.",
+      "anti_pattern": "A small accent-coloured \"FEATURES\", \"PRICING\" or \"FAQ\" label above every section heading.",
+      "status": "draft",
+      "reviewed_by": [],
+      "reviewed_at": null,
+      "sources": [
+        "docs/v1.2/plan.md §4 (tells: one eyebrow, in the hero only)",
+        "design.md §14 (tells to avoid)"
+      ],
+      "body": "",
+      "items": []
+    },
+    {
+      "id": "H-04",
+      "category": "hierarchy",
+      "title": "Numbers only for sequences",
+      "statement": "Use numbered markers (01, 02, Step 1) only for steps people follow in order.",
+      "why": "Numbers promise an order. On things that can be read in any order they add noise and send readers looking for a progression that isn't there.",
+      "check": "For each numbered marker: does order matter to the user? If not, drop the numbers.",
+      "anti_pattern": "Three feature cards labelled 01, 02 and 03 that could be read in any order.",
+      "status": "draft",
+      "reviewed_by": [],
+      "reviewed_at": null,
+      "sources": [
+        "docs/v1.2/plan.md §4 (tells: numbered markers only for real sequences)",
+        "design.md §14 (tells to avoid)"
+      ],
+      "body": "",
+      "items": []
+    },
+    {
+      "id": "T-01",
+      "category": "typography",
+      "title": "Readable line length",
+      "statement": "Cap running text at a readable measure (about 65ch), never the full container width.",
+      "why": "Long lines make the eye lose its place on the return sweep; very short ones break phrases apart. A fixed measure keeps text readable however wide the screen is.",
+      "check": "At 1440, every body paragraph has a max-width of 80ch or less.",
+      "anti_pattern": "A paragraph stretched across a 1280px container, or a hero description inheriting the full page width.",
+      "status": "draft",
+      "reviewed_by": [],
+      "reviewed_at": null,
+      "sources": [
+        "design.md §5 (paragraph measure 58–68ch)",
+        "WCAG 2.2 SC 1.4.8 Visual Presentation (AAA: no more than 80 characters)"
+      ],
+      "body": "",
+      "items": []
+    },
+    {
+      "id": "T-02",
+      "category": "typography",
+      "title": "Few sizes, from one scale",
+      "statement": "Take font sizes from the type scale; use at most four sizes in one section.",
+      "why": "Hierarchy reads clearly when each size step means something. One-off sizes blur the steps and drift apart between components.",
+      "check": "List computed font sizes per section at 1440 and 390: all on the scale, four at most.",
+      "anti_pattern": "Arbitrary values such as text-[15px] and text-[13.5px] chosen per component, with five or six sizes competing in one card.",
+      "status": "draft",
+      "reviewed_by": [],
+      "reviewed_at": null,
+      "sources": [
+        "design.md §5 (type scale)",
+        "Review dimension: consistency (docs/quality-gates.md)"
+      ],
+      "body": "",
+      "items": []
+    },
+    {
+      "id": "T-03",
+      "category": "typography",
+      "title": "Tabular figures for compared numbers",
+      "statement": "Set prices, counts and numeric columns in tabular figures.",
+      "why": "Proportional digits have different widths, so columns of numbers don't line up and values jitter when they update. Tabular figures keep every digit the same width.",
+      "check": "Inspect prices, counts and numeric columns: font-variant-numeric is tabular-nums.",
+      "anti_pattern": "Prices and table totals in proportional figures, so columns zig-zag and a live counter shifts as it changes.",
+      "status": "draft",
+      "reviewed_by": [],
+      "reviewed_at": null,
+      "sources": [
+        "docs/quality-gates.md (Visual and type: tabular numbers for counts)"
+      ],
+      "body": "",
+      "items": [
+        {
+          "slug": "pricing-tiers",
+          "title": "Pricing tiers compared on the limits that matter"
+        }
+      ]
+    },
+    {
+      "id": "S-01",
+      "category": "spacing",
+      "title": "Group by proximity",
+      "statement": "Keep space inside a group smaller than space between groups, at every width.",
+      "why": "Space is how people see what belongs together. When a heading sits as far from its paragraph as from the previous section, the structure has to be read instead of seen.",
+      "check": "Measure gaps at 1440 and 390: label to content < item to item < section to section.",
+      "anti_pattern": "One uniform gap applied to everything, so headings float between sections instead of attaching to their content.",
+      "status": "draft",
+      "reviewed_by": [],
+      "reviewed_at": null,
+      "sources": [
+        "design.md §8 (4px spacing scale)",
+        "Review dimension: hierarchy (docs/quality-gates.md)",
+        "Review dimension: density (docs/quality-gates.md)"
+      ],
+      "body": "",
+      "items": []
+    },
+    {
+      "id": "S-02",
+      "category": "spacing",
+      "title": "One shared edge",
+      "statement": "Align a section's heading, text and actions on one left edge; centre only short blocks.",
+      "why": "A shared edge gives the eye one line to scan down. Centring everything starts every line at a different place, which slows reading and leaves long text and lists ragged on both sides.",
+      "check": "At 1440, heading, text and actions share a left edge; centred text runs 3 lines at most.",
+      "anti_pattern": "Every section centred: centred heading, centred paragraph, centred cards and centred buttons, whatever their length.",
+      "status": "draft",
+      "reviewed_by": [],
+      "reviewed_at": null,
+      "sources": [
+        "Review dimension: coherence (docs/quality-gates.md)",
+        "Review dimension: hierarchy (docs/quality-gates.md)"
+      ],
+      "body": "",
+      "items": [
+        {
+          "slug": "empty-state",
+          "title": "Empty state that says why and what next"
+        },
+        { "slug": "faq", "title": "FAQ that answers real objections" }
+      ]
+    },
+    {
+      "id": "S-03",
+      "category": "spacing",
+      "title": "Density fits the task",
+      "statement": "Make data surfaces compact and reading surfaces roomy; don't use one density everywhere.",
+      "why": "Data is scanned and compared, so every extra pixel of padding hides a row. Marketing and reading surfaces are read once and need air. One density everywhere fails one of the two.",
+      "check": "At 1440×900, data rows are 48px tall or less; reading text has line-height 1.5 or more.",
+      "anti_pattern": "Data tables with card-sized rows and generous padding, or landing sections packed edge to edge like a spreadsheet.",
+      "status": "draft",
+      "reviewed_by": [],
+      "reviewed_at": null,
+      "sources": [
+        "AGENTS.md §13, v1.1 (tag v1.1-archive): research and database surfaces may be denser than marketing surfaces",
+        "Review dimension: density (docs/quality-gates.md)"
+      ],
+      "body": "",
+      "items": []
+    },
+    {
+      "id": "C-01",
+      "category": "colour",
+      "title": "Semantic tokens only",
+      "statement": "Colour with semantic tokens (background, primary, muted, border…), never raw values.",
+      "why": "Raw colours lock a component to one palette and break dark mode and the installing project's theme. Semantic roles let the same structure work in any theme.",
+      "check": "No hex, rgb(), hsl() or palette classes in the component; it works in light and dark.",
+      "anti_pattern": "Hard-coded hex values, Tailwind palette classes such as text-gray-500 and white cards that ignore the project's theme and vanish in dark mode.",
+      "status": "draft",
+      "reviewed_by": [],
+      "reviewed_at": null,
+      "sources": [
+        "docs/v1.2/plan.md §4 (semantic theme tokens only)",
+        "AGENTS.md (Library items)",
+        "CONTRIBUTING.md (item checklist)"
+      ],
+      "body": "",
+      "items": []
+    },
+    {
+      "id": "C-02",
+      "category": "colour",
+      "title": "Never colour alone",
+      "statement": "Pair every colour-coded meaning (error, selected, status) with text or shape.",
+      "why": "Colour alone fails people with colour-vision deficiencies, monochrome screens and forced-colours mode. A text label also gives screen readers the meaning.",
+      "check": "View it in greyscale: every state is still identifiable from text or shape.",
+      "anti_pattern": "A red border as the only sign of an error, or a highlighted card as the only sign of the recommended plan.",
+      "status": "draft",
+      "reviewed_by": [],
+      "reviewed_at": null,
+      "sources": [
+        "WCAG 2.2 SC 1.4.1 Use of Color (A)",
+        "docs/v1.2/plan.md §6.4 (sign-in default: colour-only feedback)"
+      ],
+      "body": "",
+      "items": [
+        {
+          "slug": "empty-state",
+          "title": "Empty state that says why and what next"
+        },
+        {
+          "slug": "pricing-tiers",
+          "title": "Pricing tiers compared on the limits that matter"
+        }
+      ]
+    },
+    {
+      "id": "C-03",
+      "category": "colour",
+      "title": "The accent is scarce",
+      "statement": "Spend the primary colour on the primary action and real status, not decoration.",
+      "why": "An accent works because it is rare. When icons, headings, borders and backgrounds all use it, nothing stands out and the primary action loses its pull.",
+      "check": "At 1440 and 390, every element in the primary colour is the primary action or a status.",
+      "anti_pattern": "Primary-coloured icons on every card, tinted section backgrounds, gradient headings and accent-coloured text everywhere.",
+      "status": "draft",
+      "reviewed_by": [],
+      "reviewed_at": null,
+      "sources": [
+        "design.md §3 (principle 3: sparse accents)",
+        "design.md §6 (usage rules: accent kept to a small share of the viewport)",
+        "Review dimension: restraint (docs/quality-gates.md)"
+      ],
+      "body": "",
+      "items": []
+    },
+    {
+      "id": "C-04",
+      "category": "colour",
+      "title": "No effects as emphasis",
+      "statement": "Show importance with position, size, weight and borders, not gradients, glows or glass.",
+      "why": "Effects cost contrast, render differently across themes and date quickly. They are also the usual way generated UI fakes emphasis the structure doesn't have.",
+      "check": "Search the styles for gradients, blur and backdrop-filter: none carries meaning.",
+      "anti_pattern": "A gradient border and glow around the \"Most popular\" plan, glass cards over a blurred blob, gradient text in the hero.",
+      "status": "draft",
+      "reviewed_by": [],
+      "reviewed_at": null,
+      "sources": [
+        "design.md §15 (AI gradients, glassmorphism, oversized blur glows)",
+        "AGENTS.md §13, v1.1 (tag v1.1-archive): no glassmorphism or glow gradients",
+        "docs/v1.2/plan.md §6.4 (pricing default: gradient \"popular\" badge)"
+      ],
+      "body": "",
+      "items": [
+        {
+          "slug": "pricing-tiers",
+          "title": "Pricing tiers compared on the limits that matter"
+        }
+      ]
+    },
+    {
+      "id": "K-01",
+      "category": "components",
+      "title": "Native elements first",
+      "statement": "Use the native element (button, a, details, input, select, dialog) before a custom widget.",
+      "why": "Native elements come with keyboard support, focus handling, form behaviour and screen-reader semantics. A custom widget has to rebuild all of that and usually misses some of it.",
+      "check": "No clickable div or span (onClick, role=\"button\"); Tab reaches every control.",
+      "anti_pattern": "A div with onClick as a button, a script-driven accordion instead of details and summary, a custom toggle that isn't a radio or checkbox.",
+      "status": "draft",
+      "reviewed_by": [],
+      "reviewed_at": null,
+      "sources": [
+        "WCAG 2.2 SC 4.1.2 Name, Role, Value (A)",
+        "WCAG 2.2 SC 2.1.1 Keyboard (A)",
+        "docs/quality-gates.md (no invalid nested interactive markup)"
+      ],
+      "body": "",
+      "items": [{ "slug": "faq", "title": "FAQ that answers real objections" }]
+    },
+    {
+      "id": "K-02",
+      "category": "components",
+      "title": "Links go, buttons do",
+      "statement": "Use a link to go to a URL and a button to act on the page; the style never decides.",
+      "why": "Links open in new tabs, can be copied and are announced as links; buttons submit and toggle. Using the wrong element breaks those expectations even when it looks right.",
+      "check": "Everything that navigates has an href and works with middle click; buttons only act.",
+      "anti_pattern": "A button that calls router.push() to navigate, or an anchor with href=\"#\" that submits a form.",
+      "status": "draft",
+      "reviewed_by": [],
+      "reviewed_at": null,
+      "sources": [
+        "docs/quality-gates.md (Interaction: links work with click, keyboard, modifier click and middle click)",
+        "WCAG 2.2 SC 4.1.2 Name, Role, Value (A)"
+      ],
+      "body": "",
+      "items": []
+    },
+    {
+      "id": "K-03",
+      "category": "components",
+      "title": "Compared options share rows",
+      "statement": "Give compared options the same rows in the same order, aligned, values written out.",
+      "why": "Comparison happens row by row. When each option lists different features in a different order, people have to rebuild the table in their heads.",
+      "check": "At 768 and up, each attribute lines up across options; values are text, not ticks.",
+      "anti_pattern": "Pricing cards with a dozen ticked features each, mostly repeated, in a different order per card and out of line.",
+      "status": "draft",
+      "reviewed_by": [],
+      "reviewed_at": null,
+      "sources": [
+        "docs/v1.2/plan.md §6.2 (example: comparison rows over feature-tick soup)",
+        "docs/v1.2/plan.md §6.4 (pricing default: identical cards)"
+      ],
+      "body": "",
+      "items": [
+        {
+          "slug": "pricing-tiers",
+          "title": "Pricing tiers compared on the limits that matter"
+        }
+      ]
+    },
+    {
+      "id": "K-04",
+      "category": "components",
+      "title": "No identical card grids",
+      "statement": "Shape each block by its content; don't force unlike content into identical icon cards.",
+      "why": "Identical icon cards make every point look equally important and equally vague. Evidence, comparisons, questions and steps each have a natural shape, and using it shows the content is real.",
+      "check": "Every grid of 3+ same-shaped cards holds true peers; otherwise use a list or table.",
+      "anti_pattern": "Three rounded cards with an icon, a two-word title and a line of filler each, for points that have nothing in common.",
+      "status": "draft",
+      "reviewed_by": [],
+      "reviewed_at": null,
+      "sources": [
+        "docs/v1.2/plan.md §6.4 (feature default: three identical icon cards)",
+        "design.md §9 (avoid the repeated rounded card with shadow)",
+        "AGENTS.md §13, v1.1 (tag v1.1-archive): no oversized rounded wrappers as a substitute for hierarchy"
+      ],
+      "body": "",
+      "items": []
+    },
+    {
+      "id": "W-01",
+      "category": "copy",
+      "title": "Headings make a specific point",
+      "statement": "Write headings that make the product's point, not labels like \"Features\" or \"FAQ\".",
+      "why": "A category label tells people what kind of section they are in, which they can already see. A specific heading tells them why to keep reading and still makes sense out of context.",
+      "check": "Swap in another product's name: if the heading still works, rewrite it.",
+      "anti_pattern": "\"Features\", \"Why choose us?\", \"Frequently Asked Questions\" and \"Everything you need to succeed\".",
+      "status": "draft",
+      "reviewed_by": [],
+      "reviewed_at": null,
+      "sources": [
+        "AGENTS.md §13, v1.1 (tag v1.1-archive): no generic AI filler copy",
+        "Review dimension: task fit (docs/quality-gates.md)"
+      ],
+      "body": "",
+      "items": []
+    },
+    {
+      "id": "W-02",
+      "category": "copy",
+      "title": "Action labels name the outcome",
+      "statement": "Label actions with what happens next, not \"Get started\", \"Submit\" or \"Learn more\".",
+      "why": "Specific labels let people predict the result before they commit, and they make sense to screen-reader users who list links and buttons out of context.",
+      "check": "Read each button and link out of context: it says what it does or where it goes.",
+      "anti_pattern": "\"Get started\" on every pricing card, \"Submit\" on every form, and rows of \"Learn more\" links.",
+      "status": "draft",
+      "reviewed_by": [],
+      "reviewed_at": null,
+      "sources": [
+        "WCAG 2.2 SC 2.4.4 Link Purpose (In Context) (A)",
+        "WCAG 2.2 SC 2.4.6 Headings and Labels (AA)",
+        "docs/v1.2/plan.md §6.2 (example default: the same CTA label on every card)"
+      ],
+      "body": "",
+      "items": [
+        {
+          "slug": "empty-state",
+          "title": "Empty state that says why and what next"
+        },
+        {
+          "slug": "pricing-tiers",
+          "title": "Pricing tiers compared on the limits that matter"
+        }
+      ]
+    },
+    {
+      "id": "W-03",
+      "category": "copy",
+      "title": "No invented proof",
+      "statement": "Show no ratings, counts, logos, quotes or metrics you can't source.",
+      "why": "Invented proof is false the moment the component ships with it, and placeholder claims are routinely left in. Honest UI states only what is known.",
+      "check": "Trace every number, logo and quote to a real source, or label it fictional demo content.",
+      "anti_pattern": "\"Trusted by 10,000+ teams\", a row of placeholder logos, five-star ratings and testimonials from people who don't exist.",
+      "status": "draft",
+      "reviewed_by": [],
+      "reviewed_at": null,
+      "sources": [
+        "AGENTS.md (Truth: no fake data)",
+        "design.md §3 (principle 6: truthful interface)",
+        "docs/quality-gates.md (Truthfulness)",
+        "docs/v1.2/plan.md §6.4 (social proof default: invented logos, metrics and testimonials)"
+      ],
+      "body": "",
+      "items": []
+    },
+    {
+      "id": "W-04",
+      "category": "copy",
+      "title": "Answer first",
+      "statement": "Lead answers, errors and notices with the answer or consequence, then the detail.",
+      "why": "People scan. When the first words are the answer (\"Yes.\", \"Nothing was deleted.\") most readers can stop there; the detail is for those who need it.",
+      "check": "Read only the first sentence of each answer or message: it gives the answer or outcome.",
+      "anti_pattern": "FAQ answers that open with \"Great question! At Acme we believe…\" and errors that start with an apology and bury what happened.",
+      "status": "draft",
+      "reviewed_by": [],
+      "reviewed_at": null,
+      "sources": [
+        "Review dimension: task fit (docs/quality-gates.md)",
+        "Review dimension: restraint (docs/quality-gates.md)"
+      ],
+      "body": "",
+      "items": [{ "slug": "faq", "title": "FAQ that answers real objections" }]
+    },
+    {
+      "id": "W-05",
+      "category": "copy",
+      "title": "Arrows only for leaving",
+      "statement": "Put an arrow on a link only when it leaves the site (↗), never on every link.",
+      "why": "An arrow on everything stops meaning anything. Kept for links that take people elsewhere, it warns them before they click.",
+      "check": "Every link or button with an arrow glyph or icon goes to another site or app.",
+      "anti_pattern": "\"Learn more →\" on every card, buttons with trailing arrows, and arrow icons on in-page actions.",
+      "status": "draft",
+      "reviewed_by": [],
+      "reviewed_at": null,
+      "sources": [
+        "docs/v1.2/plan.md §4 (tells: arrows only where they mean \"goes somewhere else\")",
+        "design.md §14 (tells to avoid)"
+      ],
+      "body": "",
+      "items": []
+    },
+    {
+      "id": "ST-01",
+      "category": "states",
+      "title": "Every data region has its states",
+      "statement": "Design empty, loading and error states for every region that loads or lists data.",
+      "why": "Real data is often missing, slow or failing, especially on first use. A region designed only for the happy path shows a blank box or a broken layout exactly when people need guidance.",
+      "check": "Force no data, a slow network and a failed request: each shows a designed state.",
+      "anti_pattern": "A table or list that renders nothing, or spins forever, when the data is empty or the request fails.",
+      "status": "draft",
+      "reviewed_by": [],
+      "reviewed_at": null,
+      "sources": [
+        "docs/quality-gates.md (Interaction: empty, error and loading states exist)",
+        "docs/v1.2/plan.md §6.4 (data table default: no empty, loading or error states)"
+      ],
+      "body": "",
+      "items": [
+        {
+          "slug": "empty-state",
+          "title": "Empty state that says why and what next"
+        }
+      ]
+    },
+    {
+      "id": "ST-02",
+      "category": "states",
+      "title": "Empty states differ by cause",
+      "statement": "Give first use, no results and failure their own message and action.",
+      "why": "Each cause needs a different next step: create something, change the search, or retry. One generic message makes people guess which situation they are in.",
+      "check": "First use, no matches and a failed load each show their own copy and action.",
+      "anti_pattern": "One illustration and \"Nothing here yet\" for an empty account, a mistyped search and a server error alike.",
+      "status": "draft",
+      "reviewed_by": [],
+      "reviewed_at": null,
+      "sources": [
+        "docs/v1.2/plan.md §6.4 (empty-state default: illustration and \"Nothing here yet\")",
+        "Review dimension: task fit (docs/quality-gates.md)"
+      ],
+      "body": "",
+      "items": [
+        {
+          "slug": "empty-state",
+          "title": "Empty state that says why and what next"
+        }
+      ]
+    },
+    {
+      "id": "ST-03",
+      "category": "states",
+      "title": "State changes don't move the page",
+      "statement": "Reserve space so loading, toggles and validation don't shift surrounding content.",
+      "why": "Content that jumps makes people lose their place and click the wrong thing. Reserving room for text that appears keeps the page still.",
+      "check": "Switch every state at 1440 and 390: nothing else moves (CLS under 0.1).",
+      "anti_pattern": "Error text inserted above a field that pushes the form down, or a billing note that appears only for annual billing and shifts the buttons.",
+      "status": "draft",
+      "reviewed_by": [],
+      "reviewed_at": null,
+      "sources": [
+        "docs/quality-gates.md (Interaction: loading controls don't resize)",
+        "docs/quality-gates.md (Media and performance: CLS under 0.1)"
+      ],
+      "body": "",
+      "items": [
+        {
+          "slug": "pricing-tiers",
+          "title": "Pricing tiers compared on the limits that matter"
+        }
+      ]
+    },
+    {
+      "id": "ST-04",
+      "category": "states",
+      "title": "Errors explain and offer a way out",
+      "statement": "Say what failed, what is still safe, and one way forward (retry, edit or contact).",
+      "why": "An error without its consequences leaves people worried about their work; one without an action leaves them stuck. Both lead to repeated attempts and support requests.",
+      "check": "Trigger each error: the text names the failure, the impact and an action.",
+      "anti_pattern": "A red toast reading \"Something went wrong\" with no detail and no retry.",
+      "status": "draft",
+      "reviewed_by": [],
+      "reviewed_at": null,
+      "sources": [
+        "WCAG 2.2 SC 3.3.1 Error Identification (A)",
+        "WCAG 2.2 SC 3.3.3 Error Suggestion (AA)",
+        "Review dimension: task fit (docs/quality-gates.md)"
+      ],
+      "body": "",
+      "items": [
+        {
+          "slug": "empty-state",
+          "title": "Empty state that says why and what next"
+        }
+      ]
+    },
+    {
+      "id": "ST-05",
+      "category": "states",
+      "title": "Destructive actions state consequences",
+      "statement": "Before a destructive action, name what is lost and if it can be undone; confirm it.",
+      "why": "Deletion is the one action people can't take back. Naming the object and the consequence turns an accidental click into a decision.",
+      "check": "Each delete or reset confirms with the object and consequence named; Cancel gets focus.",
+      "anti_pattern": "A red Delete button that acts at once, or an \"Are you sure?\" dialog with OK and Cancel and no word about what will be lost.",
+      "status": "draft",
+      "reviewed_by": [],
+      "reviewed_at": null,
+      "sources": [
+        "docs/v1.2/plan.md §6.4 (settings default: delete with no confirmation or consequences)",
+        "WCAG 2.2 SC 3.3.4 Error Prevention (Legal, Financial, Data) (AA)",
+        "WAI-ARIA Authoring Practices Guide, Dialog (Modal) pattern"
+      ],
+      "body": "",
+      "items": []
+    },
+    {
+      "id": "R-01",
+      "category": "responsive",
+      "title": "Recompose for small screens",
+      "statement": "On phones, restack content by priority and adapt components; don't shrink the desktop.",
+      "why": "A scaled-down desktop keeps the desktop's order and density on a screen a third as wide. Recomposing puts the most important content and action first, at a usable size.",
+      "check": "At 390: priority order holds, nothing is cramped side by side, text is no smaller.",
+      "anti_pattern": "Three columns squeezed side by side on a phone, or a desktop table shrunk to tiny text.",
+      "status": "draft",
+      "reviewed_by": [],
+      "reviewed_at": null,
+      "sources": [
+        "design.md §3 (principle 8: responsive by recomposition)",
+        "docs/quality-gates.md (Widths: mobile is recomposed)",
+        "docs/v1.2/plan.md §6.4 (mobile default: shrunken desktop layout)",
+        "Review dimension: mobile usability (docs/quality-gates.md)"
+      ],
+      "body": "",
+      "items": []
+    },
+    {
+      "id": "R-02",
+      "category": "responsive",
+      "title": "Reflow at 320 without sideways scroll",
+      "statement": "Fit every surface into 320 CSS px with no sideways scroll; only tables and code may scroll.",
+      "why": "320 px is a 1280 px screen at 400% zoom, and the width of small phones. Scrolling sideways to read each line makes the page unusable for people who zoom.",
+      "check": "At 320 px, the document is no wider than the viewport and no text is clipped.",
+      "anti_pattern": "Fixed min-widths, long unbroken URLs or a row of nowrap buttons that pushes the page wider than the screen.",
+      "status": "draft",
+      "reviewed_by": [],
+      "reviewed_at": null,
+      "sources": [
+        "WCAG 2.2 SC 1.4.10 Reflow (AA)",
+        "docs/quality-gates.md (Widths: 320px gate)"
+      ],
+      "body": "",
+      "items": []
+    },
+    {
+      "id": "R-03",
+      "category": "responsive",
+      "title": "Break where the content breaks",
+      "statement": "Change layout where the content stops fitting, not at device names.",
+      "why": "Screens come in every width. A layout that changes where its content needs room works at all of them; one tuned to \"tablet\" and \"phone\" breaks in between.",
+      "check": "Resize from 1440 to 320: no width crushes columns or orphans one card on a row.",
+      "anti_pattern": "Three pricing cards kept side by side down to 768px because that is the tablet breakpoint, squeezing each one to a narrow strip.",
+      "status": "draft",
+      "reviewed_by": [],
+      "reviewed_at": null,
+      "sources": [
+        "design.md §12 (breakpoints are behaviour triggers, not device labels)",
+        "Review dimension: mobile usability (docs/quality-gates.md)"
+      ],
+      "body": "",
+      "items": [
+        { "slug": "faq", "title": "FAQ that answers real objections" },
+        {
+          "slug": "pricing-tiers",
+          "title": "Pricing tiers compared on the limits that matter"
+        }
+      ]
+    },
+    {
+      "id": "M-01",
+      "category": "motion",
+      "title": "Motion only explains change",
+      "statement": "Animate only changes people cause (open, close, switch); no decorative motion.",
+      "why": "Motion that follows an action shows what changed and where. Motion for its own sake competes with the content, delays reading and can make people feel unwell.",
+      "check": "Without interaction nothing moves, on load or scroll; transitions take 240ms or less.",
+      "anti_pattern": "Floating hero blobs, a fade-up on every section as it scrolls in, parallax backgrounds and cursor-follow effects.",
+      "status": "draft",
+      "reviewed_by": [],
+      "reviewed_at": null,
+      "sources": [
+        "design.md §10 (motion: 120–240ms; no cursor-follow or scroll-jacking)",
+        "design.md §15 (animation for decoration alone)",
+        "WCAG 2.2 SC 2.2.2 Pause, Stop, Hide (A)"
+      ],
+      "body": "",
+      "items": [{ "slug": "faq", "title": "FAQ that answers real objections" }]
+    },
+    {
+      "id": "M-02",
+      "category": "motion",
+      "title": "Respect reduced motion",
+      "statement": "Under prefers-reduced-motion, remove non-essential transforms and transitions.",
+      "why": "For people with vestibular disorders, movement on screen can cause dizziness and nausea. The operating-system setting is how they ask for less.",
+      "check": "Emulate prefers-reduced-motion: reduce; only essential motion remains.",
+      "anti_pattern": "Slide-ins, parallax and animated counters that run whatever the reduced-motion setting says.",
+      "status": "draft",
+      "reviewed_by": [],
+      "reviewed_at": null,
+      "sources": [
+        "WCAG 2.2 SC 2.3.3 Animation from Interactions (AAA)",
+        "docs/quality-gates.md (Accessibility: prefers-reduced-motion respected)",
+        "design.md §10 (motion)"
+      ],
+      "body": "",
+      "items": [{ "slug": "faq", "title": "FAQ that answers real objections" }]
+    },
+    {
+      "id": "A-01",
+      "category": "accessibility",
+      "title": "44px touch targets",
+      "statement": "Make every interactive target at least 44×44 CSS px; inline text links excepted.",
+      "why": "Small targets cause mis-taps on touch screens and are hard to hit with a tremor or limited dexterity. WCAG's AA minimum is 24px; 44px is its enhanced level and the bar these rules use.",
+      "check": "At 390, every button, link and control's hit area is 44×44px or more, inline links aside.",
+      "anti_pattern": "32px icon buttons, tiny close crosses and tightly packed pill filters.",
+      "status": "draft",
+      "reviewed_by": [],
+      "reviewed_at": null,
+      "sources": [
+        "WCAG 2.2 SC 2.5.8 Target Size (Minimum) (AA: 24px)",
+        "WCAG 2.2 SC 2.5.5 Target Size (Enhanced) (AAA: 44px)",
+        "docs/quality-gates.md (Accessibility: touch targets about 44×44px)"
+      ],
+      "body": "",
+      "items": [
+        {
+          "slug": "empty-state",
+          "title": "Empty state that says why and what next"
+        }
+      ]
+    },
+    {
+      "id": "A-02",
+      "category": "accessibility",
+      "title": "Visible focus",
+      "statement": "Show a visible :focus-visible indicator on every interactive element.",
+      "why": "Keyboard users need to see where they are. Removing the outline without a replacement leaves them navigating blind.",
+      "check": "Tab through at 1440 and 390: each stop shows an uncovered indicator at 3:1 contrast.",
+      "anti_pattern": "outline: none in a global reset with no replacement, or a focus style that is only a faint colour change.",
+      "status": "draft",
+      "reviewed_by": [],
+      "reviewed_at": null,
+      "sources": [
+        "WCAG 2.2 SC 2.4.7 Focus Visible (AA)",
+        "WCAG 2.2 SC 2.4.11 Focus Not Obscured (Minimum) (AA)",
+        "WCAG 2.2 SC 1.4.11 Non-text Contrast (AA)"
+      ],
+      "body": "",
+      "items": []
+    },
+    {
+      "id": "A-03",
+      "category": "accessibility",
+      "title": "AA contrast in every theme",
+      "statement": "Meet 4.5:1 for text and 3:1 for large text and control edges, in every theme.",
+      "why": "Muted grey on tinted surfaces is where contrast usually slips, and a pair that passes in the light theme can fail in the dark one. Checking every theme catches both.",
+      "check": "Run axe with the WCAG 2.2 AA tags in each theme: no contrast violations.",
+      "anti_pattern": "Light-grey helper text on an off-white card, or muted text that passes only on pure white.",
+      "status": "draft",
+      "reviewed_by": [],
+      "reviewed_at": null,
+      "sources": [
+        "WCAG 2.2 SC 1.4.3 Contrast (Minimum) (AA)",
+        "WCAG 2.2 SC 1.4.11 Non-text Contrast (AA)",
+        "docs/quality-gates.md (Accessibility: contrast)"
+      ],
+      "body": "",
+      "items": []
+    },
+    {
+      "id": "A-04",
+      "category": "accessibility",
+      "title": "Label every control",
+      "statement": "Give every control a visible label, groups a legend, and errors a link to their field.",
+      "why": "Placeholders disappear as soon as people type and are not reliably announced. Visible labels, legends and linked errors tell everyone what a control is and what went wrong.",
+      "check": "Clicking a label focuses its control; groups have a legend; errors use aria-describedby.",
+      "anti_pattern": "Placeholder-only inputs, a row of radio buttons with no group label, and one error banner at the top of the form.",
+      "status": "draft",
+      "reviewed_by": [],
+      "reviewed_at": null,
+      "sources": [
+        "WCAG 2.2 SC 1.3.1 Info and Relationships (A)",
+        "WCAG 2.2 SC 3.3.2 Labels or Instructions (A)",
+        "docs/quality-gates.md (Accessibility: every field has a label; errors are connected to their controls)"
+      ],
+      "body": "",
+      "items": []
+    },
+    {
+      "id": "A-05",
+      "category": "accessibility",
+      "title": "Announce changes in place",
+      "statement": "Announce results, saves and errors that appear in place through a polite live region.",
+      "why": "Sighted people see a result count change or a \"Saved\" message; screen-reader users hear nothing unless the change is announced.",
+      "check": "With a screen reader, filter, save and fail: each change is announced once, focus unmoved.",
+      "anti_pattern": "A result count that updates silently, or a toast that appears and disappears without being announced.",
+      "status": "draft",
+      "reviewed_by": [],
+      "reviewed_at": null,
+      "sources": [
+        "WCAG 2.2 SC 4.1.3 Status Messages (AA)",
+        "docs/quality-gates.md (Accessibility: live regions announce search, filter and result changes)"
+      ],
+      "body": "",
+      "items": []
+    },
+    {
+      "id": "A-06",
+      "category": "accessibility",
+      "title": "Keyboard complete, nothing hover-only",
+      "statement": "Make everything work by keyboard, close overlays on Escape, and hide nothing behind hover.",
+      "why": "Many people navigate by keyboard or switch device, and touch screens have no hover. Anything reachable only by mouse or hover is missing for them.",
+      "check": "Keyboard alone reaches and operates everything; Escape closes overlays and focus returns.",
+      "anti_pattern": "Menus that open only on hover, tooltips holding essential information, and dialogs that trap focus or drop it on close.",
+      "status": "draft",
+      "reviewed_by": [],
+      "reviewed_at": null,
+      "sources": [
+        "WCAG 2.2 SC 2.1.1 Keyboard (A)",
+        "WCAG 2.2 SC 2.1.2 No Keyboard Trap (A)",
+        "WCAG 2.2 SC 1.4.13 Content on Hover or Focus (AA)",
+        "docs/quality-gates.md (Interaction: menus close on Escape and return focus)"
+      ],
+      "body": "",
+      "items": [{ "slug": "faq", "title": "FAQ that answers real objections" }]
+    }
+  ],
+  "index": "# Tessli UI rules\n\nTessli is an open-source UI library that ships its reasoning. These 39 rules cover structure and behaviour (hierarchy, spacing, states, copy, responsive, accessibility), not a visual style: keep your project's own theme.\nStatus: every rule is a draft until a maintainer signs it; 0 of 39 reviewed. Reasons and sources for each: https://tessli.vercel.app/rules\nUse: read this before building UI. Then render at 1440, 768 and 390 px (and 320 px for overflow) and verify each rule's check.\nFormat: `ID rule | how to check`. Generated from rules/*.md; edit those, not this file.\n\n## Hierarchy\n\n- H-01 Give each section, card or dialog at most one primary-styled action. | Count primary-styled actions per section and dialog at 1440 and 390: one at most.\n- H-02 One h1 per page; nest h2–h4 in order. Level follows structure, size follows style. | Run axe heading-order or list the outline: one h1, no skipped levels.\n- H-03 Use at most one uppercase eyebrow per page, and only if it adds information. | Count uppercase, letter-spaced labels over headings: one per page at most.\n- H-04 Use numbered markers (01, 02, Step 1) only for steps people follow in order. | For each numbered marker: does order matter to the user? If not, drop the numbers.\n\n## Typography\n\n- T-01 Cap running text at a readable measure (about 65ch), never the full container width. | At 1440, every body paragraph has a max-width of 80ch or less.\n- T-02 Take font sizes from the type scale; use at most four sizes in one section. | List computed font sizes per section at 1440 and 390: all on the scale, four at most.\n- T-03 Set prices, counts and numeric columns in tabular figures. | Inspect prices, counts and numeric columns: font-variant-numeric is tabular-nums.\n\n## Spacing and density\n\n- S-01 Keep space inside a group smaller than space between groups, at every width. | Measure gaps at 1440 and 390: label to content < item to item < section to section.\n- S-02 Align a section's heading, text and actions on one left edge; centre only short blocks. | At 1440, heading, text and actions share a left edge; centred text runs 3 lines at most.\n- S-03 Make data surfaces compact and reading surfaces roomy; don't use one density everywhere. | At 1440×900, data rows are 48px tall or less; reading text has line-height 1.5 or more.\n\n## Colour\n\n- C-01 Colour with semantic tokens (background, primary, muted, border…), never raw values. | No hex, rgb(), hsl() or palette classes in the component; it works in light and dark.\n- C-02 Pair every colour-coded meaning (error, selected, status) with text or shape. | View it in greyscale: every state is still identifiable from text or shape.\n- C-03 Spend the primary colour on the primary action and real status, not decoration. | At 1440 and 390, every element in the primary colour is the primary action or a status.\n- C-04 Show importance with position, size, weight and borders, not gradients, glows or glass. | Search the styles for gradients, blur and backdrop-filter: none carries meaning.\n\n## Components\n\n- K-01 Use the native element (button, a, details, input, select, dialog) before a custom widget. | No clickable div or span (onClick, role=\"button\"); Tab reaches every control.\n- K-02 Use a link to go to a URL and a button to act on the page; the style never decides. | Everything that navigates has an href and works with middle click; buttons only act.\n- K-03 Give compared options the same rows in the same order, aligned, values written out. | At 768 and up, each attribute lines up across options; values are text, not ticks.\n- K-04 Shape each block by its content; don't force unlike content into identical icon cards. | Every grid of 3+ same-shaped cards holds true peers; otherwise use a list or table.\n\n## Copy\n\n- W-01 Write headings that make the product's point, not labels like \"Features\" or \"FAQ\". | Swap in another product's name: if the heading still works, rewrite it.\n- W-02 Label actions with what happens next, not \"Get started\", \"Submit\" or \"Learn more\". | Read each button and link out of context: it says what it does or where it goes.\n- W-03 Show no ratings, counts, logos, quotes or metrics you can't source. | Trace every number, logo and quote to a real source, or label it fictional demo content.\n- W-04 Lead answers, errors and notices with the answer or consequence, then the detail. | Read only the first sentence of each answer or message: it gives the answer or outcome.\n- W-05 Put an arrow on a link only when it leaves the site (↗), never on every link. | Every link or button with an arrow glyph or icon goes to another site or app.\n\n## States\n\n- ST-01 Design empty, loading and error states for every region that loads or lists data. | Force no data, a slow network and a failed request: each shows a designed state.\n- ST-02 Give first use, no results and failure their own message and action. | First use, no matches and a failed load each show their own copy and action.\n- ST-03 Reserve space so loading, toggles and validation don't shift surrounding content. | Switch every state at 1440 and 390: nothing else moves (CLS under 0.1).\n- ST-04 Say what failed, what is still safe, and one way forward (retry, edit or contact). | Trigger each error: the text names the failure, the impact and an action.\n- ST-05 Before a destructive action, name what is lost and if it can be undone; confirm it. | Each delete or reset confirms with the object and consequence named; Cancel gets focus.\n\n## Responsive\n\n- R-01 On phones, restack content by priority and adapt components; don't shrink the desktop. | At 390: priority order holds, nothing is cramped side by side, text is no smaller.\n- R-02 Fit every surface into 320 CSS px with no sideways scroll; only tables and code may scroll. | At 320 px, the document is no wider than the viewport and no text is clipped.\n- R-03 Change layout where the content stops fitting, not at device names. | Resize from 1440 to 320: no width crushes columns or orphans one card on a row.\n\n## Motion\n\n- M-01 Animate only changes people cause (open, close, switch); no decorative motion. | Without interaction nothing moves, on load or scroll; transitions take 240ms or less.\n- M-02 Under prefers-reduced-motion, remove non-essential transforms and transitions. | Emulate prefers-reduced-motion: reduce; only essential motion remains.\n\n## Accessibility\n\n- A-01 Make every interactive target at least 44×44 CSS px; inline text links excepted. | At 390, every button, link and control's hit area is 44×44px or more, inline links aside.\n- A-02 Show a visible :focus-visible indicator on every interactive element. | Tab through at 1440 and 390: each stop shows an uncovered indicator at 3:1 contrast.\n- A-03 Meet 4.5:1 for text and 3:1 for large text and control edges, in every theme. | Run axe with the WCAG 2.2 AA tags in each theme: no contrast violations.\n- A-04 Give every control a visible label, groups a legend, and errors a link to their field. | Clicking a label focuses its control; groups have a legend; errors use aria-describedby.\n- A-05 Announce results, saves and errors that appear in place through a polite live region. | With a screen reader, filter, save and fail: each change is announced once, focus unmoved.\n- A-06 Make everything work by keyboard, close overlays on Escape, and hide nothing behind hover. | Keyboard alone reaches and operates everything; Escape closes overlays and focus returns.\n"
+}

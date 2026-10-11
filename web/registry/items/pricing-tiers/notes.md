@@ -11,7 +11,15 @@ avoid_when:
   - There are more than three plans, or pricing is usage-based; use a calculator or a full comparison table.
   - Every plan needs a sales conversation; show what is included and one contact route instead.
   - The plans differ on dozens of features; link to a full comparison table below a short summary.
-rules: []
+rules:
+  - H-01 # one primary action per surface
+  - T-03 # tabular figures for compared numbers
+  - C-02 # never colour alone
+  - C-04 # no effects as emphasis
+  - K-03 # compared options share rows
+  - W-02 # action labels name the outcome
+  - ST-03 # state changes don't move the page
+  - R-03 # break where the content breaks
 ai_default: >-
   Three identical rounded cards, the middle one raised with a gradient border
   and a "Most popular" pill, a dozen ticked features per card that mostly

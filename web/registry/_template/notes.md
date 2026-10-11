@@ -10,7 +10,10 @@ use_when:
   - The situation this item is right for.
 avoid_when:
   - When to use something else, and what to use instead.
-rules: [] # rule ids such as H-02, once the rule set is published
+rules: # 3-8 ids from rules/ (see /rules) that this item really follows
+  - H-01 # one primary action per surface
+  - W-02 # action labels name the outcome
+  - A-01 # 44px touch targets
 ai_default: >-
   The generic version a model usually produces for the same job, described
   concretely enough that a reader recognises it.

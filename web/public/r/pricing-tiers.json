@@ -31,7 +31,16 @@
         "Every plan needs a sales conversation; show what is included and one contact route instead.",
         "The plans differ on dozens of features; link to a full comparison table below a short summary."
       ],
-      "rules": [],
+      "rules": [
+        "H-01",
+        "T-03",
+        "C-02",
+        "C-04",
+        "K-03",
+        "W-02",
+        "ST-03",
+        "R-03"
+      ],
       "ai_default": "Three identical rounded cards, the middle one raised with a gradient border and a \"Most popular\" pill, a dozen ticked features per card that mostly repeat, the same \"Get started\" button on every card, and an annual toggle whose saving is a hard-coded percentage.",
       "why_this_is_better": [
         "Plans are compared on three named limits, written out as values (\"Up to 50\", \"1 year\") in the same order on every plan, so the difference is readable at a glance.",

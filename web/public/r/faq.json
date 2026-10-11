@@ -31,7 +31,7 @@
         "You have fewer than three real questions; answer them in the page copy.",
         "The content is support troubleshooting that changes often; keep it in a help centre."
       ],
-      "rules": [],
+      "rules": ["H-02", "S-02", "K-01", "W-04", "R-03", "M-01", "M-02", "A-06"],
       "ai_default": "A centred \"Frequently Asked Questions\" heading over a JavaScript accordion of filler questions such as \"What is [product]?\" and \"Why choose us?\", answered with marketing copy, only one item open at a time, and no way to reach a person.",
       "why_this_is_better": [
         "Questions are real objections (export, cancellation, billing, sharing, offline) in the words a buyer would use.",
