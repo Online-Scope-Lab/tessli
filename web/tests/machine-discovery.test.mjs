@@ -27,11 +27,13 @@ test("robots metadata advertises the sitemap and blocks unpublished routes", asy
   assert.match(robots, /sitemap/i);
   assert.match(robots, /sitemap\.xml/);
 
-  for (const pathname of ["/submit", "/suggest", "/lab/", "/preview/"]) {
+  for (const pathname of ["/lab/", "/preview/"]) {
     assert.match(robots, quotedPath(pathname), `robots disallows ${pathname}`);
   }
 
-  for (const pathname of ["/saved", "/boards"]) {
+  // /submit and /suggest are redirects to /contribute now, so robots no
+  // longer needs to hide them.
+  for (const pathname of ["/saved", "/boards", "/submit", "/suggest"]) {
     assert.doesNotMatch(
       robots,
       quotedPath(pathname),
@@ -111,6 +113,7 @@ test("sitemap lists only public discovery routes and machine representations", a
     "/resources",
     "/collections",
     "/for-ai",
+    "/contribute",
     "/llms.txt",
   ]) {
     assert.match(sitemap, quotedPath(pathname), `sitemap includes ${pathname}`);

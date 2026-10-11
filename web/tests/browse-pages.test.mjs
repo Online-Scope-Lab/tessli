@@ -54,7 +54,11 @@ test("canonical Browse uses repository data without remote state", async () => {
   assert.match(resources, /deriveBrowseResults/);
   assert.match(resources, /<BrowseResults resources=\{resources\}/);
   assert.doesNotMatch(resources, /RoutePlaceholder|localStorage|fetch\(/);
-  assert.match(navigation, /label: "Browse"[\s\S]*?available: true/);
+  // The nav says "Sources"; the canonical browser stays at /resources.
+  assert.match(
+    navigation,
+    /label: "Sources",\s*href: "\/resources",\s*available: true/,
+  );
   assert.match(filters, /id="browse-search"/);
   assert.match(filters, /name="q"/);
 });

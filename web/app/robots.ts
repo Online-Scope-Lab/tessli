@@ -16,7 +16,7 @@ export default function robots(): MetadataRoute.Robots {
     rules: {
       userAgent: "*",
       allow: "/",
-      disallow: ["/submit", "/suggest", "/lab/", "/preview/"],
+      disallow: ["/lab/", "/preview/"],
     },
     sitemap: `${siteOrigin()}/sitemap.xml`,
   };

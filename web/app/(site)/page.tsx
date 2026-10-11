@@ -1,18 +1,17 @@
-import { HomeTaskEntry } from "@/components/home-task-entry/home-task-entry";
 import { ExploreHero } from "@/components/explore-hero/explore-hero";
-import { getPublishedCollections } from "@/lib/collections";
+import { HomeSections } from "@/components/home/home-sections";
 
 export const metadata = {
-  title: "Tessli — design research for people and agents",
+  title: "Tessli — UI with the reasoning attached",
   description:
-    "Start with a design task, choose relevant sources, and carry the useful decisions into your build.",
+    "An open-source UI library that explains itself: components, sections and pages with working code, live previews and their reasoning, plus a curated directory of design sources.",
 };
 
 export default function HomePage() {
   return (
     <main id="main-content">
       <ExploreHero />
-      <HomeTaskEntry collections={getPublishedCollections().slice(0, 3)} />
+      <HomeSections />
     </main>
   );
 }

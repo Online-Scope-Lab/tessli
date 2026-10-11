@@ -128,29 +128,70 @@ const desktop = await evaluate(`(() => {
   const utilities = Array.from(header.querySelectorAll('nav[aria-label="Utilities"] a'));
   return {
     primary: primary.map((link) => [link.textContent.trim(), link.getAttribute('href')]),
-    utilities: utilities.map((link) => [link.textContent.trim(), link.getAttribute('href')]),
-    current: primary.filter((link) => link.getAttribute('aria-current') === 'page').map((link) => link.textContent.trim()),
+    utilities: utilities.map((link) => [link.querySelector('span')?.textContent.trim(), link.getAttribute('href'), link.getAttribute('target'), link.getAttribute('rel')]),
+    current: Array.from(header.querySelectorAll('nav[aria-label="Primary navigation"] a[aria-current="page"], nav[aria-label="Utilities"] a[aria-current="page"]')).map((link) => link.textContent.trim()),
     authLinks: [header, document.querySelector('footer')]
       .flatMap((region) => Array.from(region?.querySelectorAll('a, button') ?? []))
       .filter((control) => (control.getAttribute('href') ?? '').startsWith('/auth') || /sign[ -]?in|log[ -]?in/i.test(control.textContent))
       .length,
-    legacyLabels: /Explore|Resources|Full reference/.test(header.textContent),
-    searchTarget: Boolean(document.querySelector('#browse-search')),
+    legacyLabels: /Explore|Resources|Full reference|Browse|Collections/.test(header.textContent),
+    footerLinks: Array.from(document.querySelectorAll('footer nav a')).map((link) => link.getAttribute('href')),
     overflow: document.documentElement.scrollWidth > document.documentElement.clientWidth + 1,
   };
 })()`);
 
 assert.deepEqual(desktop.primary, [
-  ["Browse", "/resources"],
-  ["Collections", "/collections"],
+  ["Library", "/library"],
+  ["Sources", "/resources"],
   ["For AI", "/for-ai"],
 ]);
-assert.deepEqual(desktop.utilities, [["Search", "/resources#browse-search"]]);
-assert.deepEqual(desktop.current, ["Browse"]);
+assert.deepEqual(desktop.utilities, [
+  ["Contribute", "/contribute", null, null],
+  [
+    "GitHub",
+    "https://github.com/Online-Scope-Lab/tessli",
+    "_blank",
+    "noopener noreferrer",
+  ],
+]);
+assert.deepEqual(desktop.current, ["Sources"]);
 assert.equal(desktop.authLinks, 0);
 assert.equal(desktop.legacyLabels, false);
-assert.equal(desktop.searchTarget, true);
+for (const route of [
+  "/about",
+  "/rules",
+  "/contribute",
+  "/privacy",
+  "/terms",
+  "/content-policy",
+]) {
+  assert.ok(desktop.footerLinks.includes(route), `footer links ${route}`);
+}
 assert.equal(desktop.overflow, false);
+
+// Every internal header and footer destination answers 200.
+for (const href of new Set([
+  ...desktop.primary.map(([, href]) => href),
+  "/contribute",
+  ...desktop.footerLinks.filter((href) => href.startsWith("/")),
+])) {
+  const response = await fetch(`${origin}${href}`, { redirect: "manual" });
+  assert.equal(response.status, 200, `${href} is a working destination`);
+}
+
+for (const [pathname, current] of [
+  ["/library/pricing-tiers", ["Library"]],
+  ["/for-ai", ["For AI"]],
+  ["/contribute", ["Contribute"]],
+  ["/", []],
+]) {
+  await navigate(`${origin}${pathname}`);
+  const active = await evaluate(
+    `Array.from(document.querySelectorAll('body > header nav[aria-label="Primary navigation"] a[aria-current="page"], body > header nav[aria-label="Utilities"] a[aria-current="page"]')).map((link) => link.textContent.trim())`,
+  );
+  assert.deepEqual(active, current, `active navigation on ${pathname}`);
+}
+await navigate(`${origin}/resources`);
 await screenshot("global-navigation-1440x900.png");
 
 await send("Emulation.setDeviceMetricsOverride", {
@@ -172,7 +213,8 @@ const mobileOpen = await evaluate(`(() => {
     modal: sheet?.getAttribute('aria-modal'),
     primary: Array.from(sheet.querySelectorAll('nav[aria-label="Mobile primary navigation"] a')).map((link) => link.textContent.trim()),
     current: Array.from(sheet.querySelectorAll('nav[aria-label="Mobile primary navigation"] a[aria-current="page"]')).map((link) => link.textContent.trim()),
-    utilities: Array.from(sheet.querySelectorAll('nav[aria-label="Mobile utilities"] a')).map((link) => link.textContent.trim()),
+    utilities: Array.from(sheet.querySelectorAll('nav[aria-label="Mobile utilities"] a')).map((link) => link.querySelector('span')?.textContent.trim()),
+    focusInSheet: sheet.contains(document.activeElement),
     authLinks: Array.from(sheet.querySelectorAll('a, button'))
       .filter((control) => (control.getAttribute('href') ?? '').startsWith('/auth') || /sign[ -]?in|log[ -]?in/i.test(control.textContent))
       .length,
@@ -184,9 +226,11 @@ const mobileOpen = await evaluate(`(() => {
 
 assert.equal(mobileOpen.dialog, "dialog");
 assert.equal(mobileOpen.modal, "true");
-assert.deepEqual(mobileOpen.primary, ["Browse", "Collections", "For AI"]);
-assert.deepEqual(mobileOpen.current, ["Collections"]);
-assert.deepEqual(mobileOpen.utilities, ["Search"]);
+assert.deepEqual(mobileOpen.primary, ["Library", "Sources", "For AI"]);
+// Collections are source guides, so Sources is current there.
+assert.deepEqual(mobileOpen.current, ["Sources"]);
+assert.deepEqual(mobileOpen.utilities, ["Contribute", "GitHub"]);
+assert.equal(mobileOpen.focusInSheet, true);
 assert.equal(mobileOpen.authLinks, 0);
 assert.equal(mobileOpen.bodyOverflow, "hidden");
 assert.equal(mobileOpen.contentInert, true);
@@ -209,8 +253,14 @@ const mobileClosed = await evaluate(`(() => ({
   hidden: document.querySelector('[class*="sheetLayer"]').hidden,
   bodyOverflow: document.body.style.overflow,
   contentInert: document.querySelector('[data-site-content]').inert,
+  focusReturned: document.activeElement?.hasAttribute('data-mobile-menu-trigger') === true,
 }))()`);
 assert.equal(mobileClosed.hidden, true);
+assert.equal(
+  mobileClosed.focusReturned,
+  true,
+  "Escape returns focus to the menu button",
+);
 assert.equal(mobileClosed.bodyOverflow, "");
 assert.equal(mobileClosed.contentInert, false);
 

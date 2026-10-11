@@ -12,29 +12,29 @@ export type FooterGroup = Readonly<{
   links: readonly FooterLink[];
 }>;
 
+// Plan §5 footer: About · Rules · Contribute · Privacy · Terms · Content
+// policy, plus the primary destinations for the end of long pages.
+// Collections and the curation notes sit with Sources.
 export const footerGroups: readonly FooterGroup[] = [
   {
-    id: "footer-research",
-    label: "Research",
+    id: "footer-browse",
+    label: "Browse",
     links: [
-      { label: "Browse sources", href: "/resources" },
+      { label: "Library", href: "/library" },
+      { label: "Sources", href: "/resources" },
       { label: "Collections", href: "/collections" },
       { label: "For AI", href: "/for-ai" },
     ],
   },
   {
-    id: "footer-contribute",
-    label: "Contribute",
+    id: "footer-project",
+    label: "Project",
     links: [
+      { label: "About", href: "/about" },
+      { label: "Rules", href: "/rules" },
+      { label: "Contribute", href: "/contribute" },
+      { label: "How sources are chosen", href: "/curation" },
       { label: "GitHub repository", href: repositoryUrl, external: true },
-    ],
-  },
-  {
-    id: "footer-about",
-    label: "About",
-    links: [
-      { label: "About Tessli", href: "/about" },
-      { label: "Curation process", href: "/curation" },
     ],
   },
   {

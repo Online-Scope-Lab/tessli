@@ -13,7 +13,7 @@ Be clear about what exists today:
   - the **Rules** at `/rules`: 39 draft rules for hierarchy, typography, spacing, colour, components, copy, states, responsive behaviour, motion and accessibility, each with why it matters, how to check it, the default it guards against, its sources and the items that apply it. None is reviewed by a maintainer yet. [`rules/TESSLI.md`](rules/TESSLI.md) is the compact index for agents.
   - the curated **Sources** directory (browse, source pages, collections) and public Markdown/JSON for each source.
   - **For AI** at `/for-ai`: the shadcn install, `TESSLI.md`, a local read-only MCP server, `llms.txt` and an Agent Skill (see [For AI](#for-ai) below).
-- **Being built:** the Contribute page.
+  - **Contribute** at `/contribute`: the four contribution paths, each ending in a GitHub issue form or pull request. The old `/submit` and `/suggest` addresses redirect there.
 - **Not built:** accounts, a database, analytics or payments. GitHub issues and pull requests are the backend.
 
 The plan and its phases are in [`docs/v1.2/plan.md`](docs/v1.2/plan.md).

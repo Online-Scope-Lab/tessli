@@ -9,7 +9,7 @@ export default function TermsPage() {
       relatedLinks={[
         { href: "/privacy", label: "Privacy" },
         { href: "/content-policy", label: "Content policy" },
-        { href: "/curation", label: "Curation process" },
+        { href: "/curation", label: "How sources are chosen" },
       ]}
       sections={[
         {

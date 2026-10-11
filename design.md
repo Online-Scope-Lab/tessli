@@ -7,7 +7,7 @@ This document is the concise source of truth for Tessli's visual identity. Compo
 
 ## 1. Product character
 
-Tessli is a human-curated, AI-native design-source router for designers, developers, product builders, and coding agents.
+Tessli is an open-source UI library that explains itself, with a curated directory of design sources beside it, for designers, developers, product builders, and coding agents.
 
 It should feel:
 
@@ -286,7 +286,7 @@ Motion is functional and restrained.
 
 ## 11. Homepage evidence and imagery
 
-The home hero stays, with its composition and the arch-and-stairs artwork (`web/public/brand/tessli-hero-geometry.webp`, hash-checked in CI). See `docs/v1.2/plan.md` §4. Below the hero, the homepage leads with task starters, the find → decide → handoff explanation, selected Collections, and a concise For AI path.
+The home hero stays, with its composition and the arch-and-stairs artwork (`web/public/brand/tessli-hero-geometry.webp`, hash-checked in CI). See `docs/v1.2/plan.md` §4. Below the hero, the homepage shows featured library items as live previews, the anatomy of one item from its real notes, a For AI install strip, a Sources teaser and a Contribute strip (plan §5; [`docs/component-contracts.md`](docs/component-contracts.md) §4).
 
 Do not use coverage levels, verification status, user counts, activity, popularity, or community claims as evidence. Real Tessli product UI is the preferred imagery for anything new.
 
@@ -324,7 +324,7 @@ Two older triggers remain where moving them would change real layouts: `1100px` 
 From `docs/v1.2/plan.md` §4:
 
 - One uppercase eyebrow per site, in the home hero only. Elsewhere a heading stands alone; if a label carries real information (a page name, a category), show it as plain sentence-case text or a `Tag`.
-- Numbered markers (01/02/03, Stage 1) only for real sequences, such as the For AI workflow, the home research loop and Collection stages.
+- Numbered markers (01/02/03, Stage 1) only for real sequences, such as the For AI workflow and Collection stages.
 - Arrows only where a link goes somewhere else: `↗` for external links. No `→` on ordinary links or cards.
 
 ## 15. Anti-patterns

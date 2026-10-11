@@ -32,7 +32,7 @@ export function RoutePlaceholder({
         </section>
 
         <div className={styles.actions}>
-          <Button href="/">Return to Explore</Button>
+          <Button href="/">Return home</Button>
           <Button href={repositoryUrl} variant="secondary">
             View the repository
             <span aria-hidden="true">↗</span>

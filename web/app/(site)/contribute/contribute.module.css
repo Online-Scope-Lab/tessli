@@ -1,0 +1,189 @@
+.page {
+  padding: clamp(54px, 8vw, 96px) 0 clamp(80px, 10vw, 128px);
+}
+
+.header {
+  max-width: 900px;
+  padding-bottom: clamp(36px, 5vw, 56px);
+}
+
+.header h1,
+.path h2,
+.rulesHeading h2 {
+  margin: 0;
+  color: var(--text-strong);
+  font-family: var(--font-display);
+  font-optical-sizing: auto;
+  font-weight: 620;
+  letter-spacing: var(--tracking-title);
+  text-wrap: balance;
+}
+
+.header h1 {
+  font-size: var(--text-title);
+  line-height: 0.98;
+}
+
+.lede {
+  max-width: 62ch;
+  margin: var(--space-5) 0 0;
+  color: var(--text-body);
+  font-size: var(--text-body-lg);
+  line-height: 1.55;
+}
+
+/* Four paths in a bordered grid: borders carry the hierarchy. */
+.paths {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  border-top: 1px solid var(--line);
+  border-left: 1px solid var(--line);
+}
+
+.paths > li {
+  min-width: 0;
+  border-right: 1px solid var(--line);
+  border-bottom: 1px solid var(--line);
+  background: var(--surface);
+}
+
+.path {
+  display: flex;
+  height: 100%;
+  flex-direction: column;
+  gap: var(--space-3);
+  padding: clamp(22px, 3vw, 36px);
+}
+
+.path h2 {
+  font-size: var(--text-h2);
+  line-height: 1.04;
+}
+
+.path p {
+  max-width: 60ch;
+  margin: 0;
+  color: var(--text-body);
+  line-height: 1.55;
+}
+
+.path .who {
+  color: var(--text-strong);
+  font-weight: 600;
+}
+
+.path .lands {
+  flex-grow: 1;
+  border-top: 1px solid var(--line-subtle);
+  padding-top: var(--space-3);
+  color: var(--text-body);
+  font-size: var(--text-body-sm);
+}
+
+.lands > span {
+  display: block;
+  margin-bottom: var(--space-1);
+  color: var(--text-strong);
+  font-weight: 650;
+}
+
+.actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-3);
+  margin-top: var(--space-3);
+}
+
+.rules {
+  display: grid;
+  grid-template-columns: minmax(0, 5fr) minmax(0, 7fr);
+  gap: var(--space-6) clamp(32px, 6vw, 96px);
+  padding-top: clamp(54px, 8vw, 88px);
+}
+
+.rulesHeading h2 {
+  font-size: var(--text-h2);
+  line-height: 1.04;
+}
+
+.rulesHeading p {
+  max-width: 46ch;
+  margin: var(--space-4) 0 0;
+  color: var(--text-body);
+  line-height: 1.55;
+}
+
+.ruleList {
+  display: grid;
+  margin: 0;
+  border-top: 1px solid var(--line);
+}
+
+.ruleList > div {
+  display: grid;
+  grid-template-columns: minmax(0, 13rem) minmax(0, 1fr);
+  gap: var(--space-2) var(--space-6);
+  border-bottom: 1px solid var(--line);
+  padding-block: var(--space-4);
+}
+
+.ruleList dt {
+  color: var(--text-strong);
+  font-weight: 650;
+}
+
+.ruleList dd {
+  margin: 0;
+  color: var(--text-body);
+  line-height: 1.55;
+}
+
+.readMore {
+  display: flex;
+  flex-wrap: wrap;
+  grid-column: 2;
+  gap: 0 var(--space-6);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.readMore a {
+  display: inline-flex;
+  min-height: 44px;
+  align-items: center;
+  color: var(--text-strong);
+  font-size: var(--text-body-sm);
+  font-weight: 600;
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 0.2em;
+}
+
+.readMore span {
+  margin-left: 0.28em;
+  color: var(--accent-text);
+}
+
+@media (max-width: 1024px) {
+  .rules {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .readMore {
+    grid-column: auto;
+  }
+}
+
+@media (max-width: 767px) {
+  .paths {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .ruleList > div {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}

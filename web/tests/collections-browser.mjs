@@ -195,7 +195,8 @@ assert.equal(
   await evaluate(
     `document.querySelector('nav[aria-label="Primary navigation"] a[aria-current="page"]')?.textContent?.trim()`,
   ),
-  "Collections",
+  // Collections are curated source guides, so Sources is the current item.
+  "Sources",
 );
 assert.equal(
   await evaluate("document.documentElement.scrollWidth <= window.innerWidth"),
@@ -269,7 +270,7 @@ for (const [index, slug] of collectionSlugs.entries()) {
     await evaluate(
       `document.querySelector('nav[aria-label="Primary navigation"] a[aria-current="page"]')?.textContent?.trim()`,
     ),
-    "Collections",
+    "Sources",
   );
   assert.equal(
     await evaluate("document.documentElement.scrollWidth <= window.innerWidth"),

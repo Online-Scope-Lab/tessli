@@ -12,10 +12,13 @@ async function read(relativePath) {
 }
 
 const footerRoutes = [
+  "/library",
   "/resources",
   "/collections",
   "/for-ai",
   "/about",
+  "/rules",
+  "/contribute",
   "/curation",
   "/privacy",
   "/terms",
@@ -23,10 +26,13 @@ const footerRoutes = [
 ];
 
 const implementedRoutes = new Set([
+  "/library",
   "/resources",
   "/collections",
   "/for-ai",
   "/about",
+  "/rules",
+  "/contribute",
   "/curation",
   "/privacy",
   "/terms",
@@ -49,7 +55,7 @@ test("footer contains truthful research groups and safe external links", async (
     read("components/site-footer/site-footer.module.css"),
   ]);
 
-  for (const group of ["Research", "Contribute", "About", "Legal"]) {
+  for (const group of ["Browse", "Project", "Legal"]) {
     assert.match(navigation, new RegExp(`label: "${group}"`));
   }
 
@@ -57,8 +63,28 @@ test("footer contains truthful research groups and safe external links", async (
     assert.match(navigation, new RegExp(`href: "${route}"`));
   }
 
-  assert.match(navigation, /label: "Browse sources", href: "\/resources"/);
-  assert.match(navigation, /label: "For AI", href: "\/for-ai"/);
+  // Plan §5: About · Rules · Contribute · Privacy · Terms · Content policy.
+  for (const [label, route] of [
+    ["About", "/about"],
+    ["Rules", "/rules"],
+    ["Contribute", "/contribute"],
+    ["Privacy", "/privacy"],
+    ["Terms", "/terms"],
+    ["Content policy", "/content-policy"],
+    ["Library", "/library"],
+    ["Sources", "/resources"],
+    ["Collections", "/collections"],
+    ["For AI", "/for-ai"],
+  ]) {
+    assert.match(
+      navigation,
+      new RegExp(`label: "${label}", href: "${route.replace("/", "\\/")}"`),
+    );
+  }
+  assert.match(
+    navigation,
+    /label: "GitHub repository", href: repositoryUrl, external: true/,
+  );
   assert.doesNotMatch(
     navigation,
     /href: "\/(?:submit|suggest|saved|boards)"|Saved sources|Project boards/,
@@ -93,7 +119,7 @@ test("route shells are honest, visitor-facing, and never collect data", async ()
   );
   assert.match(placeholder, /id="main-content"/);
   assert.match(placeholder, /<h1>/);
-  assert.match(placeholder, /Return to Explore/);
+  assert.match(placeholder, /Return home/);
   assert.match(placeholder, /View the repository/);
   assert.match(
     placeholder,
@@ -107,13 +133,27 @@ test("route shells are honest, visitor-facing, and never collect data", async ()
 test("header exposes only working primary and utility routes", async () => {
   const navigation = await read("components/site-header/navigation.ts");
 
-  assert.match(navigation, /label: "Browse"[\s\S]*?available: true/);
-  assert.match(navigation, /label: "Collections"[\s\S]*?available: true/);
-  assert.match(navigation, /label: "For AI"[\s\S]*?available: true/);
-  assert.match(navigation, /label: "Search"[\s\S]*?available: true/);
+  for (const [label, route] of [
+    ["Library", "/library"],
+    ["Sources", "/resources"],
+    ["For AI", "/for-ai"],
+    ["Contribute", "/contribute"],
+  ]) {
+    assert.match(
+      navigation,
+      new RegExp(
+        `label: "${label}",\\s*href: "${route.replace("/", "\\/")}",\\s*available: true`,
+      ),
+    );
+    await access(path.join(webRoot, `app/(site)${route}/page.tsx`));
+  }
+  assert.match(
+    navigation,
+    /label: "GitHub",\s*href: repositoryUrl,\s*available: true/,
+  );
   assert.doesNotMatch(
     navigation,
-    /label: "Explore"|label: "Resources"|label: "About"|label: "Saved"|label: "Boards"|\/auth|\/saved|\/boards/,
+    /label: "Explore"|label: "Resources"|label: "About"|label: "Saved"|label: "Boards"|\/auth|\/saved|\/boards|\/submit|\/suggest/,
   );
 });
 

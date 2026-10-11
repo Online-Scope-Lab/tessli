@@ -134,7 +134,7 @@ jobs:
 
           node tests/smoke-browser.mjs 2>&1 | tee artifacts/browser-tests.log
           node tests/explore-search-browser.mjs 2>&1 | tee -a artifacts/browser-tests.log
-          node tests/home-task-entry-browser.mjs 2>&1 | tee -a artifacts/browser-tests.log
+          node tests/home-browser.mjs 2>&1 | tee -a artifacts/browser-tests.log
           node tests/resource-card-browser.mjs 2>&1 | tee -a artifacts/browser-tests.log
           node tests/card-surface-parity-browser.mjs 2>&1 | tee -a artifacts/browser-tests.log
           node tests/collections-browser.mjs 2>&1 | tee -a artifacts/browser-tests.log

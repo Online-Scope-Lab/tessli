@@ -11,29 +11,63 @@ async function read(relativePath) {
   return readFile(path.join(webRoot, relativePath), "utf8");
 }
 
-test("public navigation separates primary research routes from utilities", async () => {
+test("primary navigation is Library | Sources | For AI, with Contribute and GitHub as utilities", async () => {
   const navigation = await read("components/site-header/navigation.ts");
+  const { availablePrimaryNavigationItems, availableUtilityNavigationItems } =
+    await import("../components/site-header/navigation.ts");
+  const { repositoryUrl } = await import("../lib/repository.ts");
 
-  assert.match(
-    navigation,
-    /label: "Browse"[\s\S]*?href: "\/resources"[\s\S]*?available: true/,
+  assert.deepEqual(
+    availablePrimaryNavigationItems.map((item) => [item.label, item.href]),
+    [
+      ["Library", "/library"],
+      ["Sources", "/resources"],
+      ["For AI", "/for-ai"],
+    ],
   );
-  assert.match(
-    navigation,
-    /label: "Collections"[\s\S]*?href: "\/collections"[\s\S]*?available: true/,
+  assert.deepEqual(
+    availableUtilityNavigationItems.map((item) => [
+      item.label,
+      item.href,
+      Boolean(item.external),
+    ]),
+    [
+      ["Contribute", "/contribute", false],
+      ["GitHub", repositoryUrl, true],
+    ],
   );
-  assert.match(
-    navigation,
-    /label: "For AI"[\s\S]*?href: "\/for-ai"[\s\S]*?available: true/,
-  );
-  assert.match(
-    navigation,
-    /label: "Search"[\s\S]*?href: "\/resources#browse-search"[\s\S]*?match: "none"/,
-  );
+  // The GitHub link reads the canonical repository constant.
+  assert.match(navigation, /href: repositoryUrl/);
   assert.doesNotMatch(
     navigation,
-    /label: "Explore"|label: "Resources"|label: "About"|label: "Saved"|label: "Boards"|\/saved|\/boards/,
+    /label: "Explore"|label: "Browse"|label: "Collections"|label: "Saved"|label: "Boards"|\/saved|\/boards|\/submit|\/suggest/,
   );
+});
+
+test("navigation active states follow the section, not a string prefix", async () => {
+  const {
+    primaryNavigationItems,
+    utilityNavigationItems,
+    isNavigationItemActive,
+  } = await import("../components/site-header/navigation.ts");
+  const items = [...primaryNavigationItems, ...utilityNavigationItems];
+  const active = (pathname) =>
+    items
+      .filter((item) => isNavigationItemActive(item, pathname))
+      .map((item) => item.label);
+
+  assert.deepEqual(active("/"), []);
+  assert.deepEqual(active("/library"), ["Library"]);
+  assert.deepEqual(active("/library/pricing-tiers"), ["Library"]);
+  assert.deepEqual(active("/resources"), ["Sources"]);
+  assert.deepEqual(active("/resources/land-book"), ["Sources"]);
+  // Collections are curated source guides, so they sit under Sources.
+  assert.deepEqual(active("/collections"), ["Sources"]);
+  assert.deepEqual(active("/collections/saas-landing-pages"), ["Sources"]);
+  assert.deepEqual(active("/for-ai"), ["For AI"]);
+  assert.deepEqual(active("/contribute"), ["Contribute"]);
+  assert.deepEqual(active("/rules"), []);
+  assert.deepEqual(active("/librarything"), []);
 });
 
 test("header implements accessible modal navigation behaviour", async () => {
@@ -51,6 +85,10 @@ test("header implements accessible modal navigation behaviour", async () => {
   assert.match(header, /window\.addEventListener\("popstate"/);
   assert.match(header, /aria-label="Utilities"/);
   assert.match(header, /aria-label="Mobile utilities"/);
+  // External utility links open safely and say so to screen readers.
+  assert.match(header, /rel="noopener noreferrer"/);
+  assert.match(header, /target="_blank"/);
+  assert.match(header, /\(opens in a new tab\)/);
   assert.doesNotMatch(header, /href="\/auth"|Sign in to Tessli|isAuthActive/);
   assert.doesNotMatch(header, /fake avatar|theme toggle/i);
 });

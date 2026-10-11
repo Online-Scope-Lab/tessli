@@ -8,11 +8,11 @@ import "./globals.css";
 
 export const metadata: Metadata = {
   title: {
-    default: "Tessli — Curated design resources",
+    default: "Tessli — UI with the reasoning attached",
     template: "%s — Tessli",
   },
   description:
-    "A manually curated index of useful web and product design resources for designers and developers.",
+    "An open-source UI library that explains itself, and a curated directory of design sources.",
 };
 
 // The site chrome (skip link, header, footer) lives in app/(site)/layout.tsx so

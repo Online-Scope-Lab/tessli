@@ -15,10 +15,8 @@ test("Home preserves the existing hero and delegates its new content below the f
   const page = await read("app/(site)/page.tsx");
 
   assert.match(page, /import \{ ExploreHero \}/);
-  assert.match(page, /import \{ HomeTaskEntry \}/);
-  assert.match(page, /getPublishedCollections\(\)\.slice\(0, 3\)/);
-  assert.match(page, /<ExploreHero \/>/);
-  assert.match(page, /<HomeTaskEntry/);
+  assert.match(page, /import \{ HomeSections \}/);
+  assert.match(page, /<ExploreHero \/>\s*<HomeSections \/>/);
   assert.match(page, /id="main-content"/);
   assert.doesNotMatch(page, /catalogue|fetch\(/);
 });

@@ -1,0 +1,371 @@
+.page {
+  border-top: 1px solid var(--line-subtle);
+}
+
+.librarySection,
+.anatomySection,
+.aiSection {
+  padding-block: clamp(64px, 8vw, 112px);
+}
+
+.librarySection,
+.aiSection {
+  background: var(--surface);
+}
+
+.anatomySection {
+  border-block: 1px solid var(--line);
+  background: var(--surface-muted);
+}
+
+.splitHeading h2,
+.aiCopy h2,
+.closingPanel h2 {
+  margin: 0;
+  color: var(--text-strong);
+  font-family: var(--font-display);
+  font-optical-sizing: auto;
+  font-weight: 600;
+  letter-spacing: var(--tracking-title);
+  line-height: 1;
+  text-wrap: balance;
+}
+
+.splitHeading h2 {
+  font-size: clamp(2.25rem, 4.4vw, 3.75rem);
+}
+
+.aiCopy h2,
+.closingPanel h2 {
+  font-size: var(--text-h2);
+  line-height: 1.04;
+}
+
+/* Heading left, explanation right; one column below 1024px. */
+.splitHeading {
+  display: grid;
+  grid-template-columns: minmax(0, 5fr) minmax(0, 6fr);
+  align-items: end;
+  gap: var(--space-6) clamp(32px, 6vw, 96px);
+  margin-bottom: clamp(32px, 4.5vw, 56px);
+}
+
+.splitHeading h2 {
+  max-width: 14ch;
+}
+
+.splitHeading p,
+.aiCopy p,
+.closingPanel p {
+  max-width: 62ch;
+  margin: 0;
+  color: var(--text-body);
+  font-size: var(--text-body-lg);
+  line-height: 1.55;
+}
+
+.splitHeading .note {
+  margin-top: var(--space-3);
+  color: var(--text-muted);
+  font-size: var(--text-body-sm);
+}
+
+.splitHeading a,
+.textLinks a {
+  color: var(--text-strong);
+  font-weight: 650;
+  text-decoration: underline;
+  text-decoration-color: var(--accent);
+  text-decoration-thickness: 1px;
+  text-underline-offset: 0.22em;
+}
+
+.textLinks {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0 var(--space-6);
+  margin: var(--space-4) 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+.textLinks a {
+  display: inline-flex;
+  min-height: 44px;
+  align-items: center;
+  font-size: var(--text-body-sm);
+}
+
+.externalMark {
+  margin-left: 0.28em;
+  color: var(--accent-text);
+}
+
+/* Featured items: live previews of real Tessli UI. */
+
+.featuredGrid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: var(--space-6);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.featuredCard {
+  position: relative;
+  display: flex;
+  height: 100%;
+  min-width: 0;
+  flex-direction: column;
+  border: 1px solid var(--line);
+  background: var(--canvas);
+  transition: border-color var(--motion-fast) var(--ease-standard);
+}
+
+.featuredCard:hover,
+.featuredCard:focus-within {
+  border-color: var(--line-strong);
+}
+
+.featuredCard:has(.cardLink:focus-visible) {
+  outline: 3px solid var(--focus);
+  outline-offset: 3px;
+}
+
+.featuredBody {
+  display: grid;
+  flex: 1;
+  align-content: start;
+  justify-items: start;
+  gap: var(--space-3);
+  padding: var(--space-5);
+}
+
+.featuredBody h3 {
+  margin: 0;
+  font-size: var(--text-h3);
+  font-weight: 620;
+  letter-spacing: -0.01em;
+  line-height: 1.25;
+}
+
+.cardLink {
+  color: var(--text-strong);
+  text-decoration: none;
+}
+
+/* The whole card is one target; the title link stretches over it. */
+.cardLink::after {
+  position: absolute;
+  inset: 0;
+  content: "";
+}
+
+.cardLink:focus-visible {
+  outline: none;
+}
+
+.featuredBody p {
+  margin: 0;
+  color: var(--text-body);
+  font-size: var(--text-body-sm);
+  line-height: 1.55;
+}
+
+/* Anatomy: one item's real notes as a bordered spec sheet. */
+
+.anatomy {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  border-top: 1px solid var(--line);
+  border-left: 1px solid var(--line);
+  background: var(--surface);
+}
+
+.anatomyCell {
+  min-width: 0;
+  border-right: 1px solid var(--line);
+  border-bottom: 1px solid var(--line);
+  padding: clamp(20px, 2.6vw, 32px);
+}
+
+.anatomyCell h3 {
+  margin: 0 0 var(--space-3);
+  color: var(--text-strong);
+  font-size: var(--text-body-md);
+  font-weight: 680;
+}
+
+.anatomyCell p,
+.anatomyCell li {
+  max-width: 62ch;
+  color: var(--text-body);
+  font-size: var(--text-body-sm);
+  line-height: 1.6;
+}
+
+.anatomyCell p {
+  margin: 0;
+}
+
+.anatomyCell ul {
+  display: grid;
+  gap: var(--space-2);
+  margin: 0;
+  padding-left: 1.1em;
+  list-style: disc;
+}
+
+.anatomyCell li::marker {
+  color: var(--text-faint);
+}
+
+.anatomyCell code {
+  font-family:
+    ui-monospace, "SFMono-Regular", Consolas, "Liberation Mono", monospace;
+  font-size: 0.9em;
+}
+
+.anatomyRules {
+  grid-column: 1 / -1;
+}
+
+.anatomyRules ul {
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 0 var(--space-6);
+  padding: 0;
+  list-style: none;
+}
+
+.anatomyRules li {
+  max-width: none;
+}
+
+.anatomyRules a {
+  display: flex;
+  min-height: 44px;
+  align-items: baseline;
+  gap: var(--space-2);
+  padding-block: var(--space-2);
+  color: var(--text-strong);
+  font-weight: 550;
+  text-decoration: none;
+}
+
+.anatomyRules a:hover {
+  text-decoration: underline;
+  text-decoration-color: var(--accent);
+  text-underline-offset: 0.22em;
+}
+
+.ruleId {
+  flex: none;
+  min-width: 3.4em;
+  color: var(--accent-text);
+  font-size: var(--text-label);
+  font-variant-numeric: tabular-nums;
+  font-weight: 700;
+}
+
+/* For AI strip. */
+
+.aiLayout {
+  display: grid;
+  grid-template-columns: minmax(0, 5fr) minmax(0, 6fr);
+  align-items: start;
+  gap: var(--space-8) clamp(32px, 6vw, 96px);
+}
+
+.commands {
+  display: grid;
+  gap: var(--space-6);
+}
+
+.commands h3 {
+  margin: 0 0 var(--space-3);
+  color: var(--text-strong);
+  font-size: var(--text-body-md);
+  font-weight: 680;
+}
+
+/* Sources teaser and Contribute strip, side by side. */
+
+.closingBand {
+  border-top: 1px solid var(--line);
+  background: var(--surface-muted);
+}
+
+.closingLayout {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.closingPanel {
+  min-width: 0;
+  padding-block: clamp(56px, 7vw, 96px);
+}
+
+.aiCopy p,
+.closingPanel p {
+  margin-top: var(--space-4);
+}
+
+.closingPanel + .closingPanel {
+  border-left: 1px solid var(--line);
+  padding-left: clamp(32px, 6vw, 96px);
+}
+
+.closingPanel:first-child {
+  padding-right: clamp(32px, 6vw, 96px);
+}
+
+@media (max-width: 1024px) {
+  .splitHeading,
+  .aiLayout {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .featuredGrid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .anatomyRules ul {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 767px) {
+  .librarySection,
+  .anatomySection,
+  .aiSection {
+    padding-block: var(--space-12);
+  }
+
+  .featuredGrid,
+  .anatomy,
+  .anatomyRules ul,
+  .closingLayout {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .closingPanel {
+    padding-block: var(--space-12);
+  }
+
+  .closingPanel:first-child {
+    padding-right: 0;
+  }
+
+  .closingPanel + .closingPanel {
+    border-top: 1px solid var(--line);
+    border-left: 0;
+    padding-left: 0;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .featuredCard {
+    transition: none;
+  }
+}

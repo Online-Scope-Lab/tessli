@@ -12,8 +12,8 @@ export function SiteFooter() {
             Tessli
           </Link>
           <p>
-            Find design and frontend sources, inspect their fit, and keep
-            project research reusable.
+            UI with the reasoning attached: components and sections that explain
+            themselves, and a curated directory of design sources.
           </p>
         </div>
 
@@ -41,6 +41,7 @@ export function SiteFooter() {
                         >
                           ↗
                         </span>
+                        <span className="sr-only"> (opens in a new tab)</span>
                       </a>
                     ) : (
                       <Link href={link.href}>{link.label}</Link>

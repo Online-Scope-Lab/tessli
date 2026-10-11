@@ -14,8 +14,8 @@ export default function ErrorPage({ reset }: ErrorPageProps) {
         <div className={styles.copy}>
           <h1>We hit a temporary snag.</h1>
           <p className={styles.summary}>
-            Tessli could not finish loading this page. Try again, or return to
-            Explore while we recover.
+            Tessli could not finish loading this page. Try again, or go back to
+            the home page while we recover.
           </p>
         </div>
 
@@ -23,14 +23,14 @@ export default function ErrorPage({ reset }: ErrorPageProps) {
           <h2 id="error-status-title">What you can do</h2>
           <ul>
             <li>Try loading this page again.</li>
-            <li>Return to Explore to continue researching the catalogue.</li>
+            <li>Go back to the home page and continue from there.</li>
           </ul>
         </section>
 
         <div className={styles.actions}>
           <Button onClick={reset}>Try again</Button>
           <Button href="/" variant="secondary">
-            Return to Explore
+            Return home
           </Button>
         </div>
       </div>

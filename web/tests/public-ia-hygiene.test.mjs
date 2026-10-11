@@ -11,13 +11,16 @@ async function read(relativePath) {
   return readFile(path.join(webRoot, relativePath), "utf8");
 }
 
-const headerRoutes = ["/resources", "/collections", "/for-ai"];
+const headerRoutes = ["/library", "/resources", "/for-ai", "/contribute"];
 
 const footerRoutes = [
+  "/library",
   "/resources",
   "/collections",
   "/for-ai",
   "/about",
+  "/rules",
+  "/contribute",
   "/curation",
   "/privacy",
   "/terms",
@@ -25,14 +28,12 @@ const footerRoutes = [
 ];
 
 test("public header and footer promote only implemented routes", async () => {
-  const [navigation, header, footerNavigation, footer, filters] =
-    await Promise.all([
-      read("components/site-header/navigation.ts"),
-      read("components/site-header/site-header.tsx"),
-      read("components/site-footer/footer-navigation.ts"),
-      read("components/site-footer/site-footer.tsx"),
-      read("components/browse/browse-filters.tsx"),
-    ]);
+  const [navigation, header, footerNavigation, footer] = await Promise.all([
+    read("components/site-header/navigation.ts"),
+    read("components/site-header/site-header.tsx"),
+    read("components/site-footer/footer-navigation.ts"),
+    read("components/site-footer/site-footer.tsx"),
+  ]);
 
   for (const route of new Set(["/", ...headerRoutes, ...footerRoutes])) {
     await access(path.join(webRoot, `app/(site)${route}/page.tsx`));
@@ -48,8 +49,9 @@ test("public header and footer promote only implemented routes", async () => {
 
   assert.match(header, /href="\/"/);
   assert.match(footer, /href="\/"/);
-  assert.match(navigation, /href: "\/resources#browse-search"/);
-  assert.match(filters, /id="browse-search"/);
+  // GitHub links read the canonical repository constant.
+  assert.match(navigation, /href: repositoryUrl/);
+  assert.match(footerNavigation, /href: repositoryUrl/);
 
   assert.doesNotMatch(
     `${navigation}\n${header}\n${footer}`,
@@ -58,17 +60,27 @@ test("public header and footer promote only implemented routes", async () => {
   assert.doesNotMatch(footerNavigation, /href: "\/(?:saved|boards)"/u);
 });
 
-test("unfinished and internal-lab routes are non-indexable", async () => {
-  const [submit, suggest, lab] = await Promise.all([
-    read("app/(site)/submit/page.tsx"),
-    read("app/(site)/suggest/page.tsx"),
-    read("app/(site)/lab/page.tsx"),
-  ]);
+test("the internal lab is non-indexable", async () => {
+  const lab = await read("app/(site)/lab/page.tsx");
 
-  for (const route of [submit, suggest, lab]) {
-    assert.match(route, /index: false/);
-    assert.match(route, /follow: false/);
+  assert.match(lab, /index: false/);
+  assert.match(lab, /follow: false/);
+});
+
+test("/submit and /suggest are replaced by permanent redirects to /contribute", async () => {
+  for (const removed of ["app/(site)/submit", "app/(site)/suggest"]) {
+    await assert.rejects(access(path.join(webRoot, removed)), {
+      code: "ENOENT",
+    });
   }
+  await access(path.join(webRoot, "app/(site)/contribute/page.tsx"));
+
+  const { default: nextConfig } = await import("../next.config.ts");
+  const redirects = await nextConfig.redirects();
+  assert.deepEqual(redirects, [
+    { source: "/submit", destination: "/contribute", permanent: true },
+    { source: "/suggest", destination: "/contribute", permanent: true },
+  ]);
 });
 
 test("the account route, auth shell and session proxy are removed", async () => {
@@ -109,6 +121,7 @@ test("sitemap limits discovery to public routes and canonical documents", async 
     "/resources",
     "/collections",
     "/for-ai",
+    "/contribute",
     "/about",
     "/curation",
     "/privacy",

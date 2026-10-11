@@ -24,7 +24,18 @@ const widths = [
 // Every public page the smoke matrix renders. `status` is the HTTP status the
 // server must return; `text` must appear in the server-rendered HTML.
 const pages = [
-  { name: "home", path: "/", text: "Find better design resources, faster" },
+  {
+    name: "home",
+    path: "/",
+    text: "Find better design resources, faster",
+    markers: [
+      "UI with the reasoning attached.",
+      "data-home-featured-item=",
+      "data-home-anatomy=",
+      "npx shadcn@latest add online-scope-lab/tessli/rules",
+      'href="/contribute"',
+    ],
+  },
   {
     name: "resources",
     path: "/resources",
@@ -94,7 +105,19 @@ const pages = [
   { name: "privacy", path: "/privacy", text: "Keep reading" },
   { name: "terms", path: "/terms", text: "Keep reading" },
   { name: "content-policy", path: "/content-policy", text: "Keep reading" },
-  { name: "submit", path: "/submit", text: "What this route does today" },
+  {
+    name: "contribute",
+    path: "/contribute",
+    text: "Contribute on GitHub.",
+    markers: [
+      "https://github.com/Online-Scope-Lab/tessli/issues/new?template=suggest-source.yml",
+      "https://github.com/Online-Scope-Lab/tessli/issues/new?template=submit-design.yml",
+      "https://github.com/Online-Scope-Lab/tessli/issues/new?template=report-source.yml",
+      "https://github.com/Online-Scope-Lab/tessli/issues/new?template=bug.yml",
+      "https://github.com/Online-Scope-Lab/tessli/blob/main/CONTRIBUTING.md#contribute-an-item",
+      "https://github.com/Online-Scope-Lab/tessli/tree/main/web/registry/_template",
+    ],
+  },
   { name: "lab", path: "/lab", text: "Design system" },
   {
     name: "not-found",
@@ -120,7 +143,6 @@ const extraRouteChecks = [
   // Archived by the v1.2 triage: the page stays, with its notice.
   ["/resources/designindex", 200, "data-source-archived"],
   ["/curation", 200, "Keep reading"],
-  ["/suggest", 200, "What this route does today"],
   ["/auth", 404, "Page not found"],
   ["/saved", 404, "Page not found"],
   ["/boards", 404, "Page not found"],
@@ -164,6 +186,17 @@ for (const [path, status, text] of extraRouteChecks) {
   const body = await response.text();
   assert.equal(response.status, status, `${path} status`);
   assert.match(body, new RegExp(escapeRegExp(text), "i"), `${path} content`);
+}
+
+// /contribute replaced /submit and /suggest: both answer a permanent 308.
+for (const path of ["/submit", "/suggest"]) {
+  const response = await fetch(`${origin}${path}`, { redirect: "manual" });
+  assert.equal(response.status, 308, `${path} redirects permanently`);
+  assert.equal(
+    new URL(response.headers.get("location") ?? "", origin).pathname,
+    "/contribute",
+    `${path} redirects to /contribute`,
+  );
 }
 
 for (const path of ["/preview/faq", "/preview/pricing-tiers?theme=neutral"]) {
@@ -218,7 +251,7 @@ assert.match(
   /^Sitemap:\s*.+\/sitemap\.xml\s*$/imu,
   "/robots.txt sitemap",
 );
-for (const pathname of ["/submit", "/suggest", "/lab/", "/preview/"]) {
+for (const pathname of ["/lab/", "/preview/"]) {
   assert.match(
     robots,
     new RegExp(`^Disallow:\\s*${escapeRegExp(pathname)}\\s*$`, "imu"),

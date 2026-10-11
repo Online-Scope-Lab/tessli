@@ -7,7 +7,7 @@ export default function ContentPolicyPage() {
       title="Tessli indexes references without claiming ownership of them."
       summary="The public catalogue links to original destinations and keeps only the limited metadata needed to make those links useful. It is not a proxy, mirror, or archive of third-party design work."
       relatedLinks={[
-        { href: "/curation", label: "Curation process" },
+        { href: "/curation", label: "How sources are chosen" },
         { href: "/terms", label: "Terms" },
         { href: "/privacy", label: "Privacy" },
       ]}

@@ -8,15 +8,51 @@ import { CloseIcon, MenuIcon } from "./icons";
 import {
   availablePrimaryNavigationItems,
   availableUtilityNavigationItems,
+  isNavigationItemActive as isItemActive,
   type NavigationItem,
 } from "./navigation";
 import styles from "./site-header.module.css";
 
-function isItemActive(item: NavigationItem, pathname: string) {
-  if (item.match === "none") return false;
-  return item.match === "exact"
-    ? pathname === item.href
-    : pathname.startsWith(item.href);
+/** A utility link: internal routes use next/link; external ones open a new tab. */
+function UtilityLink({
+  item,
+  active,
+  className,
+  onClick,
+}: Readonly<{
+  item: NavigationItem;
+  active: boolean;
+  className: string;
+  onClick?: () => void;
+}>) {
+  if (item.external) {
+    return (
+      <a
+        className={className}
+        href={item.href}
+        onClick={onClick}
+        rel="noopener noreferrer"
+        target="_blank"
+      >
+        <span>{item.label}</span>
+        <span aria-hidden="true" className={styles.externalMark}>
+          ↗
+        </span>
+        <span className="sr-only"> (opens in a new tab)</span>
+      </a>
+    );
+  }
+
+  return (
+    <Link
+      aria-current={active ? "page" : undefined}
+      className={className}
+      href={item.href}
+      onClick={onClick}
+    >
+      <span>{item.label}</span>
+    </Link>
+  );
 }
 
 export function SiteHeader() {
@@ -167,14 +203,12 @@ export function SiteHeader() {
             {availableUtilityNavigationItems.map((item) => {
               const active = isItemActive(item, pathname);
               return (
-                <Link
-                  aria-current={active ? "page" : undefined}
+                <UtilityLink
+                  active={active}
                   className={`${styles.utilityLink} ${active ? styles.utilityLinkActive : ""}`}
-                  href={item.href}
+                  item={item}
                   key={item.href}
-                >
-                  {item.label}
-                </Link>
+                />
               );
             })}
           </nav>
@@ -248,20 +282,18 @@ export function SiteHeader() {
             })}
           </nav>
           <div className={styles.mobileUtilities}>
-            <p>Utilities</p>
+            <p>Project</p>
             <nav aria-label="Mobile utilities">
               {availableUtilityNavigationItems.map((item) => {
                 const active = isItemActive(item, pathname);
                 return (
-                  <Link
-                    aria-current={active ? "page" : undefined}
+                  <UtilityLink
+                    active={active}
                     className={`${styles.mobileUtilityLink} ${active ? styles.mobileUtilityLinkActive : ""}`}
-                    href={item.href}
+                    item={item}
                     key={item.href}
                     onClick={closeMenu}
-                  >
-                    <span>{item.label}</span>
-                  </Link>
+                  />
                 );
               })}
             </nav>

@@ -9,16 +9,16 @@ These contracts describe working public interfaces only. Components being remove
 ### Anatomy
 
 - Tessli wordmark;
-- working primary navigation: Browse, Collections, For AI;
-- utilities: Search;
-- mobile menu and search shortcut.
+- working primary navigation (plan §5): Library (`/library`), Sources (`/resources`), For AI (`/for-ai`);
+- utilities on the right: Contribute (`/contribute`) and GitHub (the canonical repository URL from `web/lib/repository.ts`, opening in a new tab with `↗`);
+- mobile menu.
 
 ### Behaviour
 
 - desktop height approximately `64px`;
 - active route uses a restrained orange underline, not a filled pill;
 - show only working routes/utilities;
-- Browse is the canonical source browser;
+- Sources (`/resources`) is the canonical source browser; Sources is also the active item on `/collections`, which are curated source guides;
 - no Sign in, account, in-site submit form, or Lab control;
 - mobile navigation opens a full-height accessible sheet;
 - Escape closes sheets/menus and focus returns to their triggers.
@@ -49,15 +49,17 @@ These contracts describe working public interfaces only. Components being remove
 - local catalogue filtering may debounce `80–120ms` without a network call;
 - a task search on Home submits to `/resources?q=...`.
 
-## 4. Task starter
+## 4. Home sections
 
-Used on Home only.
+Below the frozen hero, in this order (`web/components/home/home-sections.tsx`):
 
-- concise task label and optional one-line context;
-- links to a meaningful `/resources` query;
-- three to six items maximum;
-- visible focus and minimum touch target;
-- never becomes a category rail, result set, or decorative pill cloud.
+- featured library items: one component, one section and one page as live, lazy, inert `/preview/<slug>` thumbnails at a fixed 16:10 ratio, each with its title and the item's own first "why this is better" note;
+- anatomy of an item: one real item's own notes (use when, avoid when, common AI default, what it does instead, the rules it follows), shortened, with a link to the full item;
+- a For AI strip with the real rules-file and item install commands;
+- a Sources teaser with counts derived from the catalogue, linking to `/resources` and `/collections`;
+- a Contribute strip linking to `/contribute` and the repository.
+
+No invented stats, logos or testimonials; no eyebrow outside the hero; no arrows on ordinary links.
 
 ## 5. Browse refinement controls
 
@@ -144,7 +146,7 @@ Auth, account menus and in-site forms are not part of v1.2. Contributions go thr
 ## 11. Footer
 
 - concise Tessli statement;
-- footer-only links: About, Curation, Privacy, Terms, Content policy;
+- three groups: Browse (Library, Sources, Collections, For AI), Project (About, Rules, Contribute, How sources are chosen, GitHub) and Legal (Privacy, Terms, Content policy);
 - responsive groups that stack simply on mobile;
 - no newsletter until operational;
 - no Auth or Lab destination.
