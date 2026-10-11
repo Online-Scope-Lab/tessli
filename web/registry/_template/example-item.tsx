@@ -1,5 +1,6 @@
-// TEMPLATE. Copy this folder to web/registry/items/<your-slug>/ and rename
-// this file to <your-slug>.tsx. See CONTRIBUTING.md, "Contribute an item".
+// TEMPLATE. Copy this folder to web/registry/items/<your-slug>/, rename
+// this file to <your-slug>.tsx and update the ./example-item imports in
+// demo.tsx and states.tsx. See CONTRIBUTING.md, "Contribute an item".
 //
 // Rules for the item file:
 // - One file. Import only React, npm packages listed in web/package.json,

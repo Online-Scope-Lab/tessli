@@ -144,7 +144,7 @@ For whoever implements it later, a split touches: `CATEGORY_DEFINITIONS`; the 20
 **Labels:** `good first issue`, `help wanted`
 
 ~~~~markdown
-The nine browser tests in `web/tests/*-browser.mjs` (about 3,000 lines) each carry their own copy of the same Chrome DevTools Protocol plumbing: `delay`, `findPageTarget`, the WebSocket setup and `send`, `evaluate`, `evaluateSettled`, `waitFor` and `markDocumentStale`, and most of them `navigate`, `setViewport` or `screenshot`. A fix to one copy doesn't reach the others.
+The nine browser tests in `web/tests/*-browser.mjs` (about 3,000 lines) each carry their own copy of the same Chrome DevTools Protocol plumbing: `delay`, `findPageTarget`, the WebSocket setup and `send`, and `evaluate` in all nine; `evaluateSettled`, `waitFor` and `markDocumentStale` in all but `global-navigation-browser.mjs`; and `navigate`, `setViewport` or `screenshot` in most of them. A fix to one copy doesn't reach the others.
 
 Move the shared helpers into one module, for example `web/tests/lib/cdp.mjs`, and import it from all nine files:
 
