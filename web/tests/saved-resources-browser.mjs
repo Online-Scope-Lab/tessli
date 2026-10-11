@@ -1,12 +1,8 @@
 import assert from "node:assert/strict";
-import { mkdir, readFile, writeFile } from "node:fs/promises";
+import { readFile } from "node:fs/promises";
 
 const endpoint = process.env.CDP_ENDPOINT ?? "http://127.0.0.1:9222";
 const origin = process.env.TESSLI_ORIGIN ?? "http://127.0.0.1:3000";
-const outputDirectory = new URL(
-  "../artifacts/search-browser/",
-  import.meta.url,
-);
 const catalogue = JSON.parse(
   await readFile(new URL("../data/catalogue.json", import.meta.url), "utf8"),
 );
@@ -78,7 +74,6 @@ async function waitFor(expression, label, timeout = 7_500) {
   throw new Error(`Timed out waiting for ${label}.`);
 }
 
-await mkdir(outputDirectory, { recursive: true });
 await send("Page.enable");
 await send("Page.navigate", { url: `${origin}/` });
 await waitFor(
@@ -303,53 +298,5 @@ await waitFor(
   "persistent empty state",
 );
 
-await send("Emulation.setDeviceMetricsOverride", {
-  width: 390,
-  height: 844,
-  deviceScaleFactor: 1,
-  mobile: true,
-});
-await send("Page.navigate", { url: `${origin}/auth` });
-await waitFor(
-  "Boolean(document.querySelector('[data-auth-shell=ready]'))",
-  "credential-ready auth shell",
-);
-await waitFor("document.fonts.status === 'loaded'", "auth shell fonts");
-const authAudit = await evaluate(`(() => {
-  const shell = document.querySelector('[data-auth-shell=ready]');
-  const fieldset = shell?.querySelector('fieldset');
-  const controls = [...(fieldset?.querySelectorAll('button, input') ?? [])];
-  return {
-    configuration: shell?.getAttribute('data-auth-configuration'),
-    controlsDisabled:
-      controls.length === 3 && controls.every((control) => control.matches(':disabled')),
-    fieldsetDisabled: Boolean(fieldset?.disabled),
-    localSaves: localStorage.getItem('tessli-saved-resource-ids-v2'),
-    noSubmitCopy: document.body.textContent.includes(
-      'No sign-in request is sent from this page yet',
-    ),
-    overflow:
-      document.documentElement.scrollWidth >
-      document.documentElement.clientWidth,
-  };
-})()`);
-assert.deepEqual(authAudit, {
-  configuration: "unconfigured",
-  controlsDisabled: true,
-  fieldsetDisabled: true,
-  localSaves: "[]",
-  noSubmitCopy: true,
-  overflow: false,
-});
-const authScreenshot = await send("Page.captureScreenshot", {
-  format: "png",
-  fromSurface: true,
-  captureBeyondViewport: false,
-});
-await writeFile(
-  new URL("auth-shell-390x844.png", outputDirectory),
-  Buffer.from(authScreenshot.data, "base64"),
-);
-
 socket.close();
-console.log("Saved resource and credential-ready auth interactions passed.");
+console.log("Saved resource interactions passed.");

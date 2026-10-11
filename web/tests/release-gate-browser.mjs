@@ -71,7 +71,7 @@ const routeChecks = [
   ["/content-policy", 200, "Keep reading"],
   ["/submit", 200, "What this route does today"],
   ["/suggest", 200, "What this route does today"],
-  ["/auth", 200, "Account access unavailable"],
+  ["/auth", 404, "Page not found"],
   ["/collections/not-a-real-collection", 404, "Page not found"],
   ["/a-clearly-missing-route", 404, "Page not found"],
 ];
@@ -122,7 +122,7 @@ assert.match(
   /^Sitemap:\s*.+\/sitemap\.xml\s*$/imu,
   "/robots.txt sitemap",
 );
-for (const pathname of ["/auth", "/submit", "/suggest", "/boards", "/lab/"]) {
+for (const pathname of ["/submit", "/suggest", "/boards", "/lab/"]) {
   assert.match(
     robots,
     new RegExp(`^Disallow:\\s*${pathname.replaceAll("/", "\\/")}\\s*$`, "imu"),
@@ -378,12 +378,6 @@ const visualCases = [
   },
   { name: "about", path: "/about", selector: "#main-content article" },
   {
-    name: "auth",
-    path: "/auth",
-    selector: "[data-auth-shell=ready]",
-    auth: true,
-  },
-  {
     name: "contribution-guidance",
     path: "/submit",
     selector: "#main-content",
@@ -604,43 +598,6 @@ for (const [width, height] of viewports) {
         `Board local-only copy at ${width}`,
       );
       assert.equal(boardAudit.readyCopy, true, `Board ready state at ${width}`);
-    }
-
-    if (visualCase.auth) {
-      const authAudit = await evaluate(`(() => {
-        const shell = document.querySelector('[data-auth-shell=ready]');
-        const fieldset = shell?.querySelector('fieldset');
-        const controls = [...(fieldset?.querySelectorAll('button, input') ?? [])];
-        return {
-          configuration: shell?.getAttribute('data-auth-configuration'),
-          controlsDisabled:
-            controls.length === 3 && controls.every((control) => control.matches(':disabled')),
-          fieldsetDisabled: Boolean(fieldset?.disabled),
-          noSubmitCopy: document.body.textContent.includes(
-            'No sign-in request is sent from this page yet',
-          ),
-        };
-      })()`);
-      assert.equal(
-        authAudit.configuration,
-        "unconfigured",
-        `auth configuration at ${width}`,
-      );
-      assert.equal(
-        authAudit.fieldsetDisabled,
-        true,
-        `auth fieldset disabled at ${width}`,
-      );
-      assert.equal(
-        authAudit.controlsDisabled,
-        true,
-        `auth controls disabled at ${width}`,
-      );
-      assert.equal(
-        authAudit.noSubmitCopy,
-        true,
-        `auth no-submit copy at ${width}`,
-      );
     }
 
     const screenshot = await send("Page.captureScreenshot", {

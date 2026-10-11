@@ -40,7 +40,10 @@ test("Collection detail is an ordered research checklist with a truthful Board p
   assert.match(resourceList, /Decision prompt/);
   assert.match(resourceList, /onSavedChange=\{handleSavedChange\}/);
   assert.match(resourceList, /aria-live="polite"/);
-  assert.doesNotMatch(resourceList, /fetch\(|supabase|board/i);
+  assert.doesNotMatch(
+    resourceList,
+    /fetch\(|create(?:Browser|Server)?Client\(|board/i,
+  );
 });
 
 test("Collection-detail checklist recomposes and keeps focusable actions usable", async () => {

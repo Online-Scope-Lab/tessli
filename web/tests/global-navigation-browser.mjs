@@ -130,7 +130,10 @@ const desktop = await evaluate(`(() => {
     primary: primary.map((link) => [link.textContent.trim(), link.getAttribute('href')]),
     utilities: utilities.map((link) => [link.textContent.trim(), link.getAttribute('href')]),
     current: primary.filter((link) => link.getAttribute('aria-current') === 'page').map((link) => link.textContent.trim()),
-    authLinks: header.querySelectorAll('a[href^="/auth"]').length,
+    authLinks: [header, document.querySelector('footer')]
+      .flatMap((region) => Array.from(region?.querySelectorAll('a, button') ?? []))
+      .filter((control) => (control.getAttribute('href') ?? '').startsWith('/auth') || /sign[ -]?in|log[ -]?in/i.test(control.textContent))
+      .length,
     legacyLabels: /Explore|Resources|Full reference/.test(header.textContent),
     searchTarget: Boolean(document.querySelector('#browse-search')),
     overflow: document.documentElement.scrollWidth > document.documentElement.clientWidth + 1,
@@ -174,7 +177,9 @@ const mobileOpen = await evaluate(`(() => {
     primary: Array.from(sheet.querySelectorAll('nav[aria-label="Mobile primary navigation"] a')).map((link) => link.textContent.trim()),
     current: Array.from(sheet.querySelectorAll('nav[aria-label="Mobile primary navigation"] a[aria-current="page"]')).map((link) => link.textContent.trim()),
     utilities: Array.from(sheet.querySelectorAll('nav[aria-label="Mobile utilities"] a')).map((link) => link.textContent.trim().replace(/→/g, '').trim()),
-    authLinks: sheet.querySelectorAll('a[href^="/auth"]').length,
+    authLinks: Array.from(sheet.querySelectorAll('a, button'))
+      .filter((control) => (control.getAttribute('href') ?? '').startsWith('/auth') || /sign[ -]?in|log[ -]?in/i.test(control.textContent))
+      .length,
     bodyOverflow: document.body.style.overflow,
     contentInert: document.querySelector('[data-site-content]').inert,
     overflow: document.documentElement.scrollWidth > document.documentElement.clientWidth + 1,

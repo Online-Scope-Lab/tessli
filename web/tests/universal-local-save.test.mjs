@@ -47,5 +47,8 @@ test("universal Save remains local-only and does not expand into Boards or cloud
   const list = await read(
     "components/collection-resources/collection-resource-list.tsx",
   );
-  assert.doesNotMatch(list, /fetch\(|supabase|board|account/i);
+  assert.doesNotMatch(
+    list,
+    /fetch\(|create(?:Browser|Server)?Client\(|board|account/i,
+  );
 });

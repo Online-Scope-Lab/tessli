@@ -66,16 +66,28 @@ test("public header and footer promote only implemented routes", async () => {
 });
 
 test("unfinished and internal-lab routes are non-indexable", async () => {
-  const [auth, submit, suggest, lab] = await Promise.all([
-    read("app/auth/page.tsx"),
+  const [submit, suggest, lab] = await Promise.all([
     read("app/submit/page.tsx"),
     read("app/suggest/page.tsx"),
     read("app/lab/page.tsx"),
   ]);
 
-  for (const route of [auth, submit, suggest, lab]) {
+  for (const route of [submit, suggest, lab]) {
     assert.match(route, /index: false/);
     assert.match(route, /follow: false/);
+  }
+});
+
+test("the account route, auth shell and session proxy are removed", async () => {
+  for (const removed of [
+    "app/auth",
+    "components/auth-shell",
+    "proxy.ts",
+    "middleware.ts",
+  ]) {
+    await assert.rejects(access(path.join(webRoot, removed)), {
+      code: "ENOENT",
+    });
   }
 });
 

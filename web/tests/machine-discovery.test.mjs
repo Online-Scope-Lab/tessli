@@ -27,7 +27,7 @@ test("robots metadata advertises the sitemap and blocks unpublished routes", asy
   assert.match(robots, /sitemap/i);
   assert.match(robots, /sitemap\.xml/);
 
-  for (const pathname of ["/auth", "/submit", "/suggest", "/boards", "/lab/"]) {
+  for (const pathname of ["/submit", "/suggest", "/boards", "/lab/"]) {
     assert.match(robots, quotedPath(pathname), `robots disallows ${pathname}`);
   }
 });
