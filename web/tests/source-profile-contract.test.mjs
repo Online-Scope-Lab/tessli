@@ -375,6 +375,14 @@ test("an archived source page shows its reason and a non-archived replacement", 
     actions.indexOf(") : ("),
   );
   assert.match(archivedBranch, /Original address/);
+  const guide = fs.readFileSync(
+    path.join(__dirname, "../components/source-detail/intelligence-detail.tsx"),
+    "utf8",
+  );
+  assert.match(
+    guide,
+    /profile\.status === "archived" \?[\s\S]*?no longer recommends an access\s+route/,
+  );
   assert.doesNotMatch(archivedBranch, /buttonClassName|Visit source/);
 });
 

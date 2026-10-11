@@ -108,7 +108,7 @@ Source Guide composition follows this fixed reading hierarchy:
 
 The component family must degrade honestly for thinly described sources and omit unsupported optional fields. Coverage levels, evidence records, governance and verification mechanics are not shown on the Source Guide in v1.2.
 
-An archived source keeps its Source Guide for old links, marked `noindex`. It shows an "Archived: <reason>" notice under the purpose, links the replacing source when one is recorded, and shows the provider address as a quiet text link instead of the Visit button.
+An archived source keeps its Source Guide for old links, marked `noindex`. It shows an "Archived: <reason>" notice under the purpose, links the replacing source when one is recorded, shows the provider address as a quiet text link instead of the Visit button, and recommends no access route.
 
 ## 8. Collection card and stage item
 

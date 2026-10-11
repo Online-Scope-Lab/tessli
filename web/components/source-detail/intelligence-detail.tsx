@@ -77,27 +77,34 @@ export function IntelligenceDetail({
       </GuideSection>
 
       <GuideSection title="How to access it">
-        <ul className={styles.accessRoutes}>
-          {profile.accessRoutes.map((route) => (
-            <li key={`${route.kind}-${route.url ?? route.agentAction}`}>
-              <div>
-                <strong>{label(route.kind)}</strong>
-                {route.preferred ? (
-                  <Tag tone="signal">Preferred route</Tag>
+        {profile.status === "archived" ? (
+          <p className={styles.emptyNote}>
+            This source is archived, so Tessli no longer recommends an access
+            route. Its original address is listed above.
+          </p>
+        ) : (
+          <ul className={styles.accessRoutes}>
+            {profile.accessRoutes.map((route) => (
+              <li key={`${route.kind}-${route.url ?? route.agentAction}`}>
+                <div>
+                  <strong>{label(route.kind)}</strong>
+                  {route.preferred ? (
+                    <Tag tone="signal">Preferred route</Tag>
+                  ) : null}
+                </div>
+                <p>{route.agentAction}</p>
+                <p className={styles.routeMeta}>
+                  {accessRequirement(route.auth)}
+                </p>
+                {route.url ? (
+                  <a href={route.url} rel="noopener noreferrer" target="_blank">
+                    Open recorded {label(route.kind)} ↗
+                  </a>
                 ) : null}
-              </div>
-              <p>{route.agentAction}</p>
-              <p className={styles.routeMeta}>
-                {accessRequirement(route.auth)}
-              </p>
-              {route.url ? (
-                <a href={route.url} rel="noopener noreferrer" target="_blank">
-                  Open recorded {label(route.kind)} ↗
-                </a>
-              ) : null}
-            </li>
-          ))}
-        </ul>
+              </li>
+            ))}
+          </ul>
+        )}
       </GuideSection>
 
       {compatibility.length > 0 ? (
