@@ -7,7 +7,8 @@ kind: gallery
 access: free
 summary: Recent web, interface, and interaction design
 status: archived
-archived_reason: "Triage score 10/18 (keep threshold 14): unclear scope and activity; low signal"
+archived_reason: "Triage score 10/18 (keep threshold 14): unclear scope and activity; low signal. Since 2026-10 it is Godly's new home (godly.website redirects here), listed under godly"
+replaced_by: godly
 added_at: 2026-07-22
 added_via: curator
 last_checked: null

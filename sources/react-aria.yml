@@ -6,7 +6,7 @@ category: ui-libraries
 kind: library
 access: open-source
 summary: Accessible hooks and components for React applications
-status: needs-review
+status: active
 added_at: 2026-07-22
 added_via: curator
 last_checked: null

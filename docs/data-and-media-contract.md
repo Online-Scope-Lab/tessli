@@ -10,8 +10,8 @@ Every source is one YAML file, `sources/<slug>.yml`, validated by [`schemas/sour
 # sources/godly.yml, as committed
 id: resource-169e5a48b03e # frozen; never derived from the URL, never changed
 slug: godly # must equal the file name
-name: Godly
-url: https://godly.website
+name: Recent.Design (formerly Godly)
+url: https://recent.design
 category: website-inspiration # one of the category ids below
 kind: gallery # gallery | library | design-system | tool | asset | reference
 access: free # free | open-source | freemium | paid | free-trial

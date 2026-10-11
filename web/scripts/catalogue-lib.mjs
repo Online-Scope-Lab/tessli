@@ -413,7 +413,12 @@ export function composeCatalogue(
     const urlKey = normalizedUrlKey(data.url);
     urlOccurrences.set(urlKey, [
       ...(urlOccurrences.get(urlKey) ?? []),
-      { file, name: data.name },
+      {
+        file,
+        name: data.name,
+        slug: data.slug,
+        replacedBy: data.status === "archived" ? data.replaced_by : undefined,
+      },
     ]);
     if (data.status !== "archived") {
       const domain = domainFromUrl(data.url);
@@ -424,9 +429,19 @@ export function composeCatalogue(
     }
   }
 
+  // An archived source may share its URL with the source that replaced it
+  // (for example a site that rebranded and now redirects to its successor).
   const duplicateUrls = [...urlOccurrences.entries()]
-    .filter(([, entries]) => entries.length > 1)
-    .map(([url, entries]) => ({ url, entries }));
+    .map(([url, entries]) => {
+      const slugs = new Set(entries.map((entry) => entry.slug));
+      return {
+        url,
+        entries: entries
+          .filter((entry) => !slugs.has(entry.replacedBy))
+          .map(({ file, name }) => ({ file, name })),
+      };
+    })
+    .filter(({ entries }) => entries.length > 1);
   for (const duplicate of duplicateUrls) {
     errors.push(
       issue(

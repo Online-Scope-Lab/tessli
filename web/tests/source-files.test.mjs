@@ -233,6 +233,21 @@ test("IDs, URLs and replacements keep referential integrity", async () => {
   ]);
   assert.ok(errorCodes(duplicateUrl).includes("duplicate-url"));
 
+  // An archived source may keep the URL it now redirects to when it names
+  // the source at that URL as its replacement.
+  const redirectedToSuccessor = await compose([
+    sourceFile(),
+    sourceFile({
+      id: "resource-fixture-b",
+      slug: "fixture-b",
+      url: "https://www.fixture-a.example/",
+      status: "archived",
+      archived_reason: "Rebranded as Fixture A.",
+      replaced_by: "fixture-a",
+    }),
+  ]);
+  assert.ok(!errorCodes(redirectedToSuccessor).includes("duplicate-url"));
+
   const unknownReplacement = await compose([
     sourceFile({
       status: "archived",

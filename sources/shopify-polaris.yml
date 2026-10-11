@@ -1,12 +1,12 @@
 id: resource-ea00ff19bb49
 slug: shopify-polaris
 name: Shopify Polaris
-url: https://polaris.shopify.com
+url: https://shopify.dev/docs/api/app-home/web-components
 category: design-systems
 kind: design-system
 access: open-source
 summary: Shopify's product design system for commerce interfaces
-status: needs-review
+status: active
 added_at: 2026-07-22
 added_via: curator
 last_checked: null

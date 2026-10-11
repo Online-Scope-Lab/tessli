@@ -6,7 +6,7 @@ category: design-tools-ai
 kind: tool
 access: freemium
 summary: AI generation of React interfaces and applications
-status: needs-review
+status: active
 added_at: 2026-07-22
 added_via: curator
 last_checked: null
