@@ -518,7 +518,7 @@ test("collection pages drop archived members and hide emptied stages", () => {
   assert.equal(collection.resources.length, 2);
 });
 
-test("the MCP collection tool drops archived members from sources, stages and counts", () => {
+test("the MCP collection tool drops archived members and archive-emptied stages", () => {
   const index = createSourceProfileIndex(fixtures);
   const output = createNativeCollection(fixtureCollection, index.get);
 
@@ -538,7 +538,6 @@ test("the MCP collection tool drops archived members from sources, stages and co
     ]),
     [
       ["look", ["fixture-active"]],
-      ["gone", []],
       ["review", ["fixture-review"]],
     ],
   );

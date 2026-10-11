@@ -207,22 +207,28 @@ export function createNativeCollection(
       order: index + 1,
       ...toSourceGuide(requireProfile(resourceId)),
     })),
-    stages: collection.stages.map((stage) => ({
-      id: stage.id,
-      title: stage.title,
-      inspect: stage.inspect,
-      decision: stage.decision,
-      sources: stage.items
-        .filter((item) => resourceIds.includes(item.resourceId))
-        .map((item) => {
-          const source = requireProfile(item.resourceId);
-          return {
-            sourceId: source.id,
-            sourceSlug: source.slug,
-            role: item.role,
-          };
-        }),
-    })),
+    // Stages whose members are all archived are hidden, as on the website.
+    // Stages emptied only by the source limit stay listed.
+    stages: collection.stages
+      .filter((stage) =>
+        stage.items.some((item) => isBrowsableResource(item.resourceId)),
+      )
+      .map((stage) => ({
+        id: stage.id,
+        title: stage.title,
+        inspect: stage.inspect,
+        decision: stage.decision,
+        sources: stage.items
+          .filter((item) => resourceIds.includes(item.resourceId))
+          .map((item) => {
+            const source = requireProfile(item.resourceId);
+            return {
+              sourceId: source.id,
+              sourceSlug: source.slug,
+              role: item.role,
+            };
+          }),
+      })),
     boundary:
       "Collection roles and source guidance are repository-recorded; provider access remains outside Tessli.",
   };
