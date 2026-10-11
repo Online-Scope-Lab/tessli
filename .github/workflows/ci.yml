@@ -108,7 +108,11 @@ jobs:
           # runner can take longer, so wait here (up to 60s) before starting them.
           cdp_ready=false
           for attempt in $(seq 1 60); do
-            if curl --fail --silent http://127.0.0.1:9222/json/list | grep -q '"type": *"page"'; then
+            # Write to a file rather than piping into grep -q: under pipefail an early
+            # grep exit can SIGPIPE curl into a false miss. --max-time stops a hung
+            # connection from stalling the loop.
+            if curl --fail --silent --max-time 2 http://127.0.0.1:9222/json/list -o "$RUNNER_TEMP/cdp.json" &&
+              grep -q '"type": *"page"' "$RUNNER_TEMP/cdp.json"; then
               cdp_ready=true
               break
             fi

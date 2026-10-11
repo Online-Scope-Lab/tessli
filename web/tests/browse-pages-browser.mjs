@@ -72,19 +72,49 @@ async function evaluate(expression) {
   return response.result.value;
 }
 
+// Polling right after Page.navigate can land on the document swap, which CDP
+// rejects with a transient error. Treat that as "not ready yet"; the waitFor
+// deadline still bounds the wait, and its timeout reports the last such error.
+const transientNavigationError =
+  /Inspected target navigated or closed|Execution context was destroyed|Cannot find context with specified id|Cannot find default execution context|Promise was collected/;
+let lastTransientError = null;
+
+async function evaluateSettled(expression) {
+  try {
+    return await evaluate(expression);
+  } catch (error) {
+    if (transientNavigationError.test(error.message)) {
+      lastTransientError = error.message;
+      return false;
+    }
+    throw error;
+  }
+}
+
 async function waitFor(expression, label, timeout = 10_000) {
   const deadline = Date.now() + timeout;
+  lastTransientError = null;
   while (Date.now() < deadline) {
-    if (await evaluate(expression)) return;
+    if (await evaluateSettled(expression)) return;
     await delay(75);
   }
-  throw new Error(`Timed out waiting for ${label}.`);
+  throw new Error(
+    `Timed out waiting for ${label}.${lastTransientError ? ` Last transient CDP error: ${lastTransientError}` : ""}`,
+  );
+}
+
+// Page.navigate returns before the old document is gone, so a readiness check
+// could pass against it. Mark the current document first; readiness checks
+// then require !window.__tessliStale, which only a new document satisfies.
+async function markDocumentStale() {
+  await waitFor("window.__tessliStale = true", "stale-document marker");
 }
 
 async function navigate(pathname) {
+  await markDocumentStale();
   await send("Page.navigate", { url: `${origin}${pathname}` });
   await waitFor(
-    `document.readyState === "complete" && Boolean(document.querySelector('[data-browse-view]'))`,
+    `!window.__tessliStale && document.readyState === "complete" && Boolean(document.querySelector('[data-browse-view]'))`,
     pathname,
   );
 }
@@ -231,9 +261,10 @@ for (const [width, height] of [
   );
 }
 
+await markDocumentStale();
 await send("Page.navigate", { url: `${origin}/resources?sort=verified` });
 await waitFor(
-  `document.readyState === "complete" && Boolean(document.querySelector('[data-browse-view=cards]'))`,
+  `!window.__tessliStale && document.readyState === "complete" && Boolean(document.querySelector('[data-browse-view=cards]'))`,
   "legacy verification sort",
 );
 assert.equal(
@@ -245,9 +276,10 @@ assert.equal(
   "curated",
 );
 
+await markDocumentStale();
 await send("Page.navigate", { url: `${origin}/resources/designindex` });
 await waitFor(
-  `document.readyState === "complete" && Boolean(document.querySelector('[data-source-detail=designindex]'))`,
+  `!window.__tessliStale && document.readyState === "complete" && Boolean(document.querySelector('[data-source-detail=designindex]'))`,
   "internal source profile",
 );
 assert.equal(

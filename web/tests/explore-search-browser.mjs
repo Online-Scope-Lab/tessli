@@ -82,18 +82,47 @@ async function evaluate(expression) {
   return response.result.value;
 }
 
+// Polling right after Page.navigate can land on the document swap, which CDP
+// rejects with a transient error. Treat that as "not ready yet"; the waitFor
+// deadline still bounds the wait, and its timeout reports the last such error.
+const transientNavigationError =
+  /Inspected target navigated or closed|Execution context was destroyed|Cannot find context with specified id|Cannot find default execution context|Promise was collected/;
+let lastTransientError = null;
+
+async function evaluateSettled(expression) {
+  try {
+    return await evaluate(expression);
+  } catch (error) {
+    if (transientNavigationError.test(error.message)) {
+      lastTransientError = error.message;
+      return false;
+    }
+    throw error;
+  }
+}
+
 async function waitFor(expression, label) {
   const deadline = Date.now() + 5_000;
+  lastTransientError = null;
 
   while (Date.now() < deadline) {
-    if (await evaluate(expression)) {
+    if (await evaluateSettled(expression)) {
       return;
     }
 
     await delay(50);
   }
 
-  throw new Error(`Timed out waiting for ${label}.`);
+  throw new Error(
+    `Timed out waiting for ${label}.${lastTransientError ? ` Last transient CDP error: ${lastTransientError}` : ""}`,
+  );
+}
+
+// Page.navigate returns before the old document is gone, so a readiness check
+// could pass against it. Mark the current document first; readiness checks
+// then require !window.__tessliStale, which only a new document satisfies.
+async function markDocumentStale() {
+  await waitFor("window.__tessliStale = true", "stale-document marker");
 }
 
 async function pressKey({ code, key, modifiers = 0, virtualKeyCode }) {
@@ -125,9 +154,10 @@ async function pressKeyUntil(keyOptions, expression, label) {
 
 await send("Page.enable");
 await send("Runtime.enable");
+await markDocumentStale();
 await send("Page.navigate", { url: pageUrl });
 await waitFor(
-  'document.readyState === "complete" && Boolean(document.querySelector("[data-explore-search-input]"))',
+  '!window.__tessliStale && document.readyState === "complete" && Boolean(document.querySelector("[data-explore-search-input]"))',
   "the Explore search input",
 );
 

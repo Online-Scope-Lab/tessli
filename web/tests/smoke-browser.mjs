@@ -475,13 +475,42 @@ async function evaluate(expression) {
   return response.result.value;
 }
 
+// Polling right after Page.navigate can land on the document swap, which CDP
+// rejects with a transient error. Treat that as "not ready yet"; the waitFor
+// deadline still bounds the wait, and its timeout reports the last such error.
+const transientNavigationError =
+  /Inspected target navigated or closed|Execution context was destroyed|Cannot find context with specified id|Cannot find default execution context|Promise was collected/;
+let lastTransientError = null;
+
+async function evaluateSettled(expression) {
+  try {
+    return await evaluate(expression);
+  } catch (error) {
+    if (transientNavigationError.test(error.message)) {
+      lastTransientError = error.message;
+      return false;
+    }
+    throw error;
+  }
+}
+
 async function waitFor(expression, label, timeout = 15_000) {
   const deadline = Date.now() + timeout;
+  lastTransientError = null;
   while (Date.now() < deadline) {
-    if (await evaluate(expression)) return;
+    if (await evaluateSettled(expression)) return;
     await delay(75);
   }
-  throw new Error(`Timed out waiting for ${label}.`);
+  throw new Error(
+    `Timed out waiting for ${label}.${lastTransientError ? ` Last transient CDP error: ${lastTransientError}` : ""}`,
+  );
+}
+
+// Page.navigate returns before the old document is gone, so a readiness check
+// could pass against it. Mark the current document first; readiness checks
+// then require !window.__tessliStale, which only a new document satisfies.
+async function markDocumentStale() {
+  await waitFor("window.__tessliStale = true", "stale-document marker");
 }
 
 await mkdir(outputDirectory, { recursive: true });
@@ -500,11 +529,10 @@ for (const { width, height, screenshot: capture = false } of widths) {
   for (const page of pages) {
     const label = `${page.path} at ${width}`;
     currentPage = { page, width };
-    // A marker on the old document proves the navigation replaced it.
-    await evaluate("window.__tessliSmokeStale = true");
+    await markDocumentStale();
     await send("Page.navigate", { url: `${origin}${page.path}` });
     await waitFor(
-      "!window.__tessliSmokeStale && document.readyState === 'complete'",
+      "!window.__tessliStale && document.readyState === 'complete'",
       `${label} document`,
     );
     await waitFor("document.fonts.status === 'loaded'", `${label} fonts`);
