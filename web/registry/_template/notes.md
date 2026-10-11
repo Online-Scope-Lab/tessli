@@ -1,6 +1,7 @@
 ---
 # TEMPLATE. Every field below is required unless marked optional. The schema
-# is schemas/library-item.schema.json; `npm run registry:check` validates it.
+# is schemas/library-item.schema.json. `npm run registry:build` (in web/)
+# validates it and fails on any example text left unchanged from this file.
 id: example-item # equals the folder name; never renamed
 kind: section # component | section | page
 category: features # hero | features | pricing | social-proof | faq | cta | settings | tables | dashboards | forms | auth | empty-states | navigation | mobile

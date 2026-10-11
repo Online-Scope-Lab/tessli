@@ -7,6 +7,8 @@
 import { readdir, readFile } from "node:fs/promises";
 import path from "node:path";
 
+import { formatSchemaErrors } from "./schema-messages.mjs";
+
 export const RULES_DIR = "rules";
 export const RULE_SCHEMA_PATH = "schemas/rule.schema.json";
 export const TESSLI_INDEX_FILE = "TESSLI.md";
@@ -42,23 +44,30 @@ function ruleOrder(a, b) {
   );
 }
 
-function schemaProblems(validate, label) {
-  return (validate.errors ?? []).map(
-    (error) =>
-      `${label}${error.instancePath || ""} ${error.message}${
-        error.keyword === "additionalProperties"
-          ? `: ${error.params.additionalProperty}`
-          : ""
-      }`,
-  );
+const RULE_REVIEW_HINT =
+  "Proposed rules leave `status: draft`, `reviewed_by: []` and `reviewed_at: null`; only a maintainer signs a rule reviewed, with their handle and the date.";
+
+function schemaProblems(validate, label, schema) {
+  return formatSchemaErrors(validate.errors, {
+    label,
+    schema,
+    schemaPath: RULE_SCHEMA_PATH,
+    rootName: "the frontmatter",
+    hints: {
+      status: RULE_REVIEW_HINT,
+      reviewed_by: RULE_REVIEW_HINT,
+      reviewed_at: RULE_REVIEW_HINT,
+    },
+  });
 }
 
 /**
  * Loads and validates every rule file.
  * @param {(text: string, label: string) => {frontmatter: object, body: string}} parse
+ * @param {object} [schema] the rule schema, for field descriptions in messages
  * @returns {Promise<{rules: object[], problems: string[]}>}
  */
-export async function loadRules(repoRoot, validate, parse) {
+export async function loadRules(repoRoot, validate, parse, schema) {
   const dir = path.join(repoRoot, RULES_DIR);
   const entries = await readdir(dir, { withFileTypes: true });
   const problems = [];
@@ -86,20 +95,20 @@ export async function loadRules(repoRoot, validate, parse) {
     }
     const { frontmatter, body } = parsed;
     if (!validate(frontmatter)) {
-      problems.push(...schemaProblems(validate, label));
+      problems.push(...schemaProblems(validate, label, schema));
       continue;
     }
     const id = entry.name.slice(0, -3);
     if (frontmatter.id !== id) {
       problems.push(
-        `${label}: id "${frontmatter.id}" must equal the file name "${id}".`,
+        `${label}: id "${frontmatter.id}" must equal the file name "${id}"; set \`id: ${id}\` or rename the file.`,
       );
       continue;
     }
     const prefix = prefixes.get(frontmatter.category);
     if (id.split("-")[0] !== prefix) {
       problems.push(
-        `${label}: a ${frontmatter.category} rule id starts with "${prefix}-".`,
+        `${label}: a ${frontmatter.category} rule id starts with "${prefix}-"; rename the file and its id to the next free ${prefix}-NN, or fix the category.`,
       );
       continue;
     }
@@ -130,7 +139,7 @@ export function itemRuleProblems(items, rules, itemsDir) {
     for (const id of item.notes.rules) {
       if (!ids.has(id)) {
         problems.push(
-          `${itemsDir}/${item.slug}/notes.md: rules lists ${id}, but ${RULES_DIR}/${id}.md does not exist.`,
+          `${itemsDir}/${item.slug}/notes.md: rules lists ${id}, but ${RULES_DIR}/${id}.md does not exist. Use an id from ${TESSLI_INDEX_PATH}.`,
         );
       }
     }

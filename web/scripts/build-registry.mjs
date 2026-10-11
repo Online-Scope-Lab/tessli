@@ -8,6 +8,7 @@ import path from "node:path";
 
 import {
   buildRegistry,
+  FIX_GUIDE,
   REPO_ROOT,
   RegistryError,
   staleGeneratedFiles,
@@ -20,8 +21,12 @@ try {
   result = await buildRegistry();
 } catch (error) {
   if (error instanceof RegistryError) {
-    console.error("Library registry is invalid:");
+    console.error(
+      `Library registry is invalid (${error.problems.length} problem${error.problems.length === 1 ? "" : "s"}):`,
+    );
     for (const problem of error.problems) console.error(`- ${problem}`);
+    console.error("");
+    for (const line of FIX_GUIDE) console.error(line);
     process.exit(1);
   }
   throw error;
@@ -44,7 +49,7 @@ if (check) {
   drift.push(...stale.map((file) => `${file} (no longer generated)`));
   if (drift.length) {
     console.error(
-      "Library registry drift. Run `npm run registry:build` in web/ and commit:",
+      "Library registry drift: these generated files do not match a fresh build. Run `npm run registry:build` in web/ and commit every file it changes:",
     );
     for (const file of drift) console.error(`- ${file}`);
     process.exit(1);

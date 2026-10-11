@@ -14,6 +14,7 @@ import Ajv2020 from "ajv/dist/2020.js";
 import * as prettier from "prettier";
 import { parse as parseYaml } from "yaml";
 
+import { formatSchemaErrors } from "./schema-messages.mjs";
 import {
   itemRuleProblems,
   loadRules,
@@ -33,10 +34,18 @@ export const WEB_ROOT = path.resolve(
 export const REPO_ROOT = path.resolve(WEB_ROOT, "..");
 
 export const ITEMS_DIR = "web/registry/items";
+export const TEMPLATE_DIR = "web/registry/_template";
+export const TEMPLATE_ITEM_FILE = "example-item.tsx";
 export const SHADCN_UI_DIR = "web/registry/shadcn/ui";
 export const SCHEMA_PATH = "schemas/library-item.schema.json";
 export const REGISTRY_PATH = "registry.json";
 export const PUBLIC_ITEMS_DIR = "web/public/r";
+/**
+ * The flat registry index served next to the item files, so a hosted
+ * `<origin>/r/{name}.json` registry (the shadcn directory format) resolves
+ * `registry` too. Same content as the root registry.json.
+ */
+export const PUBLIC_REGISTRY_INDEX = `${PUBLIC_ITEMS_DIR}/registry.json`;
 export const LIBRARY_DATA_PATH = "web/data/library.json";
 export const PREVIEW_INDEX_PATH = "web/registry/__index__.tsx";
 
@@ -75,6 +84,31 @@ const SHADCN_UI_IMPORT = /^@\/registry\/shadcn\/ui\/([a-z0-9-]+)$/u;
 const SHADCN_UTILS_IMPORT = "@/registry/shadcn/lib/utils";
 const BUILTIN_PACKAGES = new Set(["react", "react-dom"]);
 
+/** Where a contributor reads how to fix a problem the build reports. */
+export const FIX_GUIDE = [
+  "Fix each problem above, then run `npm run registry:build` again (in web/).",
+  `The full field list is ${SCHEMA_PATH}; a filled-in example is web/registry/items/pricing-tiers/.`,
+  'Step by step: CONTRIBUTING.md, "Contribute an item".',
+];
+
+/** Advice for rules the item schema can only express with if/then/else. */
+const ITEM_HINTS = {
+  status:
+    "Contributors leave `status: community`, `reviewed_by: []` and `reviewed_at: null`; only a maintainer signs an item reviewed, with their handle and the date.",
+  reviewed_by:
+    "Contributors leave `status: community`, `reviewed_by: []` and `reviewed_at: null`; only a maintainer signs an item reviewed, with their handle and the date.",
+  reviewed_at:
+    "Contributors leave `status: community`, `reviewed_by: []` and `reviewed_at: null`; only a maintainer signs an item reviewed, with their handle and the date.",
+  source_url:
+    "Adapted work names where it came from (`source_url`) and its licence (`source_license`).",
+  source_license:
+    "Adapted work names where it came from (`source_url`) and its licence (`source_license`).",
+  "#/allOf/1/else/not":
+    "`source_url` and `source_license` are only for `provenance: adapted`; remove them for original work.",
+  rules: "List 3–8 existing rule ids such as H-01 (see rules/TESSLI.md).",
+  contributors: "GitHub handles without the @.",
+};
+
 export class RegistryError extends Error {
   constructor(problems) {
     super(problems.join("\n"));
@@ -100,6 +134,7 @@ function validHttpUrl(value) {
 export function compileItemSchema(schema) {
   const ajv = new Ajv2020({
     allErrors: true,
+    verbose: true,
     formats: { date: validIsoDate, uri: validHttpUrl },
   });
   return ajv.compile(schema);
@@ -137,15 +172,14 @@ export function parseNotes(text, label) {
   return { frontmatter: trimStrings(frontmatter), body: match[2].trim() };
 }
 
-function schemaProblems(validate, label) {
-  return (validate.errors ?? []).map(
-    (error) =>
-      `${label}${error.instancePath || ""} ${error.message}${
-        error.keyword === "additionalProperties"
-          ? `: ${error.params.additionalProperty}`
-          : ""
-      }`,
-  );
+function schemaProblems(validate, label, schema) {
+  return formatSchemaErrors(validate.errors, {
+    label,
+    schema,
+    schemaPath: SCHEMA_PATH,
+    hints: ITEM_HINTS,
+    rootName: "the frontmatter",
+  });
 }
 
 /** Module specifiers of static imports and re-exports. */
@@ -171,17 +205,17 @@ async function exists(file) {
   }
 }
 
-async function analyseItemImports(source, label, webDependencies) {
+async function analyseItemImports(source, label, webDependencies, repoRoot) {
   const problems = [];
   const registryDependencies = new Set();
   const dependencies = new Set();
   for (const specifier of importSpecifiers(source)) {
     const ui = SHADCN_UI_IMPORT.exec(specifier);
     if (ui) {
-      const file = path.join(REPO_ROOT, SHADCN_UI_DIR, `${ui[1]}.tsx`);
+      const file = path.join(repoRoot, SHADCN_UI_DIR, `${ui[1]}.tsx`);
       if (!(await exists(file))) {
         problems.push(
-          `${label}: imports ${specifier}, but ${SHADCN_UI_DIR}/${ui[1]}.tsx is not vendored.`,
+          `${label}: imports ${specifier}, but ${SHADCN_UI_DIR}/${ui[1]}.tsx is not vendored. Copy the primitive from shadcn/ui (https://ui.shadcn.com/docs/components/${ui[1]}) into ${SHADCN_UI_DIR}/ in the same PR, or use one that is already there.`,
         );
       }
       registryDependencies.add(ui[1]);
@@ -198,7 +232,7 @@ async function analyseItemImports(source, label, webDependencies) {
     if (BUILTIN_PACKAGES.has(name)) continue;
     if (!webDependencies.has(name)) {
       problems.push(
-        `${label}: imports the package ${name}, which is not a dependency of web/package.json.`,
+        `${label}: imports the package ${name}, which is not a dependency of web/package.json. Use what web/package.json already has, or add ${name} there with a one-line reason in the PR description.`,
       );
     }
     dependencies.add(name);
@@ -218,24 +252,97 @@ function statesExportKeys(source) {
   ].map((match) => match[1] ?? match[2]);
 }
 
-async function loadItem(slug, validate, webDependencies) {
-  const dir = path.join(REPO_ROOT, ITEMS_DIR, slug);
+/**
+ * Values copied unchanged from web/registry/_template/notes.md. A field that
+ * still holds one was not filled in.
+ */
+function templatePlaceholders(frontmatter, body, template, label) {
+  if (!template) return [];
+  const problems = [];
+  const fields = [
+    "title",
+    "summary",
+    "use_when",
+    "avoid_when",
+    "ai_default",
+    "why_this_is_better",
+    "failures",
+    "a11y",
+  ];
+  const same = (value, templateValue) =>
+    JSON.stringify(value) === JSON.stringify(templateValue);
+  for (const field of fields) {
+    const value = frontmatter[field];
+    const templateValue = template.frontmatter[field];
+    const copied = Array.isArray(value)
+      ? value.some((entry) => templateValue?.includes(entry))
+      : same(value, templateValue);
+    if (copied) {
+      problems.push(
+        `${label}/notes.md: \`${field}\` still has the template's example text; describe this item.`,
+      );
+    }
+  }
+  for (const side of ["desktop", "mobile"]) {
+    if (
+      frontmatter.responsive?.[side] === template.frontmatter.responsive?.[side]
+    ) {
+      problems.push(
+        `${label}/notes.md: \`responsive.${side}\` still has the template's example text; describe this item.`,
+      );
+    }
+  }
+  for (const handle of template.frontmatter.contributors ?? []) {
+    if (frontmatter.contributors.includes(handle)) {
+      problems.push(
+        `${label}/notes.md: \`contributors\` still lists the placeholder "${handle}"; put your GitHub handle (and the designer's, if you built a submitted design).`,
+      );
+    }
+  }
+  if (body === template.body) {
+    problems.push(
+      `${label}/notes.md: the prose after the frontmatter is still the template's; explain this item in a few short paragraphs.`,
+    );
+  }
+  return problems;
+}
+
+async function loadItem(slug, validate, webDependencies, context) {
+  const { repoRoot, template, schema } = context;
+  const dir = path.join(repoRoot, ITEMS_DIR, slug);
   const label = `${ITEMS_DIR}/${slug}`;
   const problems = [];
 
   if (!SLUG_PATTERN.test(slug)) {
-    return { problems: [`${label}: folder name must be a lowercase slug.`] };
+    return {
+      problems: [
+        `${label}: the folder name must be a lowercase, hyphenated slug such as "pricing-tiers"; rename the folder.`,
+      ],
+    };
   }
 
   const files = (await readdir(dir)).sort();
   const itemFile = `${slug}.tsx`;
   const allowed = new Set([itemFile, ...REQUIRED_FILES, ...OPTIONAL_FILES]);
+  const keptTemplateFile =
+    !files.includes(itemFile) && files.includes(TEMPLATE_ITEM_FILE);
   for (const required of [itemFile, ...REQUIRED_FILES]) {
-    if (!files.includes(required))
-      problems.push(`${label}: missing ${required}.`);
+    if (files.includes(required)) continue;
+    if (required === itemFile && keptTemplateFile) {
+      problems.push(
+        `${label}: missing ${itemFile}. Rename ${TEMPLATE_ITEM_FILE} to ${itemFile} and update the "./example-item" imports in demo.tsx and states.tsx.`,
+      );
+    } else {
+      problems.push(
+        `${label}: missing ${required}. Copy it from ${TEMPLATE_DIR}/.`,
+      );
+    }
   }
   for (const file of files) {
-    if (!allowed.has(file)) {
+    if (
+      !allowed.has(file) &&
+      !(keptTemplateFile && file === TEMPLATE_ITEM_FILE)
+    ) {
       problems.push(
         `${label}: unexpected file ${file}. An item folder holds ${itemFile}, demo.tsx, notes.md and optionally states.tsx and default.png.`,
       );
@@ -255,14 +362,15 @@ async function loadItem(slug, validate, webDependencies) {
   }
   const { frontmatter, body } = notes;
   if (!validate(frontmatter)) {
-    problems.push(...schemaProblems(validate, `${label}/notes.md`));
+    problems.push(...schemaProblems(validate, `${label}/notes.md`, schema));
     return { problems };
   }
   if (frontmatter.id !== slug) {
     problems.push(
-      `${label}/notes.md: id "${frontmatter.id}" must equal the folder name "${slug}".`,
+      `${label}/notes.md: id "${frontmatter.id}" must equal the folder name "${slug}"; set \`id: ${slug}\`.`,
     );
   }
+  problems.push(...templatePlaceholders(frontmatter, body, template, label));
   if (!body) {
     problems.push(
       `${label}/notes.md: add a short prose explanation after the frontmatter.`,
@@ -273,7 +381,7 @@ async function loadItem(slug, validate, webDependencies) {
   const hasStatesFile = files.includes("states.tsx");
   if (extraStates.length && !hasStatesFile) {
     problems.push(
-      `${label}: notes.md lists states ${extraStates.join(", ")}, so states.tsx must export them.`,
+      `${label}: notes.md lists states ${extraStates.join(", ")}, so states.tsx must export them (\`export const states = { "${extraStates[0]}": Component }\`; see ${TEMPLATE_DIR}/states.tsx). With one state, list only that state.`,
     );
   }
   if (hasStatesFile) {
@@ -282,14 +390,14 @@ async function loadItem(slug, validate, webDependencies) {
     );
     if (!keys) {
       problems.push(
-        `${label}/states.tsx: must export \`const states = { … }\` keyed by state name.`,
+        `${label}/states.tsx: must export \`const states = { … }\` keyed by state name (see ${TEMPLATE_DIR}/states.tsx), or be deleted if the item has one state.`,
       );
     } else {
       const expected = [...extraStates].sort().join(", ");
       const actual = [...keys].sort().join(", ");
       if (expected !== actual) {
         problems.push(
-          `${label}/states.tsx: exports states [${actual}], but notes.md lists [${expected}] after the first state.`,
+          `${label}/states.tsx: exports states [${actual}], but notes.md lists [${expected}] after the first state. Make the \`states\` keys in states.tsx and the names after the first in notes.md \`states\` match.`,
         );
       }
     }
@@ -300,6 +408,7 @@ async function loadItem(slug, validate, webDependencies) {
     source,
     `${label}/${itemFile}`,
     webDependencies,
+    repoRoot,
   );
   problems.push(...analysis.problems);
 
@@ -389,29 +498,45 @@ async function formatted(text, filepath) {
   return prettier.format(text, { ...options, filepath });
 }
 
+async function readTemplate(repoRoot) {
+  try {
+    return parseNotes(
+      await readFile(path.join(repoRoot, TEMPLATE_DIR, "notes.md"), "utf8"),
+      `${TEMPLATE_DIR}/notes.md`,
+    );
+  } catch (error) {
+    if (error?.code === "ENOENT") return null;
+    throw error;
+  }
+}
+
 /**
  * Builds every generated file in memory.
+ * @param {{repoRoot?: string}} [options] repoRoot defaults to this checkout;
+ *   tests pass a temporary copy to exercise contributor mistakes.
  * @returns {Promise<{files: Map<string, string>, items: object[], rules: object[]}>} repo-relative path → contents
  */
-export async function buildRegistry() {
+export async function buildRegistry({ repoRoot = REPO_ROOT } = {}) {
   const schema = JSON.parse(
-    await readFile(path.join(REPO_ROOT, SCHEMA_PATH), "utf8"),
+    await readFile(path.join(repoRoot, SCHEMA_PATH), "utf8"),
   );
   const validate = compileItemSchema(schema);
   const ruleSchema = JSON.parse(
-    await readFile(path.join(REPO_ROOT, RULE_SCHEMA_PATH), "utf8"),
+    await readFile(path.join(repoRoot, RULE_SCHEMA_PATH), "utf8"),
   );
   const ruleLoad = await loadRules(
-    REPO_ROOT,
+    repoRoot,
     compileItemSchema(ruleSchema),
     parseNotes,
+    ruleSchema,
   );
   const webPackage = JSON.parse(
-    await readFile(path.join(WEB_ROOT, "package.json"), "utf8"),
+    await readFile(path.join(repoRoot, "web/package.json"), "utf8"),
   );
   const webDependencies = new Set(Object.keys(webPackage.dependencies ?? {}));
+  const context = { repoRoot, schema, template: await readTemplate(repoRoot) };
 
-  const entries = await readdir(path.join(REPO_ROOT, ITEMS_DIR), {
+  const entries = await readdir(path.join(repoRoot, ITEMS_DIR), {
     withFileTypes: true,
   });
   const slugs = entries
@@ -426,16 +551,18 @@ export async function buildRegistry() {
   );
   const items = [];
   for (const slug of slugs) {
-    const result = await loadItem(slug, validate, webDependencies);
+    const result = await loadItem(slug, validate, webDependencies, context);
     problems.push(...result.problems);
     if (result.item) items.push(result.item);
   }
   const { rules } = ruleLoad;
   const rulesName = rulesRegistryItem(rules, SITE_ORIGIN).name;
-  if (slugs.includes(rulesName)) {
-    problems.push(
-      `${ITEMS_DIR}/${rulesName}: "${rulesName}" is reserved for the rules registry item.`,
-    );
+  for (const reserved of [rulesName, "registry"]) {
+    if (slugs.includes(reserved)) {
+      problems.push(
+        `${ITEMS_DIR}/${reserved}: "${reserved}" is a reserved registry name; choose another slug.`,
+      );
+    }
   }
   problems.push(
     ...ruleLoad.problems,
@@ -454,18 +581,19 @@ export async function buildRegistry() {
   const rulesItem = rulesRegistryItem(rules, SITE_ORIGIN);
   const files = new Map();
 
+  const registryIndex = {
+    $schema: "https://ui.shadcn.com/schema/registry.json",
+    name: REGISTRY_NAME,
+    homepage: `${SITE_ORIGIN}/library`,
+    items: [...registryItems, rulesItem],
+  };
+  files.set(REGISTRY_PATH, `${JSON.stringify(registryIndex, null, 2)}\n`);
   files.set(
-    REGISTRY_PATH,
-    `${JSON.stringify(
-      {
-        $schema: "https://ui.shadcn.com/schema/registry.json",
-        name: REGISTRY_NAME,
-        homepage: `${SITE_ORIGIN}/library`,
-        items: [...registryItems, rulesItem],
-      },
-      null,
-      2,
-    )}\n`,
+    PUBLIC_REGISTRY_INDEX,
+    await formatted(
+      JSON.stringify(registryIndex),
+      path.join(repoRoot, PUBLIC_REGISTRY_INDEX),
+    ),
   );
 
   for (const [index, item] of items.entries()) {
@@ -481,7 +609,7 @@ export async function buildRegistry() {
     const target = `${PUBLIC_ITEMS_DIR}/${item.slug}.json`;
     files.set(
       target,
-      await formatted(JSON.stringify(publicItem), path.join(REPO_ROOT, target)),
+      await formatted(JSON.stringify(publicItem), path.join(repoRoot, target)),
     );
   }
 
@@ -494,7 +622,7 @@ export async function buildRegistry() {
         ...rulesItem,
         files: rulesItem.files.map((file) => ({ ...file, content: index })),
       }),
-      path.join(REPO_ROOT, rulesTarget),
+      path.join(repoRoot, rulesTarget),
     ),
   );
   files.set(TESSLI_INDEX_PATH, index);
@@ -502,7 +630,7 @@ export async function buildRegistry() {
     RULES_DATA_PATH,
     await formatted(
       JSON.stringify(rulesData(rules, items, index)),
-      path.join(REPO_ROOT, RULES_DATA_PATH),
+      path.join(repoRoot, RULES_DATA_PATH),
     ),
   );
 
@@ -529,7 +657,7 @@ export async function buildRegistry() {
     LIBRARY_DATA_PATH,
     await formatted(
       JSON.stringify(library),
-      path.join(REPO_ROOT, LIBRARY_DATA_PATH),
+      path.join(repoRoot, LIBRARY_DATA_PATH),
     ),
   );
 
@@ -537,7 +665,7 @@ export async function buildRegistry() {
     PREVIEW_INDEX_PATH,
     await formatted(
       previewIndexSource(items),
-      path.join(REPO_ROOT, PREVIEW_INDEX_PATH),
+      path.join(repoRoot, PREVIEW_INDEX_PATH),
     ),
   );
 

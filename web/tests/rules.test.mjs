@@ -156,7 +156,7 @@ test("every item applies 3-8 rules that exist", () => {
   }
   const broken = [{ slug: "demo", notes: { rules: ["H-01", "Z-99"] } }];
   assert.deepEqual(itemRuleProblems(broken, rules, "web/registry/items"), [
-    "web/registry/items/demo/notes.md: rules lists Z-99, but rules/Z-99.md does not exist.",
+    "web/registry/items/demo/notes.md: rules lists Z-99, but rules/Z-99.md does not exist. Use an id from rules/TESSLI.md.",
   ]);
 });
 

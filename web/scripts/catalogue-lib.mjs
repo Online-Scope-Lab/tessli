@@ -6,6 +6,8 @@ import { fileURLToPath } from "node:url";
 import Ajv2020 from "ajv/dist/2020.js";
 import { parse as parseYaml } from "yaml";
 
+import { formatSchemaErrors } from "./schema-messages.mjs";
+
 /** One YAML file per source: sources/<slug>.yml. */
 export const SOURCES_DIR = "sources";
 export const SOURCE_SCHEMA_PATH = "schemas/source.schema.json";
@@ -16,6 +18,24 @@ export const CATALOGUE_PATH = "web/data/catalogue.json";
 export const REPORT_PATH = "web/data/catalogue-validation.json";
 
 const SOURCE_FILE_PATTERN = /^([a-z0-9]+(?:-[a-z0-9]+)*)\.yml$/u;
+
+/** Where a contributor reads how to fix a catalogue error. */
+export const CATALOGUE_FIX_GUIDE = [
+  "Fix each problem above, then run `npm run catalogue:generate` (in web/) and commit web/data/catalogue.json and web/data/catalogue-validation.json with your source file.",
+  `The full field list is ${SOURCE_SCHEMA_PATH}; step by step: CONTRIBUTING.md, "Add a source".`,
+];
+
+/** Advice for rules the source schema can only express with if/then/else. */
+const SOURCE_HINTS = {
+  archived_reason:
+    "An archived source needs `archived_reason`: one sentence on why it was archived.",
+  "#/allOf/0/else/not":
+    "`archived_reason` and `replaced_by` are only for `status: archived`; remove them from an active source.",
+  id: 'A new source\'s id is "resource-" followed by its slug, and it never changes.',
+  slug: "The slug is the file name without .yml: lowercase words joined by hyphens.",
+  last_checked:
+    "Write the date you opened and checked the source (YYYY-MM-DD), or null.",
+};
 
 export const CATEGORY_DEFINITIONS = [
   {
@@ -147,20 +167,19 @@ function validHttpUrl(value) {
 export function compileSchema(schema) {
   const ajv = new Ajv2020({
     allErrors: true,
+    verbose: true,
     formats: { date: validIsoDate, uri: validHttpUrl, "date-time": true },
   });
   return ajv.compile(schema);
 }
 
-function schemaMessages(validate, label) {
-  return (validate.errors ?? []).map(
-    (error) =>
-      `${label}${error.instancePath || ""} ${error.message}${
-        error.keyword === "additionalProperties"
-          ? `: ${error.params.additionalProperty}`
-          : ""
-      }`,
-  );
+function schemaMessages(validate, label, schema, schemaPath, hints = {}) {
+  return formatSchemaErrors(validate.errors, {
+    label,
+    schema,
+    schemaPath,
+    hints,
+  });
 }
 
 export function domainFromUrl(value) {
@@ -213,7 +232,9 @@ function serialize(value) {
 /** Validates a generated catalogue against schemas/catalogue.schema.json. */
 export function validateCatalogueAgainstSchema(catalogue, schema) {
   const validate = compileSchema(schema);
-  return validate(catalogue) ? [] : schemaMessages(validate, "Catalogue");
+  return validate(catalogue)
+    ? []
+    : schemaMessages(validate, "Catalogue", schema, SCHEMA_PATH);
 }
 
 /** Maps one validated source file to its catalogue.json record. */
@@ -273,7 +294,7 @@ export function composeCatalogue(
       errors.push(
         issue(
           "source-file-name",
-          `${label} must be named <slug>.yml with a lowercase, hyphenated slug.`,
+          `${label}: a source file is named <slug>.yml with a lowercase, hyphenated slug (for example sources/example-patterns.yml); rename it.`,
           { file: label },
         ),
       );
@@ -285,16 +306,31 @@ export function composeCatalogue(
       data = parseYaml(normalizeText(file.text), { prettyErrors: true });
     } catch (error) {
       errors.push(
-        issue("source-yaml", `${label} is not valid YAML.`, {
-          file: label,
-          reason: error instanceof Error ? error.message : "Unknown YAML error",
-        }),
+        issue(
+          "source-yaml",
+          `${label}: not valid YAML (${
+            error instanceof Error
+              ? error.message.split("\n")[0]
+              : "unknown YAML error"
+          }). Check indentation and quote values that contain ": " or start with a special character.`,
+          {
+            file: label,
+            reason:
+              error instanceof Error ? error.message : "Unknown YAML error",
+          },
+        ),
       );
       continue;
     }
 
     if (!validateSource(data)) {
-      for (const message of schemaMessages(validateSource, label)) {
+      for (const message of schemaMessages(
+        validateSource,
+        label,
+        sourceSchema,
+        SOURCE_SCHEMA_PATH,
+        SOURCE_HINTS,
+      )) {
         errors.push(issue("source-schema", message, { file: label }));
       }
       continue;
@@ -303,29 +339,43 @@ export function composeCatalogue(
     let fileValid = true;
     if (data.slug !== fileMatch[1]) {
       errors.push(
-        issue("source-slug", `${label} slug must equal its file name.`, {
-          file: label,
-          slug: data.slug,
-        }),
+        issue(
+          "source-slug",
+          `${label}: slug "${data.slug}" must equal the file name "${fileMatch[1]}"; rename the file or fix the slug.`,
+          {
+            file: label,
+            slug: data.slug,
+          },
+        ),
       );
       fileValid = false;
     }
     if (!categoryIds.has(data.category)) {
       errors.push(
-        issue("unknown-category", `${label} uses an unknown category.`, {
-          file: label,
-          value: data.category,
-        }),
+        issue(
+          "unknown-category",
+          `${label}: category "${data.category}" is not a Tessli category; use one of: ${[
+            ...categoryIds,
+          ].join(", ")}.`,
+          {
+            file: label,
+            value: data.category,
+          },
+        ),
       );
       fileValid = false;
     }
     if (ids.has(data.id)) {
       errors.push(
-        issue("duplicate-id", `${label} reuses the ID of another source.`, {
-          file: label,
-          id: data.id,
-          firstFile: ids.get(data.id),
-        }),
+        issue(
+          "duplicate-id",
+          `${label}: id "${data.id}" is already used by ${ids.get(data.id)}. A new source's id is "resource-" followed by its slug.`,
+          {
+            file: label,
+            id: data.id,
+            firstFile: ids.get(data.id),
+          },
+        ),
       );
       fileValid = false;
     } else {
@@ -345,7 +395,7 @@ export function composeCatalogue(
         errors.push(
           issue(
             "unknown-replacement",
-            `${file} replaced_by must name another source's slug.`,
+            `${file}: replaced_by "${data.replaced_by}" must be the slug of another source in ${SOURCES_DIR}/.`,
             { file, value: data.replaced_by },
           ),
         );
@@ -353,7 +403,7 @@ export function composeCatalogue(
         errors.push(
           issue(
             "archived-replacement",
-            `${file} replaced_by points at an archived source.`,
+            `${file}: replaced_by "${data.replaced_by}" is archived itself; point it at the active source that replaces both.`,
             { file, value: data.replaced_by },
           ),
         );
@@ -381,7 +431,11 @@ export function composeCatalogue(
     errors.push(
       issue(
         "duplicate-url",
-        "Multiple sources resolve to the same normalized URL.",
+        `Multiple sources resolve to the same normalized URL ${duplicate.url}: ${duplicate.entries
+          .map((entry) => entry.file)
+          .join(
+            ", ",
+          )}. Keep one; if the other is a real source, archive it with archived_reason and replaced_by.`,
         duplicate,
       ),
     );

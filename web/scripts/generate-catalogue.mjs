@@ -7,6 +7,7 @@ import {
   CATALOGUE_PATH,
   REPORT_PATH,
 } from "./release-catalogue-lib.mjs";
+import { CATALOGUE_FIX_GUIDE } from "./catalogue-lib.mjs";
 
 const currentFile = fileURLToPath(import.meta.url);
 const repoRoot = path.resolve(path.dirname(currentFile), "../..");
@@ -26,6 +27,8 @@ if (report.issues.errors.length > 0) {
   for (const error of report.issues.errors) {
     console.error(`- [${error.code}] ${error.message}`);
   }
+  console.error("");
+  for (const line of CATALOGUE_FIX_GUIDE) console.error(line);
   process.exitCode = 1;
 } else {
   await mkdir(path.dirname(cataloguePath), { recursive: true });

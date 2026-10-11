@@ -7,6 +7,7 @@ import {
   CATALOGUE_PATH,
   REPORT_PATH,
 } from "./release-catalogue-lib.mjs";
+import { CATALOGUE_FIX_GUIDE } from "./catalogue-lib.mjs";
 
 const currentFile = fileURLToPath(import.meta.url);
 const repoRoot = path.resolve(path.dirname(currentFile), "../..");
@@ -19,6 +20,8 @@ if (result.report.issues.errors.length > 0) {
   for (const error of result.report.issues.errors) {
     console.error(`- [${error.code}] ${error.message}`);
   }
+  console.error("");
+  for (const line of CATALOGUE_FIX_GUIDE) console.error(line);
   process.exitCode = 1;
 } else {
   const [committedCatalogue, committedReport] = await Promise.all([
@@ -36,7 +39,7 @@ if (result.report.issues.errors.length > 0) {
 
   if (drift.length > 0) {
     console.error(
-      `Committed catalogue output is stale: ${drift.join(", ")}. Run npm run catalogue:generate.`,
+      `Committed catalogue output is stale: ${drift.join(", ")}. Run \`npm run catalogue:generate\` in web/ and commit the files it changes with your source file.`,
     );
     process.exitCode = 1;
   } else {
