@@ -12,7 +12,8 @@ type ContentSection = Readonly<{
 type RelatedLink = Readonly<{ href: string; label: string }>;
 
 type PublicContentPageProps = Readonly<{
-  eyebrow: string;
+  /** Plain page name shown above the title (sentence case, not an eyebrow). */
+  label: string;
   title: string;
   summary: string;
   sections: readonly ContentSection[];
@@ -20,7 +21,7 @@ type PublicContentPageProps = Readonly<{
 }>;
 
 export function PublicContentPage({
-  eyebrow,
+  label,
   title,
   summary,
   sections,
@@ -30,7 +31,7 @@ export function PublicContentPage({
     <main className={styles.page} id="main-content">
       <div className={`tessli-container ${styles.layout}`}>
         <header className={styles.intro}>
-          <p className={styles.eyebrow}>{eyebrow}</p>
+          <p className={styles.pageLabel}>{label}</p>
           <h1>{title}</h1>
           <p>{summary}</p>
         </header>
@@ -52,12 +53,11 @@ export function PublicContentPage({
           ))}
         </article>
         <aside aria-label="Related Tessli pages" className={styles.aside}>
-          <p className={styles.eyebrow}>Keep reading</p>
+          <p className={styles.asideLabel}>Keep reading</p>
           <nav>
             {relatedLinks.map((link) => (
               <Link href={link.href} key={link.href}>
                 {link.label}
-                <span aria-hidden="true">→</span>
               </Link>
             ))}
           </nav>

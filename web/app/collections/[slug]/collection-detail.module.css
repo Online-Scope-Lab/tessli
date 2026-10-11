@@ -20,9 +20,7 @@
   color: var(--accent-text);
 }
 
-.breadcrumb a:focus-visible,
-.primaryAction:focus-visible,
-.secondaryAction:focus-visible {
+.breadcrumb a:focus-visible {
   outline: 3px solid var(--focus);
   outline-offset: 3px;
 }
@@ -54,7 +52,6 @@
   max-width: 760px;
 }
 
-.eyebrow,
 .stageNumber,
 .intentLabel {
   margin: 0;
@@ -67,7 +64,7 @@
 
 .heroCopy h1 {
   max-width: 13ch;
-  margin: var(--space-3) 0 0;
+  margin: 0;
   font-family: var(--font-newsreader), Georgia, serif;
   font-size: var(--text-title);
   font-weight: 620;
@@ -111,39 +108,6 @@
   margin-top: var(--space-6);
 }
 
-.primaryAction,
-.secondaryAction {
-  display: inline-flex;
-  min-height: 44px;
-  align-items: center;
-  justify-content: center;
-  border: 1px solid var(--text-strong);
-  border-radius: var(--radius-control-md);
-  padding: 0 var(--space-5);
-  font-size: var(--text-label);
-  font-weight: 700;
-  text-decoration: none;
-}
-
-.primaryAction {
-  background: var(--text-strong);
-  color: var(--surface);
-}
-
-.secondaryAction {
-  background: transparent;
-  color: var(--text-strong);
-}
-
-.primaryAction:hover {
-  background: var(--accent-hover);
-}
-
-.secondaryAction:hover {
-  border-color: var(--accent);
-  color: var(--accent-text);
-}
-
 .resources {
   scroll-margin-top: 40px;
   padding-top: clamp(48px, 8vw, 84px);
@@ -159,7 +123,7 @@
 }
 
 .resourcesHeading h2 {
-  margin: var(--space-2) 0 0;
+  margin: 0;
   font-family: var(--font-newsreader), Georgia, serif;
   font-size: var(--text-h2);
   font-weight: 610;
@@ -228,7 +192,7 @@
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
   gap: var(--space-6);
-  margin: var(--space-7) 0 0;
+  margin: var(--space-6) 0 0;
   padding: 0;
   list-style: none;
 }
@@ -276,7 +240,7 @@
   }
 }
 
-@media (max-width: 940px) {
+@media (max-width: 1023px) {
   .hero {
     grid-template-columns: 1fr;
   }
@@ -313,8 +277,7 @@
     display: grid;
   }
 
-  .primaryAction,
-  .secondaryAction {
+  .actions > * {
     width: 100%;
   }
 
@@ -332,7 +295,7 @@
   }
 }
 
-@media (max-width: 479px) {
+@media (max-width: 480px) {
   .coverFrame > div {
     min-height: 210px;
   }

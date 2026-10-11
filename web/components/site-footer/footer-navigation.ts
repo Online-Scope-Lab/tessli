@@ -1,3 +1,5 @@
+import { repositoryUrl } from "@/lib/repository";
+
 export type FooterLink = Readonly<{
   label: string;
   href: string;
@@ -9,8 +11,6 @@ export type FooterGroup = Readonly<{
   label: string;
   links: readonly FooterLink[];
 }>;
-
-export const repositoryUrl = "https://github.com/itsdeepaks/tessli";
 
 export const footerGroups: readonly FooterGroup[] = [
   {

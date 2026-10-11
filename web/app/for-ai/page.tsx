@@ -1,5 +1,7 @@
 import Link from "next/link";
 
+import { Button } from "@/components/ui/button";
+import { repositoryCloneUrl, repositoryUrl } from "@/lib/repository";
 import { getSourceProfile } from "@/lib/source-profiles";
 
 import styles from "./for-ai.module.css";
@@ -10,8 +12,7 @@ export const metadata = {
     "Turn a design task into a small, explicit source handoff for an agent—through source guides, public representations, or local MCP.",
 };
 
-const repositoryUrl = "https://github.com/itsdeepaks/tessli";
-const setupCommands = `git clone https://github.com/itsdeepaks/tessli.git
+const setupCommands = `git clone ${repositoryCloneUrl}
 cd tessli/web
 npm ci
 npm run mcp`;
@@ -68,9 +69,6 @@ export default function ForAiPage() {
     <main className={styles.page} data-for-ai-page id="main-content">
       <div className="tessli-container">
         <header className={styles.hero}>
-          <p className={styles.eyebrow}>
-            For people working with coding agents
-          </p>
           <h1>Turn research into an agent’s next clear move.</h1>
           <p className={styles.lede}>
             Tessli helps a person frame a design task, choose useful sources,
@@ -79,12 +77,10 @@ export default function ForAiPage() {
             finished outcome.
           </p>
           <div className={styles.heroActions}>
-            <Link className={styles.primaryAction} href="/resources">
-              Start with a task
-            </Link>
-            <Link className={styles.secondaryAction} href="#local-mcp">
+            <Button href="/resources">Start with a task</Button>
+            <Button href="#local-mcp" variant="secondary">
               Set up local MCP
-            </Link>
+            </Button>
           </div>
         </header>
 
@@ -95,7 +91,6 @@ export default function ForAiPage() {
         >
           <div className={styles.sectionHeading}>
             <div>
-              <p className={styles.eyebrow}>One shared workflow</p>
               <h2 id="workflow-title">From task to reviewed implementation.</h2>
             </div>
             <p>
@@ -125,7 +120,6 @@ export default function ForAiPage() {
         >
           <div className={styles.sectionHeading}>
             <div>
-              <p className={styles.eyebrow}>What an agent receives</p>
               <h2 id="agent-context-title">
                 Guidance with a reason to use it.
               </h2>
@@ -171,7 +165,6 @@ export default function ForAiPage() {
         >
           <div className={styles.sectionHeading}>
             <div>
-              <p className={styles.eyebrow}>A concrete task, kept compact</p>
               <h2 id="example-title">A result a builder can act on.</h2>
             </div>
             <p>
@@ -217,8 +210,7 @@ export default function ForAiPage() {
                 </li>
               </ul>
               <Link href={`/resources/${componentSource.slug}`}>
-                Inspect the {componentSource.name} source guide{" "}
-                <span aria-hidden="true">→</span>
+                Inspect the {componentSource.name} source guide
               </Link>
             </article>
           </div>
@@ -231,7 +223,6 @@ export default function ForAiPage() {
         >
           <div className={styles.sectionHeading}>
             <div>
-              <p className={styles.eyebrow}>Access without MCP</p>
               <h2 id="representations-title">
                 Use a source guide or public representation.
               </h2>
@@ -245,18 +236,16 @@ export default function ForAiPage() {
 
           <div className={styles.accessGrid}>
             <article>
-              <p className={styles.cardNumber}>01</p>
               <h3>Semantic source pages</h3>
               <p>
                 The public source guide is designed for direct reading and links
                 to the recorded provider route separately.
               </p>
               <Link href={`/resources/${componentSource.slug}`}>
-                Open the source guide <span aria-hidden="true">→</span>
+                Open the source guide
               </Link>
             </article>
             <article>
-              <p className={styles.cardNumber}>02</p>
               <h3>Public JSON and Markdown</h3>
               <p>
                 These static representations expose the same source truth in a
@@ -282,7 +271,6 @@ export default function ForAiPage() {
         >
           <div className={styles.sectionHeading}>
             <div>
-              <p className={styles.eyebrow}>Current transport</p>
               <h2 id="local-mcp-title">Local MCP is the current transport.</h2>
             </div>
             <p>
@@ -344,7 +332,6 @@ export default function ForAiPage() {
         >
           <div className={styles.sectionHeading}>
             <div>
-              <p className={styles.eyebrow}>Access-route vocabulary</p>
               <h2 id="routes-title">Choose the recorded access route.</h2>
             </div>
             <p>
@@ -380,7 +367,6 @@ export default function ForAiPage() {
           className={`${styles.section} ${styles.boundaries}`}
           data-for-ai-boundaries
         >
-          <p className={styles.eyebrow}>A concise boundary</p>
           <h2 id="boundaries-title">
             Keep project context private and provider boundaries clear.
           </h2>

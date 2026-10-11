@@ -29,21 +29,15 @@
   min-width: 0;
 }
 
-.eyebrow,
-.kicker {
-  margin: 0;
-  color: var(--text-muted, #78716a);
-  font-size: var(--text-label, 0.75rem);
-  font-weight: 650;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
+.category {
+  margin: var(--space-5) 0 0;
 }
 
 .hero h1 {
   max-width: 12ch;
-  margin: var(--space-2, 0.5rem) 0 var(--space-4, 1rem);
-  color: var(--text-strong, #151412);
-  font-family: var(--font-display), Georgia, serif;
+  margin: 0 0 var(--space-4);
+  color: var(--text-strong);
+  font-family: var(--font-display);
   font-size: clamp(3.5rem, 7vw, 6.5rem);
   font-weight: 650;
   letter-spacing: -0.05em;
@@ -87,7 +81,7 @@
   border: 1px solid var(--line-strong, #bdb5ab);
   background: var(--surface, #fffefc);
   color: var(--text-strong, #151412);
-  font-family: var(--font-display), Georgia, serif;
+  font-family: var(--font-display);
   font-size: clamp(2.5rem, 6vw, 4.25rem);
   font-weight: 650;
 }
@@ -136,9 +130,9 @@
 
 .section h2,
 .collectionSection h2 {
-  margin: var(--space-2, 0.5rem) 0 var(--space-5, 1.25rem);
+  margin: 0 0 var(--space-5);
   color: var(--text-strong, #151412);
-  font-family: var(--font-display), Georgia, serif;
+  font-family: var(--font-display);
   font-size: clamp(1.8rem, 3vw, 2.7rem);
   font-weight: 600;
   letter-spacing: -0.025em;
@@ -202,7 +196,7 @@
   line-height: 1.55;
 }
 
-@media (max-width: 820px) {
+@media (max-width: 1023px) {
   .hero {
     grid-template-columns: minmax(0, 1fr);
     align-items: start;
@@ -217,7 +211,7 @@
   }
 }
 
-@media (max-width: 420px) {
+@media (max-width: 480px) {
   .page {
     padding-top: var(--space-5, 1.25rem);
   }

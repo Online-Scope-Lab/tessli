@@ -261,7 +261,6 @@ export function SiteHeader() {
                     onClick={closeMenu}
                   >
                     <span>{item.label}</span>
-                    <span aria-hidden="true">→</span>
                   </Link>
                 );
               })}

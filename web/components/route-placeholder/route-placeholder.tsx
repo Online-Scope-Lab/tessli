@@ -1,18 +1,15 @@
-import Link from "next/link";
-
-import { repositoryUrl } from "@/components/site-footer/footer-navigation";
+import { Button } from "@/components/ui/button";
+import { repositoryUrl } from "@/lib/repository";
 
 import styles from "./route-placeholder.module.css";
 
 type RoutePlaceholderProps = Readonly<{
-  eyebrow: string;
   title: string;
   summary: string;
   details: readonly string[];
 }>;
 
 export function RoutePlaceholder({
-  eyebrow,
   title,
   summary,
   details,
@@ -21,7 +18,6 @@ export function RoutePlaceholder({
     <main className={styles.page} id="main-content">
       <div className={`tessli-container ${styles.inner}`}>
         <div className={styles.copy}>
-          <p className={styles.eyebrow}>{eyebrow}</p>
           <h1>{title}</h1>
           <p className={styles.summary}>{summary}</p>
         </div>
@@ -36,18 +32,11 @@ export function RoutePlaceholder({
         </section>
 
         <div className={styles.actions}>
-          <Link className={styles.primaryAction} href="/">
-            Return to Explore
-          </Link>
-          <a
-            className={styles.secondaryAction}
-            href={repositoryUrl}
-            rel="noopener noreferrer"
-            target="_blank"
-          >
+          <Button href="/">Return to Explore</Button>
+          <Button href={repositoryUrl} variant="secondary">
             View the repository
             <span aria-hidden="true">↗</span>
-          </a>
+          </Button>
         </div>
       </div>
     </main>

@@ -50,14 +50,11 @@
   grid-column: 1 / span 8;
 }
 
-.eyebrow,
 .panelLabel {
   margin: 0 0 var(--space-3);
-  color: var(--accent-text);
-  font-size: var(--text-label);
-  font-weight: 700;
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
+  color: var(--text-muted);
+  font-size: var(--text-body-sm);
+  font-weight: 650;
 }
 
 .lede {
@@ -296,64 +293,16 @@
   margin-top: var(--space-8);
 }
 
-.button {
-  min-height: 42px;
-  border: 1px solid transparent;
-  border-radius: var(--radius-control-md);
-  padding-inline: var(--space-4);
-  cursor: pointer;
-  font-weight: 600;
-}
-
-.buttonPrimary {
-  background: var(--accent);
-  color: var(--text-strong);
-}
-
-.buttonSecondary {
-  border-color: var(--line);
-  background: var(--surface);
-}
-
-.buttonQuiet {
-  background: transparent;
-  color: var(--text-body);
-}
-
-.field {
-  display: grid;
-  grid-template-columns: auto 1fr;
-  align-items: center;
-  gap: var(--space-3);
-  min-height: 48px;
+.fieldSpecimen {
   margin-top: var(--space-8);
-  padding-inline: var(--space-4);
-}
-
-.field input {
-  min-width: 0;
-  border: 0;
-  outline: 0;
-  background: transparent;
 }
 
 .tagRow {
   margin-top: var(--space-8);
 }
 
-.tag {
-  border: 1px solid var(--line);
-  border-radius: var(--radius-control-sm);
-  background: var(--surface);
-  padding: 6px 10px;
-  color: var(--text-body);
-  font-size: var(--text-body-sm);
-}
-
-.tagActive {
-  border-color: color-mix(in srgb, var(--accent) 45%, var(--line));
-  background: var(--accent-soft);
-  color: var(--accent-text);
+.eyebrowSpecimen {
+  margin-top: var(--space-6);
 }
 
 .rules {
@@ -406,7 +355,7 @@
   }
 }
 
-@media (max-width: 720px) {
+@media (max-width: 767px) {
   .topbarInner {
     min-height: 58px;
   }

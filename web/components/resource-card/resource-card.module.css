@@ -225,27 +225,6 @@
   margin-top: var(--space-3);
 }
 
-.tags span {
-  max-width: 100%;
-  overflow: hidden;
-  border: 1px solid var(--line-subtle);
-  border-radius: var(--radius-control-sm);
-  background: var(--surface-muted);
-  color: var(--text-body);
-  padding: 4px 7px;
-  font-size: var(--text-micro);
-  font-weight: 600;
-  line-height: 1.2;
-  text-overflow: ellipsis;
-  white-space: nowrap;
-}
-
-.tags .intelligenceBadge {
-  border-color: color-mix(in srgb, var(--accent) 38%, var(--line));
-  background: var(--accent-soft);
-  color: var(--accent-text);
-}
-
 .footer {
   display: flex;
   align-items: center;

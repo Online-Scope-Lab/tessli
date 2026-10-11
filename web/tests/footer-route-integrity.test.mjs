@@ -72,7 +72,7 @@ test("footer contains truthful research groups and safe external links", async (
   assert.match(footer, /public repository does not itself grant reuse rights/i);
   assert.match(
     styles,
-    /@media \(max-width: 560px\)[\s\S]*?\.footnote[\s\S]*?font-size: var\(--text-body-sm\)/,
+    /@media \(max-width: 767px\)[\s\S]*?\.footnote[\s\S]*?font-size: var\(--text-body-sm\)/,
   );
   assert.doesNotMatch(
     `${navigation}\n${footer}`,
@@ -95,7 +95,13 @@ test("route shells are honest, visitor-facing, and never collect data", async ()
   assert.match(placeholder, /<h1>/);
   assert.match(placeholder, /Return to Explore/);
   assert.match(placeholder, /View the repository/);
-  assert.match(placeholder, /rel="noopener noreferrer"/);
+  assert.match(
+    placeholder,
+    /<Button href=\{repositoryUrl\} variant="secondary">/,
+  );
+  // External Button links open safely.
+  const button = await read("components/ui/button.tsx");
+  assert.match(button, /rel="noopener noreferrer"/);
 });
 
 test("header exposes only working primary and utility routes", async () => {

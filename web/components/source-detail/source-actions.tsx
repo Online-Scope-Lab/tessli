@@ -1,4 +1,5 @@
 import type { ResourceCardData } from "@/components/resource-card/resource-card";
+import { buttonClassName } from "@/components/ui/button";
 
 import styles from "./source-actions.module.css";
 
@@ -14,7 +15,12 @@ export function SourceActions({ resource }: SourceActionsProps) {
           Provider currently unavailable
         </span>
       ) : (
-        <a href={resource.url} rel="noopener noreferrer" target="_blank">
+        <a
+          className={buttonClassName("secondary")}
+          href={resource.url}
+          rel="noopener noreferrer"
+          target="_blank"
+        >
           Visit source ↗
         </a>
       )}

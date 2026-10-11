@@ -1,7 +1,6 @@
 "use client";
 
-import Link from "next/link";
-
+import { Button } from "@/components/ui/button";
 import styles from "@/components/route-placeholder/route-placeholder.module.css";
 
 type ErrorPageProps = Readonly<{
@@ -13,7 +12,6 @@ export default function ErrorPage({ reset }: ErrorPageProps) {
     <main className={styles.page} id="main-content">
       <div className={`tessli-container ${styles.inner}`}>
         <div className={styles.copy}>
-          <p className={styles.eyebrow}>Something went wrong</p>
           <h1>We hit a temporary snag.</h1>
           <p className={styles.summary}>
             Tessli could not finish loading this page. Try again, or return to
@@ -30,16 +28,10 @@ export default function ErrorPage({ reset }: ErrorPageProps) {
         </section>
 
         <div className={styles.actions}>
-          <button
-            className={styles.primaryAction}
-            onClick={reset}
-            type="button"
-          >
-            Try again
-          </button>
-          <Link className={styles.secondaryAction} href="/">
+          <Button onClick={reset}>Try again</Button>
+          <Button href="/" variant="secondary">
             Return to Explore
-          </Link>
+          </Button>
         </div>
       </div>
     </main>

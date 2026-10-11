@@ -36,8 +36,13 @@ test("package scripts and runtime constraints are present", async () => {
 test("App Router root layout owns html and body", async () => {
   const layout = await read("app/layout.tsx");
 
-  assert.match(layout, /<html lang="en"/);
-  assert.match(layout, /<body className=/);
+  assert.match(layout, /<html\s+lang="en"/);
+  // next/font variables sit on <html> so :root tokens such as --font-display resolve.
+  assert.match(
+    layout,
+    /<html[^>]*className=\{`\$\{interfaceFont\.variable\} \$\{displayFont\.variable\}`\}/,
+  );
+  assert.match(layout, /<body>/);
   assert.match(layout, /\{children\}/);
   assert.match(layout, /import "\.\/globals\.css"/);
 });

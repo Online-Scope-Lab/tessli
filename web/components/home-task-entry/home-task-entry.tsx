@@ -67,7 +67,6 @@ export function HomeTaskEntry({ collections }: HomeTaskEntryProps) {
       >
         <div className="tessli-container">
           <header className={styles.sectionHeading}>
-            <p className={styles.eyebrow}>Start with the work</p>
             <h2 id="home-task-starters-title">
               What are you trying to design?
             </h2>
@@ -80,7 +79,6 @@ export function HomeTaskEntry({ collections }: HomeTaskEntryProps) {
                 <Link className={styles.taskLink} href={task.href}>
                   <span>{task.title}</span>
                   <small>{task.description}</small>
-                  <b aria-hidden="true">→</b>
                 </Link>
               </li>
             ))}
@@ -94,7 +92,6 @@ export function HomeTaskEntry({ collections }: HomeTaskEntryProps) {
       >
         <div className={`tessli-container ${styles.workflowLayout}`}>
           <header className={styles.workflowHeading}>
-            <p className={styles.eyebrow}>A useful research loop</p>
             <h2 id="home-workflow-title">
               From a good reference to a better next decision.
             </h2>
@@ -120,10 +117,9 @@ export function HomeTaskEntry({ collections }: HomeTaskEntryProps) {
         <div className="tessli-container">
           <header className={styles.collectionsHeading}>
             <div>
-              <p className={styles.eyebrow}>Guided research paths</p>
               <h2 id="home-collections-title">Follow a practical sequence.</h2>
             </div>
-            <Link href="/collections">View all collections →</Link>
+            <Link href="/collections">View all collections</Link>
           </header>
 
           <ul className={styles.collectionGrid}>
@@ -139,7 +135,6 @@ export function HomeTaskEntry({ collections }: HomeTaskEntryProps) {
       <section aria-labelledby="home-ai-title" className={styles.agentSection}>
         <div className={`tessli-container ${styles.agentLayout}`}>
           <div>
-            <p className={styles.eyebrow}>For coding agents</p>
             <h2 id="home-ai-title">Give an agent a better starting point.</h2>
           </div>
           <div className={styles.agentCopy}>
@@ -149,7 +144,7 @@ export function HomeTaskEntry({ collections }: HomeTaskEntryProps) {
               decisions in your project notes, then hand over only the context
               that matters.
             </p>
-            <Link href="/for-ai">See how Tessli works with AI →</Link>
+            <Link href="/for-ai">See how Tessli works with AI</Link>
           </div>
         </div>
       </section>

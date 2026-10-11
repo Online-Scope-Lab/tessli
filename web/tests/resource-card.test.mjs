@@ -107,11 +107,9 @@ test("resource card geometry survives long copy and restores restrained hover mo
   );
   assert.match(css, /@media \(prefers-reduced-motion: reduce\)/);
   assert.match(css, /@media \(forced-colors: active\)/);
-  assert.match(component, /className=\{styles\.intelligenceBadge\}/);
+  assert.match(component, /<Tag data-intelligence-badge="true" tone="signal">/);
+  assert.match(component, /<Tag key=\{tag\}>\{tag\}<\/Tag>/);
   assert.doesNotMatch(component, /style=\{\{/);
-  assert.match(
-    css,
-    /\.tags \.intelligenceBadge[\s\S]*color: var\(--accent-text\)/,
-  );
+  assert.doesNotMatch(css, /\.tags span|\.intelligenceBadge/);
   assert.doesNotMatch(css, /border-radius: 1[2-9]px|backdrop-filter/);
 });

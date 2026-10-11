@@ -208,10 +208,7 @@ export function BrowseFilters({
           role={isOpen ? "dialog" : undefined}
         >
           <div className={styles.filterSheetHeader}>
-            <div>
-              <p className={styles.filterSheetKicker}>Refine this source set</p>
-              <h2 id="browse-filter-title">Refine results</h2>
-            </div>
+            <h2 id="browse-filter-title">Refine results</h2>
             <button
               aria-label="Close filters"
               className={styles.filterClose}

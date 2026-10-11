@@ -172,7 +172,7 @@ const mobileOpen = await evaluate(`(() => {
     modal: sheet?.getAttribute('aria-modal'),
     primary: Array.from(sheet.querySelectorAll('nav[aria-label="Mobile primary navigation"] a')).map((link) => link.textContent.trim()),
     current: Array.from(sheet.querySelectorAll('nav[aria-label="Mobile primary navigation"] a[aria-current="page"]')).map((link) => link.textContent.trim()),
-    utilities: Array.from(sheet.querySelectorAll('nav[aria-label="Mobile utilities"] a')).map((link) => link.textContent.trim().replace(/→/g, '').trim()),
+    utilities: Array.from(sheet.querySelectorAll('nav[aria-label="Mobile utilities"] a')).map((link) => link.textContent.trim()),
     authLinks: Array.from(sheet.querySelectorAll('a, button'))
       .filter((control) => (control.getAttribute('href') ?? '').startsWith('/auth') || /sign[ -]?in|log[ -]?in/i.test(control.textContent))
       .length,

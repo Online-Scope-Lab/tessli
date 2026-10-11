@@ -4,6 +4,7 @@ import { notFound } from "next/navigation";
 
 import { CollectionCover } from "@/components/collection-card/collection-card";
 import { CollectionResourceList } from "@/components/collection-resources/collection-resource-list";
+import { Button } from "@/components/ui/button";
 import {
   getPublishedCollection,
   getPublishedCollections,
@@ -71,7 +72,6 @@ export default async function CollectionDetailPage({
             />
           </div>
           <div className={styles.heroCopy}>
-            <p className={styles.eyebrow}>Guided research path</p>
             <h1>{playbook.title}</h1>
             <div className={styles.intentGrid}>
               <section aria-labelledby="goal-title">
@@ -94,9 +94,7 @@ export default async function CollectionDetailPage({
               </section>
             </div>
             <div className={styles.actions}>
-              <a className={styles.primaryAction} href="#research-sequence">
-                Start with stage 1
-              </a>
+              <Button href="#research-sequence">Start with stage 1</Button>
             </div>
           </div>
         </header>
@@ -107,10 +105,7 @@ export default async function CollectionDetailPage({
           id="research-sequence"
         >
           <header className={styles.resourcesHeading}>
-            <div>
-              <p className={styles.eyebrow}>Ordered research sequence</p>
-              <h2 id="stages-title">Inspect one stage at a time</h2>
-            </div>
+            <h2 id="stages-title">Inspect one stage at a time</h2>
             <p>
               Start with the first stage, inspect each source against its
               prompt, and note the references that help you make the decision.

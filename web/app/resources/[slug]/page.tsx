@@ -8,6 +8,7 @@ import type {
 } from "@/components/resource-card/resource-card";
 import { IntelligenceDetail } from "@/components/source-detail/intelligence-detail";
 import { SourceActions } from "@/components/source-detail/source-actions";
+import { Tag } from "@/components/ui/tag";
 import catalogue from "@/data/catalogue.json";
 import { getPublishedCollections } from "@/lib/collections";
 import { getSimilarSourceProfiles } from "@/lib/similar-sources";
@@ -100,11 +101,13 @@ export default async function SourceProfilePage({ params }: Props) {
 
         <header className={styles.hero}>
           <div className={styles.identity}>
-            <p className={styles.eyebrow}>
-              {categories.get(profile.category) ?? label(profile.category)}
-            </p>
             <h1>{profile.name}</h1>
             <p className={styles.summary}>{profile.summary}</p>
+            <p className={styles.category}>
+              <Tag>
+                {categories.get(profile.category) ?? label(profile.category)}
+              </Tag>
+            </p>
           </div>
 
           <figure className={styles.preview}>
@@ -139,7 +142,6 @@ export default async function SourceProfilePage({ params }: Props) {
         <div className={styles.guide}>
           <ProfileList
             title="Use it when"
-            kicker="Task fit"
             items={profile.bestFor}
             empty="No structured task-fit guidance is recorded for this Listed source. Start with its canonical description and provider page."
           />
@@ -150,7 +152,6 @@ export default async function SourceProfilePage({ params }: Props) {
             className={styles.collectionSection}
             aria-labelledby="collections-title"
           >
-            <p className={styles.kicker}>Research path</p>
             <h2 id="collections-title">Collections</h2>
             {memberships.length > 0 ? (
               <ul className={styles.collectionList}>
@@ -177,19 +178,16 @@ export default async function SourceProfilePage({ params }: Props) {
 
 function ProfileList({
   title,
-  kicker,
   items,
   empty,
 }: Readonly<{
   title: string;
-  kicker: string;
   items: readonly string[];
   empty: string;
 }>) {
   const id = title.toLowerCase().replaceAll(/[^a-z0-9]+/g, "-");
   return (
     <section className={styles.section} aria-labelledby={id}>
-      <p className={styles.kicker}>{kicker}</p>
       <h2 id={id}>{title}</h2>
       {items.length > 0 ? (
         <ul className={styles.list}>

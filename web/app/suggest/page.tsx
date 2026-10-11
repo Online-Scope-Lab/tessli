@@ -13,7 +13,6 @@ export const metadata: Metadata = {
 export default function SuggestPage() {
   return (
     <RoutePlaceholder
-      eyebrow="Improve the index"
       title="Corrections and improvements will use a reviewed workflow."
       summary="Suggestions may cover outdated descriptions, access labels, broken destinations, missing metadata, or clearer categorisation. Nothing will publish directly without review."
       details={[

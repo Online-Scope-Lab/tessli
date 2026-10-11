@@ -16,7 +16,6 @@ export default function CollectionsPage() {
     <main className={styles.page} id="main-content">
       <div className="tessli-container">
         <header className={styles.hero}>
-          <p className={styles.eyebrow}>Collections</p>
           <h1>Which guided research path matches my goal?</h1>
           <p className={styles.lede}>
             Choose a focused path, then work through its stages to make the next

@@ -9,7 +9,7 @@ It does not connect to Landingfolio or another provider, retrieve screenshots, i
 ## Requirements
 
 - Node.js 22 or later;
-- a local checkout of `itsdeepaks/tessli`;
+- a local checkout of `Online-Scope-Lab/tessli`;
 - locked dependencies installed under `web/`.
 
 ## Install

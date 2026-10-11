@@ -73,8 +73,8 @@ test("source guide styling preserves a fixed preview and narrow-screen recomposi
   assert.match(styles, /\.preview \{/);
   assert.match(styles, /aspect-ratio: 16 \/ 10/);
   assert.match(styles, /\.previewMark/);
-  assert.match(styles, /@media \(max-width: 820px\)/);
-  assert.match(styles, /@media \(max-width: 420px\)/);
+  assert.match(styles, /@media \(max-width: 1023px\)/);
+  assert.match(styles, /@media \(max-width: 480px\)/);
   assert.doesNotMatch(styles, /backdrop-filter|linear-gradient\([^\n]*purple/i);
 });
 

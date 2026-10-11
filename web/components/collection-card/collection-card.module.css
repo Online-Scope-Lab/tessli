@@ -145,7 +145,7 @@
 .headingRow {
   display: grid;
   min-width: 0;
-  grid-template-columns: minmax(0, 1fr) 22px;
+  grid-template-columns: minmax(0, 1fr);
   align-items: start;
   gap: var(--space-4);
 }
@@ -158,25 +158,6 @@
   font-weight: 610;
   letter-spacing: -0.02em;
   line-height: 1.12;
-}
-
-.headingRow svg {
-  width: 22px;
-  height: 22px;
-  color: var(--text-muted);
-  stroke: currentColor;
-  stroke-linecap: round;
-  stroke-linejoin: round;
-  stroke-width: 1.7;
-  transition:
-    color var(--motion-fast) var(--ease-standard),
-    transform var(--motion-fast) var(--ease-standard);
-}
-
-.card:hover .headingRow svg,
-.card:focus-within .headingRow svg {
-  color: var(--accent-text);
-  transform: translateX(3px);
 }
 
 .facts {

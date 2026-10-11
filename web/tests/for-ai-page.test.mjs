@@ -72,9 +72,18 @@ test("For AI page leads with the task-to-agent workflow and current access truth
   assert.match(page, /data-for-ai-boundaries/);
   assert.match(page, /Turn research into an agent’s next clear move./);
   assert.match(page, /From task to reviewed implementation./);
-  assert.match(page, /What an agent receives/);
-  assert.match(page, /A concrete task, kept compact/);
-  assert.match(page, /Access without MCP/);
+  assert.match(page, /Guidance with a reason to use it\./);
+  assert.match(page, /A result a builder can act on\./);
+  assert.match(page, /Use a source guide or public representation\./);
+  // One eyebrow site-wide (home hero); numbers only for the real workflow sequence.
+  assert.doesNotMatch(page, /styles\.eyebrow|styles\.cardNumber/);
+  assert.match(page, /String\(index \+ 1\)\.padStart\(2, "0"\)/);
+  assert.doesNotMatch(page, /→/);
+  assert.match(
+    page,
+    /Open the Tessli repository <span aria-hidden="true">↗<\/span>/,
+  );
+  assert.match(page, /<Button href="\/resources">Start with a task<\/Button>/);
   assert.match(page, /Local MCP is the current transport./);
   assert.match(page, /Choose the recorded access route./);
   assert.match(
@@ -119,11 +128,13 @@ test("For AI visual contract is route-scoped, responsive, and overflow safe", as
 
   assert.match(css, /\.hero \{/);
   assert.match(css, /\.codeBlock \{[\s\S]*?overflow-x: auto/);
-  assert.match(css, /@media \(max-width: 980px\)/);
+  assert.match(css, /@media \(max-width: 1023px\)/);
   assert.match(css, /@media \(max-width: 767px\)/);
-  assert.match(css, /@media \(max-width: 390px\)/);
-  assert.match(css, /@media \(prefers-reduced-motion: reduce\)/);
+  assert.match(css, /@media \(max-width: 480px\)/);
   assert.match(css, /@media \(forced-colors: active\)/);
+  // Actions moved to the shared Button; its transitions follow the global reduced-motion rule.
+  assert.doesNotMatch(css, /\.primaryAction|\.secondaryAction|\.eyebrow/);
+  assert.match(css, /\.heroActions > \* \{\s*width: 100%;/);
   assert.doesNotMatch(
     css,
     /backdrop-filter|filter: blur|border-radius: 1[2-9]px|animation:/,

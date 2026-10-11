@@ -3,7 +3,7 @@ export const metadata = { title: "Terms" };
 export default function TermsPage() {
   return (
     <PublicContentPage
-      eyebrow="Terms"
+      label="Terms"
       title="Use Tessli as a research index, not a substitute for source terms."
       summary="Tessli links to independent resources and provides limited catalogue metadata to help visitors research them. Use of a resource remains subject to the terms, licences, pricing, and availability stated by its original source."
       relatedLinks={[

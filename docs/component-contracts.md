@@ -29,7 +29,8 @@ These contracts describe working public interfaces only. Components being remove
 - links to `/`;
 - no icon beside the wordmark;
 - desktop approximately `34–38px`; mobile approximately `30–32px`;
-- remains readable in dark/forced-colour contexts.
+- remains readable in dark/forced-colour contexts;
+- the browser-tab icon is `web/app/icon.svg`: a serif "T" with the orange signal dot on the warm canvas (not the hero artwork).
 
 ## 3. Search field
 
@@ -149,3 +150,7 @@ Auth, account menus and in-site forms are not part of v1.2. Contributions go thr
 ## 12. Announcements
 
 Dynamic result, search and filter-recovery status changes are announced to assistive technology through live regions. Errors are never explained only in a transient message. There is no toast component; it was removed with Saved and Boards in C4.
+
+## 13. Shared primitives
+
+`web/components/ui/` holds `Button` (primary, secondary, quiet; renders an internal link, or a new-tab external link with `rel="noopener noreferrer"`, when given `href`), `Field` (label, input or textarea, hint and error wired with `aria-describedby` and `aria-invalid`), `Tag` (neutral, signal) and `Eyebrow` (home hero only). Page modules use these instead of redefining action, field or tag styles. Their tokens and rules are in [`design.md`](../design.md) §13–14.

@@ -1,6 +1,11 @@
 import type { Metadata } from "next";
 import type { CSSProperties } from "react";
 
+import { Button } from "@/components/ui/button";
+import { Eyebrow } from "@/components/ui/eyebrow";
+import { Field } from "@/components/ui/field";
+import { Tag } from "@/components/ui/tag";
+
 import { GrainToggle } from "./grain-toggle";
 import styles from "./lab.module.css";
 import toolbarStyles from "./lab-toolbar.module.css";
@@ -31,7 +36,7 @@ export default function DesignFoundationLabPage() {
       <div className={toolbarStyles.toolbar}>
         <div className={`tessli-container ${toolbarStyles.inner}`}>
           <span className={toolbarStyles.label}>
-            Design foundation · Slice 1.2
+            Design system · internal specimen
           </span>
           <GrainToggle />
         </div>
@@ -41,14 +46,13 @@ export default function DesignFoundationLabPage() {
         <section className={`tessli-container ${styles.intro}`}>
           <div className={`tessli-grid ${styles.introGrid}`}>
             <div className={styles.introCopy}>
-              <p className={styles.eyebrow}>Browser-rendered visual contract</p>
               <h1 className="tessli-display">
                 A warm, editorial system for useful discovery.
               </h1>
               <p className={styles.lede}>
-                This lab verifies Tessli&apos;s real fonts, palette, grain,
-                spacing, sharp surfaces, small-radius controls, and responsive
-                grid before product components are built.
+                This internal page renders Tessli&apos;s real fonts, palette,
+                grain, spacing, sharp surfaces, shared primitives, and
+                responsive grid in the browser.
               </p>
             </div>
             <aside className={styles.status} aria-label="Foundation status">
@@ -208,46 +212,33 @@ export default function DesignFoundationLabPage() {
               <article className={`tessli-panel ${styles.componentPanel}`}>
                 <p className={styles.panelLabel}>Buttons</p>
                 <div className={styles.buttonRow}>
-                  <button
-                    className={`${styles.button} ${styles.buttonPrimary}`}
-                    type="button"
-                  >
-                    Primary action
-                  </button>
-                  <button
-                    className={`${styles.button} ${styles.buttonSecondary}`}
-                    type="button"
-                  >
-                    Secondary
-                  </button>
-                  <button
-                    className={`${styles.button} ${styles.buttonQuiet}`}
-                    type="button"
-                  >
-                    Quiet action
-                  </button>
+                  <Button>Primary action</Button>
+                  <Button variant="secondary">Secondary</Button>
+                  <Button variant="quiet">Quiet action</Button>
                 </div>
               </article>
               <article className={`tessli-panel ${styles.componentPanel}`}>
-                <p className={styles.panelLabel}>Search field</p>
-                <label className={`tessli-control ${styles.field}`}>
-                  <span aria-hidden="true">⌕</span>
-                  <input
-                    aria-label="Example resource search"
-                    placeholder="Search resources"
-                  />
-                </label>
+                <p className={styles.panelLabel}>Field</p>
+                <Field
+                  className={styles.fieldSpecimen}
+                  hint="Hint and error text are linked with aria-describedby."
+                  id="lab-field-example"
+                  label="Source URL"
+                  placeholder="https://"
+                  type="url"
+                />
               </article>
               <article className={`tessli-panel ${styles.componentPanel}`}>
-                <p className={styles.panelLabel}>Tags and selection</p>
+                <p className={styles.panelLabel}>Tags and eyebrow</p>
                 <div className={styles.tagRow}>
-                  <span className={`${styles.tag} ${styles.tagActive}`}>
-                    All resources
-                  </span>
-                  <span className={styles.tag}>Typography</span>
-                  <span className={styles.tag}>Motion</span>
-                  <span className={styles.tag}>Open source</span>
+                  <Tag tone="signal">Profiled</Tag>
+                  <Tag>Typography</Tag>
+                  <Tag>Motion</Tag>
+                  <Tag>Open source</Tag>
                 </div>
+                <Eyebrow className={styles.eyebrowSpecimen}>
+                  Home hero only
+                </Eyebrow>
               </article>
             </div>
 
@@ -259,7 +250,7 @@ export default function DesignFoundationLabPage() {
               <div className={styles.rule}>
                 <span>Buttons and inputs</span>
                 <strong>
-                  4–7px radius · visible focus · 42px minimum height
+                  4–7px radius · visible focus · 44px minimum height
                 </strong>
               </div>
               <div className={styles.rule}>
@@ -279,8 +270,8 @@ export default function DesignFoundationLabPage() {
 
       <footer className={styles.footer}>
         <div className="tessli-container">
-          Tessli design foundation · Product pages begin only after this lab is
-          approved.
+          Tokens live in web/app/globals.css; primitives live in
+          web/components/ui/.
         </div>
       </footer>
     </div>

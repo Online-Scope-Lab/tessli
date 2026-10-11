@@ -54,8 +54,12 @@ test("Collection-detail checklist recomposes and keeps focusable actions usable"
   assert.match(pageCss, /grid-template-columns: repeat\(3, minmax\(0, 1fr\)\)/);
   assert.match(pageCss, /grid-template-columns: repeat\(2, minmax\(0, 1fr\)\)/);
   assert.match(pageCss, /grid-template-columns: 1fr/);
-  assert.match(pageCss, /@media \(max-width: 479px\)/);
-  assert.match(pageCss, /\.primaryAction:focus-visible/);
-  assert.match(pageCss, /min-height: 44px/);
+  assert.match(pageCss, /@media \(max-width: 480px\)/);
+  assert.match(pageCss, /\.breadcrumb a:focus-visible/);
+  // Actions use the shared Button primitive (focus and 44px target live there).
+  assert.doesNotMatch(pageCss, /\.primaryAction|\.secondaryAction/);
+  assert.match(pageCss, /\.actions > \* \{\s*width: 100%;/);
+  const buttonCss = await read("components/ui/button.module.css");
+  assert.match(buttonCss, /min-height: 44px/);
   assert.match(resourceCss, /overflow-wrap: anywhere/);
 });

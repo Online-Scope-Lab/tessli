@@ -24,20 +24,11 @@
   max-width: 680px;
 }
 
-.eyebrow {
-  margin: 0;
-  color: var(--accent-text);
-  font-size: var(--text-micro);
-  font-weight: 720;
-  letter-spacing: 0.045em;
-  text-transform: uppercase;
-}
-
 .sectionHeading h2,
 .workflowHeading h2,
 .collectionsHeading h2,
 .agentLayout h2 {
-  margin: var(--space-3) 0 0;
+  margin: 0;
   color: var(--text-strong);
   font-family: var(--font-newsreader), Georgia, serif;
   font-size: clamp(2.3rem, 5vw, 4.3rem);
@@ -70,7 +61,7 @@
   position: relative;
   display: grid;
   min-height: 184px;
-  grid-template-rows: auto 1fr auto;
+  grid-template-rows: auto 1fr;
   gap: var(--space-4);
   padding: clamp(22px, 3vw, 32px);
   color: inherit;
@@ -105,13 +96,6 @@
   color: var(--text-body);
   font-size: var(--text-body-sm);
   line-height: 1.5;
-}
-
-.taskLink b {
-  color: var(--accent-text);
-  font-size: 1.4rem;
-  font-weight: 500;
-  line-height: 1;
 }
 
 .workflowLayout,
@@ -226,7 +210,7 @@
   .workflowSection,
   .collectionsSection,
   .agentSection {
-    padding-block: var(--space-7);
+    padding-block: var(--space-6);
   }
 
   .taskGrid,

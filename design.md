@@ -1,7 +1,7 @@
 # Tessli Design System
 
 Status: **active visual contract**
-Last updated: 2026-07-29
+Last updated: 2026-10-11
 
 This document is the concise source of truth for Tessli's visual identity. Component behaviour, data rules and quality checks live in the documents indexed in [`docs/README.md`](docs/README.md).
 
@@ -64,12 +64,18 @@ Why:
 Rules:
 
 ```css
---font-display: "Newsreader", "Iowan Old Style", "Palatino Linotype", serif;
+--font-display:
+  var(--font-newsreader), "Iowan Old Style", "Palatino Linotype", Georgia, serif;
 ```
 
-- Wordmark: weight `700`, optical size `72`, tracking `-0.045em`.
-- Hero: weight `650`, optical size `72`, tracking `-0.055em`, line-height `0.92`.
-- Page title: weight `600`, optical size `60`, tracking `-0.04em`, line-height `0.96`.
+`next/font` sets `--font-newsreader` and `--font-instrument-sans` on `<html>`, so `--font-display` and `--font-ui` resolve everywhere.
+
+Shipped values (tracking tokens live in `web/app/globals.css`):
+
+- Wordmark: weight `700`, automatic optical size, tracking `-0.045em`.
+- Hero: weight `650`, automatic optical size, tracking `-0.015em` (`--tracking-display`), line-height `0.92`.
+- Page and section title: weight `600–620`, tracking `-0.025em` (`--tracking-title`), line-height `0.96–0.98`.
+- Some existing page modules use tighter title tracking (down to `-0.05em` on the source page title); new work uses the two tokens.
 - Do not use Newsreader for controls, metadata, tables, tags, or long UI paragraphs.
 
 ### Interface: Instrument Sans Variable
@@ -91,7 +97,7 @@ Why:
 Rules:
 
 ```css
---font-ui: "Instrument Sans", "Avenir Next", system-ui, sans-serif;
+--font-ui: var(--font-instrument-sans), "Avenir Next", system-ui, sans-serif;
 ```
 
 - Body: `400`.
@@ -126,11 +132,13 @@ Any font change must pass an in-browser specimen first: the wordmark, hero headl
 --text-h2: clamp(1.75rem, 2.5vw, 2.5rem);
 --text-h3: 1.25rem;
 --text-body-lg: 1.0625rem;
---text-body: 1rem;
+--text-body-md: 1rem;
 --text-body-sm: 0.875rem;
 --text-label: 0.75rem;
 --text-micro: 0.6875rem;
 ```
+
+`--text-body` is the body text **colour** (§6); the body **size** is `--text-body-md`. Before 2026-10-11 both shared the name `--text-body`, so the size overrode the colour and body copy rendered in `--text-strong`.
 
 Paragraph measure: `58–68ch`.  
 Hero supporting copy: `44–56ch`.
@@ -169,6 +177,20 @@ The palette is sampled from the approved direction and adjusted for accessibilit
   --stone-art: #d9cfbf;
 }
 ```
+
+Semantic aliases (shadcn names) map onto these tokens. Library items use only the aliases, so they take on the installing project's theme:
+
+| Alias                                | Tessli token                                            |
+| ------------------------------------ | ------------------------------------------------------- |
+| `--background` / `--foreground`      | `--canvas` / `--text-strong`                            |
+| `--card` / `--card-foreground`       | `--surface` / `--text-strong`                           |
+| `--primary` / `--primary-foreground` | `--accent` / `--text-strong`                            |
+| `--muted` / `--muted-foreground`     | `--surface-muted` / `--text-muted`                      |
+| `--accent` / `--accent-foreground`   | `--accent` (the orange signal itself) / `--text-strong` |
+| `--destructive`                      | `--danger`                                              |
+| `--border`                           | `--line`                                                |
+| `--ring`                             | `--focus`                                               |
+| `--radius`                           | `--radius-control-md`                                   |
 
 Usage rules:
 
@@ -214,6 +236,8 @@ Base spacing unit: `4px`.
 --space-24: 6rem;
 ```
 
+There is no `--space-7` or `--space-9`; use the neighbouring steps.
+
 Containers:
 
 - maximum page width: `1280px`;
@@ -227,11 +251,9 @@ Containers:
 ## 9. Borders, radius, and elevation
 
 ```css
---radius-xs: 4px;
---radius-sm: 7px;
---radius-md: 10px;
---radius-lg: 14px;
---radius-xl: 20px;
+--radius-control-sm: 4px;
+--radius-control-md: 7px;
+--radius-control-lg: 10px;
 --radius-pill: 999px;
 
 --shadow-xs: 0 1px 2px rgb(21 20 18 / 0.04);
@@ -239,6 +261,7 @@ Containers:
 --shadow-md: 0 14px 36px rgb(21 20 18 / 0.09);
 ```
 
+- Cards and panels are square (`0`); controls use `--radius-control-sm`/`-md`; menus and sheets may use `--radius-control-lg`. There is no larger radius.
 - Borders do more visual work than shadows.
 - Search bars, dropdowns, sheets, and modals may elevate.
 - Resource cards remain mostly flat and become clearer through hover/focus background changes.
@@ -258,9 +281,9 @@ Motion is functional and restrained.
 
 ## 11. Homepage evidence and imagery
 
-The V3 homepage does not use a statistics or coverage row. Its hierarchy is task question, task search, task starters, the find → decide → handoff explanation, selected Collections, and a concise For AI path.
+The home hero stays, with its composition and the arch-and-stairs artwork (`web/public/brand/tessli-hero-geometry.webp`, hash-checked in CI). See `docs/v1.2/plan.md` §4. Below the hero, the homepage leads with task starters, the find → decide → handoff explanation, selected Collections, and a concise For AI path.
 
-Do not use the catalogue count, coverage levels, verification status, user counts, activity, popularity, or community claims as hero evidence. Real Tessli product UI is the preferred marketing imagery when a later approved page contract calls for imagery. The legacy geometric hero artwork is not prescribed for the V3 homepage.
+Do not use coverage levels, verification status, user counts, activity, popularity, or community claims as evidence. Real Tessli product UI is the preferred imagery for anything new.
 
 ## 12. Breakpoints
 
@@ -274,9 +297,30 @@ Reference breakpoints:
 --bp-2xl: 1440px;
 ```
 
-Breakpoints are behaviour triggers, not device labels. Each page's exact transitions live in its CSS module; check them at the widths in [`docs/quality-gates.md`](docs/quality-gates.md).
+Breakpoints are behaviour triggers, not device labels. CSS modules use these `max-width` queries:
 
-## 13. Anti-patterns
+- `480px`: small phones;
+- `767px`: below tablet (`--bp-md`);
+- `1023px`: below `--bp-lg`, when 1024px itself keeps the desktop composition;
+- `1024px`: tablet and below, when 1024px takes the tablet composition.
+
+Two older triggers remain where moving them would change real layouts: `1100px` for the three-column Browse and Collection grids, and the hero's own `720px`, `389px` and `1120px` (facts row), which stay with the frozen hero. Each page's transitions live in its CSS module; check them at the widths in [`docs/quality-gates.md`](docs/quality-gates.md).
+
+## 13. Tailwind and primitives
+
+- `web/app/globals.css` is the single token source. `@theme static` and `@theme inline` expose colour, type, spacing, radius, shadow and motion tokens as Tailwind utilities (for example `bg-canvas`, `text-ink-body`, `text-body-md`, `rounded-control-md`, `shadow-sm`, `ease-standard`, `bg-primary`).
+- `web/components/ui/` holds the shared primitives: `Button` (`primary`, `secondary`, `quiet`; renders a link when given `href`), `Field` (label, input or textarea, hint, error), `Tag` (`neutral`, `signal`) and `Eyebrow`. Use them instead of redefining action, field or tag styles in a page module.
+- `/lab` is the internal, `noindex` specimen of the tokens and primitives.
+
+## 14. Tells to avoid
+
+From `docs/v1.2/plan.md` §4:
+
+- One uppercase eyebrow per site, in the home hero only. Elsewhere a heading stands alone; if a label carries real information (a page name, a category), show it as plain sentence-case text or a `Tag`.
+- Numbered markers (01/02/03, Stage 1) only for real sequences, such as the For AI workflow, the home research loop and Collection stages.
+- Arrows only where a link goes somewhere else: `↗` for external links. No `→` on ordinary links or cards.
+
+## 15. Anti-patterns
 
 Do not introduce:
 

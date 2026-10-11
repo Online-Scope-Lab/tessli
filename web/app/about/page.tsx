@@ -3,7 +3,7 @@ export const metadata = { title: "About" };
 export default function AboutPage() {
   return (
     <PublicContentPage
-      eyebrow="About Tessli"
+      label="About Tessli"
       title="A calmer route to useful design resources."
       summary="Tessli is a manually curated index for designers, frontend developers, product builders, and small teams that need useful references without another noisy feed."
       relatedLinks={[

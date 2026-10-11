@@ -3,7 +3,7 @@ export const metadata = { title: "Privacy" };
 export default function PrivacyPage() {
   return (
     <PublicContentPage
-      eyebrow="Privacy"
+      label="Privacy"
       title="Browse without creating an account."
       summary="This statement describes Tessli's current Phase 1 public application. It is limited to functionality that exists today and will be revised before any account, analytics, or form system is introduced."
       relatedLinks={[

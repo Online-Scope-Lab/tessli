@@ -3,7 +3,7 @@ export const metadata = { title: "Curation process" };
 export default function CurationPage() {
   return (
     <PublicContentPage
-      eyebrow="How resources are selected"
+      label="How resources are selected"
       title="Curation favours usefulness, clarity, and maintainable truth."
       summary="A resource needs more than a memorable URL or polished screenshot. Tessli reviews whether it can be described accurately, placed in a useful category, and linked to without misrepresenting its source."
       relatedLinks={[

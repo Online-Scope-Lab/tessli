@@ -3,19 +3,10 @@
   border-bottom: 1px solid var(--line, #d8d1c8);
 }
 
-.kicker {
-  margin: 0;
-  color: var(--text-muted, #78716a);
-  font-size: var(--text-label, 0.75rem);
-  font-weight: 650;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-}
-
 .section h2 {
-  margin: var(--space-2) 0 var(--space-5);
+  margin: 0 0 var(--space-5);
   color: var(--text-strong, #151412);
-  font-family: var(--font-display), Georgia, serif;
+  font-family: var(--font-display);
   font-size: clamp(1.8rem, 3vw, 2.7rem);
   font-weight: 600;
   letter-spacing: -0.025em;
@@ -71,13 +62,6 @@
 .accessRoutes strong {
   color: var(--text-strong, #151412);
   font-size: 1rem;
-}
-
-.accessRoutes span {
-  color: var(--accent-text, #b9380e);
-  font-size: var(--text-label, 0.75rem);
-  font-weight: 650;
-  text-transform: uppercase;
 }
 
 .accessRoutes p,
@@ -203,7 +187,7 @@
   overflow-wrap: anywhere;
 }
 
-@media (max-width: 640px) {
+@media (max-width: 767px) {
   .alternatives,
   .diagnostics dl {
     grid-template-columns: minmax(0, 1fr);
@@ -217,7 +201,7 @@
   }
 }
 
-@media (max-width: 420px) {
+@media (max-width: 480px) {
   .diagnostics dl div {
     grid-template-columns: minmax(0, 1fr);
     gap: var(--space-1);

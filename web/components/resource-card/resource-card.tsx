@@ -6,6 +6,7 @@ import {
   getIntelligenceBadge,
   getIntelligenceProfile,
 } from "@/lib/intelligence";
+import { Tag } from "@/components/ui/tag";
 
 import styles from "./resource-card.module.css";
 
@@ -61,14 +62,6 @@ function ExternalArrowIcon() {
   return (
     <svg aria-hidden="true" fill="none" focusable="false" viewBox="0 0 24 24">
       <path d="M7 17 17 7M9 7h8v8" />
-    </svg>
-  );
-}
-
-function InternalArrowIcon() {
-  return (
-    <svg aria-hidden="true" fill="none" focusable="false" viewBox="0 0 24 24">
-      <path d="M5 12h14M13 6l6 6-6 6" />
     </svg>
   );
 }
@@ -232,7 +225,7 @@ export function ResourceCard({
               <p className={styles.domain}>{resource.domain}</p>
               <h3 id={titleId}>{resource.name}</h3>
             </div>
-            {opensExternal ? <ExternalArrowIcon /> : <InternalArrowIcon />}
+            {opensExternal ? <ExternalArrowIcon /> : null}
           </div>
 
           <p className={styles.description} id={descriptionId}>
@@ -241,15 +234,12 @@ export function ResourceCard({
 
           <div aria-label="Resource attributes" className={styles.tags}>
             {badgeText && (
-              <span
-                className={styles.intelligenceBadge}
-                data-intelligence-badge="true"
-              >
+              <Tag data-intelligence-badge="true" tone="signal">
                 {badgeText}
-              </span>
+              </Tag>
             )}
             {visibleTags.map((tag) => (
-              <span key={tag}>{tag}</span>
+              <Tag key={tag}>{tag}</Tag>
             ))}
           </div>
 
@@ -272,7 +262,7 @@ export function ResourceCard({
             data-resource-inspect={resource.id}
             href={internalProfileHref}
           >
-            Inspect <span aria-hidden="true">→</span>
+            Inspect
           </a>
           {resource.status === "unavailable" ? (
             <span className={styles.unavailableAction}>

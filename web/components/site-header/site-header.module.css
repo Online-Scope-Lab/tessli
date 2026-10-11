@@ -240,10 +240,6 @@
   text-decoration: none;
 }
 
-.mobileUtilityLink span:last-child {
-  color: var(--accent-text);
-}
-
 .mobileUtilityLinkActive {
   color: var(--accent-text);
 }

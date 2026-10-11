@@ -1,5 +1,6 @@
 import Link from "next/link";
 
+import { Tag } from "@/components/ui/tag";
 import type { SourceProfile } from "@/lib/source-profiles";
 import type { SimilarSourceMatch } from "@/lib/similar-sources";
 
@@ -37,18 +38,15 @@ function GuideList({
 }
 
 function GuideSection({
-  kicker,
   title,
   children,
 }: Readonly<{
-  kicker: string;
   title: string;
   children: React.ReactNode;
 }>) {
   const id = title.toLowerCase().replaceAll(/[^a-z0-9]+/g, "-");
   return (
     <section className={styles.section} aria-labelledby={id}>
-      <p className={styles.kicker}>{kicker}</p>
       <h2 id={id}>{title}</h2>
       {children}
     </section>
@@ -72,20 +70,22 @@ export function IntelligenceDetail({
 
   return (
     <>
-      <GuideSection kicker="Explore" title="What to explore">
+      <GuideSection title="What to explore">
         <GuideList
           items={exploration}
           empty="No structured exploration points are recorded for this Listed source. Start with the canonical provider page."
         />
       </GuideSection>
 
-      <GuideSection kicker="Access" title="How to access it">
+      <GuideSection title="How to access it">
         <ul className={styles.accessRoutes}>
           {profile.accessRoutes.map((route) => (
             <li key={`${route.kind}-${route.url ?? route.agentAction}`}>
               <div>
                 <strong>{label(route.kind)}</strong>
-                {route.preferred ? <span>Preferred route</span> : null}
+                {route.preferred ? (
+                  <Tag tone="signal">Preferred route</Tag>
+                ) : null}
               </div>
               <p>{route.agentAction}</p>
               <p className={styles.routeMeta}>
@@ -102,19 +102,19 @@ export function IntelligenceDetail({
       </GuideSection>
 
       {compatibility.length > 0 ? (
-        <GuideSection kicker="Compatibility" title="Works with">
+        <GuideSection title="Works with">
           <GuideList items={compatibility} empty="" />
         </GuideSection>
       ) : null}
 
-      <GuideSection kicker="Boundary" title="Important limitations">
+      <GuideSection title="Important limitations">
         <GuideList
           items={profile.limitations}
           empty="No structured limitation is recorded. Confirm current availability, pricing, and terms with the source before relying on it."
         />
       </GuideSection>
 
-      <GuideSection kicker="Alternatives" title="Consider instead">
+      <GuideSection title="Consider instead">
         {similar.length > 0 ? (
           <ul className={styles.alternatives}>
             {similar.map((match) => (

@@ -1,0 +1,21 @@
+.tag {
+  display: inline-block;
+  max-width: 100%;
+  overflow: hidden;
+  border: 1px solid var(--line-subtle);
+  border-radius: var(--radius-control-sm);
+  background: var(--surface-muted);
+  padding: 4px 7px;
+  color: var(--text-body);
+  font-size: var(--text-micro);
+  font-weight: 600;
+  line-height: 1.2;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.signal {
+  border-color: color-mix(in srgb, var(--accent) 38%, var(--line));
+  background: var(--accent-soft);
+  color: var(--accent-text);
+}

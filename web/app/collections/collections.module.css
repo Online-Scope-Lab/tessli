@@ -8,18 +8,9 @@
   padding-bottom: clamp(36px, 6vw, 64px);
 }
 
-.eyebrow {
-  margin: 0;
-  color: var(--accent-text);
-  font-size: var(--text-label);
-  font-weight: 700;
-  letter-spacing: 0.09em;
-  text-transform: uppercase;
-}
-
 .hero h1 {
   max-width: 13ch;
-  margin: var(--space-3) 0 0;
+  margin: 0;
   font-family: var(--font-newsreader), Georgia, serif;
   font-size: var(--text-title);
   font-weight: 620;
@@ -44,7 +35,7 @@
   align-items: end;
   justify-content: space-between;
   gap: var(--space-8);
-  margin-bottom: var(--space-7);
+  margin-bottom: var(--space-6);
 }
 
 .sectionHeading h2 {
