@@ -1,6 +1,6 @@
 # Tessli v1.2 — Product and build plan
 
-Status: **Proposed — awaiting owner approval**
+Status: **Approved by the owner, 2026-10-11** (decisions in §14 resolved: direction approved; MIT with brand excluded; Saved and Boards removed; registry location settled by the Phase 2 spike; prune via `catalogue-triage-final.csv`; the keep-all-295 rule replaced by archive-with-reason)
 Date: 2026-10-10
 Replaces on approval: `docs/product-direction.md`, `docs/product-realignment-v3.md`, `PRD.md`, `build-slices.md`, `UI-INTELLIGENCE-ROADMAP.md`
 Companions: [`repo-cleanup.md`](repo-cleanup.md) · [`catalogue-audit.md`](catalogue-audit.md) · [`research-notes.md`](research-notes.md) · [`catalogue-triage-draft.csv`](catalogue-triage-draft.csv) · [`suggested-additions-draft.csv`](suggested-additions-draft.csv) · [`suggest-source-issue-form-draft.yml`](suggest-source-issue-form-draft.yml)

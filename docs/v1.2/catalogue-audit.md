@@ -1,7 +1,7 @@
 # Catalogue audit: input for v1.2 pruning
 
 Date: 2026-10-10
-Status: **AI first pass, for owner review.** Nothing here is a final curation decision.
+Status: **AI first pass.** The decisions to apply are in [`catalogue-triage-final.csv`](catalogue-triage-final.csv) (approved 2026-10-11).
 Data: [`catalogue-triage-draft.csv`](catalogue-triage-draft.csv) (all 295 rows), [`suggested-additions-draft.csv`](suggested-additions-draft.csv) (71 candidates)
 
 ## 1. Current shape

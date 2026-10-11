@@ -1,6 +1,6 @@
 # Tessli v1.2: repo cleanup plan
 
-Status: **Proposed — awaiting owner approval** (depends on [`plan.md`](plan.md))
+Status: **Approved by the owner, 2026-10-11.** C0 is done: tag `v1.1-archive`, release "v1.1 archive" and branch `archive/v1.1` at `9214e06`.
 Baseline: `main` @ `9214e06`, 2026-10-10
 
 ## Goal
