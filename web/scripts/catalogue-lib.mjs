@@ -9,6 +9,7 @@ export const CATALOGUE_PATH = "web/data/catalogue.json";
 export const REPORT_PATH = "web/data/catalogue-validation.json";
 
 export const SOURCE_HEADERS = [
+  "ID",
   "Category",
   "Website",
   "URL",
@@ -236,13 +237,9 @@ function domainFromUrl(value) {
   return new URL(value).hostname.toLowerCase().replace(/^www\./, "");
 }
 
-function stableResourceId(url) {
-  const digest = createHash("sha256")
-    .update(normalizedUrlKey(url))
-    .digest("hex")
-    .slice(0, 12);
-  return `resource-${digest}`;
-}
+// Resource IDs are frozen: each row stores its ID explicitly and the ID is
+// never recomputed from the URL, so fixing a URL cannot change an ID.
+const RESOURCE_ID_PATTERN = /^resource-[a-z0-9]+(?:-[a-z0-9]+)*$/;
 
 export function sourceProvenanceSha256(source) {
   const normalized = source.toString("utf8").replace(/\r\n?/g, "\n");
@@ -465,6 +462,7 @@ export async function buildCatalogue(options = {}) {
     CATEGORY_DEFINITIONS.map((category) => [category.sourceLabel, category]),
   );
   const usedSlugs = new Map();
+  const usedIds = new Map();
   const urlOccurrences = new Map();
   const domainOccurrences = new Map();
   const categoryCounts = new Map(
@@ -499,6 +497,7 @@ export async function buildCatalogue(options = {}) {
     }
 
     const [
+      storedId,
       categoryLabel,
       name,
       rawUrl,
@@ -543,6 +542,24 @@ export async function buildCatalogue(options = {}) {
         ),
       );
     }
+    if (!RESOURCE_ID_PATTERN.test(storedId)) {
+      errors.push(
+        issue("invalid-id", `Row ${sourceRow} has no valid stored ID.`, {
+          row: sourceRow,
+          value: storedId,
+        }),
+      );
+    } else if (usedIds.has(storedId)) {
+      errors.push(
+        issue("duplicate-id", `Row ${sourceRow} reuses a stored ID.`, {
+          row: sourceRow,
+          value: storedId,
+          firstRow: usedIds.get(storedId),
+        }),
+      );
+    } else {
+      usedIds.set(storedId, sourceRow);
+    }
     if (!name) {
       errors.push(
         issue("missing-name", `Row ${sourceRow} has no website name.`, {
@@ -580,6 +597,7 @@ export async function buildCatalogue(options = {}) {
     }
 
     if (
+      usedIds.get(storedId) !== sourceRow ||
       !category ||
       !access ||
       !subscriptionRequired ||
@@ -605,7 +623,7 @@ export async function buildCatalogue(options = {}) {
     }
 
     const resource = {
-      id: stableResourceId(rawUrl),
+      id: storedId,
       slug,
       name,
       url: rawUrl,
