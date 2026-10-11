@@ -1,0 +1,71 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "social-proof-honest",
+  "type": "registry:block",
+  "title": "Honest social proof",
+  "description": "Shows only proof a reader can check, real quotes with a name and a link to the source, and public records instead when there is none yet.",
+  "registryDependencies": [],
+  "dependencies": [],
+  "files": [
+    {
+      "path": "web/registry/items/social-proof-honest/social-proof-honest.tsx",
+      "type": "registry:component",
+      "content": "import * as React from \"react\";\n\nimport { cn } from \"@/registry/shadcn/lib/utils\";\n\nexport type ProofLink = {\n  /** Where the link goes, in words: \"Read the case study\", \"Read the original post\". */\n  label: string;\n  href: string;\n  /** True when the link leaves your site. Adds ↗ and \"(another site)\" for screen readers. */\n  external?: boolean;\n};\n\nexport type ProofQuote = {\n  id: string;\n  /** The person's exact words, unedited, without quotation marks. */\n  quote: string;\n  /** The real, full name of the person quoted. No initials or \"Happy customer\". */\n  name: string;\n  /** Their role and organisation, as they agreed to be named. */\n  role?: string;\n  /** Where the quote was first published, so readers can check it in context. */\n  source: ProofLink;\n  /** ISO date (YYYY-MM-DD) the quote was published. Shown so readers can judge how current it is. */\n  publishedAt?: string;\n  /**\n   * Marks example content. Renders a visible label on the quote so a\n   * placeholder can never ship looking like a real customer.\n   */\n  placeholder?: boolean;\n};\n\nexport type ProofFallbackLink = ProofLink & {\n  /** What a reader can check there, in one sentence. */\n  description: string;\n};\n\nexport type SocialProofHonestProps = Omit<\n  React.ComponentProps<\"section\">,\n  \"title\"\n> & {\n  title: React.ReactNode;\n  description?: React.ReactNode;\n  /**\n   * One to three real quotes, each published with the person's permission.\n   * The first is shown largest. Pass an empty array until you have one.\n   */\n  quotes: ProofQuote[];\n  /**\n   * Shown instead of quotes when there are none: public records a reader can\n   * check (changelog, source code, status history). With no quotes and no\n   * fallback the section renders nothing.\n   */\n  fallback?: ProofFallbackLink[];\n  /** How the quotes were gathered and used (permission, edits, sources). */\n  note?: React.ReactNode;\n  /** Text on quotes marked `placeholder`. */\n  placeholderLabel?: string;\n  /** Screen-reader text added to external links. */\n  externalLabel?: string;\n  locale?: string;\n};\n\nconst linkClass =\n  \"inline-flex min-h-11 items-center rounded-sm font-medium text-foreground underline underline-offset-4 focus-visible:ring-[3px] focus-visible:ring-ring/50 focus-visible:outline-none\";\n\nfunction ProofAnchor({\n  link,\n  externalLabel,\n}: {\n  link: ProofLink;\n  externalLabel: string;\n}) {\n  return (\n    <a href={link.href} className={linkClass}>\n      {/* One inline run, so a wrapped label keeps ↗ beside its last word. */}\n      <span>\n        {link.label}\n        {link.external ? (\n          <>\n            <span aria-hidden=\"true\">&nbsp;↗</span>\n            <span className=\"sr-only\"> ({externalLabel})</span>\n          </>\n        ) : null}\n      </span>\n    </a>\n  );\n}\n\nfunction formatDate(iso: string, locale: string) {\n  return new Intl.DateTimeFormat(locale, {\n    year: \"numeric\",\n    month: \"long\",\n    timeZone: \"UTC\",\n  }).format(new Date(`${iso}T00:00:00Z`));\n}\n\nfunction QuoteFigure({\n  quote,\n  featured,\n  placeholderLabel,\n  externalLabel,\n  locale,\n}: {\n  quote: ProofQuote;\n  featured: boolean;\n  placeholderLabel: string;\n  externalLabel: string;\n  locale: string;\n}) {\n  return (\n    <figure className=\"border-t border-border pt-6\">\n      {quote.placeholder ? (\n        <p className=\"mb-4 inline-flex rounded-sm border border-dashed border-input px-2 py-1 text-sm font-medium text-foreground\">\n          {placeholderLabel}\n        </p>\n      ) : null}\n      <blockquote\n        cite={quote.source.href}\n        className={cn(\n          \"text-pretty text-foreground\",\n          featured\n            ? \"max-w-[40ch] text-xl leading-snug font-medium sm:text-2xl\"\n            : \"max-w-prose text-base leading-relaxed\",\n        )}\n      >\n        <p>“{quote.quote}”</p>\n      </blockquote>\n      <figcaption className=\"mt-5 text-sm leading-relaxed\">\n        <span className=\"block font-medium text-foreground\">{quote.name}</span>\n        {quote.role ? (\n          <span className=\"block text-muted-foreground\">{quote.role}</span>\n        ) : null}\n        <span className=\"mt-1 flex flex-wrap items-center gap-x-3 text-muted-foreground\">\n          <ProofAnchor link={quote.source} externalLabel={externalLabel} />\n          {quote.publishedAt ? (\n            <time dateTime={quote.publishedAt}>\n              Published {formatDate(quote.publishedAt, locale)}\n            </time>\n          ) : null}\n        </span>\n      </figcaption>\n    </figure>\n  );\n}\n\nexport function SocialProofHonest({\n  title,\n  description,\n  quotes,\n  fallback,\n  note,\n  placeholderLabel = \"Example — replace with a real, permissioned quote\",\n  externalLabel = \"another site\",\n  locale = \"en-GB\",\n  className,\n  ...props\n}: SocialProofHonestProps) {\n  const headingId = React.useId();\n  const [featured, ...rest] = quotes;\n  const hasFallback = !featured && fallback && fallback.length > 0;\n\n  // No proof and nothing honest to show instead: render nothing rather than\n  // an empty frame that invites placeholder logos.\n  if (!featured && !hasFallback) return null;\n\n  const figureProps = { placeholderLabel, externalLabel, locale };\n\n  return (\n    <section\n      aria-labelledby={headingId}\n      data-slot=\"social-proof-honest\"\n      className={cn(\"bg-background text-foreground\", className)}\n      {...props}\n    >\n      <div className=\"mx-auto w-full max-w-6xl px-4 py-12 sm:px-6 sm:py-16 lg:px-8 lg:py-24\">\n        <div className=\"max-w-2xl\">\n          <h2\n            id={headingId}\n            className=\"text-3xl leading-tight font-semibold tracking-tight text-balance sm:text-4xl\"\n          >\n            {title}\n          </h2>\n          {description ? (\n            <p className=\"mt-4 text-base leading-relaxed text-pretty text-muted-foreground\">\n              {description}\n            </p>\n          ) : null}\n        </div>\n\n        {featured ? (\n          <div\n            className={cn(\n              \"mt-10 grid gap-10\",\n              rest.length > 0 &&\n                \"lg:grid-cols-[minmax(0,3fr)_minmax(0,2fr)] lg:gap-16\",\n            )}\n          >\n            <QuoteFigure quote={featured} featured {...figureProps} />\n            {rest.length > 0 ? (\n              <ul className=\"grid content-start gap-8\">\n                {rest.map((quote) => (\n                  <li key={quote.id}>\n                    <QuoteFigure\n                      quote={quote}\n                      featured={false}\n                      {...figureProps}\n                    />\n                  </li>\n                ))}\n              </ul>\n            ) : null}\n          </div>\n        ) : null}\n\n        {hasFallback ? (\n          <ul className=\"mt-10 max-w-4xl border-t border-border\">\n            {fallback.map((link) => (\n              <li\n                key={link.href}\n                className=\"grid gap-x-8 gap-y-1 border-b border-border py-4 md:grid-cols-[minmax(0,16rem)_minmax(0,1fr)] md:items-center\"\n              >\n                <span className=\"text-base\">\n                  <ProofAnchor link={link} externalLabel={externalLabel} />\n                </span>\n                <p className=\"max-w-prose text-sm leading-relaxed text-muted-foreground\">\n                  {link.description}\n                </p>\n              </li>\n            ))}\n          </ul>\n        ) : null}\n\n        {note ? (\n          <div className=\"mt-10 max-w-prose text-sm leading-relaxed text-muted-foreground\">\n            {note}\n          </div>\n        ) : null}\n      </div>\n    </section>\n  );\n}\n"
+    }
+  ],
+  "categories": ["social-proof"],
+  "docs": "Taste notes, states and rules: https://tessli.vercel.app/library/social-proof-honest",
+  "meta": {
+    "tessli": {
+      "id": "social-proof-honest",
+      "kind": "section",
+      "category": "social-proof",
+      "title": "Honest social proof",
+      "summary": "Shows only proof a reader can check, real quotes with a name and a link to the source, and public records instead when there is none yet.",
+      "use_when": [
+        "You have one to three quotes that named people agreed, in writing, to have published with their name and role.",
+        "Each quote already exists somewhere a reader can follow, such as a case study, the person's own post or a recorded talk.",
+        "The product is new and has no quotes yet, but has public records (changelog, source code, status history) a reader can check."
+      ],
+      "avoid_when": [
+        "You have no permissioned quotes and no public record to point at; leave the section out rather than fill it.",
+        "You want to show usage numbers or customer logos; publish those only with a cited source and written permission, in their own section.",
+        "The quotes are long stories; link to full case studies from a short list instead."
+      ],
+      "rules": ["W-03", "W-02", "W-05", "K-04", "S-02", "T-01", "C-04", "A-01"],
+      "ai_default": "A \"Trusted by\" strip of grey placeholder logos, three counters such as \"10,000+ teams\" and \"4.9/5 rating\", and a grid of identical testimonial cards with five stars, a stock avatar, a first name and a vague line of praise, none of it traceable to a real person or source.",
+      "why_this_is_better": [
+        "Every quote needs a full name and a link to where it was first published, so the claim can be checked, and readers can see the person said it in context.",
+        "Example quotes carry a visible \"Example — replace with a real, permissioned quote\" label, so a placeholder cannot ship looking like a real customer.",
+        "With no quotes, the section shows public records a reader can check (changelog, source code, status history) instead of inventing proof; with nothing at all, it renders nothing.",
+        "No logos, star ratings or counters, which are the parts most often invented and least often sourced.",
+        "The first quote leads and the rest follow in a quieter column, instead of identical cards that make every quote equally vague.",
+        "Links say where they go (\"Read the case study\"), and only links that leave the site get ↗."
+      ],
+      "failures": [
+        "Shipping the demo with the placeholder flag removed, so example quotes read as real customers.",
+        "Editing a quote to make it punchier, or trimming the parts that qualify it; publish the person's exact words.",
+        "Linking the source to a page that does not contain the quote, or to the home page.",
+        "Adding a logo strip or usage counters next to the quotes without a source and permission for each.",
+        "Keeping a quote after the person has left the organisation or asked for it to be removed."
+      ],
+      "states": ["default", "single", "no-proof-yet"],
+      "responsive": {
+        "desktop": "From 1024px the first quote sits in a wider left column at a larger size and the others stack in a narrower right column, all sharing the heading's left edge; quote text keeps a readable measure.",
+        "mobile": "One column in reading order, heading first, then the lead quote and the others below it; the fallback links stack above their descriptions and stay at least 44px tall."
+      },
+      "a11y": [
+        "The section is labelled by its h2; each quote is a figure with a blockquote, its cite attribute set to the source, and a figcaption naming the person.",
+        "The example label is visible text above the quote, so placeholder status is not shown by the dashed border alone.",
+        "External links add \"(another site)\" for screen readers; the ↗ glyph is hidden from them.",
+        "Source and fallback links are at least 44px tall with a visible focus ring, and nothing moves or appears on hover only."
+      ],
+      "status": "community",
+      "reviewed_by": [],
+      "reviewed_at": null,
+      "contributors": [],
+      "provenance": "original",
+      "license": "MIT"
+    }
+  }
+}

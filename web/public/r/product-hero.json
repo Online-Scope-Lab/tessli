@@ -1,0 +1,72 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "product-hero",
+  "type": "registry:block",
+  "title": "Product hero with real UI",
+  "description": "A landing-page hero that says what the product does, offers one primary action and shows the product itself, composed from interface components.",
+  "registryDependencies": ["button"],
+  "dependencies": [],
+  "files": [
+    {
+      "path": "web/registry/items/product-hero/product-hero.tsx",
+      "type": "registry:component",
+      "content": "import * as React from \"react\";\n\nimport { cn } from \"@/registry/shadcn/lib/utils\";\nimport { buttonVariants } from \"@/registry/shadcn/ui/button\";\n\nexport type ProductHeroAction = {\n  /** What happens next: \"Start a free notebook\", not \"Get started\". */\n  label: string;\n  href: string;\n};\n\ntype HeadingLevel = 1 | 2;\n\nexport type ProductHeroProps = Omit<\n  React.ComponentProps<\"section\">,\n  \"title\"\n> & {\n  /**\n   * What the product does, in plain words. If another product's name could\n   * replace yours and the headline still works, rewrite it.\n   */\n  title: React.ReactNode;\n  /** One or two sentences: who it is for and the two or three things it does. */\n  description?: React.ReactNode;\n  /** The only primary-styled action in the hero. */\n  primaryAction: ProductHeroAction;\n  /** An optional quieter route (a tour, the docs). Never a second primary. */\n  secondaryAction?: ProductHeroAction;\n  /** Terms people check before they click (price, trial, card). Only if true. */\n  note?: React.ReactNode;\n  /** The product itself: a ProductWindow composed from your real UI. */\n  product: React.ReactNode;\n  /** 1 on a landing page, where the hero holds the page title; 2 otherwise. */\n  headingLevel?: HeadingLevel;\n};\n\nexport function ProductHero({\n  title,\n  description,\n  primaryAction,\n  secondaryAction,\n  note,\n  product,\n  headingLevel = 1,\n  className,\n  ...props\n}: ProductHeroProps) {\n  const headingId = React.useId();\n  const Heading = `h${headingLevel}` as const;\n\n  return (\n    <section\n      aria-labelledby={headingId}\n      data-slot=\"product-hero\"\n      className={cn(\"bg-background text-foreground\", className)}\n      {...props}\n    >\n      <div className=\"mx-auto w-full max-w-6xl px-4 py-12 sm:px-6 sm:py-16 lg:px-8 lg:py-20\">\n        <div className=\"max-w-3xl\">\n          <Heading\n            id={headingId}\n            className=\"text-4xl leading-[1.1] font-semibold tracking-tight text-balance sm:text-5xl\"\n          >\n            {title}\n          </Heading>\n          {description ? (\n            <p className=\"mt-5 max-w-prose text-lg leading-relaxed text-pretty text-muted-foreground\">\n              {description}\n            </p>\n          ) : null}\n\n          <div className=\"mt-8 flex flex-col gap-3 sm:flex-row sm:items-center\">\n            <a\n              href={primaryAction.href}\n              className={cn(\n                buttonVariants({ size: \"lg\" }),\n                \"h-11 w-full px-6 sm:w-auto\",\n              )}\n            >\n              {primaryAction.label}\n            </a>\n            {secondaryAction ? (\n              <a\n                href={secondaryAction.href}\n                className={cn(\n                  buttonVariants({ variant: \"ghost\", size: \"lg\" }),\n                  \"h-11 w-full px-4 underline decoration-muted-foreground underline-offset-4 hover:decoration-current sm:w-auto\",\n                )}\n              >\n                {secondaryAction.label}\n              </a>\n            ) : null}\n          </div>\n          {note ? (\n            <p className=\"mt-4 text-sm text-muted-foreground\">{note}</p>\n          ) : null}\n        </div>\n\n        <div className=\"mt-12 sm:mt-16\">{product}</div>\n      </div>\n    </section>\n  );\n}\n\nexport type ProductWindowProps = Omit<\n  React.ComponentProps<\"figure\">,\n  \"children\"\n> & {\n  /** The title bar text: the product, workspace or view name. */\n  label: React.ReactNode;\n  /**\n   * Visible caption and the text alternative for the whole frame. Say what\n   * the frame shows; if the product or its content is fictional, say so.\n   */\n  caption: React.ReactNode;\n  /**\n   * A static composition of your product's UI, built from your own\n   * components and tokens rather than a screenshot. It is a picture: it is\n   * hidden from assistive technology and inert, so put no real controls in\n   * it. The content area is a size container, so children can recompose\n   * with @sm: … @3xl: variants as the frame narrows.\n   */\n  children: React.ReactNode;\n};\n\nexport function ProductWindow({\n  label,\n  caption,\n  children,\n  className,\n  ...props\n}: ProductWindowProps) {\n  return (\n    <figure\n      data-slot=\"product-window\"\n      className={cn(\"m-0 min-w-0\", className)}\n      {...props}\n    >\n      <div\n        aria-hidden=\"true\"\n        inert\n        className=\"overflow-hidden rounded-lg border border-border bg-card text-card-foreground select-none\"\n      >\n        <div className=\"flex h-10 items-center border-b border-border bg-muted px-4\">\n          <span className=\"min-w-0 truncate text-xs text-muted-foreground\">\n            {label}\n          </span>\n        </div>\n        <div className=\"@container\">{children}</div>\n      </div>\n      <figcaption className=\"mt-3 max-w-prose text-sm text-pretty text-muted-foreground\">\n        {caption}\n      </figcaption>\n    </figure>\n  );\n}\n"
+    }
+  ],
+  "categories": ["hero"],
+  "docs": "Taste notes, states and rules: https://tessli.vercel.app/library/product-hero",
+  "meta": {
+    "tessli": {
+      "id": "product-hero",
+      "kind": "section",
+      "category": "hero",
+      "title": "Product hero with real UI",
+      "summary": "A landing-page hero that says what the product does, offers one primary action and shows the product itself, composed from interface components.",
+      "use_when": [
+        "The top of a landing page for a product people use on screen, where seeing the interface answers \"what is it?\" faster than copy.",
+        "You can compose a representative view of the product from your own components and tokens, with content that looks like real use."
+      ],
+      "avoid_when": [
+        "The product has no interface worth showing (an API, a service); show a short code sample or the outcome instead.",
+        "The view you would show is not built yet; describe what exists and leave the frame out rather than mocking up features.",
+        "A page deeper in the site (docs, pricing); use a plain heading and description there, not a hero."
+      ],
+      "rules": ["H-01", "W-01", "W-02", "W-03", "C-03", "C-04", "S-02", "R-01"],
+      "ai_default": "A centred headline such as \"Supercharge your workflow\" over a purple-to-blue gradient blob, a vague subline, two equal buttons (\"Get started\" and \"Learn more\"), a row of grey customer logos and \"Trusted by 10,000+ teams\", and a tilted, glowing screenshot or an abstract 3D shape where the product should be.",
+      "why_this_is_better": [
+        "The headline says what the product does for whom, so a visitor knows within one line whether to keep reading.",
+        "One primary button names what happens next; the secondary route is a quiet underlined link, so the two never compete.",
+        "The product is shown as it is used, with a notebook open and believable notes, instead of a gradient or a decorative shape standing in for it.",
+        "The frame is built from the same semantic tokens as the page, so it follows the theme (light or dark) and stays sharp at every width, unlike a screenshot.",
+        "The frame recomposes as it narrows (the list alone on phones, then the open note, then the notebooks column) instead of shrinking a desktop picture until its text is unreadable.",
+        "The terms people check before clicking (\"Free for one person. No card needed.\") sit under the action, and there are no logos, counts or quotes the page cannot source."
+      ],
+      "failures": [
+        "Mocking up features the product does not have, or content that no user would write, so the frame promises more than the product does.",
+        "Adding a second primary button, or styling the secondary link as a full outline button so the choice becomes equal.",
+        "Swapping the frame for a screenshot that turns into unreadable text on phones and ignores the theme.",
+        "Putting real, focusable controls inside the frame; it is a picture, hidden from assistive technology.",
+        "Filling the space under the actions with invented logos or \"Trusted by\" counts.",
+        "Centring a long headline and description, which makes the text ragged and hard to scan."
+      ],
+      "states": ["default"],
+      "responsive": {
+        "desktop": "Headline, description and actions on one left edge, capped at a readable width, with the product frame full width below; from 56rem of frame width it shows the notebooks column, the notes list and the open note.",
+        "mobile": "The text block comes first and the actions stack full width with the primary on top; the frame below drops to the notes list alone, at full text size, and adds the open note from 36rem."
+      },
+      "a11y": [
+        "The section is labelled by its heading; headingLevel is 1 on a landing page (the hero holds the page title) and 2 where the page already has an h1, as in this preview.",
+        "Both actions are links to their destinations, at least 44px tall with a visible focus ring; the secondary is underlined, so it reads as a link without relying on colour.",
+        "The product frame is a figure whose visible caption is its text alternative; the composed interface inside it is aria-hidden and inert, so it adds no tab stops and no duplicate reading.",
+        "Selection in the frame is shown with a left bar and weight as well as a background tint, so it survives greyscale.",
+        "Nothing animates."
+      ],
+      "status": "community",
+      "reviewed_by": [],
+      "reviewed_at": null,
+      "contributors": [],
+      "provenance": "original",
+      "license": "MIT"
+    }
+  }
+}

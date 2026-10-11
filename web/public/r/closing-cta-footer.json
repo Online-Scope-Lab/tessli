@@ -1,0 +1,69 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "closing-cta-footer",
+  "type": "registry:block",
+  "title": "Closing CTA and footer",
+  "description": "One final action tied to the page's job, then a compact footer with a few grouped links, a real contact route and the legal links.",
+  "registryDependencies": ["button"],
+  "dependencies": [],
+  "files": [
+    {
+      "path": "web/registry/items/closing-cta-footer/closing-cta-footer.tsx",
+      "type": "registry:component",
+      "content": "import * as React from \"react\";\n\nimport { cn } from \"@/registry/shadcn/lib/utils\";\nimport { buttonVariants } from \"@/registry/shadcn/ui/button\";\n\nexport type FooterLink = {\n  label: string;\n  href: string;\n  /**\n   * The link leaves your site. It gets a ↗ and a screen-reader note; links\n   * that stay on the site never get an arrow.\n   */\n  external?: boolean;\n};\n\nexport type FooterLinkGroup = {\n  /** A short, plain group name: \"Product\", \"Help\", \"Company\". */\n  title: string;\n  /** Three to five links people actually look for at the end of a page. */\n  links: FooterLink[];\n};\n\nexport type ClosingCta = {\n  /**\n   * The page's point, restated as a reason to act now. Not \"Ready to get\n   * started?\".\n   */\n  title: React.ReactNode;\n  description?: React.ReactNode;\n  /** The one primary action, named by what happens next. */\n  action: { label: string; href: string };\n  /** An optional quieter alternative, rendered as a text link, not a button. */\n  secondaryAction?: { label: string; href: string };\n  /** What removes the last doubt: price, card, commitment. Only if true. */\n  note?: React.ReactNode;\n};\n\nexport type ClosingCtaFooterProps = React.ComponentProps<\"div\"> & {\n  /** Leave out on pages whose job is not to convert (docs, legal, help). */\n  cta?: ClosingCta;\n  /** The product name as text, linking home. No logo is required. */\n  brand: { name: string; href: string; description?: React.ReactNode };\n  /** Two to four groups. More than that is a sitemap, not a footer. */\n  groups: FooterLinkGroup[];\n  /** A real contact route: who answers and how. */\n  contact?: React.ReactNode;\n  /** Privacy, terms and any other legally required links. */\n  legal?: FooterLink[];\n  /** Copyright or company line, e.g. \"© 2026 Example Ltd.\" */\n  copyright?: React.ReactNode;\n};\n\nconst linkClass =\n  \"inline-flex min-h-11 min-w-11 items-center rounded-sm text-sm text-muted-foreground underline-offset-4 hover:text-foreground hover:underline focus-visible:text-foreground focus-visible:ring-[3px] focus-visible:ring-ring/50 focus-visible:outline-none\";\n\nfunction FooterAnchor({ link }: { link: FooterLink }) {\n  return (\n    <a href={link.href} className={linkClass}>\n      {/* One inline run, so a wrapped label keeps ↗ beside its last word. */}\n      <span>\n        {link.label}\n        {link.external ? (\n          <>\n            <span aria-hidden=\"true\">&nbsp;↗</span>\n            <span className=\"sr-only\"> (another site)</span>\n          </>\n        ) : null}\n      </span>\n    </a>\n  );\n}\n\nexport function ClosingCtaFooter({\n  cta,\n  brand,\n  groups,\n  contact,\n  legal,\n  copyright,\n  className,\n  ...props\n}: ClosingCtaFooterProps) {\n  const id = React.useId();\n  const ctaHeadingId = `${id}-cta`;\n\n  return (\n    <div\n      data-slot=\"closing-cta-footer\"\n      className={cn(\"bg-background text-foreground\", className)}\n      {...props}\n    >\n      {cta ? (\n        <section aria-labelledby={ctaHeadingId}>\n          <div className=\"mx-auto w-full max-w-6xl px-4 py-16 sm:px-6 sm:py-20 lg:px-8 lg:py-24\">\n            <div className=\"max-w-2xl\">\n              <h2\n                id={ctaHeadingId}\n                className=\"text-3xl leading-tight font-semibold tracking-tight text-balance sm:text-4xl\"\n              >\n                {cta.title}\n              </h2>\n              {cta.description ? (\n                <p className=\"mt-4 text-base leading-relaxed text-pretty text-muted-foreground\">\n                  {cta.description}\n                </p>\n              ) : null}\n              <div className=\"mt-8 flex flex-col gap-3 sm:flex-row sm:items-center sm:gap-6\">\n                <a\n                  href={cta.action.href}\n                  className={cn(\n                    buttonVariants({ size: \"lg\" }),\n                    \"h-11 w-full sm:w-auto\",\n                  )}\n                >\n                  {cta.action.label}\n                </a>\n                {cta.secondaryAction ? (\n                  <a\n                    href={cta.secondaryAction.href}\n                    className=\"inline-flex min-h-11 items-center self-center rounded-sm text-sm font-medium text-foreground underline underline-offset-4 focus-visible:ring-[3px] focus-visible:ring-ring/50 focus-visible:outline-none sm:self-auto\"\n                  >\n                    {cta.secondaryAction.label}\n                  </a>\n                ) : null}\n              </div>\n              {cta.note ? (\n                <div className=\"mt-4 text-sm leading-relaxed text-muted-foreground\">\n                  {cta.note}\n                </div>\n              ) : null}\n            </div>\n          </div>\n        </section>\n      ) : null}\n\n      <footer className=\"border-t border-border\">\n        <div className=\"mx-auto w-full max-w-6xl px-4 pt-10 pb-6 sm:px-6 lg:px-8 lg:pt-12\">\n          <div className=\"grid gap-8 lg:grid-cols-[minmax(0,1fr)_minmax(0,2fr)] lg:gap-12\">\n            <div className=\"max-w-sm\">\n              <a\n                href={brand.href}\n                className=\"inline-flex min-h-11 items-center rounded-sm text-base font-semibold tracking-tight focus-visible:ring-[3px] focus-visible:ring-ring/50 focus-visible:outline-none\"\n              >\n                {brand.name}\n              </a>\n              {brand.description ? (\n                <p className=\"mt-1 text-sm leading-relaxed text-pretty text-muted-foreground\">\n                  {brand.description}\n                </p>\n              ) : null}\n              {contact ? (\n                <div className=\"mt-4 text-sm leading-relaxed text-pretty text-muted-foreground\">\n                  {contact}\n                </div>\n              ) : null}\n            </div>\n\n            <nav aria-label=\"Footer\">\n              <div\n                className={cn(\n                  \"grid grid-cols-2 gap-x-6 gap-y-8\",\n                  groups.length === 3 && \"sm:grid-cols-3\",\n                  groups.length >= 4 && \"md:grid-cols-4\",\n                )}\n              >\n                {groups.map((group, index) => {\n                  const groupId = `${id}-group-${index}`;\n                  return (\n                    <div key={group.title}>\n                      {/* A list label, not a heading: \"Product\" says nothing\n                          about the page, and the nav landmark already lets\n                          people jump here. */}\n                      <p\n                        id={groupId}\n                        className=\"text-sm font-medium text-foreground\"\n                      >\n                        {group.title}\n                      </p>\n                      <ul aria-labelledby={groupId} className=\"mt-2\">\n                        {group.links.map((link) => (\n                          <li key={link.href}>\n                            <FooterAnchor link={link} />\n                          </li>\n                        ))}\n                      </ul>\n                    </div>\n                  );\n                })}\n              </div>\n            </nav>\n          </div>\n\n          {legal?.length || copyright ? (\n            <div className=\"mt-10 flex flex-col gap-2 border-t border-border pt-4 sm:flex-row sm:items-center sm:justify-between sm:gap-6\">\n              {copyright ? (\n                <div className=\"text-sm text-muted-foreground\">{copyright}</div>\n              ) : null}\n              {legal?.length ? (\n                <nav aria-label=\"Legal\">\n                  <ul className=\"flex flex-wrap gap-x-6\">\n                    {legal.map((link) => (\n                      <li key={link.href}>\n                        <FooterAnchor link={link} />\n                      </li>\n                    ))}\n                  </ul>\n                </nav>\n              ) : null}\n            </div>\n          ) : null}\n        </div>\n      </footer>\n    </div>\n  );\n}\n"
+    }
+  ],
+  "categories": ["cta"],
+  "docs": "Taste notes, states and rules: https://tessli.vercel.app/library/closing-cta-footer",
+  "meta": {
+    "tessli": {
+      "id": "closing-cta-footer",
+      "kind": "section",
+      "category": "cta",
+      "title": "Closing CTA and footer",
+      "summary": "One final action tied to the page's job, then a compact footer with a few grouped links, a real contact route and the legal links.",
+      "use_when": [
+        "A marketing, pricing or product page ends and the reader should have one clear next step.",
+        "The site needs a footer that helps people find a few things (pricing, help, contact, legal), not a sitemap."
+      ],
+      "avoid_when": [
+        "The page's job is not to convert (documentation, help, legal); leave out the CTA and keep the footer only.",
+        "The site has dozens of destinations people browse from the footer; give it a proper sitemap page and link to it.",
+        "The last action on the page is already the same as the hero's with nothing new to say; restate why to act, or drop the CTA."
+      ],
+      "rules": ["H-01", "W-01", "W-02", "W-05", "S-02", "K-02", "R-01", "A-01"],
+      "ai_default": "A centred \"Ready to get started?\" band on a gradient with two equal filled buttons (\"Get started\" and \"Book a demo\") repeating the hero word for word, followed by a five-column link-farm footer of every page, a newsletter field, a row of social-media icons and an arrow after every link.",
+      "why_this_is_better": [
+        "The closing heading restates the page's point as a reason to act now, and the single primary action says what happens next (\"Create a free workspace\").",
+        "The alternative is a quiet text link (\"Compare plans\"), so the page ends on one obvious step instead of a choice between two equal buttons.",
+        "A short note under the action removes the last doubt (price, card, commitment) and only says what is true.",
+        "The footer groups a handful of links people actually look for, names a real contact route with who answers and how fast, and keeps legal links in their own row.",
+        "Only the link that leaves the site carries ↗, with a screen-reader note; nothing else gets an arrow, and there are no icon-only social links."
+      ],
+      "failures": [
+        "Repeating the hero's headline and buttons word for word, so the closing section adds nothing.",
+        "Adding a second filled button, or styling the secondary link as a button of equal weight.",
+        "Turning the footer into a sitemap with five or more columns, or adding social icons with no visible labels.",
+        "Writing a reassurance note (\"Cancel anytime\", \"No card needed\") that the product's terms do not support.",
+        "Pointing the contact line at an inbox nobody reads, or promising a reply time nobody keeps."
+      ],
+      "states": ["default", "footer-only"],
+      "responsive": {
+        "desktop": "The closing heading, text and actions share one left edge with text capped at a readable measure; the footer puts the name, description and contact in one column beside two to four link groups, with copyright and legal links in a row below.",
+        "mobile": "The primary action becomes full width with the text link below it on the same left edge; the footer stacks name and contact first, link groups in two columns, then copyright and legal links."
+      },
+      "a11y": [
+        "The closing section is labelled by its h2; the footer is a footer element with two navigation landmarks, \"Footer\" and \"Legal\".",
+        "Each link group is a list labelled by its visible group name (aria-labelledby), so screen readers announce \"Product, list, 3 items\".",
+        "Every footer link, the brand link and the text link are at least 44px tall with a visible focus ring; the mailto link in the contact sentence is an inline link.",
+        "The external link's ↗ is aria-hidden and replaced by \"(another site)\" for screen readers; nothing relies on colour or hover alone."
+      ],
+      "status": "community",
+      "reviewed_by": [],
+      "reviewed_at": null,
+      "contributors": [],
+      "provenance": "original",
+      "license": "MIT"
+    }
+  }
+}
