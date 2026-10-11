@@ -272,6 +272,8 @@ test("private and reserved addresses are never fetched", async () => {
     "::ffff:a00:1",
     "::127.0.0.1",
     "::7f00:1",
+    "::ffff:0:7f00:1",
+    "::ffff:0:a9fe:a9fe",
     "64:ff9b::7f00:1",
     "64:ff9b::a9fe:a9fe",
     "64:ff9b:1::a00:1",

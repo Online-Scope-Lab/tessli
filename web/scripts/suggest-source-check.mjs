@@ -303,8 +303,9 @@ function ipv6Groups(address) {
 
 /**
  * The IPv4 address an IPv6 address carries, if any: IPv4-mapped
- * (::ffff:0:0/96), IPv4-compatible (::/96), NAT64 (64:ff9b::/96 and
- * 64:ff9b:1::/48) and 6to4 (2002::/16), in dotted or hex form.
+ * (::ffff:0:0/96), IPv4-compatible (::/96), SIIT IPv4-translated
+ * (::ffff:0:0:0/96), NAT64 (64:ff9b::/96 and 64:ff9b:1::/48) and 6to4
+ * (2002::/16), in dotted or hex form.
  */
 function embeddedIpv4(groups) {
   const toIpv4 = (high, low) =>
@@ -312,6 +313,9 @@ function embeddedIpv4(groups) {
   const zero = (from, to) =>
     groups.slice(from, to).every((group) => group === 0);
   if (zero(0, 5) && (groups[5] === 0xffff || groups[5] === 0)) {
+    return toIpv4(groups[6], groups[7]);
+  }
+  if (zero(0, 4) && groups[4] === 0xffff && groups[5] === 0) {
     return toIpv4(groups[6], groups[7]);
   }
   if (
