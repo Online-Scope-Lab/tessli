@@ -266,10 +266,30 @@ test("private and reserved addresses are never fetched", async () => {
     "fd00::1",
     "fe80::1",
     "::ffff:127.0.0.1",
+    // IPv4 carried in IPv6, in the hex form the WHATWG URL parser produces.
+    "::ffff:7f00:1",
+    "::ffff:a9fe:a9fe",
+    "::ffff:a00:1",
+    "::127.0.0.1",
+    "::7f00:1",
+    "64:ff9b::7f00:1",
+    "64:ff9b::a9fe:a9fe",
+    "64:ff9b:1::a00:1",
+    "2002:a00:1::1",
+    "::",
+    "2001:db8::1",
+    "192.0.2.1",
+    "255.255.255.255",
+    "not-an-address",
   ]) {
     assert.equal(isPrivateAddress(address), true, address);
   }
-  for (const address of ["93.184.216.34", "2606:4700::1"]) {
+  for (const address of [
+    "93.184.216.34",
+    "2606:4700::1",
+    "::ffff:5db8:d822",
+    "64:ff9b::5db8:d822",
+  ]) {
     assert.equal(isPrivateAddress(address), false, address);
   }
 
@@ -284,6 +304,31 @@ test("private and reserved addresses are never fetched", async () => {
   assert.equal(fetched, 0);
   assert.equal(result.ok, false);
   assert.match(result.reason, /private or reserved/u);
+
+  // A literal IPv4-mapped address, and a public host redirecting to one.
+  for (const start of [
+    "http://[::ffff:127.0.0.1]:3000/",
+    "http://[64:ff9b::a9fe:a9fe]/latest/meta-data/",
+    "https://public.example/",
+  ]) {
+    const hosts = [];
+    const blocked = await checkLink(start, {
+      lookupImpl: async () => [{ address: "93.184.216.34" }],
+      fetchImpl: async (url) => {
+        hosts.push(url.hostname);
+        return new Response(null, {
+          status: 302,
+          headers: { location: "http://[::ffff:169.254.169.254]/" },
+        });
+      },
+    });
+    assert.equal(blocked.ok, false, start);
+    assert.match(blocked.reason, /private or reserved/u);
+    assert.deepEqual(
+      hosts,
+      start.startsWith("https://public") ? ["public.example"] : [],
+    );
+  }
 });
 
 test("the link check uses HEAD, falls back to GET and caps redirects at five", async () => {
@@ -388,9 +433,37 @@ test("the report has one marker, names duplicates with status, and never echoes 
   );
 });
 
+test("the link line tells a skipped check apart from an unreadable URL", async () => {
+  const skipped = await runSuggestSourceCheck(
+    formBody({ url: "https://example.com" }),
+    sources,
+  );
+  assert.equal(skipped.link, null);
+  assert.match(skipped.report, /- Not checked: the link check was skipped/u);
+  assert.doesNotMatch(skipped.report, /could not be read/u);
+
+  let called = 0;
+  const invalid = await runSuggestSourceCheck(
+    formBody({ url: "not a url" }),
+    sources,
+    {
+      checkLink: async () => {
+        called += 1;
+        return { ok: true, status: 200, method: "HEAD", redirects: 0 };
+      },
+    },
+  );
+  assert.equal(called, 0);
+  assert.match(
+    invalid.report,
+    /#### Link\n\n- Not checked: the URL could not be read\./u,
+  );
+});
+
 test("the check reads every source file, archived ones included", async () => {
   const loaded = await loadSources(repoRoot);
-  assert.equal(loaded.length, 295);
+  // Every source file, so later additions are covered without editing this.
+  assert.ok(loaded.length >= 295);
   const archived = loaded.find((source) => source.slug === "designindex");
   assert.equal(archived.status, "archived");
   assert.match(archived.archived_reason, /\S/u);

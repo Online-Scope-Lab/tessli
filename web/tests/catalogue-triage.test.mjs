@@ -84,13 +84,13 @@ test("every triage row maps to exactly one source file with its frozen id", asyn
   const { rows, files, sources } = await loadTriage();
 
   assert.equal(rows.length, 295);
-  assert.equal(files.length, 295, "no source file is deleted");
-  assert.deepEqual(
-    [...new Set(rows.map((row) => row.slug))].sort(),
-    [...sources.keys()].sort(),
-  );
+  assert.equal(new Set(rows.map((row) => row.slug)).size, rows.length);
+  // No triaged row is deleted. Sources added later (accepted suggestions)
+  // are not part of the triage and may only add files.
+  assert.ok(files.length >= rows.length, "no source file is deleted");
   for (const row of rows) {
     const source = sources.get(row.slug);
+    assert.ok(source, `${row.slug}: source file is missing`);
     assert.equal(source.name, `${row.slug}.yml`);
     assert.equal(source.data.id, row.id, `${row.slug} keeps its id`);
   }
@@ -168,29 +168,38 @@ test("merged rows name their target and fixed rows change URL or wait for review
   assert.equal(sources.get("v0").data.url, "https://v0.app");
 });
 
-test("triage leaves 129 listed sources and 166 archived ones", async () => {
+test("triage leaves 129 listed sources and 166 archived ones", async (t) => {
   const { rows, sources } = await loadTriage();
-  const count = (predicate) => [...sources.values()].filter(predicate).length;
   const decisions = (decision) =>
-    rows.filter((row) => row.owner_decision === decision).length;
+    rows.filter((row) => row.owner_decision === decision);
+  const statuses = (decision) => {
+    const counts = {};
+    for (const row of decisions(decision)) {
+      const { status } = sources.get(row.slug).data;
+      counts[status] = (counts[status] ?? 0) + 1;
+    }
+    return counts;
+  };
 
-  assert.equal(decisions("keep"), 125);
-  assert.equal(decisions("fix-url"), 4);
-  assert.equal(decisions("archive"), 164);
-  assert.equal(decisions("merge"), 2);
+  assert.equal(decisions("keep").length, 125);
+  assert.equal(decisions("fix-url").length, 4);
+  assert.equal(decisions("archive").length, 164);
+  assert.equal(decisions("merge").length, 2);
 
-  // 125 keep rows are active; the 4 fix-url rows are needs-review until a
-  // human opens the new URLs. Both are listed on the site.
-  assert.equal(
-    count(({ data }) => data.status === "active"),
-    125,
-  );
-  assert.equal(
-    count(({ data }) => data.status === "needs-review"),
-    4,
-  );
-  assert.equal(
-    count(({ data }) => data.status === "archived"),
-    166,
+  // Counted over the triaged rows only, so sources added later do not move
+  // these numbers. 125 keep rows are active and 166 archive/merge rows are
+  // archived. The 4 fix-url rows are listed either way: needs-review until a
+  // human opens the new URLs, then active.
+  assert.deepEqual(statuses("keep"), { active: 125 });
+  assert.deepEqual(statuses("archive"), { archived: 164 });
+  assert.deepEqual(statuses("merge"), { archived: 2 });
+  const fixed = statuses("fix-url");
+  assert.equal((fixed.active ?? 0) + (fixed["needs-review"] ?? 0), 4);
+  for (const status of Object.keys(fixed)) {
+    assert.ok(["active", "needs-review"].includes(status), status);
+  }
+  // At the time of the triage: 0 active, 4 needs-review (docs/decisions.md).
+  t.diagnostic(
+    `fix-url rows: ${fixed.active ?? 0} active, ${fixed["needs-review"] ?? 0} needs-review`,
   );
 });

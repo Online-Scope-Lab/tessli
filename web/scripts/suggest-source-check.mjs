@@ -12,7 +12,7 @@
 
 import { appendFile, writeFile } from "node:fs/promises";
 import { lookup } from "node:dns/promises";
-import { isIP } from "node:net";
+import { BlockList, isIP } from "node:net";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
 
@@ -253,40 +253,92 @@ export function validateSuggestion(fields) {
 
 // --- Link check ----------------------------------------------------------
 
-function ipv4Parts(address) {
-  return address.split(".").map(Number);
+const BLOCKED = new BlockList();
+for (const [network, prefix] of [
+  ["0.0.0.0", 8], // "this" network
+  ["10.0.0.0", 8], // private
+  ["100.64.0.0", 10], // shared (carrier-grade NAT)
+  ["127.0.0.0", 8], // loopback
+  ["169.254.0.0", 16], // link-local, cloud metadata
+  ["172.16.0.0", 12], // private
+  ["192.0.0.0", 24], // IETF protocol assignments
+  ["192.0.2.0", 24], // documentation
+  ["192.88.99.0", 24], // 6to4 relay anycast
+  ["192.168.0.0", 16], // private
+  ["198.18.0.0", 15], // benchmarking
+  ["198.51.100.0", 24], // documentation
+  ["203.0.113.0", 24], // documentation
+  ["224.0.0.0", 4], // multicast
+  ["240.0.0.0", 4], // reserved, broadcast
+]) {
+  BLOCKED.addSubnet(network, prefix, "ipv4");
+}
+for (const [network, prefix] of [
+  ["::", 127], // unspecified and loopback
+  ["100::", 64], // discard
+  ["2001::", 23], // IETF protocol assignments, Teredo
+  ["2001:db8::", 32], // documentation
+  ["fc00::", 7], // unique local
+  ["fe80::", 10], // link-local
+  ["fec0::", 10], // site-local (deprecated)
+  ["ff00::", 8], // multicast
+]) {
+  BLOCKED.addSubnet(network, prefix, "ipv6");
 }
 
-/** True for loopback, private, link-local, shared, reserved or multicast. */
+/**
+ * Expands an IPv6 address to its eight 16-bit groups. The WHATWG URL parser
+ * canonicalises it first, so a dotted tail (::ffff:127.0.0.1) becomes hex.
+ */
+function ipv6Groups(address) {
+  const canonical = new URL(`http://[${address}]/`).hostname.slice(1, -1);
+  const [head, tail] = canonical.split("::");
+  const parse = (part) =>
+    part ? part.split(":").map((group) => Number.parseInt(group, 16)) : [];
+  const left = parse(head);
+  const right = parse(tail);
+  const gap = tail === undefined ? 0 : 8 - left.length - right.length;
+  return [...left, ...new Array(gap).fill(0), ...right];
+}
+
+/**
+ * The IPv4 address an IPv6 address carries, if any: IPv4-mapped
+ * (::ffff:0:0/96), IPv4-compatible (::/96), NAT64 (64:ff9b::/96 and
+ * 64:ff9b:1::/48) and 6to4 (2002::/16), in dotted or hex form.
+ */
+function embeddedIpv4(groups) {
+  const toIpv4 = (high, low) =>
+    [high >> 8, high & 0xff, low >> 8, low & 0xff].join(".");
+  const zero = (from, to) =>
+    groups.slice(from, to).every((group) => group === 0);
+  if (zero(0, 5) && (groups[5] === 0xffff || groups[5] === 0)) {
+    return toIpv4(groups[6], groups[7]);
+  }
+  if (
+    groups[0] === 0x64 &&
+    groups[1] === 0xff9b &&
+    (zero(2, 6) || groups[2] === 1)
+  ) {
+    return toIpv4(groups[6], groups[7]);
+  }
+  if (groups[0] === 0x2002) return toIpv4(groups[1], groups[2]);
+  return null;
+}
+
+/**
+ * True for loopback, private, link-local, shared, documentation, reserved or
+ * multicast addresses, including IPv4 ones carried inside IPv6 (mapped,
+ * compatible, NAT64, 6to4) in either textual form. Anything that is not an IP
+ * address counts as private.
+ */
 export function isPrivateAddress(address) {
   const value = String(address).toLowerCase();
-  const mapped = /^::ffff:(\d+\.\d+\.\d+\.\d+)$/u.exec(value);
-  if (mapped) return isPrivateAddress(mapped[1]);
-  if (isIP(value) === 4) {
-    const [a, b] = ipv4Parts(value);
-    return (
-      a === 0 ||
-      a === 10 ||
-      a === 127 ||
-      (a === 100 && b >= 64 && b <= 127) ||
-      (a === 169 && b === 254) ||
-      (a === 172 && b >= 16 && b <= 31) ||
-      (a === 192 && b === 0) ||
-      (a === 192 && b === 168) ||
-      (a === 198 && (b === 18 || b === 19)) ||
-      a >= 224
-    );
-  }
-  if (isIP(value) === 6) {
-    return (
-      value === "::" ||
-      value === "::1" ||
-      /^f[cd]/u.test(value) ||
-      /^fe[89ab]/u.test(value) ||
-      /^ff/u.test(value)
-    );
-  }
-  return true;
+  const family = isIP(value);
+  if (family === 4) return BLOCKED.check(value, "ipv4");
+  if (family !== 6) return true;
+  const embedded = embeddedIpv4(ipv6Groups(value));
+  if (embedded && BLOCKED.check(embedded, "ipv4")) return true;
+  return BLOCKED.check(value, "ipv6");
 }
 
 async function hostIsPublic(hostname, lookupImpl) {
@@ -304,7 +356,8 @@ async function hostIsPublic(hostname, lookupImpl) {
 /**
  * Requests the URL once (HEAD, then GET if HEAD fails or is refused),
  * following at most five redirects by hand, each to a public https or http
- * host. Reports the status only; no body is read.
+ * host. Reports the status only; no body is read. fetch resolves the name
+ * again, so a DNS-rebinding host keeps a small window (see docs/decisions.md).
  */
 export async function checkLink(rawUrl, options = {}) {
   const fetchImpl = options.fetchImpl ?? fetch;
@@ -442,8 +495,10 @@ export function renderReport({ validation, duplicates, link }) {
   lines.push("");
 
   lines.push("#### Link", "");
-  if (!link) {
+  if (!validation.normalised.ok) {
     lines.push("- Not checked: the URL could not be read.");
+  } else if (!link) {
+    lines.push("- Not checked: the link check was skipped for this run.");
   } else if (link.status !== undefined) {
     const via = link.redirects
       ? `, after ${plural(link.redirects, "redirect")} to ${code(link.finalHost)}`

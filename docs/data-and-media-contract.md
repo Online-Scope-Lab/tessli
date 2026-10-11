@@ -93,7 +93,7 @@ type Category = {
 };
 ```
 
-The category ids are defined in `web/scripts/catalogue-lib.mjs`. The current broad categories remain the release taxonomy until a curator assigns every source to the revised v1.2 categories; the suggest-source issue form lists the same 11 categories, and its validation Action rejects any other value. Short labels are used in compact UI while full labels remain available in filters and detail views.
+The category ids are defined in `web/scripts/catalogue-lib.mjs`. The current broad categories remain the release taxonomy until a curator assigns every source to the revised v1.2 categories; the suggest-source issue form lists the same 11 categories, and its validation Action flags any other value in its comment. Short labels are used in compact UI while full labels remain available in filters and detail views.
 
 ## 3. Collection model
 
