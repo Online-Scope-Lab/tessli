@@ -6,7 +6,8 @@ category: visual-assets
 kind: asset
 access: free
 summary: Mix-and-match gradient illustration components
-status: active
+status: archived
+archived_reason: "Triage score 10/18 (keep threshold 14): stale illustration kit; blocked in Aug 2026"
 added_at: 2026-07-22
 added_via: curator
 last_checked: null

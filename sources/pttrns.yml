@@ -6,7 +6,8 @@ category: product-ui-ux
 kind: gallery
 access: paid
 summary: Mobile UI patterns and categorized app screenshots
-status: active
+status: archived
+archived_reason: "Triage score 8/18 (keep threshold 14): legacy paid mobile-pattern site, effectively superseded by Mobbin/ScreensDesign"
 added_at: 2026-07-22
 added_via: curator
 last_checked: null

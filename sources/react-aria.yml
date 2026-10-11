@@ -1,12 +1,12 @@
 id: resource-9ad947201ac6
 slug: react-aria
 name: React Aria
-url: https://react-spectrum.adobe.com/react-aria
+url: https://react-aria.adobe.com
 category: ui-libraries
 kind: library
 access: open-source
 summary: Accessible hooks and components for React applications
-status: active
+status: needs-review
 added_at: 2026-07-22
 added_via: curator
 last_checked: null

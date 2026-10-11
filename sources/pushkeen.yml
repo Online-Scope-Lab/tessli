@@ -6,7 +6,8 @@ category: product-ui-ux
 kind: gallery
 access: free
 summary: Push-notification patterns from mobile apps
-status: active
+status: archived
+archived_reason: "Off-scope: push-notification copy patterns; growth marketing rather than design reference"
 added_at: 2026-07-22
 added_via: curator
 last_checked: null

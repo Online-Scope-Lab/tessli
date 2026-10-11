@@ -6,7 +6,8 @@ category: ui-libraries
 kind: library
 access: open-source
 summary: Unstyled accessible components for React and Vue
-status: active
+status: archived
+archived_reason: "Triage score 13/18 (keep threshold 14): Tailwind Labs headless components; slower cadence; overlaps Radix/Base UI"
 added_at: 2026-07-22
 added_via: curator
 last_checked: null

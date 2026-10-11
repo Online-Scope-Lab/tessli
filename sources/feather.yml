@@ -6,7 +6,9 @@ category: icons
 kind: asset
 access: open-source
 summary: Simple open-source line icons
-status: active
+status: archived
+archived_reason: "Triage score 11/18 (keep threshold 14): unmaintained; Lucide is its maintained fork"
+replaced_by: lucide
 added_at: 2026-07-22
 added_via: curator
 last_checked: null

@@ -6,7 +6,8 @@ category: icons
 kind: asset
 access: freemium
 summary: Large commercial icon collection with multiple styles
-status: active
+status: archived
+archived_reason: "Triage score 8/18 (keep threshold 14): dated commercial collection"
 added_at: 2026-07-22
 added_via: curator
 last_checked: null

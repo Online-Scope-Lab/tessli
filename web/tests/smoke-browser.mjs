@@ -74,7 +74,9 @@ const extraRouteChecks = [
     200,
     "Design systems worth studying",
   ],
-  ["/resources/designindex", 200, "How to access it"],
+  ["/resources/land-book", 200, "How to access it"],
+  // Archived by the v1.2 triage: the page stays, with its notice.
+  ["/resources/designindex", 200, "data-source-archived"],
   ["/curation", 200, "Keep reading"],
   ["/suggest", 200, "What this route does today"],
   ["/auth", 404, "Page not found"],
@@ -214,6 +216,7 @@ const machineRouteChecks = [
     contentType: "text/markdown",
     headings: [
       "# Tessli Source Guide — DesignIndex",
+      "**Archived:** Off-scope",
       "## Use it when",
       "## What to explore",
       "## How to access",

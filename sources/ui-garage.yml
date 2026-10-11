@@ -6,7 +6,8 @@ category: product-ui-ux
 kind: gallery
 access: free
 summary: UI examples organized by pattern and platform
-status: active
+status: archived
+archived_reason: "Triage score 10/18 (keep threshold 14): dated, low-signal pattern collection"
 added_at: 2026-07-22
 added_via: curator
 last_checked: null

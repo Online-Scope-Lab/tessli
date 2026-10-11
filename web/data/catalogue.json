@@ -2,7 +2,7 @@
   "version": 2,
   "source": {
     "path": "sources",
-    "sha256": "d63c0eae1c380eaef90f32cfa588ccb8654f8e15c512c8f737b0285b5b4d14dd",
+    "sha256": "0bb35ae2619ebbb6b6ba5e37073c4d69a70d6c081f8cbcddf0481f665a3e8cb1",
     "fileCount": 295
   },
   "resources": [
@@ -16,10 +16,11 @@
       "category": "website-inspiration",
       "kind": "gallery",
       "access": "free",
-      "status": "active",
+      "status": "archived",
       "addedAt": "2026-07-22",
       "addedVia": "curator",
-      "lastChecked": null
+      "lastChecked": null,
+      "archivedReason": "Off-scope: meta-directory of design resources; duplicates Tessli's own role, link primary sources instead"
     },
     {
       "id": "resource-3ea619b0ed5d",
@@ -31,10 +32,11 @@
       "category": "website-inspiration",
       "kind": "gallery",
       "access": "free",
-      "status": "active",
+      "status": "archived",
       "addedAt": "2026-07-22",
       "addedVia": "curator",
       "lastChecked": null,
+      "archivedReason": "Off-scope: meta-directory of tools/assets; large but duplicates Tessli's own role",
       "previewImageUrl": "https://cdn.prod.website-files.com/5ce10a4c0b5f0b05f522e746/6a4a19c7af17b15abe7f8a0a_toools-design-ogimg.jpg",
       "faviconUrl": "https://cdn.prod.website-files.com/5ce10a4c0b5f0b05f522e746/6a04fc6e5e84a0009e4f999f_toools-design-favicon-light.png"
     },
@@ -166,10 +168,11 @@
       "category": "website-inspiration",
       "kind": "gallery",
       "access": "free",
-      "status": "active",
+      "status": "archived",
       "addedAt": "2026-07-22",
       "addedVia": "curator",
-      "lastChecked": null
+      "lastChecked": null,
+      "archivedReason": "Triage score 12/18 (keep threshold 14): long-running minimal showcase; overlaps Minimal Gallery/SiteInspire"
     },
     {
       "id": "resource-def4db859619",
@@ -181,10 +184,11 @@
       "category": "website-inspiration",
       "kind": "gallery",
       "access": "free",
-      "status": "active",
+      "status": "archived",
       "addedAt": "2026-07-22",
       "addedVia": "curator",
       "lastChecked": null,
+      "archivedReason": "Triage score 13/18 (keep threshold 14): historic experimental-web awards; overlaps Awwwards",
       "faviconUrl": "https://thefwa.com/favicons/apple-touch-icon-180x180.png"
     },
     {
@@ -197,10 +201,11 @@
       "category": "website-inspiration",
       "kind": "gallery",
       "access": "free",
-      "status": "active",
+      "status": "archived",
       "addedAt": "2026-07-22",
       "addedVia": "curator",
-      "lastChecked": null
+      "lastChecked": null,
+      "archivedReason": "Triage score 13/18 (keep threshold 14): active awards gallery; heavy overlap with Awwwards"
     },
     {
       "id": "resource-c5b1425b1432",
@@ -212,10 +217,11 @@
       "category": "website-inspiration",
       "kind": "gallery",
       "access": "free",
-      "status": "active",
+      "status": "archived",
       "addedAt": "2026-07-22",
       "addedVia": "curator",
-      "lastChecked": null
+      "lastChecked": null,
+      "archivedReason": "Triage score 11/18 (keep threshold 14): low-signal awards gallery; pay-to-submit, overlaps Awwwards/CSSDA"
     },
     {
       "id": "resource-a7ae7a615066",
@@ -227,10 +233,11 @@
       "category": "website-inspiration",
       "kind": "gallery",
       "access": "free",
-      "status": "active",
+      "status": "archived",
       "addedAt": "2026-07-22",
       "addedVia": "curator",
       "lastChecked": null,
+      "archivedReason": "Triage score 12/18 (keep threshold 14): decent hand-picked gallery; generic vs stronger peers",
       "faviconUrl": "https://bestwebsite.gallery/assets/images/bitmap/favicon/apple-touch-icon-152x152.png"
     },
     {
@@ -260,10 +267,12 @@
       "category": "website-inspiration",
       "kind": "gallery",
       "access": "free",
-      "status": "active",
+      "status": "archived",
       "addedAt": "2026-07-22",
       "addedVia": "curator",
       "lastChecked": null,
+      "replacedBy": "minimal-gallery",
+      "archivedReason": "Triage score 11/18 (keep threshold 14): minimal gallery with slow updates; superseded by Minimal Gallery",
       "faviconUrl": "https://siiimple.com/wp-content/uploads/2018/02/cropped-favicon-1-1-180x180.png"
     },
     {
@@ -276,10 +285,11 @@
       "category": "website-inspiration",
       "kind": "gallery",
       "access": "free",
-      "status": "active",
+      "status": "archived",
       "addedAt": "2026-07-22",
       "addedVia": "curator",
       "lastChecked": null,
+      "archivedReason": "Triage score 12/18 (keep threshold 14): generic modern gallery; overlap",
       "previewImageUrl": "https://d3alngem7je9z2.cloudfront.net/sitesee_banner.png",
       "faviconUrl": "https://sitesee.co/apple-touch-icon.png"
     },
@@ -293,10 +303,11 @@
       "category": "website-inspiration",
       "kind": "gallery",
       "access": "free",
-      "status": "active",
+      "status": "archived",
       "addedAt": "2026-07-22",
       "addedVia": "curator",
-      "lastChecked": null
+      "lastChecked": null,
+      "archivedReason": "Triage score 13/18 (keep threshold 14): niche experimental/unconventional web; distinct angle"
     },
     {
       "id": "resource-859433d5d4ec",
@@ -332,10 +343,11 @@
       "category": "website-inspiration",
       "kind": "gallery",
       "access": "free",
-      "status": "active",
+      "status": "archived",
       "addedAt": "2026-07-22",
       "addedVia": "curator",
-      "lastChecked": null
+      "lastChecked": null,
+      "archivedReason": "Triage score 12/18 (keep threshold 14): long-running gallery; returned 403 in Aug 2026 discovery"
     },
     {
       "id": "resource-a15a27462f41",
@@ -347,10 +359,11 @@
       "category": "website-inspiration",
       "kind": "gallery",
       "access": "free",
-      "status": "active",
+      "status": "archived",
       "addedAt": "2026-07-22",
       "addedVia": "curator",
       "lastChecked": null,
+      "archivedReason": "Triage score 13/18 (keep threshold 14): dark-mode slice; keep one of the dark-theme galleries",
       "previewImageUrl": "https://cdn.prod.website-files.com/5ea7fc450fe2ee12b924f695/63f1a4bc731066c857d55d0b_97ffe48072aebe00cb0efe5b320f4130_OpenGraph-min.png",
       "faviconUrl": "https://cdn.prod.website-files.com/5ea7fc450fe2ee12b924f695/6a6c2105544b94d5960c409f_Icon_Webclip.png"
     },
@@ -364,10 +377,11 @@
       "category": "website-inspiration",
       "kind": "gallery",
       "access": "free",
-      "status": "active",
+      "status": "archived",
       "addedAt": "2026-07-22",
       "addedVia": "curator",
       "lastChecked": null,
+      "archivedReason": "Merged into Dark Mode Design as a near-duplicate; Dark Mode Design is archived too",
       "previewImageUrl": "https://www.dark.design/og.avif",
       "faviconUrl": "https://www.dark.design/favicon.avif"
     },
@@ -381,10 +395,11 @@
       "category": "website-inspiration",
       "kind": "gallery",
       "access": "free",
-      "status": "active",
+      "status": "archived",
       "addedAt": "2026-07-22",
       "addedVia": "curator",
-      "lastChecked": null
+      "lastChecked": null,
+      "archivedReason": "Triage score 12/18 (keep threshold 14): minimal-sites niche; overlaps Minimal Gallery"
     },
     {
       "id": "resource-a76216149326",
@@ -446,10 +461,11 @@
       "category": "website-inspiration",
       "kind": "gallery",
       "access": "free",
-      "status": "active",
+      "status": "archived",
       "addedAt": "2026-07-22",
       "addedVia": "curator",
-      "lastChecked": null
+      "lastChecked": null,
+      "archivedReason": "Triage score 12/18 (keep threshold 14): large generic gallery; HTML over 1 MiB in discovery; overlap"
     },
     {
       "id": "resource-c5f9ae1c7798",
@@ -461,10 +477,11 @@
       "category": "website-inspiration",
       "kind": "gallery",
       "access": "free",
-      "status": "active",
+      "status": "archived",
       "addedAt": "2026-07-22",
       "addedVia": "curator",
       "lastChecked": null,
+      "archivedReason": "Triage score 11/18 (keep threshold 14): generic gallery, low distinctiveness, uncertain activity",
       "previewImageUrl": "https://framerusercontent.com/assets/wCuoawEW0qbKivA7KjNgcPtGUoE.webp",
       "faviconUrl": "https://framerusercontent.com/images/guIul9Er3h97K5iT2hUme3EDuM.png"
     },
@@ -478,10 +495,11 @@
       "category": "website-inspiration",
       "kind": "gallery",
       "access": "free",
-      "status": "active",
+      "status": "archived",
       "addedAt": "2026-07-22",
       "addedVia": "curator",
-      "lastChecked": null
+      "lastChecked": null,
+      "archivedReason": "Triage score 13/18 (keep threshold 14): 3D/WebGL slice; distinct angle"
     },
     {
       "id": "resource-1cd85fba3a9b",
@@ -493,10 +511,11 @@
       "category": "website-inspiration",
       "kind": "gallery",
       "access": "free",
-      "status": "active",
+      "status": "archived",
       "addedAt": "2026-07-22",
       "addedVia": "curator",
-      "lastChecked": null
+      "lastChecked": null,
+      "archivedReason": "Triage score 12/18 (keep threshold 14): daily-picks gallery; generic"
     },
     {
       "id": "resource-f297ebee087b",
@@ -508,10 +527,11 @@
       "category": "website-inspiration",
       "kind": "gallery",
       "access": "free",
-      "status": "active",
+      "status": "archived",
       "addedAt": "2026-07-22",
       "addedVia": "curator",
-      "lastChecked": null
+      "lastChecked": null,
+      "archivedReason": "Dead link: the listed URL returned HTTP 404 (media check, 2026-08-02)"
     },
     {
       "id": "resource-3894be38dacd",
@@ -523,10 +543,11 @@
       "category": "website-inspiration",
       "kind": "gallery",
       "access": "free",
-      "status": "active",
+      "status": "archived",
       "addedAt": "2026-07-22",
       "addedVia": "curator",
-      "lastChecked": null
+      "lastChecked": null,
+      "archivedReason": "Triage score 11/18 (keep threshold 14): regional niche; fetch failed in Aug 2026 discovery"
     },
     {
       "id": "resource-46c4289c2359",
@@ -538,10 +559,11 @@
       "category": "website-inspiration",
       "kind": "gallery",
       "access": "free",
-      "status": "active",
+      "status": "archived",
       "addedAt": "2026-07-22",
       "addedVia": "curator",
       "lastChecked": null,
+      "archivedReason": "Triage score 11/18 (keep threshold 14): generic \"unusual sites\" gallery; low distinctiveness, uncertain activity",
       "previewImageUrl": "https://www.a-fresh.website/a/2mNsxrKcXN2U0NnPyI6xqK/a-fresh-social-share.jpg"
     },
     {
@@ -586,10 +608,11 @@
       "category": "website-inspiration",
       "kind": "gallery",
       "access": "free",
-      "status": "active",
+      "status": "archived",
       "addedAt": "2026-07-22",
       "addedVia": "curator",
       "lastChecked": null,
+      "archivedReason": "Triage score 10/18 (keep threshold 14): generic gallery, low distinctiveness",
       "previewImageUrl": "https://www.a1.gallery/images/og-default.webp",
       "faviconUrl": "https://www.a1.gallery/images/a1-favicon-192.png"
     },
@@ -603,10 +626,11 @@
       "category": "website-inspiration",
       "kind": "gallery",
       "access": "free",
-      "status": "active",
+      "status": "archived",
       "addedAt": "2026-07-22",
       "addedVia": "curator",
-      "lastChecked": null
+      "lastChecked": null,
+      "archivedReason": "Redirects to Details.so, a different brand (August 2026 check)"
     },
     {
       "id": "resource-910c4b25079b",
@@ -618,10 +642,11 @@
       "category": "website-inspiration",
       "kind": "gallery",
       "access": "free",
-      "status": "active",
+      "status": "archived",
       "addedAt": "2026-07-22",
       "addedVia": "curator",
       "lastChecked": null,
+      "archivedReason": "Triage score 10/18 (keep threshold 14): colour-organised gallery; low signal",
       "previewImageUrl": "https://webzooo.com/og-image.webp",
       "faviconUrl": "https://webzooo.com/apple-touch-icon.png"
     },
@@ -635,10 +660,11 @@
       "category": "website-inspiration",
       "kind": "gallery",
       "access": "free",
-      "status": "active",
+      "status": "archived",
       "addedAt": "2026-07-22",
       "addedVia": "curator",
       "lastChecked": null,
+      "archivedReason": "Triage score 10/18 (keep threshold 14): unclear scope and activity; low signal",
       "previewImageUrl": "https://recent.design/og.png"
     },
     {
@@ -651,10 +677,11 @@
       "category": "website-inspiration",
       "kind": "gallery",
       "access": "free",
-      "status": "active",
+      "status": "archived",
       "addedAt": "2026-07-22",
       "addedVia": "curator",
       "lastChecked": null,
+      "archivedReason": "Triage score 12/18 (keep threshold 14): UI-detail gallery; activity unclear",
       "previewImageUrl": "https://detail.design/og.png"
     },
     {
@@ -748,10 +775,11 @@
       "category": "product-ui-ux",
       "kind": "gallery",
       "access": "free",
-      "status": "active",
+      "status": "archived",
       "addedAt": "2026-07-22",
       "addedVia": "curator",
-      "lastChecked": null
+      "lastChecked": null,
+      "archivedReason": "Redirects to ScreensDesign (August 2026 check)"
     },
     {
       "id": "resource-5c66064d184b",
@@ -763,10 +791,12 @@
       "category": "product-ui-ux",
       "kind": "gallery",
       "access": "free",
-      "status": "active",
+      "status": "archived",
       "addedAt": "2026-07-22",
       "addedVia": "curator",
-      "lastChecked": null
+      "lastChecked": null,
+      "replacedBy": "page-flows",
+      "archivedReason": "Redirects to Page Flows, which is already listed"
     },
     {
       "id": "resource-ac7884b515b0",
@@ -778,10 +808,11 @@
       "category": "product-ui-ux",
       "kind": "gallery",
       "access": "paid",
-      "status": "active",
+      "status": "archived",
       "addedAt": "2026-07-22",
       "addedVia": "curator",
       "lastChecked": null,
+      "archivedReason": "Triage score 8/18 (keep threshold 14): legacy paid mobile-pattern site, effectively superseded by Mobbin/ScreensDesign",
       "faviconUrl": "https://www.pttrns.com/wp-content/uploads/2022/07/favicon-300x300.png"
     },
     {
@@ -794,10 +825,11 @@
       "category": "product-ui-ux",
       "kind": "gallery",
       "access": "free",
-      "status": "active",
+      "status": "archived",
       "addedAt": "2026-07-22",
       "addedVia": "curator",
-      "lastChecked": null
+      "lastChecked": null,
+      "archivedReason": "Redirects to ScreensDesign (August 2026 check)"
     },
     {
       "id": "resource-cd0047dcee72",
@@ -809,10 +841,11 @@
       "category": "product-ui-ux",
       "kind": "gallery",
       "access": "free",
-      "status": "active",
+      "status": "archived",
       "addedAt": "2026-07-22",
       "addedVia": "curator",
       "lastChecked": null,
+      "archivedReason": "Triage score 12/18 (keep threshold 14): B2B/desktop interface elements; activity unclear",
       "previewImageUrl": "https://interface-index.com/assets/interface-index-opengraph-share-image.png",
       "faviconUrl": "https://interface-index.com/favicons/apple-touch-icon.png"
     },
@@ -826,10 +859,12 @@
       "category": "product-ui-ux",
       "kind": "gallery",
       "access": "free",
-      "status": "active",
+      "status": "archived",
       "addedAt": "2026-07-22",
       "addedVia": "curator",
       "lastChecked": null,
+      "replacedBy": "built-for-mars",
+      "archivedReason": "Merged into Built for Mars (same product and domain)",
       "previewImageUrl": "https://cdn.craft.cloud/983dd56a-1291-4f1f-ba2b-57c60e14c22a/assets/images/UXBites.jpg?width=1200&height=630&quality=82&fit=cover&s=dY5gls4sy2fXZUuDCQLhhP5z6E5rJlP7GW83Soj_d6Q"
     },
     {
@@ -857,10 +892,11 @@
       "category": "product-ui-ux",
       "kind": "gallery",
       "access": "freemium",
-      "status": "active",
+      "status": "archived",
       "addedAt": "2026-07-22",
       "addedVia": "curator",
-      "lastChecked": null
+      "lastChecked": null,
+      "archivedReason": "Triage score 10/18 (keep threshold 14): thin mobile-screenshot site; overlaps Mobbin; activity unclear"
     },
     {
       "id": "resource-fe4c69647281",
@@ -872,10 +908,11 @@
       "category": "product-ui-ux",
       "kind": "gallery",
       "access": "freemium",
-      "status": "active",
+      "status": "archived",
       "addedAt": "2026-07-22",
       "addedVia": "curator",
       "lastChecked": null,
+      "archivedReason": "Triage score 13/18 (keep threshold 14): interesting iOS production patterns; cadence unclear",
       "previewImageUrl": "https://www.spottedinprod.com/opengraph-image.png?opengraph-image.ab455828.png",
       "faviconUrl": "https://www.spottedinprod.com/apple-icon.jpg?apple-icon.a92d0c31.jpg"
     },
@@ -889,10 +926,11 @@
       "category": "product-ui-ux",
       "kind": "gallery",
       "access": "freemium",
-      "status": "active",
+      "status": "archived",
       "addedAt": "2026-07-22",
       "addedVia": "curator",
-      "lastChecked": null
+      "lastChecked": null,
+      "archivedReason": "Redirects to ScreensDesign (August 2026 check)"
     },
     {
       "id": "resource-0ef7f1529f9e",
@@ -904,10 +942,11 @@
       "category": "product-ui-ux",
       "kind": "gallery",
       "access": "free",
-      "status": "active",
+      "status": "archived",
       "addedAt": "2026-07-22",
       "addedVia": "curator",
       "lastChecked": null,
+      "archivedReason": "Off-scope: push-notification copy patterns; growth marketing rather than design reference",
       "previewImageUrl": "https://djqvvvbpwetdfwhwbsin.supabase.co/storage/v1/object/public/static/og_image.png?v=1.0"
     },
     {
@@ -920,10 +959,11 @@
       "category": "product-ui-ux",
       "kind": "gallery",
       "access": "freemium",
-      "status": "active",
+      "status": "archived",
       "addedAt": "2026-07-22",
       "addedVia": "curator",
       "lastChecked": null,
+      "archivedReason": "Triage score 13/18 (keep threshold 14): paywall screen niche; useful for subscription apps",
       "previewImageUrl": "https://cdn.dingyuebao.cn/paywall/assets/seo.png"
     },
     {
@@ -936,10 +976,11 @@
       "category": "product-ui-ux",
       "kind": "gallery",
       "access": "free",
-      "status": "active",
+      "status": "archived",
       "addedAt": "2026-07-22",
       "addedVia": "curator",
       "lastChecked": null,
+      "archivedReason": "Triage score 11/18 (keep threshold 14): small iOS showcase; low update cadence",
       "previewImageUrl": "https://laudableapps.com/images/og.jpg"
     },
     {
@@ -1006,10 +1047,11 @@
       "category": "product-ui-ux",
       "kind": "gallery",
       "access": "freemium",
-      "status": "active",
+      "status": "archived",
       "addedAt": "2026-07-22",
       "addedVia": "curator",
       "lastChecked": null,
+      "archivedReason": "Triage score 11/18 (keep threshold 14): SaaS UI gallery overlapping Nicelydone/SaaSFrame/Refero",
       "faviconUrl": "https://saasinterface.com/wp-content/themes/saasinterface/dist/images/favicon-32x32.png"
     },
     {
@@ -1022,10 +1064,11 @@
       "category": "product-ui-ux",
       "kind": "gallery",
       "access": "free",
-      "status": "active",
+      "status": "archived",
       "addedAt": "2026-07-22",
       "addedVia": "curator",
       "lastChecked": null,
+      "archivedReason": "Triage score 11/18 (keep threshold 14): web-app UI gallery; activity unclear; overlaps stronger peers",
       "previewImageUrl": "https://webframe.xyz/site-image.png"
     },
     {
@@ -1038,10 +1081,11 @@
       "category": "product-ui-ux",
       "kind": "gallery",
       "access": "free",
-      "status": "active",
+      "status": "archived",
       "addedAt": "2026-07-22",
       "addedVia": "curator",
       "lastChecked": null,
+      "archivedReason": "Triage score 10/18 (keep threshold 14): dated, low-signal pattern collection",
       "faviconUrl": "https://cdn.prod.website-files.com/6191a88a1c0e3983292beff7/65b9a33e8a695f1636c77064_webclip.png"
     },
     {
@@ -1054,10 +1098,11 @@
       "category": "product-ui-ux",
       "kind": "gallery",
       "access": "free",
-      "status": "active",
+      "status": "archived",
       "addedAt": "2026-07-22",
       "addedVia": "curator",
       "lastChecked": null,
+      "archivedReason": "Off-scope: Dribbble-shot aggregation of concept work, not production UI",
       "previewImageUrl": "https://collectui.com/og-image.jpg",
       "faviconUrl": "https://collectui.com/favicon.png"
     },
@@ -1071,10 +1116,12 @@
       "category": "product-ui-ux",
       "kind": "gallery",
       "access": "free",
-      "status": "active",
+      "status": "archived",
       "addedAt": "2026-07-22",
       "addedVia": "curator",
-      "lastChecked": null
+      "lastChecked": null,
+      "replacedBy": "page-flows",
+      "archivedReason": "Redirects to Page Flows, which is already listed"
     },
     {
       "id": "resource-be4bfd235371",
@@ -1118,10 +1165,11 @@
       "category": "landing-marketing",
       "kind": "gallery",
       "access": "free",
-      "status": "active",
+      "status": "archived",
       "addedAt": "2026-07-22",
       "addedVia": "curator",
-      "lastChecked": null
+      "lastChecked": null,
+      "archivedReason": "Triage score 12/18 (keep threshold 14): landing gallery; overlap"
     },
     {
       "id": "resource-1ef2bbb67602",
@@ -1149,10 +1197,11 @@
       "category": "landing-marketing",
       "kind": "gallery",
       "access": "free",
-      "status": "active",
+      "status": "archived",
       "addedAt": "2026-07-22",
       "addedVia": "curator",
       "lastChecked": null,
+      "archivedReason": "Triage score 12/18 (keep threshold 14): SaaS landing examples; overlaps SaaS Pages/SaaSpo",
       "previewImageUrl": "https://saaslandingpage.com/wp-content/uploads/2023/12/Link-Share-Img@2x.png"
     },
     {
@@ -1165,10 +1214,11 @@
       "category": "landing-marketing",
       "kind": "gallery",
       "access": "free",
-      "status": "active",
+      "status": "archived",
       "addedAt": "2026-07-22",
       "addedVia": "curator",
       "lastChecked": null,
+      "archivedReason": "Triage score 12/18 (keep threshold 14): outcome-linked landing pages; claims unverifiable, activity unclear",
       "previewImageUrl": "https://www.pagesthatprint.com/opengraph-image?7f8f5d1a86d4d3fd"
     },
     {
@@ -1196,10 +1246,11 @@
       "category": "landing-marketing",
       "kind": "gallery",
       "access": "freemium",
-      "status": "active",
+      "status": "archived",
       "addedAt": "2026-07-22",
       "addedVia": "curator",
       "lastChecked": null,
+      "archivedReason": "Triage score 11/18 (keep threshold 14): overlaps SaaSpo/SaaS Pages/Landingfolio",
       "previewImageUrl": "https://saaswebsites.s3.amazonaws.com/wp-content/uploads/2021/10/12224853/twitter-share.jpg"
     },
     {
@@ -1212,10 +1263,11 @@
       "category": "landing-marketing",
       "kind": "gallery",
       "access": "free",
-      "status": "active",
+      "status": "archived",
       "addedAt": "2026-07-22",
       "addedVia": "curator",
-      "lastChecked": null
+      "lastChecked": null,
+      "archivedReason": "Domain now resolves to a personal site, not the SaaS examples gallery (August 2026 check)"
     },
     {
       "id": "resource-6482b53e4e09",
@@ -1227,10 +1279,11 @@
       "category": "landing-marketing",
       "kind": "gallery",
       "access": "free",
-      "status": "active",
+      "status": "archived",
       "addedAt": "2026-07-22",
       "addedVia": "curator",
-      "lastChecked": null
+      "lastChecked": null,
+      "archivedReason": "Triage score 13/18 (keep threshold 14): tracks SaaS site changes over time; growth-adjacent"
     },
     {
       "id": "resource-4aeb8a54737a",
@@ -1257,10 +1310,11 @@
       "category": "landing-marketing",
       "kind": "gallery",
       "access": "free",
-      "status": "active",
+      "status": "archived",
       "addedAt": "2026-07-22",
       "addedVia": "curator",
-      "lastChecked": null
+      "lastChecked": null,
+      "archivedReason": "Triage score 12/18 (keep threshold 14): social-proof pattern niche; activity unclear"
     },
     {
       "id": "resource-33ac0a63b8fc",
@@ -1272,10 +1326,11 @@
       "category": "landing-marketing",
       "kind": "gallery",
       "access": "free",
-      "status": "active",
+      "status": "archived",
       "addedAt": "2026-07-22",
       "addedVia": "curator",
-      "lastChecked": null
+      "lastChecked": null,
+      "archivedReason": "Triage score 12/18 (keep threshold 14): Shopify store gallery; unreachable in Aug 2026 discovery"
     },
     {
       "id": "resource-f5eae6c7040d",
@@ -1302,10 +1357,11 @@
       "category": "landing-marketing",
       "kind": "gallery",
       "access": "free",
-      "status": "active",
+      "status": "archived",
       "addedAt": "2026-07-22",
       "addedVia": "curator",
-      "lastChecked": null
+      "lastChecked": null,
+      "archivedReason": "Triage score 11/18 (keep threshold 14): ecommerce gallery overlapping ecomm.design; unreachable in Aug 2026"
     },
     {
       "id": "resource-8dab0ae47043",
@@ -1317,10 +1373,11 @@
       "category": "landing-marketing",
       "kind": "gallery",
       "access": "free",
-      "status": "active",
+      "status": "archived",
       "addedAt": "2026-07-22",
       "addedVia": "curator",
-      "lastChecked": null
+      "lastChecked": null,
+      "archivedReason": "Triage score 12/18 (keep threshold 14): small UI patterns; mis-categorised under marketing"
     },
     {
       "id": "resource-984c1f3c1edb",
@@ -1347,10 +1404,11 @@
       "category": "landing-marketing",
       "kind": "gallery",
       "access": "freemium",
-      "status": "active",
+      "status": "archived",
       "addedAt": "2026-07-22",
       "addedVia": "curator",
-      "lastChecked": null
+      "lastChecked": null,
+      "archivedReason": "Triage score 12/18 (keep threshold 14): lifecycle email sequences; partly marketing"
     },
     {
       "id": "resource-312c2f30d95c",
@@ -1377,10 +1435,11 @@
       "category": "landing-marketing",
       "kind": "gallery",
       "access": "freemium",
-      "status": "active",
+      "status": "archived",
       "addedAt": "2026-07-22",
       "addedVia": "curator",
-      "lastChecked": null
+      "lastChecked": null,
+      "archivedReason": "Triage score 12/18 (keep threshold 14): uncurated retail-newsletter archive; useful search, low curation"
     },
     {
       "id": "resource-e723df9157ce",
@@ -1392,10 +1451,11 @@
       "category": "landing-marketing",
       "kind": "gallery",
       "access": "freemium",
-      "status": "active",
+      "status": "archived",
       "addedAt": "2026-07-22",
       "addedVia": "curator",
-      "lastChecked": null
+      "lastChecked": null,
+      "archivedReason": "Triage score 10/18 (keep threshold 14): email moodboard tool overlapping RGE/Email Love"
     },
     {
       "id": "resource-649678169c05",
@@ -1407,10 +1467,11 @@
       "category": "landing-marketing",
       "kind": "gallery",
       "access": "free",
-      "status": "active",
+      "status": "archived",
       "addedAt": "2026-07-22",
       "addedVia": "curator",
-      "lastChecked": null
+      "lastChecked": null,
+      "archivedReason": "Triage score 10/18 (keep threshold 14): overlapping email gallery; placeholder OG image"
     },
     {
       "id": "resource-d9ae8b6a37c9",
@@ -1422,10 +1483,11 @@
       "category": "landing-marketing",
       "kind": "gallery",
       "access": "free",
-      "status": "active",
+      "status": "archived",
       "addedAt": "2026-07-22",
       "addedVia": "curator",
       "lastChecked": null,
+      "archivedReason": "Off-scope: marketing/copy tactics, not a design or frontend reference",
       "previewImageUrl": "https://s3.amazonaws.com/harrydry/gdmarketing/cards/main.jpg"
     },
     {
@@ -1438,10 +1500,11 @@
       "category": "landing-marketing",
       "kind": "gallery",
       "access": "free",
-      "status": "active",
+      "status": "archived",
       "addedAt": "2026-07-22",
       "addedVia": "curator",
-      "lastChecked": null
+      "lastChecked": null,
+      "archivedReason": "Off-scope: advertising campaigns"
     },
     {
       "id": "resource-2ca28274835a",
@@ -1453,10 +1516,11 @@
       "category": "landing-marketing",
       "kind": "gallery",
       "access": "free",
-      "status": "active",
+      "status": "archived",
       "addedAt": "2026-07-22",
       "addedVia": "curator",
-      "lastChecked": null
+      "lastChecked": null,
+      "archivedReason": "Off-scope: social-ad creative"
     },
     {
       "id": "resource-fc953b0fb713",
@@ -1468,10 +1532,11 @@
       "category": "landing-marketing",
       "kind": "gallery",
       "access": "freemium",
-      "status": "active",
+      "status": "archived",
       "addedAt": "2026-07-22",
       "addedVia": "curator",
-      "lastChecked": null
+      "lastChecked": null,
+      "archivedReason": "Off-scope: ad-library SaaS for media buyers"
     },
     {
       "id": "resource-28acba4a9d55",
@@ -1554,14 +1619,14 @@
     {
       "id": "resource-fd6228fd8e88",
       "slug": "origin-ui",
-      "name": "Origin UI",
-      "url": "https://originui.com",
-      "domain": "originui.com",
-      "description": "Copyable Tailwind and shadcn-style components",
+      "name": "coss UI",
+      "url": "https://coss.com/ui",
+      "domain": "coss.com",
+      "description": "Copyable Tailwind and shadcn-style components (formerly Origin UI)",
       "category": "ui-libraries",
       "kind": "library",
       "access": "free",
-      "status": "active",
+      "status": "needs-review",
       "addedAt": "2026-07-22",
       "addedVia": "curator",
       "lastChecked": null
@@ -1606,10 +1671,11 @@
       "category": "ui-libraries",
       "kind": "library",
       "access": "open-source",
-      "status": "active",
+      "status": "archived",
       "addedAt": "2026-07-22",
       "addedVia": "curator",
       "lastChecked": null,
+      "archivedReason": "Triage score 12/18 (keep threshold 14): animated components; overlaps Magic UI/React Bits",
       "previewImageUrl": "https://assets.animata.design/og/animata-og-2026.png"
     },
     {
@@ -1637,10 +1703,11 @@
       "category": "ui-libraries",
       "kind": "library",
       "access": "open-source",
-      "status": "active",
+      "status": "archived",
       "addedAt": "2026-07-22",
       "addedVia": "curator",
-      "lastChecked": null
+      "lastChecked": null,
+      "archivedReason": "Triage score 12/18 (keep threshold 14): animated components; overlap"
     },
     {
       "id": "resource-71e0aa0115cb",
@@ -1652,10 +1719,11 @@
       "category": "ui-libraries",
       "kind": "library",
       "access": "open-source",
-      "status": "active",
+      "status": "archived",
       "addedAt": "2026-07-22",
       "addedVia": "curator",
       "lastChecked": null,
+      "archivedReason": "Triage score 10/18 (keep threshold 14): derivative of Magic UI-style components; low distinctiveness",
       "previewImageUrl": "https://www.eldoraui.site/og"
     },
     {
@@ -1668,10 +1736,11 @@
       "category": "ui-libraries",
       "kind": "library",
       "access": "open-source",
-      "status": "active",
+      "status": "archived",
       "addedAt": "2026-07-22",
       "addedVia": "curator",
-      "lastChecked": null
+      "lastChecked": null,
+      "archivedReason": "Triage score 13/18 (keep threshold 14): styled Ark UI/Panda components; niche stack"
     },
     {
       "id": "resource-efc9a91db0cb",
@@ -1698,10 +1767,11 @@
       "category": "ui-libraries",
       "kind": "library",
       "access": "free",
-      "status": "active",
+      "status": "archived",
       "addedAt": "2026-07-22",
       "addedVia": "curator",
       "lastChecked": null,
+      "archivedReason": "Triage score 12/18 (keep threshold 14): copy-paste Tailwind components; overlap",
       "previewImageUrl": "https://kokonutui.com/opengraph-image.png?opengraph-image.219_wqxzyc65n.png",
       "faviconUrl": "https://kokonutui.com/icon.png?icon.2ek27zfaz6hz0.png"
     },
@@ -1715,10 +1785,11 @@
       "category": "ui-libraries",
       "kind": "library",
       "access": "freemium",
-      "status": "active",
+      "status": "archived",
       "addedAt": "2026-07-22",
       "addedVia": "curator",
-      "lastChecked": null
+      "lastChecked": null,
+      "archivedReason": "Triage score 11/18 (keep threshold 14): animated components largely paywalled; overlaps free peers"
     },
     {
       "id": "resource-ea2802bd8265",
@@ -1730,10 +1801,11 @@
       "category": "ui-libraries",
       "kind": "library",
       "access": "open-source",
-      "status": "active",
+      "status": "archived",
       "addedAt": "2026-07-22",
       "addedVia": "curator",
       "lastChecked": null,
+      "archivedReason": "Triage score 11/18 (keep threshold 14): Tailwind components with slow maintenance; overlaps HyperUI",
       "previewImageUrl": "https://floatui.com/thumbnail.png?v2"
     },
     {
@@ -1761,10 +1833,11 @@
       "category": "ui-libraries",
       "kind": "library",
       "access": "open-source",
-      "status": "active",
+      "status": "archived",
       "addedAt": "2026-07-22",
       "addedVia": "curator",
       "lastChecked": null,
+      "archivedReason": "Triage score 12/18 (keep threshold 14): Tailwind components with RTL; overlap",
       "previewImageUrl": "https://merakiui.com/images/thumbnail.webp"
     },
     {
@@ -1841,7 +1914,7 @@
       "category": "ui-libraries",
       "kind": "library",
       "access": "open-source",
-      "status": "active",
+      "status": "archived",
       "addedAt": "2026-07-22",
       "addedVia": "curator",
       "lastChecked": null,
@@ -1850,6 +1923,7 @@
         "tailwind-component-foundation",
         "react-vue-interface-build"
       ],
+      "archivedReason": "Triage score 13/18 (keep threshold 14): Tailwind Labs headless components; slower cadence; overlaps Radix/Base UI",
       "previewImageUrl": "https://headlessui.com/_next/static/media/social-card.46834755.jpg",
       "faviconUrl": "https://headlessui.com/apple-touch-icon.png"
     },
@@ -1895,13 +1969,13 @@
       "id": "resource-9ad947201ac6",
       "slug": "react-aria",
       "name": "React Aria",
-      "url": "https://react-spectrum.adobe.com/react-aria",
-      "domain": "react-spectrum.adobe.com",
+      "url": "https://react-aria.adobe.com",
+      "domain": "react-aria.adobe.com",
       "description": "Accessible hooks and components for React applications",
       "category": "ui-libraries",
       "kind": "library",
       "access": "open-source",
-      "status": "active",
+      "status": "needs-review",
       "addedAt": "2026-07-22",
       "addedVia": "curator",
       "lastChecked": null,
@@ -1971,10 +2045,11 @@
       "category": "ui-libraries",
       "kind": "library",
       "access": "open-source",
-      "status": "active",
+      "status": "archived",
       "addedAt": "2026-07-22",
       "addedVia": "curator",
       "lastChecked": null,
+      "archivedReason": "Triage score 13/18 (keep threshold 14): accessible React components; overlaps Mantine/HeroUI",
       "previewImageUrl": "https://next.chakra-ui.com/og-image.png"
     },
     {
@@ -2027,10 +2102,11 @@
       "category": "ui-libraries",
       "kind": "library",
       "access": "open-source",
-      "status": "active",
+      "status": "archived",
       "addedAt": "2026-07-22",
       "addedVia": "curator",
       "lastChecked": null,
+      "archivedReason": "Triage score 10/18 (keep threshold 14): low maintenance and adoption; superseded by peers",
       "faviconUrl": "https://v2.grommet.io/img/mobile-app-icon.png"
     },
     {
@@ -2043,10 +2119,11 @@
       "category": "ui-libraries",
       "kind": "library",
       "access": "open-source",
-      "status": "active",
+      "status": "archived",
       "addedAt": "2026-07-22",
       "addedVia": "curator",
       "lastChecked": null,
+      "archivedReason": "Triage score 10/18 (keep threshold 14): Segment Evergreen effectively unmaintained",
       "previewImageUrl": "https://evergreen.segment.com/og-image.png",
       "faviconUrl": "https://evergreen.segment.com/favicon-32x32.png"
     },
@@ -2076,10 +2153,11 @@
       "category": "ui-libraries",
       "kind": "library",
       "access": "freemium",
-      "status": "active",
+      "status": "archived",
       "addedAt": "2026-07-22",
       "addedVia": "curator",
       "lastChecked": null,
+      "archivedReason": "Triage score 12/18 (keep threshold 14): large React suite; overlaps MUI/Mantine/Ant",
       "previewImageUrl": "https://fqjltiegiezfetthbags.supabase.co/storage/v1/object/public/common.images/meta/primereact-meta.png"
     },
     {
@@ -2092,10 +2170,11 @@
       "category": "ui-libraries",
       "kind": "library",
       "access": "freemium",
-      "status": "active",
+      "status": "archived",
       "addedAt": "2026-07-22",
       "addedVia": "curator",
       "lastChecked": null,
+      "archivedReason": "Triage score 13/18 (keep threshold 14): large Vue suite",
       "previewImageUrl": "https://fqjltiegiezfetthbags.supabase.co/storage/v1/object/public/common.images/meta/primevue-meta.png"
     },
     {
@@ -2124,10 +2203,11 @@
       "category": "ui-libraries",
       "kind": "library",
       "access": "open-source",
-      "status": "active",
+      "status": "archived",
       "addedAt": "2026-07-22",
       "addedVia": "curator",
       "lastChecked": null,
+      "archivedReason": "Triage score 12/18 (keep threshold 14): Vue app framework; more framework than reference",
       "previewImageUrl": "https://cdn.quasar.dev/logo-v2/social-cover.jpg",
       "faviconUrl": "https://cdn.quasar.dev/logo-v2/favicon/apple-icon-180x180.png"
     },
@@ -2141,10 +2221,11 @@
       "category": "ui-libraries",
       "kind": "library",
       "access": "open-source",
-      "status": "active",
+      "status": "archived",
       "addedAt": "2026-07-22",
       "addedVia": "curator",
-      "lastChecked": null
+      "lastChecked": null,
+      "archivedReason": "Triage score 12/18 (keep threshold 14): Vue 3 library; overlap"
     },
     {
       "id": "resource-b47c9612d739",
@@ -2156,10 +2237,11 @@
       "category": "ui-libraries",
       "kind": "library",
       "access": "open-source",
-      "status": "active",
+      "status": "archived",
       "addedAt": "2026-07-22",
       "addedVia": "curator",
       "lastChecked": null,
+      "archivedReason": "Triage score 13/18 (keep threshold 14): Vue 3 desktop library; overlap",
       "previewImageUrl": "https://element-plus.org/images/element-plus-og-image.png"
     },
     {
@@ -2205,10 +2287,11 @@
       "category": "ui-libraries",
       "kind": "library",
       "access": "open-source",
-      "status": "active",
+      "status": "archived",
       "addedAt": "2026-07-22",
       "addedVia": "curator",
       "lastChecked": null,
+      "archivedReason": "Triage score 12/18 (keep threshold 14): Svelte headless builders; overlaps Bits UI",
       "previewImageUrl": "https://www.melt-ui.com/banner.png",
       "faviconUrl": "https://melt-ui.com/favicon.png"
     },
@@ -2285,7 +2368,7 @@
       "category": "design-systems",
       "kind": "design-system",
       "access": "open-source",
-      "status": "active",
+      "status": "needs-review",
       "addedAt": "2026-07-22",
       "addedVia": "curator",
       "lastChecked": null,
@@ -2445,10 +2528,11 @@
       "category": "design-systems",
       "kind": "design-system",
       "access": "open-source",
-      "status": "active",
+      "status": "archived",
       "addedAt": "2026-07-22",
       "addedVia": "curator",
       "lastChecked": null,
+      "archivedReason": "Triage score 11/18 (keep threshold 14): Uber Base Web in low-maintenance mode; little unique guidance",
       "faviconUrl": "https://baseweb.design/apple-touch-icon.png"
     },
     {
@@ -2476,10 +2560,11 @@
       "category": "design-systems",
       "kind": "design-system",
       "access": "open-source",
-      "status": "active",
+      "status": "archived",
       "addedAt": "2026-07-22",
       "addedVia": "curator",
       "lastChecked": null,
+      "archivedReason": "Triage score 13/18 (keep threshold 14): support-product system; overlap",
       "previewImageUrl": "https://garden.zendesk.com/og-image.png",
       "faviconUrl": "https://garden.zendesk.com/apple-touch-icon.png"
     },
@@ -2524,10 +2609,11 @@
       "category": "design-systems",
       "kind": "design-system",
       "access": "free",
-      "status": "active",
+      "status": "archived",
       "addedAt": "2026-07-22",
       "addedVia": "curator",
-      "lastChecked": null
+      "lastChecked": null,
+      "archivedReason": "Returned HTTP 503 in August 2026; the pattern library is long abandoned"
     },
     {
       "id": "resource-001e294941b1",
@@ -2539,10 +2625,11 @@
       "category": "design-systems",
       "kind": "design-system",
       "access": "free",
-      "status": "active",
+      "status": "archived",
       "addedAt": "2026-07-22",
       "addedVia": "curator",
-      "lastChecked": null
+      "lastChecked": null,
+      "archivedReason": "Dead link: returned HTTP 404 in August 2026"
     },
     {
       "id": "resource-cc130ededb3a",
@@ -2585,10 +2672,11 @@
       "category": "design-systems",
       "kind": "design-system",
       "access": "open-source",
-      "status": "active",
+      "status": "archived",
       "addedAt": "2026-07-22",
       "addedVia": "curator",
       "lastChecked": null,
+      "archivedReason": "Triage score 12/18 (keep threshold 14): canonical CSS framework; low reference value",
       "faviconUrl": "https://assets.ubuntu.com/v1/f1464d22-vanilla_favicon_48px.png"
     },
     {
@@ -2601,10 +2689,11 @@
       "category": "design-systems",
       "kind": "design-system",
       "access": "free",
-      "status": "active",
+      "status": "archived",
       "addedAt": "2026-07-22",
       "addedVia": "curator",
-      "lastChecked": null
+      "lastChecked": null,
+      "archivedReason": "Triage score 13/18 (keep threshold 14): Workday system; overlap with other enterprise systems"
     },
     {
       "id": "resource-086a3588fd20",
@@ -2616,10 +2705,11 @@
       "category": "design-systems",
       "kind": "design-system",
       "access": "free",
-      "status": "active",
+      "status": "archived",
       "addedAt": "2026-07-22",
       "addedVia": "curator",
       "lastChecked": null,
+      "archivedReason": "Off-scope: meta-directory of design systems; likely stale; prefer Component Gallery",
       "previewImageUrl": "https://designsystemsrepo.com/social-media.png",
       "faviconUrl": "https://designsystemsrepo.com/assets/static/favicon.7b22250.0a422b3a157029ec129dcb261a8ff377.png"
     },
@@ -2776,7 +2866,7 @@
       "category": "motion-3d",
       "kind": "library",
       "access": "open-source",
-      "status": "active",
+      "status": "archived",
       "addedAt": "2026-07-22",
       "addedVia": "curator",
       "lastChecked": null,
@@ -2785,6 +2875,7 @@
         "web-scene-animation",
         "designer-developer-motion-handoff"
       ],
+      "archivedReason": "Triage score 13/18 (keep threshold 14): distinct motion editor but development has slowed",
       "faviconUrl": "https://www.theatrejs.com/logo_square_4x.png"
     },
     {
@@ -2819,7 +2910,7 @@
       "category": "motion-3d",
       "kind": "library",
       "access": "open-source",
-      "status": "active",
+      "status": "archived",
       "addedAt": "2026-07-22",
       "addedVia": "curator",
       "lastChecked": null,
@@ -2828,6 +2919,7 @@
         "lightweight-layout-motion",
         "progressive-motion-enhancement"
       ],
+      "archivedReason": "Triage score 13/18 (keep threshold 14): drop-in transitions; small scope",
       "previewImageUrl": "https://cdn.formk.it/web-assets/auto-animate-og.png",
       "faviconUrl": "https://auto-animate.formkit.com/assets/favicon-vrVmGPPs.png"
     },
@@ -2841,10 +2933,11 @@
       "category": "motion-3d",
       "kind": "library",
       "access": "free",
-      "status": "active",
+      "status": "archived",
       "addedAt": "2026-07-22",
       "addedVia": "curator",
       "lastChecked": null,
+      "archivedReason": "Triage score 12/18 (keep threshold 14): CSS animation generator; stable but not updated in years",
       "faviconUrl": "https://animista.net/images/favicons/apple-touch-icon-1024x1024.png"
     },
     {
@@ -2857,10 +2950,11 @@
       "category": "motion-3d",
       "kind": "library",
       "access": "open-source",
-      "status": "active",
+      "status": "archived",
       "addedAt": "2026-07-22",
       "addedVia": "curator",
-      "lastChecked": null
+      "lastChecked": null,
+      "archivedReason": "Triage score 10/18 (keep threshold 14): unmaintained since ~2018; dated effects"
     },
     {
       "id": "resource-c69cb09bf119",
@@ -2872,10 +2966,11 @@
       "category": "motion-3d",
       "kind": "library",
       "access": "open-source",
-      "status": "active",
+      "status": "archived",
       "addedAt": "2026-07-22",
       "addedVia": "curator",
-      "lastChecked": null
+      "lastChecked": null,
+      "archivedReason": "Triage score 10/18 (keep threshold 14): unmaintained; superseded by CSS scroll-driven animations/Motion"
     },
     {
       "id": "resource-d1f753224743",
@@ -2904,10 +2999,11 @@
       "category": "motion-3d",
       "kind": "library",
       "access": "open-source",
-      "status": "active",
+      "status": "archived",
       "addedAt": "2026-07-22",
       "addedVia": "curator",
       "lastChecked": null,
+      "archivedReason": "Triage score 11/18 (keep threshold 14): low activity; View Transitions/Swup cover the need",
       "faviconUrl": "https://barba.js.org/favicons/apple-touch-icon.png?rev=1"
     },
     {
@@ -2920,10 +3016,11 @@
       "category": "motion-3d",
       "kind": "library",
       "access": "open-source",
-      "status": "active",
+      "status": "archived",
       "addedAt": "2026-07-22",
       "addedVia": "curator",
       "lastChecked": null,
+      "archivedReason": "Triage score 12/18 (keep threshold 14): page-transition library; niche",
       "previewImageUrl": "https://swup.js.org/assets/images/swup-social-preview.png",
       "faviconUrl": "https://swup.js.org/assets/images/icon.png"
     },
@@ -2954,10 +3051,11 @@
       "category": "motion-3d",
       "kind": "library",
       "access": "open-source",
-      "status": "active",
+      "status": "archived",
       "addedAt": "2026-07-22",
       "addedVia": "curator",
-      "lastChecked": null
+      "lastChecked": null,
+      "archivedReason": "Off-scope: creative-coding education; not a UI/frontend reference"
     },
     {
       "id": "resource-60b9eb212f58",
@@ -2986,10 +3084,11 @@
       "category": "motion-3d",
       "kind": "library",
       "access": "free",
-      "status": "active",
+      "status": "archived",
       "addedAt": "2026-07-22",
       "addedVia": "curator",
       "lastChecked": null,
+      "archivedReason": "Triage score 10/18 (keep threshold 14): hobby motion editor; little maintenance",
       "previewImageUrl": "https://www.motionity.app/meta.png"
     },
     {
@@ -3115,7 +3214,7 @@
       "category": "typography",
       "kind": "asset",
       "access": "free",
-      "status": "active",
+      "status": "archived",
       "addedAt": "2026-07-22",
       "addedVia": "curator",
       "lastChecked": null,
@@ -3123,7 +3222,8 @@
         "commercial-font-shortlisting",
         "font-licence-check",
         "webfont-preparation"
-      ]
+      ],
+      "archivedReason": "Triage score 13/18 (keep threshold 14): dated catalogue but webfont generator still unique"
     },
     {
       "id": "resource-1e6b6fad041e",
@@ -3135,10 +3235,11 @@
       "category": "typography",
       "kind": "asset",
       "access": "freemium",
-      "status": "active",
+      "status": "archived",
       "addedAt": "2026-07-22",
       "addedVia": "curator",
-      "lastChecked": null
+      "lastChecked": null,
+      "archivedReason": "Triage score 10/18 (keep threshold 14): ad-heavy aggregator; low signal"
     },
     {
       "id": "resource-3b9d710cd447",
@@ -3172,7 +3273,7 @@
       "category": "typography",
       "kind": "asset",
       "access": "free",
-      "status": "active",
+      "status": "archived",
       "addedAt": "2026-07-22",
       "addedVia": "curator",
       "lastChecked": null,
@@ -3181,6 +3282,7 @@
         "typeface-provenance-research",
         "licence-aware-font-selection"
       ],
+      "archivedReason": "Triage score 13/18 (keep threshold 14): curated open-source fonts; update cadence unclear",
       "faviconUrl": "https://open-foundry.com/apple-touch-icon-180x180.png"
     },
     {
@@ -3213,10 +3315,11 @@
       "category": "typography",
       "kind": "asset",
       "access": "freemium",
-      "status": "active",
+      "status": "archived",
       "addedAt": "2026-07-22",
       "addedVia": "curator",
-      "lastChecked": null
+      "lastChecked": null,
+      "archivedReason": "Triage score 13/18 (keep threshold 14): indie foundry; PWYW"
     },
     {
       "id": "resource-42936db47b6a",
@@ -3228,7 +3331,7 @@
       "category": "typography",
       "kind": "asset",
       "access": "free",
-      "status": "active",
+      "status": "archived",
       "addedAt": "2026-07-22",
       "addedVia": "curator",
       "lastChecked": null,
@@ -3237,6 +3340,7 @@
         "brand-kit-prototyping",
         "typography-direction"
       ],
+      "archivedReason": "Triage score 12/18 (keep threshold 14): Google Fonts pairings; dated",
       "faviconUrl": "https://fontpair.co/lovable-uploads/6d6d6d0f-fa61-4507-8417-e70f209f5be1.png"
     },
     {
@@ -3249,10 +3353,11 @@
       "category": "typography",
       "kind": "asset",
       "access": "free",
-      "status": "active",
+      "status": "archived",
       "addedAt": "2026-07-22",
       "addedVia": "curator",
-      "lastChecked": null
+      "lastChecked": null,
+      "archivedReason": "Triage score 10/18 (keep threshold 14): 2017-era ML demo; stale"
     },
     {
       "id": "resource-b7677565a4ff",
@@ -3264,10 +3369,11 @@
       "category": "typography",
       "kind": "asset",
       "access": "free",
-      "status": "active",
+      "status": "archived",
       "addedAt": "2026-07-22",
       "addedVia": "curator",
-      "lastChecked": null
+      "lastChecked": null,
+      "archivedReason": "Triage score 10/18 (keep threshold 14): thin pairing generator; low signal"
     },
     {
       "id": "resource-a3de99297c3f",
@@ -3279,10 +3385,11 @@
       "category": "typography",
       "kind": "asset",
       "access": "free",
-      "status": "active",
+      "status": "archived",
       "addedAt": "2026-07-22",
       "addedVia": "curator",
       "lastChecked": null,
+      "archivedReason": "Triage score 10/18 (keep threshold 14): thin font previewer; low signal",
       "previewImageUrl": "https://fontmojo.com/OG.jpg",
       "faviconUrl": "https://fontmojo.com/apple-touch-icon.png"
     },
@@ -3311,10 +3418,11 @@
       "category": "typography",
       "kind": "asset",
       "access": "free",
-      "status": "active",
+      "status": "archived",
       "addedAt": "2026-07-22",
       "addedVia": "curator",
       "lastChecked": null,
+      "archivedReason": "Triage score 12/18 (keep threshold 14): free alternatives to paid faces; accuracy/licensing need checks",
       "previewImageUrl": "https://og.fontalternatives.com/og/home.png",
       "faviconUrl": "https://fontalternatives.com/apple-touch-icon.png"
     },
@@ -3328,10 +3436,11 @@
       "category": "typography",
       "kind": "asset",
       "access": "free",
-      "status": "active",
+      "status": "archived",
       "addedAt": "2026-07-22",
       "addedVia": "curator",
       "lastChecked": null,
+      "archivedReason": "Triage score 10/18 (keep threshold 14): thin mood-based Google Fonts browser",
       "previewImageUrl": "https://sweetfont.com/og-image.png"
     },
     {
@@ -3344,10 +3453,11 @@
       "category": "typography",
       "kind": "asset",
       "access": "free",
-      "status": "active",
+      "status": "archived",
       "addedAt": "2026-07-22",
       "addedVia": "curator",
       "lastChecked": null,
+      "archivedReason": "Triage score 10/18 (keep threshold 14): browser extension; low signal",
       "previewImageUrl": "https://tinkerfont.com/og.webp",
       "faviconUrl": "https://tinkerfont.com/apple-touch-icon.png"
     },
@@ -3466,10 +3576,11 @@
       "category": "color-accessibility",
       "kind": "tool",
       "access": "free",
-      "status": "active",
+      "status": "archived",
       "addedAt": "2026-07-22",
       "addedVia": "curator",
       "lastChecked": null,
+      "archivedReason": "Triage score 13/18 (keep threshold 14): ML palettes; overlaps Coolors/Khroma",
       "faviconUrl": "https://huemint.com/assets/img/logo-32.png"
     },
     {
@@ -3482,10 +3593,11 @@
       "category": "color-accessibility",
       "kind": "tool",
       "access": "free",
-      "status": "active",
+      "status": "archived",
       "addedAt": "2026-07-22",
       "addedVia": "curator",
       "lastChecked": null,
+      "archivedReason": "Triage score 10/18 (keep threshold 14): stale AI palette demo",
       "previewImageUrl": "https://www.khroma.co/assets/images/social.png"
     },
     {
@@ -3498,10 +3610,11 @@
       "category": "color-accessibility",
       "kind": "tool",
       "access": "free",
-      "status": "active",
+      "status": "archived",
       "addedAt": "2026-07-22",
       "addedVia": "curator",
       "lastChecked": null,
+      "archivedReason": "Triage score 11/18 (keep threshold 14): old gradient picker; low depth",
       "previewImageUrl": "https://grabient.com/grabber.png",
       "faviconUrl": "https://grabient.com/apple-touch-icon.png"
     },
@@ -3515,10 +3628,11 @@
       "category": "color-accessibility",
       "kind": "tool",
       "access": "free",
-      "status": "active",
+      "status": "archived",
       "addedAt": "2026-07-22",
       "addedVia": "curator",
-      "lastChecked": null
+      "lastChecked": null,
+      "archivedReason": "Triage score 12/18 (keep threshold 14): algorithmic scales; stale but functional"
     },
     {
       "id": "resource-06ff97d405dd",
@@ -3530,10 +3644,11 @@
       "category": "color-accessibility",
       "kind": "tool",
       "access": "open-source",
-      "status": "active",
+      "status": "archived",
       "addedAt": "2026-07-22",
       "addedVia": "curator",
       "lastChecked": null,
+      "archivedReason": "Triage score 11/18 (keep threshold 14): unmaintained palette; superseded by Radix Colors/Tailwind palette",
       "previewImageUrl": "https://yeun.github.io/open-color/asset/images/og-image.png"
     },
     {
@@ -3578,10 +3693,11 @@
       "category": "color-accessibility",
       "kind": "tool",
       "access": "free-trial",
-      "status": "active",
+      "status": "archived",
       "addedAt": "2026-07-22",
       "addedVia": "curator",
       "lastChecked": null,
+      "archivedReason": "Triage score 11/18 (keep threshold 14): trial-gated palette tool; overlaps free peers",
       "previewImageUrl": "https://atmos.style/og.png"
     },
     {
@@ -3618,10 +3734,11 @@
       "category": "color-accessibility",
       "kind": "tool",
       "access": "freemium",
-      "status": "active",
+      "status": "archived",
       "addedAt": "2026-07-22",
       "addedVia": "curator",
       "lastChecked": null,
+      "archivedReason": "Triage score 12/18 (keep threshold 14): a11y plugin suite; mostly paid",
       "faviconUrl": "https://www.getstark.co/apple-touch-icon.png"
     },
     {
@@ -3664,10 +3781,11 @@
       "category": "color-accessibility",
       "kind": "tool",
       "access": "freemium",
-      "status": "active",
+      "status": "archived",
       "addedAt": "2026-07-22",
       "addedVia": "curator",
-      "lastChecked": null
+      "lastChecked": null,
+      "archivedReason": "Triage score 12/18 (keep threshold 14): automated a11y testing; dev tool"
     },
     {
       "id": "resource-9829cb4f86f3",
@@ -3679,10 +3797,11 @@
       "category": "color-accessibility",
       "kind": "tool",
       "access": "open-source",
-      "status": "active",
+      "status": "archived",
       "addedAt": "2026-07-22",
       "addedVia": "curator",
       "lastChecked": null,
+      "archivedReason": "Triage score 13/18 (keep threshold 14): Microsoft a11y testing tools",
       "faviconUrl": "https://accessibilityinsights.io/img/accessibilityinsights.png"
     },
     {
@@ -3767,10 +3886,11 @@
       "category": "icons",
       "kind": "asset",
       "access": "open-source",
-      "status": "active",
+      "status": "archived",
       "addedAt": "2026-07-22",
       "addedVia": "curator",
       "lastChecked": null,
+      "archivedReason": "Triage score 13/18 (keep threshold 14): Bootstrap icon set; overlap",
       "previewImageUrl": "https://icons.getbootstrap.com/assets/img/bootstrap-icons-social.png",
       "faviconUrl": "https://icons.getbootstrap.com/assets/img/favicons/apple-touch-icon.png"
     },
@@ -3784,10 +3904,11 @@
       "category": "icons",
       "kind": "asset",
       "access": "open-source",
-      "status": "active",
+      "status": "archived",
       "addedAt": "2026-07-22",
       "addedVia": "curator",
-      "lastChecked": null
+      "lastChecked": null,
+      "archivedReason": "Triage score 10/18 (keep threshold 14): unmaintained since ~2019"
     },
     {
       "id": "resource-c0300d9fcfe7",
@@ -3863,10 +3984,12 @@
       "category": "icons",
       "kind": "asset",
       "access": "open-source",
-      "status": "active",
+      "status": "archived",
       "addedAt": "2026-07-22",
       "addedVia": "curator",
       "lastChecked": null,
+      "replacedBy": "lucide",
+      "archivedReason": "Triage score 11/18 (keep threshold 14): unmaintained; Lucide is its maintained fork",
       "previewImageUrl": "https://feathericons.com/feather-og.png",
       "faviconUrl": "https://feathericons.com/favicon-32x32.png"
     },
@@ -3880,10 +4003,11 @@
       "category": "icons",
       "kind": "asset",
       "access": "open-source",
-      "status": "active",
+      "status": "archived",
       "addedAt": "2026-07-22",
       "addedVia": "curator",
       "lastChecked": null,
+      "archivedReason": "Triage score 12/18 (keep threshold 14): Ionic set; overlap",
       "previewImageUrl": "https://ionic.io/ionicons/assets/img/meta/ionicons-og.png",
       "faviconUrl": "https://ionic.io/ionicons/assets/img/meta/apple-icon-180x180.png"
     },
@@ -3897,10 +4021,11 @@
       "category": "icons",
       "kind": "asset",
       "access": "freemium",
-      "status": "active",
+      "status": "archived",
       "addedAt": "2026-07-22",
       "addedVia": "curator",
       "lastChecked": null,
+      "archivedReason": "Triage score 11/18 (keep threshold 14): overlaps stronger free sets; mixed free/pro",
       "previewImageUrl": "https://boxicons.com/opengraph-image.png"
     },
     {
@@ -3928,10 +4053,11 @@
       "category": "icons",
       "kind": "asset",
       "access": "open-source",
-      "status": "active",
+      "status": "archived",
       "addedAt": "2026-07-22",
       "addedVia": "curator",
       "lastChecked": null,
+      "archivedReason": "Triage score 11/18 (keep threshold 14): small set, low activity",
       "previewImageUrl": "https://akaricons.com/images/akar-opengraph.png",
       "faviconUrl": "https://akaricons.com/images/favicon.png"
     },
@@ -3945,10 +4071,11 @@
       "category": "icons",
       "kind": "asset",
       "access": "open-source",
-      "status": "active",
+      "status": "archived",
       "addedAt": "2026-07-22",
       "addedVia": "curator",
       "lastChecked": null,
+      "archivedReason": "Triage score 11/18 (keep threshold 14): small ~300-icon set rarely updated; same domain as Radix UI",
       "previewImageUrl": "https://www.radix-ui.com/icons/opengraph-image.png?opengraph-image.3ksnf9bqqwt8y.png"
     },
     {
@@ -3961,10 +4088,11 @@
       "category": "icons",
       "kind": "asset",
       "access": "open-source",
-      "status": "active",
+      "status": "archived",
       "addedAt": "2026-07-22",
       "addedVia": "curator",
       "lastChecked": null,
+      "archivedReason": "Triage score 11/18 (keep threshold 14): ByteDance set with low maintenance",
       "faviconUrl": "https://lf-iconpark-cdn-cn.bytetos.com/obj/iconpark-site/bydesign/iconparksite/logo192.png"
     },
     {
@@ -3977,10 +4105,11 @@
       "category": "icons",
       "kind": "asset",
       "access": "free",
-      "status": "active",
+      "status": "archived",
       "addedAt": "2026-07-22",
       "addedVia": "curator",
-      "lastChecked": null
+      "lastChecked": null,
+      "archivedReason": "Triage score 13/18 (keep threshold 14): huge SVG search; mixed quality/licensing"
     },
     {
       "id": "resource-e9556bbef966",
@@ -4009,10 +4138,11 @@
       "category": "icons",
       "kind": "asset",
       "access": "freemium",
-      "status": "active",
+      "status": "archived",
       "addedAt": "2026-07-22",
       "addedVia": "curator",
-      "lastChecked": null
+      "lastChecked": null,
+      "archivedReason": "Triage score 12/18 (keep threshold 14): large styled sets; attribution/paywall limits"
     },
     {
       "id": "resource-903c037f5110",
@@ -4040,10 +4170,11 @@
       "category": "icons",
       "kind": "asset",
       "access": "freemium",
-      "status": "active",
+      "status": "archived",
       "addedAt": "2026-07-22",
       "addedVia": "curator",
-      "lastChecked": null
+      "lastChecked": null,
+      "archivedReason": "Triage score 12/18 (keep threshold 14): icons/illustrations/3D marketplace; overlap"
     },
     {
       "id": "resource-d573ddeaa5d7",
@@ -4055,10 +4186,11 @@
       "category": "icons",
       "kind": "asset",
       "access": "freemium",
-      "status": "active",
+      "status": "archived",
       "addedAt": "2026-07-22",
       "addedVia": "curator",
       "lastChecked": null,
+      "archivedReason": "Triage score 11/18 (keep threshold 14): stock-icon marketplace; inconsistent quality, attribution required",
       "previewImageUrl": "https://media.flaticon.com/share/flaticon-generic.jpg",
       "faviconUrl": "https://media.flaticon.com/dist/min/img/apple-icon-180x180.png"
     },
@@ -4087,10 +4219,11 @@
       "category": "icons",
       "kind": "asset",
       "access": "freemium",
-      "status": "active",
+      "status": "archived",
       "addedAt": "2026-07-22",
       "addedVia": "curator",
-      "lastChecked": null
+      "lastChecked": null,
+      "archivedReason": "Triage score 11/18 (keep threshold 14): overlaps stronger free sets"
     },
     {
       "id": "resource-e338ae3b4f41",
@@ -4102,10 +4235,11 @@
       "category": "icons",
       "kind": "asset",
       "access": "freemium",
-      "status": "active",
+      "status": "archived",
       "addedAt": "2026-07-22",
       "addedVia": "curator",
       "lastChecked": null,
+      "archivedReason": "Triage score 8/18 (keep threshold 14): dated commercial collection",
       "previewImageUrl": "https://www.iconshock.com/img/iconshock_og.png"
     },
     {
@@ -4118,10 +4252,11 @@
       "category": "icons",
       "kind": "asset",
       "access": "paid",
-      "status": "active",
+      "status": "archived",
       "addedAt": "2026-07-22",
       "addedVia": "curator",
       "lastChecked": null,
+      "archivedReason": "Triage score 13/18 (keep threshold 14): premium high-quality set + organiser",
       "previewImageUrl": "https://nucleoapp.com/assets/img/open-graph-home.png",
       "faviconUrl": "https://nucleoapp.com/assets/img/favicons/apple-touch-icon.png"
     },
@@ -4151,10 +4286,11 @@
       "category": "icons",
       "kind": "asset",
       "access": "open-source",
-      "status": "active",
+      "status": "archived",
       "addedAt": "2026-07-22",
       "addedVia": "curator",
       "lastChecked": null,
+      "archivedReason": "Triage score 10/18 (keep threshold 14): small, unmaintained animated set",
       "previewImageUrl": "https://useanimations.com/images/OGuseAnimationsImage.jpg",
       "faviconUrl": "https://useanimations.com/images/apple-touch-icon.png"
     },
@@ -4217,10 +4353,11 @@
       "category": "visual-assets",
       "kind": "asset",
       "access": "freemium",
-      "status": "active",
+      "status": "archived",
       "addedAt": "2026-07-22",
       "addedVia": "curator",
       "lastChecked": null,
+      "archivedReason": "Triage score 13/18 (keep threshold 14): Freepik animated illustrations; attribution",
       "faviconUrl": "https://storyset.com/apple-touch-icon.png"
     },
     {
@@ -4233,10 +4370,11 @@
       "category": "visual-assets",
       "kind": "asset",
       "access": "freemium",
-      "status": "active",
+      "status": "archived",
       "addedAt": "2026-07-22",
       "addedVia": "curator",
       "lastChecked": null,
+      "archivedReason": "Triage score 12/18 (keep threshold 14): illustration packs; overlap",
       "previewImageUrl": "https://cdn.prod.website-files.com/626f5d0ae6c15c780f2dd5c4/6336572b684b9428785ccd40_DrawKit%20Website%20preview.png",
       "faviconUrl": "https://cdn.prod.website-files.com/682d1c6b3c16bb956eafd69b/682d1c6b3c16bb956eafd82f_DrawKit-Webclip.png"
     },
@@ -4250,10 +4388,11 @@
       "category": "visual-assets",
       "kind": "asset",
       "access": "free",
-      "status": "active",
+      "status": "archived",
       "addedAt": "2026-07-22",
       "addedVia": "curator",
-      "lastChecked": null
+      "lastChecked": null,
+      "archivedReason": "Triage score 10/18 (keep threshold 14): stale illustration kit; blocked in Aug 2026"
     },
     {
       "id": "resource-ecbd825ee3b6",
@@ -4265,10 +4404,11 @@
       "category": "visual-assets",
       "kind": "asset",
       "access": "freemium",
-      "status": "active",
+      "status": "archived",
       "addedAt": "2026-07-22",
       "addedVia": "curator",
       "lastChecked": null,
+      "archivedReason": "Triage score 13/18 (keep threshold 14): artist illustrations; maintenance status should be checked",
       "previewImageUrl": "https://blush.design/og-image.png",
       "faviconUrl": "https://blush.design/apple-touch-icon.png"
     },
@@ -4282,10 +4422,11 @@
       "category": "visual-assets",
       "kind": "asset",
       "access": "freemium",
-      "status": "active",
+      "status": "archived",
       "addedAt": "2026-07-22",
       "addedVia": "curator",
-      "lastChecked": null
+      "lastChecked": null,
+      "archivedReason": "Triage score 12/18 (keep threshold 14): Icons8 illustrations; same vendor as Icons8"
     },
     {
       "id": "resource-5b575f3ee3b5",
@@ -4297,10 +4438,11 @@
       "category": "visual-assets",
       "kind": "asset",
       "access": "free",
-      "status": "active",
+      "status": "archived",
       "addedAt": "2026-07-22",
       "addedVia": "curator",
       "lastChecked": null,
+      "archivedReason": "Triage score 11/18 (keep threshold 14): generic flat illustrations; low distinctiveness",
       "faviconUrl": "https://cdn.prod.website-files.com/63a9cb71c629474d4ae334b9/64a5f701714b5fe13a08253f_favicons%201%20(2).png"
     },
     {
@@ -4313,10 +4455,11 @@
       "category": "visual-assets",
       "kind": "asset",
       "access": "free",
-      "status": "active",
+      "status": "archived",
       "addedAt": "2026-07-22",
       "addedVia": "curator",
       "lastChecked": null,
+      "archivedReason": "Triage score 13/18 (keep threshold 14): classic mix-and-match people; stale but widely used",
       "previewImageUrl": "https://cdn.prod.website-files.com/5bff8886c3964a992e90d465/5c050a75fc73fba30bf816f1_seo-rectangle.jpg",
       "faviconUrl": "https://cdn.prod.website-files.com/5bff8886c3964a992e90d465/5c00a0ce59aa851331d34687_favicon-256.png"
     },
@@ -4330,10 +4473,11 @@
       "category": "visual-assets",
       "kind": "asset",
       "access": "freemium",
-      "status": "active",
+      "status": "archived",
       "addedAt": "2026-07-22",
       "addedVia": "curator",
       "lastChecked": null,
+      "archivedReason": "Triage score 11/18 (keep threshold 14): stale illustration set",
       "previewImageUrl": "https://absurd.design/img/social.jpg",
       "faviconUrl": "https://absurd.design/img/favicon/favicon-196x196.png"
     },
@@ -4347,10 +4491,11 @@
       "category": "visual-assets",
       "kind": "asset",
       "access": "free",
-      "status": "active",
+      "status": "archived",
       "addedAt": "2026-07-22",
       "addedVia": "curator",
       "lastChecked": null,
+      "archivedReason": "Triage score 11/18 (keep threshold 14): stale; same author as Humaaans",
       "previewImageUrl": "https://cdn.prod.website-files.com/5d5d5904f8a21bfe5ff69367/5da4cb5454976755fcac7930_seo-doodles.jpg",
       "faviconUrl": "https://cdn.prod.website-files.com/5d5d5904f8a21bfe5ff69367/5da4e9a454896ed80730e86b_icon-256w.png"
     },
@@ -4364,10 +4509,11 @@
       "category": "visual-assets",
       "kind": "asset",
       "access": "free",
-      "status": "active",
+      "status": "archived",
       "addedAt": "2026-07-22",
       "addedVia": "curator",
-      "lastChecked": null
+      "lastChecked": null,
+      "archivedReason": "Triage score 10/18 (keep threshold 14): agency freebie page; low signal"
     },
     {
       "id": "resource-26a2e04e37d0",
@@ -4379,10 +4525,11 @@
       "category": "visual-assets",
       "kind": "asset",
       "access": "free",
-      "status": "active",
+      "status": "archived",
       "addedAt": "2026-07-22",
       "addedVia": "curator",
-      "lastChecked": null
+      "lastChecked": null,
+      "archivedReason": "Triage score 10/18 (keep threshold 14): Envato freebie site with little maintenance"
     },
     {
       "id": "resource-559b9456dc31",
@@ -4394,10 +4541,11 @@
       "category": "visual-assets",
       "kind": "asset",
       "access": "free",
-      "status": "active",
+      "status": "archived",
       "addedAt": "2026-07-22",
       "addedVia": "curator",
       "lastChecked": null,
+      "archivedReason": "Off-scope: mostly stock video/music",
       "faviconUrl": "https://assets.mixkit.co/build/favicons/apple-icon-180x180-bd3d5e368063b793b955fa228a1d9311b54a29ac871f53c2e0c69e81d5fa0d48.png"
     },
     {
@@ -4410,10 +4558,11 @@
       "category": "visual-assets",
       "kind": "asset",
       "access": "freemium",
-      "status": "active",
+      "status": "archived",
       "addedAt": "2026-07-22",
       "addedVia": "curator",
       "lastChecked": null,
+      "archivedReason": "Triage score 12/18 (keep threshold 14): representation-focused illustrations; activity unclear",
       "previewImageUrl": "https://cdn.prod.website-files.com/5f0a234d1293a2f4eb599bb5/6663071f6326830dc7376926_Open%20graph%20image.png",
       "faviconUrl": "https://cdn.prod.website-files.com/5f0a234d1293a2f4eb599bb5/5f4550325567b37a486e00eb_black%20illustrations%20logo.png"
     },
@@ -4459,10 +4608,11 @@
       "category": "visual-assets",
       "kind": "asset",
       "access": "free",
-      "status": "active",
+      "status": "archived",
       "addedAt": "2026-07-22",
       "addedVia": "curator",
       "lastChecked": null,
+      "archivedReason": "Triage score 10/18 (keep threshold 14): thin pattern generator",
       "previewImageUrl": "https://patternpad.com/images/patternpad-banner.png",
       "faviconUrl": "https://patternpad.com/images/apple-touch-icon.png"
     },
@@ -4491,10 +4641,11 @@
       "category": "visual-assets",
       "kind": "asset",
       "access": "paid",
-      "status": "active",
+      "status": "archived",
       "addedAt": "2026-07-22",
       "addedVia": "curator",
-      "lastChecked": null
+      "lastChecked": null,
+      "archivedReason": "Triage score 12/18 (keep threshold 14): premium UI-kit marketplace; previews browsable"
     },
     {
       "id": "resource-0e09218b32a8",
@@ -4506,10 +4657,11 @@
       "category": "visual-assets",
       "kind": "asset",
       "access": "paid",
-      "status": "active",
+      "status": "archived",
       "addedAt": "2026-07-22",
       "addedVia": "curator",
-      "lastChecked": null
+      "lastChecked": null,
+      "archivedReason": "Off-scope: general creative marketplace"
     },
     {
       "id": "resource-c8e3ed2b894f",
@@ -4521,10 +4673,11 @@
       "category": "visual-assets",
       "kind": "asset",
       "access": "paid",
-      "status": "active",
+      "status": "archived",
       "addedAt": "2026-07-22",
       "addedVia": "curator",
-      "lastChecked": null
+      "lastChecked": null,
+      "archivedReason": "Off-scope: general stock subscription"
     },
     {
       "id": "resource-424e130e8422",
@@ -4536,10 +4689,11 @@
       "category": "visual-assets",
       "kind": "asset",
       "access": "freemium",
-      "status": "active",
+      "status": "archived",
       "addedAt": "2026-07-22",
       "addedVia": "curator",
-      "lastChecked": null
+      "lastChecked": null,
+      "archivedReason": "Triage score 10/18 (keep threshold 14): freebie blog; low curation"
     },
     {
       "id": "resource-9b1c10807887",
@@ -4551,10 +4705,11 @@
       "category": "visual-assets",
       "kind": "asset",
       "access": "free",
-      "status": "active",
+      "status": "archived",
       "addedAt": "2026-07-22",
       "addedVia": "curator",
-      "lastChecked": null
+      "lastChecked": null,
+      "archivedReason": "Triage score 11/18 (keep threshold 14): freebie aggregation; low curation"
     },
     {
       "id": "resource-e6df4e7faaeb",
@@ -4566,10 +4721,11 @@
       "category": "visual-assets",
       "kind": "asset",
       "access": "free",
-      "status": "active",
+      "status": "archived",
       "addedAt": "2026-07-22",
       "addedVia": "curator",
-      "lastChecked": null
+      "lastChecked": null,
+      "archivedReason": "Triage score 11/18 (keep threshold 14): freebie blog; low curation"
     },
     {
       "id": "resource-ed42ea2dfde6",
@@ -4581,10 +4737,11 @@
       "category": "visual-assets",
       "kind": "asset",
       "access": "free",
-      "status": "active",
+      "status": "archived",
       "addedAt": "2026-07-22",
       "addedVia": "curator",
-      "lastChecked": null
+      "lastChecked": null,
+      "archivedReason": "Triage score 10/18 (keep threshold 14): freebie UI-kit site; low curation"
     },
     {
       "id": "resource-fd3c2a3a5685",
@@ -4641,10 +4798,11 @@
       "category": "design-tools-ai",
       "kind": "tool",
       "access": "freemium",
-      "status": "active",
+      "status": "archived",
       "addedAt": "2026-07-22",
       "addedVia": "curator",
-      "lastChecked": null
+      "lastChecked": null,
+      "archivedReason": "Triage score 13/18 (keep threshold 14): site builder; Made in Webflow showcase"
     },
     {
       "id": "resource-25d0d0a31e39",
@@ -4656,10 +4814,11 @@
       "category": "design-tools-ai",
       "kind": "tool",
       "access": "open-source",
-      "status": "active",
+      "status": "archived",
       "addedAt": "2026-07-22",
       "addedVia": "curator",
-      "lastChecked": null
+      "lastChecked": null,
+      "archivedReason": "Triage score 13/18 (keep threshold 14): OSS visual builder; overlap"
     },
     {
       "id": "resource-66b5da3637f8",
@@ -4671,10 +4830,11 @@
       "category": "design-tools-ai",
       "kind": "tool",
       "access": "freemium",
-      "status": "active",
+      "status": "archived",
       "addedAt": "2026-07-22",
       "addedVia": "curator",
-      "lastChecked": null
+      "lastChecked": null,
+      "archivedReason": "Off-scope: AI wireframing tool (Miro-owned); not a reference source"
     },
     {
       "id": "resource-a6b11a4a9e4a",
@@ -4686,10 +4846,11 @@
       "category": "design-tools-ai",
       "kind": "tool",
       "access": "freemium",
-      "status": "active",
+      "status": "archived",
       "addedAt": "2026-07-22",
       "addedVia": "curator",
-      "lastChecked": null
+      "lastChecked": null,
+      "archivedReason": "Off-scope: AI wireframing; not a reference source"
     },
     {
       "id": "resource-9e3aab723774",
@@ -4710,13 +4871,13 @@
       "id": "resource-4b1cd233f883",
       "slug": "v0",
       "name": "v0",
-      "url": "https://v0.dev",
-      "domain": "v0.dev",
+      "url": "https://v0.app",
+      "domain": "v0.app",
       "description": "AI generation of React interfaces and applications",
       "category": "design-tools-ai",
       "kind": "tool",
       "access": "freemium",
-      "status": "active",
+      "status": "needs-review",
       "addedAt": "2026-07-22",
       "addedVia": "curator",
       "lastChecked": null,
@@ -4738,10 +4899,11 @@
       "category": "design-tools-ai",
       "kind": "tool",
       "access": "freemium",
-      "status": "active",
+      "status": "archived",
       "addedAt": "2026-07-22",
       "addedVia": "curator",
-      "lastChecked": null
+      "lastChecked": null,
+      "archivedReason": "Off-scope: full-stack app builder; not a design reference"
     },
     {
       "id": "resource-f97b4c3f7a1b",
@@ -4753,10 +4915,11 @@
       "category": "design-tools-ai",
       "kind": "tool",
       "access": "freemium",
-      "status": "active",
+      "status": "archived",
       "addedAt": "2026-07-22",
       "addedVia": "curator",
-      "lastChecked": null
+      "lastChecked": null,
+      "archivedReason": "Off-scope: full-stack app builder; not a design reference"
     },
     {
       "id": "resource-da732653cd75",
@@ -4768,10 +4931,11 @@
       "category": "design-tools-ai",
       "kind": "tool",
       "access": "freemium",
-      "status": "active",
+      "status": "archived",
       "addedAt": "2026-07-22",
       "addedVia": "curator",
-      "lastChecked": null
+      "lastChecked": null,
+      "archivedReason": "Off-scope: cloud IDE"
     },
     {
       "id": "resource-f11c3566f12d",
@@ -4783,10 +4947,11 @@
       "category": "design-tools-ai",
       "kind": "tool",
       "access": "freemium",
-      "status": "active",
+      "status": "archived",
       "addedAt": "2026-07-22",
       "addedVia": "curator",
-      "lastChecked": null
+      "lastChecked": null,
+      "archivedReason": "Triage score 13/18 (keep threshold 14): AI product-UI exploration"
     },
     {
       "id": "resource-e81793f16a04",
@@ -4821,10 +4986,11 @@
       "category": "design-tools-ai",
       "kind": "tool",
       "access": "freemium",
-      "status": "active",
+      "status": "archived",
       "addedAt": "2026-07-22",
       "addedVia": "curator",
-      "lastChecked": null
+      "lastChecked": null,
+      "archivedReason": "Off-scope: niche no-code 3D site builder"
     },
     {
       "id": "resource-9bfe4a3897ac",
@@ -4836,10 +5002,11 @@
       "category": "design-tools-ai",
       "kind": "tool",
       "access": "freemium",
-      "status": "active",
+      "status": "archived",
       "addedAt": "2026-07-22",
       "addedVia": "curator",
-      "lastChecked": null
+      "lastChecked": null,
+      "archivedReason": "Off-scope: visual React builder; not a reference"
     },
     {
       "id": "resource-5069590156b7",
@@ -4851,10 +5018,11 @@
       "category": "design-tools-ai",
       "kind": "tool",
       "access": "freemium",
-      "status": "active",
+      "status": "archived",
       "addedAt": "2026-07-22",
       "addedVia": "curator",
-      "lastChecked": null
+      "lastChecked": null,
+      "archivedReason": "Off-scope: visual CMS/dev platform; not a reference"
     },
     {
       "id": "resource-09924984d444",
@@ -4866,10 +5034,11 @@
       "category": "design-tools-ai",
       "kind": "tool",
       "access": "freemium",
-      "status": "active",
+      "status": "archived",
       "addedAt": "2026-07-22",
       "addedVia": "curator",
-      "lastChecked": null
+      "lastChecked": null,
+      "archivedReason": "Off-scope: design-to-code tool; not a reference"
     },
     {
       "id": "resource-29300a9360ac",
@@ -4881,10 +5050,11 @@
       "category": "design-tools-ai",
       "kind": "tool",
       "access": "freemium",
-      "status": "active",
+      "status": "archived",
       "addedAt": "2026-07-22",
       "addedVia": "curator",
-      "lastChecked": null
+      "lastChecked": null,
+      "archivedReason": "Off-scope: design-to-code tool; not a reference"
     },
     {
       "id": "resource-79fdadef1595",
@@ -4896,10 +5066,11 @@
       "category": "design-tools-ai",
       "kind": "tool",
       "access": "freemium",
-      "status": "active",
+      "status": "archived",
       "addedAt": "2026-07-22",
       "addedVia": "curator",
-      "lastChecked": null
+      "lastChecked": null,
+      "archivedReason": "Off-scope: low-relevance builder/code generator"
     }
   ],
   "categories": [
@@ -5000,20 +5171,15 @@
       "description": "Focused references for studying SaaS positioning, landing-page structure, pricing presentation, proof, copy, and conversion patterns.",
       "resourceIds": [
         "resource-1ef2bbb67602",
-        "resource-f52b14528531",
         "resource-385af8e671b2",
-        "resource-be31b989dbbe",
-        "resource-8071ca23bfc4",
         "resource-c6ead4379d56",
-        "resource-068a498e5c53",
-        "resource-4aeb8a54737a",
-        "resource-3028e7238961",
-        "resource-6482b53e4e09"
+        "resource-984c1f3c1edb",
+        "resource-4aeb8a54737a"
       ],
       "coverStyle": "editorial",
-      "lastReviewedAt": "2026-07-29",
+      "lastReviewedAt": "2026-10-11",
       "status": "published",
-      "outcome": "A defensible SaaS landing-page direction covering positioning, page structure, proof, pricing, and iteration signals.",
+      "outcome": "A defensible SaaS landing-page direction covering positioning, page structure, proof, and pricing.",
       "audience": "Founders, product marketers, and designers preparing or revising a SaaS marketing site.",
       "stages": [
         {
@@ -5025,10 +5191,6 @@
             {
               "resourceId": "resource-1ef2bbb67602",
               "role": "SaaS Pages anchors the first scan with examples that combine visual structure and copywriting."
-            },
-            {
-              "resourceId": "resource-f52b14528531",
-              "role": "SaaS Landing Page broadens the comparison set across recognizable SaaS companies."
             },
             {
               "resourceId": "resource-385af8e671b2",
@@ -5043,40 +5205,24 @@
           "decision": "Decide the page sequence and which sections deserve custom design versus established patterns.",
           "items": [
             {
-              "resourceId": "resource-be31b989dbbe",
-              "role": "SaaS Websites supports screenshot-level comparison of complete pages and recurring patterns."
-            },
-            {
-              "resourceId": "resource-8071ca23bfc4",
-              "role": "SaaS Examples adds product and email references when the marketing journey extends beyond the homepage."
-            },
-            {
               "resourceId": "resource-c6ead4379d56",
               "role": "Landingfolio helps inspect individual sections and templates before composing the full page."
+            },
+            {
+              "resourceId": "resource-984c1f3c1edb",
+              "role": "Really Good Emails adds onboarding and lifecycle email references when the marketing journey extends beyond the homepage."
             }
           ]
         },
         {
           "id": "validate-conversion",
-          "title": "Validate conversion decisions",
-          "inspect": "Study pricing communication, commercial evidence, and visible website experiments.",
-          "decision": "Decide how to present price, proof, and iteration hypotheses before implementation.",
+          "title": "Decide pricing presentation",
+          "inspect": "Study pricing architecture, plan comparison, and how price and proof are presented together.",
+          "decision": "Decide how to present price, plans, and proof before implementation.",
           "items": [
-            {
-              "resourceId": "resource-068a498e5c53",
-              "role": "Landings supplies a broader landing-page reference set for checking whether the chosen structure is too narrow."
-            },
             {
               "resourceId": "resource-4aeb8a54737a",
               "role": "Pricing Pages isolates pricing architecture, plan comparison, and purchase-friction patterns."
-            },
-            {
-              "resourceId": "resource-3028e7238961",
-              "role": "Pages That Print adds examples connected to reported revenue outcomes while remaining directional evidence only."
-            },
-            {
-              "resourceId": "resource-6482b53e4e09",
-              "role": "Glance exposes visible experiments and changes so the team can define what to test after launch."
             }
           ]
         }
@@ -5086,21 +5232,18 @@
       "id": "collection-typography-font-tools",
       "slug": "typography-font-tools",
       "title": "Typography and font tools",
-      "description": "A practical starting set for finding typefaces, studying real typography, checking pairings, and exploring open and commercial font libraries.",
+      "description": "A practical starting set for finding typefaces, studying real typography and pairings, and exploring open and commercial font libraries.",
       "resourceIds": [
         "resource-75ecf91b7063",
         "resource-25a6040823a7",
         "resource-7ff8dc33fe5e",
         "resource-e50e8d1ec69c",
-        "resource-098d155d3888",
         "resource-3b9d710cd447",
-        "resource-07d9b88ef5af",
-        "resource-42936db47b6a",
         "resource-bfe4ba65c95b",
         "resource-35c3f2fef142"
       ],
       "coverStyle": "typography",
-      "lastReviewedAt": "2026-07-29",
+      "lastReviewedAt": "2026-10-11",
       "status": "published",
       "outcome": "A practical typography direction with licensed candidate fonts, real-world references, pairing rationale, and implementation options.",
       "audience": "Designers and frontend teams choosing type for a brand, marketing site, or product interface.",
@@ -5121,7 +5264,7 @@
             },
             {
               "resourceId": "resource-7ff8dc33fe5e",
-              "role": "Typewolf supplies editorial recommendations and category context for narrowing candidates."
+              "role": "Typewolf supplies editorial recommendations, pairings seen on real sites, and category context for narrowing candidates."
             }
           ]
         },
@@ -5136,10 +5279,6 @@
               "role": "Fonts In Use shows typography in real artifacts rather than isolated specimen pages."
             },
             {
-              "resourceId": "resource-098d155d3888",
-              "role": "Font Squirrel helps check commercial-use free options and practical licensing constraints."
-            },
-            {
               "resourceId": "resource-3b9d710cd447",
               "role": "Free Faces adds a curated view of freely licensed typefaces."
             }
@@ -5147,18 +5286,10 @@
         },
         {
           "id": "pair-and-finalize",
-          "title": "Pair and finalize",
-          "inspect": "Compare pairings and more distinctive open or commercial options after the core direction is clear.",
+          "title": "Finalize the shortlist",
+          "inspect": "Compare more distinctive open and commercial families once the core direction and pairings are clear.",
           "decision": "Select the primary and supporting families to prototype and test.",
           "items": [
-            {
-              "resourceId": "resource-07d9b88ef5af",
-              "role": "Open Foundry focuses the search on open-source families and their presentation."
-            },
-            {
-              "resourceId": "resource-42936db47b6a",
-              "role": "FontPair supports explicit headline-and-body pairing comparisons."
-            },
             {
               "resourceId": "resource-bfe4ba65c95b",
               "role": "Velvetyne introduces experimental libre options when the direction needs more character."
@@ -5184,12 +5315,10 @@
         "resource-631345718892",
         "resource-e5c348f9190f",
         "resource-c873b7d6cf1d",
-        "resource-e0917de2c7a9",
-        "resource-23cc7dc75f79",
-        "resource-9ab2847bb0d5"
+        "resource-23cc7dc75f79"
       ],
       "coverStyle": "motion",
-      "lastReviewedAt": "2026-07-29",
+      "lastReviewedAt": "2026-10-11",
       "status": "published",
       "outcome": "A motion approach matched to the interaction goal, runtime constraints, authoring workflow, and team stack.",
       "audience": "Designers and frontend engineers deciding how to add purposeful interface motion, vector animation, or browser 3D.",
@@ -5237,7 +5366,7 @@
         {
           "id": "match-the-stack",
           "title": "Match the implementation stack",
-          "inspect": "Compare low-level rendering, React integration, sequencing, and lightweight alternatives.",
+          "inspect": "Compare React integration for 3D with smaller code-driven animation libraries.",
           "decision": "Select the implementation layer that fits the framework, performance budget, and maintenance capacity.",
           "items": [
             {
@@ -5245,16 +5374,8 @@
               "role": "React Three Fiber shows how Three.js integrates with React component architecture."
             },
             {
-              "resourceId": "resource-e0917de2c7a9",
-              "role": "Theatre.js supports authored sequencing and motion-design control for web scenes."
-            },
-            {
               "resourceId": "resource-23cc7dc75f79",
               "role": "Anime.js offers a smaller code-driven animation alternative for targeted interactions."
-            },
-            {
-              "resourceId": "resource-9ab2847bb0d5",
-              "role": "AutoAnimate covers low-configuration layout transitions where a full motion system is unnecessary."
             }
           ]
         }
@@ -5268,17 +5389,14 @@
       "resourceIds": [
         "resource-affc29967a7c",
         "resource-01db82f90e23",
-        "resource-3bfbe7e95242",
         "resource-9ad947201ac6",
-        "resource-1cd898a493ab",
         "resource-efc9a91db0cb",
-        "resource-ea2802bd8265",
         "resource-2210207ad328",
         "resource-d94d49dfe5a3",
         "resource-1f691e6fcca8"
       ],
       "coverStyle": "systems",
-      "lastReviewedAt": "2026-07-29",
+      "lastReviewedAt": "2026-10-11",
       "status": "published",
       "outcome": "A component-library strategy that balances accessibility, styling ownership, speed, animation needs, and long-term maintenance.",
       "audience": "React product teams selecting primitives, copyable components, or higher-level UI building blocks.",
@@ -5296,26 +5414,18 @@
             {
               "resourceId": "resource-01db82f90e23",
               "role": "Radix UI represents unstyled accessible primitives with strong behavior ownership."
-            },
-            {
-              "resourceId": "resource-3bfbe7e95242",
-              "role": "Headless UI offers an alternative unstyled model across React and Vue."
             }
           ]
         },
         {
           "id": "accelerate-common-ui",
           "title": "Accelerate common UI",
-          "inspect": "Inspect styled and composable component sets that can extend the chosen foundation.",
+          "inspect": "Inspect accessible hooks and composable component sets that can extend the chosen foundation.",
           "decision": "Decide which higher-level components are safe to adopt rather than rebuild.",
           "items": [
             {
               "resourceId": "resource-9ad947201ac6",
               "role": "React Aria provides accessibility-focused hooks and components for teams needing deeper behavior control."
-            },
-            {
-              "resourceId": "resource-1cd898a493ab",
-              "role": "Park UI shows a styled system built on headless primitives."
             },
             {
               "resourceId": "resource-efc9a91db0cb",
@@ -5329,10 +5439,6 @@
           "inspect": "Review community, interactive, and motion-heavy components only after the accessibility and ownership boundary is fixed.",
           "decision": "Choose where expressive components add value without fragmenting the system.",
           "items": [
-            {
-              "resourceId": "resource-ea2802bd8265",
-              "role": "Float UI supplies responsive Tailwind sections and components for faster assembly."
-            },
             {
               "resourceId": "resource-2210207ad328",
               "role": "Uiverse provides community-made visual elements that require selective quality review."
@@ -5360,16 +5466,13 @@
         "resource-9b8e899f4893",
         "resource-9aca4d63712d",
         "resource-4eee7a21dbf7",
-        "resource-b44930562cf2",
         "resource-3cfed5eefb62",
-        "resource-06ff97d405dd",
-        "resource-9829cb4f86f3",
         "resource-2f7f7a4aa766"
       ],
       "coverStyle": "systems",
-      "lastReviewedAt": "2026-07-29",
+      "lastReviewedAt": "2026-10-11",
       "status": "published",
-      "outcome": "A colour system that communicates the intended brand while surviving contrast, visual-impairment, component-state, and page-level checks.",
+      "outcome": "A colour system that communicates the intended brand while surviving contrast, visual-impairment, and page-level checks.",
       "audience": "Designers and frontend teams defining or auditing interface colour systems.",
       "stages": [
         {
@@ -5405,17 +5508,13 @@
             {
               "resourceId": "resource-4eee7a21dbf7",
               "role": "WebAIM Contrast Checker provides a focused standards-based foreground/background test."
-            },
-            {
-              "resourceId": "resource-b44930562cf2",
-              "role": "Stark supports collaborative accessibility review across design and development tools."
             }
           ]
         },
         {
           "id": "verify-in-context",
           "title": "Verify in context",
-          "inspect": "Preview the system on interfaces, then run page- and component-level accessibility checks.",
+          "inspect": "Preview the system on interfaces, then run page-level accessibility checks.",
           "decision": "Approve, revise, or reject the colour implementation based on contextual evidence.",
           "items": [
             {
@@ -5423,16 +5522,8 @@
               "role": "Realtime Colors previews palette and typography choices in a page-like context."
             },
             {
-              "resourceId": "resource-06ff97d405dd",
-              "role": "Open Color offers an interface-oriented open colour scale for comparison or adoption."
-            },
-            {
-              "resourceId": "resource-9829cb4f86f3",
-              "role": "Accessibility Insights supports structured automated and guided implementation checks."
-            },
-            {
               "resourceId": "resource-2f7f7a4aa766",
-              "role": "WAVE provides a second page-level evaluation lens for issues automation and visual inspection reveal."
+              "role": "WAVE provides a page-level evaluation lens for issues that automation and visual inspection reveal."
             }
           ]
         }

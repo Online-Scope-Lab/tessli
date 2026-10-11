@@ -6,7 +6,8 @@ category: design-systems
 kind: design-system
 access: free
 summary: Directory of public design systems, tools, books, and articles
-status: active
+status: archived
+archived_reason: "Off-scope: meta-directory of design systems; likely stale; prefer Component Gallery"
 added_at: 2026-07-22
 added_via: curator
 last_checked: null

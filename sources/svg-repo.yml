@@ -6,7 +6,8 @@ category: icons
 kind: asset
 access: free
 summary: Large searchable collection of SVG vectors and icons
-status: active
+status: archived
+archived_reason: "Triage score 13/18 (keep threshold 14): huge SVG search; mixed quality/licensing"
 added_at: 2026-07-22
 added_via: curator
 last_checked: null

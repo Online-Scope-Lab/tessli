@@ -6,7 +6,8 @@ category: ui-libraries
 kind: library
 access: open-source
 summary: Responsive and accessible React component framework
-status: active
+status: archived
+archived_reason: "Triage score 10/18 (keep threshold 14): low maintenance and adoption; superseded by peers"
 added_at: 2026-07-22
 added_via: curator
 last_checked: null

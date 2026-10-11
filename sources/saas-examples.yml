@@ -6,7 +6,8 @@ category: landing-marketing
 kind: gallery
 access: free
 summary: SaaS website, product, and email examples
-status: active
+status: archived
+archived_reason: Domain now resolves to a personal site, not the SaaS examples gallery (August 2026 check)
 added_at: 2026-07-22
 added_via: curator
 last_checked: null

@@ -54,7 +54,7 @@ test("get_source exposes compact canonical action guidance and recorded caveats"
   );
   assert.match(bySlug.boundary, /not a live provider/i);
 
-  const sparse = getNativeSource("designindex");
+  const sparse = getNativeSource("land-book");
   assert.deepEqual(sparse.source.whatItHelpsWith, []);
   assert.deepEqual(sparse.source.caveats, []);
   assert.equal(sparse.source.status, "active");
@@ -62,6 +62,18 @@ test("get_source exposes compact canonical action guidance and recorded caveats"
     assert.equal(Object.hasOwn(sparse.source, removed), false, removed);
     assert.equal(Object.hasOwn(bySlug.source, removed), false, removed);
   }
+
+  // Archived sources resolve by slug or ID as a record, with their reason,
+  // but without an access route.
+  const archived = getNativeSource("autoanimate");
+  assert.equal(archived.source.status, "archived");
+  assert.match(archived.source.archivedReason, /\S/u);
+  assert.deepEqual(archived.source.accessRoutes, []);
+  assert.ok(
+    archived.alternatives.every(
+      (alternative) => alternative.status !== "archived",
+    ),
+  );
 
   assert.throws(
     () => getNativeSource("not-a-tessli-resource"),
@@ -94,11 +106,11 @@ test("get_collection preserves editorial order with canonical source guidance", 
 
   assert.equal(collection.slug, "saas-landing-pages");
   assert.equal(collection.status, "published");
-  assert.equal(collection.resourceCount, 10);
-  assert.equal(collection.returnedSourceCount, 10);
+  assert.equal(collection.resourceCount, 5);
+  assert.equal(collection.returnedSourceCount, 5);
   assert.deepEqual(
     collection.sources.map((source) => source.order),
-    [1, 2, 3, 4, 5, 6, 7, 8, 9, 10],
+    [1, 2, 3, 4, 5],
   );
   assert.ok(collection.stages.length > 0);
   assert.ok(

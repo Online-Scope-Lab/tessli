@@ -6,7 +6,8 @@ category: website-inspiration
 kind: gallery
 access: free
 summary: Large searchable directory of design tools, assets, inspiration, and learning resources
-status: active
+status: archived
+archived_reason: "Off-scope: meta-directory of tools/assets; large but duplicates Tessli's own role"
 added_at: 2026-07-22
 added_via: curator
 last_checked: null

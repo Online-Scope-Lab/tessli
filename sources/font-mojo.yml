@@ -6,7 +6,8 @@ category: typography
 kind: asset
 access: free
 summary: Preview and compare fonts
-status: active
+status: archived
+archived_reason: "Triage score 10/18 (keep threshold 14): thin font previewer; low signal"
 added_at: 2026-07-22
 added_via: curator
 last_checked: null

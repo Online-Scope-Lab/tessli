@@ -6,7 +6,8 @@ category: design-systems
 kind: design-system
 access: open-source
 summary: Canonical and Ubuntu CSS framework and design system
-status: active
+status: archived
+archived_reason: "Triage score 12/18 (keep threshold 14): canonical CSS framework; low reference value"
 added_at: 2026-07-22
 added_via: curator
 last_checked: null

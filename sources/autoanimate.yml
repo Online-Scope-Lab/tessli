@@ -6,7 +6,8 @@ category: motion-3d
 kind: library
 access: open-source
 summary: Automatic transition animations for web interfaces
-status: active
+status: archived
+archived_reason: "Triage score 13/18 (keep threshold 14): drop-in transitions; small scope"
 added_at: 2026-07-22
 added_via: curator
 last_checked: null

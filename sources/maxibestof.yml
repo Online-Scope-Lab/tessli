@@ -6,7 +6,8 @@ category: website-inspiration
 kind: gallery
 access: free
 summary: Websites, typography, and visual inspiration
-status: active
+status: archived
+archived_reason: "Triage score 12/18 (keep threshold 14): long-running gallery; returned 403 in Aug 2026 discovery"
 added_at: 2026-07-22
 added_via: curator
 last_checked: null

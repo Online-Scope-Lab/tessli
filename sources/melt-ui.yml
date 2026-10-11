@@ -6,7 +6,8 @@ category: ui-libraries
 kind: library
 access: open-source
 summary: Headless builders for accessible Svelte interfaces
-status: active
+status: archived
+archived_reason: "Triage score 12/18 (keep threshold 14): Svelte headless builders; overlaps Bits UI"
 added_at: 2026-07-22
 added_via: curator
 last_checked: null

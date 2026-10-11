@@ -6,7 +6,8 @@ category: motion-3d
 kind: library
 access: open-source
 summary: Animate-on-scroll JavaScript library
-status: active
+status: archived
+archived_reason: "Triage score 10/18 (keep threshold 14): unmaintained; superseded by CSS scroll-driven animations/Motion"
 added_at: 2026-07-22
 added_via: curator
 last_checked: null

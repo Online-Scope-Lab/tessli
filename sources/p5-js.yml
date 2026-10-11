@@ -6,7 +6,8 @@ category: motion-3d
 kind: library
 access: open-source
 summary: Creative-coding library for interactive graphics
-status: active
+status: archived
+archived_reason: "Off-scope: creative-coding education; not a UI/frontend reference"
 added_at: 2026-07-22
 added_via: curator
 last_checked: null

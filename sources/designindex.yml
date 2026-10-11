@@ -6,7 +6,8 @@ category: website-inspiration
 kind: gallery
 access: free
 summary: Curated directory of design inspiration and useful design resources
-status: active
+status: archived
+archived_reason: "Off-scope: meta-directory of design resources; duplicates Tessli's own role, link primary sources instead"
 added_at: 2026-07-22
 added_via: curator
 last_checked: null

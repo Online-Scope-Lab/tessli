@@ -6,7 +6,8 @@ category: motion-3d
 kind: library
 access: free
 summary: Visual generator for CSS animations
-status: active
+status: archived
+archived_reason: "Triage score 12/18 (keep threshold 14): CSS animation generator; stable but not updated in years"
 added_at: 2026-07-22
 added_via: curator
 last_checked: null

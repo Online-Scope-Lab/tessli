@@ -6,7 +6,8 @@ category: design-systems
 kind: design-system
 access: free
 summary: Mailchimp UI patterns and content guidance
-status: active
+status: archived
+archived_reason: Returned HTTP 503 in August 2026; the pattern library is long abandoned
 added_at: 2026-07-22
 added_via: curator
 last_checked: null

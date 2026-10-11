@@ -6,7 +6,8 @@ category: typography
 kind: asset
 access: free
 summary: Free alternatives to premium typefaces
-status: active
+status: archived
+archived_reason: "Triage score 12/18 (keep threshold 14): free alternatives to paid faces; accuracy/licensing need checks"
 added_at: 2026-07-22
 added_via: curator
 last_checked: null

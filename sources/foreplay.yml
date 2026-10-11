@@ -6,7 +6,8 @@ category: landing-marketing
 kind: gallery
 access: freemium
 summary: Ad-library research, saving, and creative workflow tools
-status: active
+status: archived
+archived_reason: "Off-scope: ad-library SaaS for media buyers"
 added_at: 2026-07-22
 added_via: curator
 last_checked: null

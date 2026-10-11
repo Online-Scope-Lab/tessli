@@ -6,7 +6,8 @@ category: design-systems
 kind: design-system
 access: open-source
 summary: Uber's React design system
-status: active
+status: archived
+archived_reason: "Triage score 11/18 (keep threshold 14): Uber Base Web in low-maintenance mode; little unique guidance"
 added_at: 2026-07-22
 added_via: curator
 last_checked: null

@@ -6,7 +6,8 @@ category: icons
 kind: asset
 access: open-source
 summary: Rounded interface icon library
-status: active
+status: archived
+archived_reason: "Triage score 11/18 (keep threshold 14): small set, low activity"
 added_at: 2026-07-22
 added_via: curator
 last_checked: null

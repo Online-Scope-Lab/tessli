@@ -6,7 +6,8 @@ category: landing-marketing
 kind: gallery
 access: freemium
 summary: Email moodboards, saving, and campaign analysis
-status: active
+status: archived
+archived_reason: "Triage score 10/18 (keep threshold 14): email moodboard tool overlapping RGE/Email Love"
 added_at: 2026-07-22
 added_via: curator
 last_checked: null

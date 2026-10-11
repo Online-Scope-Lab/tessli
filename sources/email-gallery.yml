@@ -6,7 +6,8 @@ category: landing-marketing
 kind: gallery
 access: free
 summary: Curated newsletter and email-design examples
-status: active
+status: archived
+archived_reason: "Triage score 10/18 (keep threshold 14): overlapping email gallery; placeholder OG image"
 added_at: 2026-07-22
 added_via: curator
 last_checked: null

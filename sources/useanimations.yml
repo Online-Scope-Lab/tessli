@@ -6,7 +6,8 @@ category: icons
 kind: asset
 access: open-source
 summary: Lottie-based animated icons for interfaces
-status: active
+status: archived
+archived_reason: "Triage score 10/18 (keep threshold 14): small, unmaintained animated set"
 added_at: 2026-07-22
 added_via: curator
 last_checked: null

@@ -6,7 +6,8 @@ category: product-ui-ux
 kind: gallery
 access: freemium
 summary: Mobile-app screenshots and product-flow references
-status: active
+status: archived
+archived_reason: "Triage score 10/18 (keep threshold 14): thin mobile-screenshot site; overlaps Mobbin; activity unclear"
 added_at: 2026-07-22
 added_via: curator
 last_checked: null

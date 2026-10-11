@@ -46,20 +46,37 @@ test("release catalogue contains six version-2 published Playbooks", async () =>
   assert.equal(report.issues.errors.length, 0);
   assert.equal(catalogue.collections.length, 6);
   assert.equal(report.summary.collections, 6);
-  assert.equal(report.summary.collectionItems, 60);
+  assert.equal(report.summary.collectionItems, 44);
+
+  // The v1.2 triage (2026-10-11) archived members of five Playbooks; each kept
+  // at least five, and only the untouched one keeps its July review date.
+  const expected = {
+    "saas-landing-pages": [5, "2026-10-11"],
+    "typography-font-tools": [7, "2026-10-11"],
+    "motion-starter-pack": [8, "2026-10-11"],
+    "open-source-ui-libraries": [7, "2026-10-11"],
+    "accessible-colour-tools": [7, "2026-10-11"],
+    "design-systems-worth-studying": [10, "2026-07-29"],
+  };
+  assert.deepEqual(
+    catalogue.collections.map((playbook) => playbook.slug),
+    Object.keys(expected),
+  );
 
   for (const playbook of catalogue.collections) {
+    const [memberCount, reviewedAt] = expected[playbook.slug];
     assert.equal(playbook.status, "published");
-    assert.equal(playbook.lastReviewedAt, "2026-07-29");
+    assert.equal(playbook.lastReviewedAt, reviewedAt);
     assert.ok(playbook.outcome.trim());
     assert.ok(playbook.audience.trim());
-    assert.equal(playbook.resourceIds.length, 10);
+    assert.equal(playbook.resourceIds.length, memberCount);
+    assert.ok(playbook.resourceIds.length >= 5);
     assert.equal(playbook.stages.length, 3);
     const stagedIds = playbook.stages.flatMap((stage) =>
       stage.items.map((item) => item.resourceId),
     );
     assert.deepEqual(stagedIds, playbook.resourceIds);
-    assert.equal(new Set(stagedIds).size, 10);
+    assert.equal(new Set(stagedIds).size, memberCount);
     assert.equal(
       playbook.stages.every(
         (stage) =>
@@ -89,7 +106,7 @@ test("Playbook membership still matches each stated workflow", async () => {
     for (const resourceId of playbook.resourceIds) {
       const resource = resources.get(resourceId);
       assert.ok(resource, `${slug} references unknown resource ${resourceId}`);
-      assert.equal(resource.status, "active");
+      assert.notEqual(resource.status, "archived", `${slug}: ${resource.name}`);
       assert.equal(
         predicate(resource),
         true,
@@ -165,6 +182,27 @@ test("validator rejects duplicated, missing, and reordered staged membership", a
   assert.equal(codes.has("duplicate-playbook-stage-resource"), true);
   assert.equal(codes.has("playbook-stage-nonmember"), true);
   assert.equal(codes.has("playbook-stage-order"), true);
+});
+
+test("validator rejects archived Playbook members", async () => {
+  const [{ catalogue }, { source, schema }] = await Promise.all([
+    releaseBuild(),
+    collectionInputs(),
+  ]);
+  const archived = catalogue.resources.find(
+    (resource) => resource.slug === "headless-ui",
+  );
+  assert.equal(archived.status, "archived");
+  const invalid = structuredClone(source);
+  invalid.collections[3].resourceIds[0] = archived.id;
+  invalid.collections[3].stages[0].items[0].resourceId = archived.id;
+
+  const errors = validateCollectionSource(invalid, schema, catalogue.resources);
+
+  assert.deepEqual(
+    errors.map((error) => [error.code, error.resourceId]),
+    [["archived-collection-member", archived.id]],
+  );
 });
 
 test("validator rejects malformed Playbook guidance", async () => {

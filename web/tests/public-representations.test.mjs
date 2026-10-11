@@ -228,6 +228,21 @@ test("archived source v3 keeps its page data with the reason and replacement", (
   assert.match(markdown, /^Replaced by: \/resources\/source-one$/mu);
   assert.match(markdown, /^Status: archived$/mu);
 
+  // Recorded access routes are a recommendation, so an archived guide drops
+  // them, as its page does.
+  const archivedProfiled = createPublicSourceRepresentation({
+    ...profiled,
+    status: "archived",
+    archivedReason: "Off-scope.",
+    replacedBy: null,
+  });
+  assert.equal(profiled.accessRoutes.length > 0, true);
+  assert.deepEqual(archivedProfiled.source.accessRoutes, []);
+  assert.match(
+    serializePublicSourceMarkdown(archivedProfiled),
+    /## How to access\n\nArchived: Tessli no longer recommends an access route\./u,
+  );
+
   const withoutReplacement = createPublicSourceRepresentation({
     ...archived,
     replacedBy: null,

@@ -6,7 +6,8 @@ category: typography
 kind: asset
 access: free
 summary: Curated open-source font library
-status: active
+status: archived
+archived_reason: "Triage score 13/18 (keep threshold 14): curated open-source fonts; update cadence unclear"
 added_at: 2026-07-22
 added_via: curator
 last_checked: null

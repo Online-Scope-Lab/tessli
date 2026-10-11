@@ -6,7 +6,8 @@ category: website-inspiration
 kind: gallery
 access: free
 summary: Award gallery for web design, UI, UX, and innovation
-status: active
+status: archived
+archived_reason: "Triage score 13/18 (keep threshold 14): active awards gallery; heavy overlap with Awwwards"
 added_at: 2026-07-22
 added_via: curator
 last_checked: null

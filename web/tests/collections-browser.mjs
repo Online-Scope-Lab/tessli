@@ -1,5 +1,5 @@
 import assert from "node:assert/strict";
-import { mkdir, writeFile } from "node:fs/promises";
+import { mkdir, readFile, writeFile } from "node:fs/promises";
 
 const endpoint = process.env.CDP_ENDPOINT ?? "http://127.0.0.1:9222";
 const origin = process.env.TESSLI_ORIGIN ?? "http://127.0.0.1:3000";
@@ -16,6 +16,19 @@ const collectionSlugs = [
   "accessible-colour-tools",
   "design-systems-worth-studying",
 ];
+// Membership sizes differ since the v1.2 triage archived some members; the
+// page must show exactly the recorded, ordered membership.
+const memberCounts = new Map(
+  JSON.parse(
+    await readFile(
+      new URL("../../lib_data/tessli-launch-collections.json", import.meta.url),
+      "utf8",
+    ),
+  ).collections.map((collection) => [
+    collection.slug,
+    collection.resourceIds.length,
+  ]),
+);
 
 async function delay(milliseconds) {
   await new Promise((resolve) => setTimeout(resolve, milliseconds));
@@ -191,9 +204,11 @@ assert.equal(
 await screenshot("playbooks-index-1440x900.png");
 
 for (const [index, slug] of collectionSlugs.entries()) {
+  const memberCount = memberCounts.get(slug);
+  assert.ok(memberCount >= 5, `${slug} keeps at least five members.`);
   await navigate(
     `/collections/${slug}`,
-    `document.querySelectorAll('[data-collection-detail="${slug}"] [data-collection-resource-grid] > li').length === 10`,
+    `document.querySelectorAll('[data-collection-detail="${slug}"] [data-collection-resource-grid] > li').length === ${memberCount}`,
   );
 
   assert.equal(
@@ -205,14 +220,14 @@ for (const [index, slug] of collectionSlugs.entries()) {
     await evaluate(
       'document.querySelectorAll("[data-collection-resource-grid] > li").length',
     ),
-    10,
-    `${slug} should expose ten ordered resources.`,
+    memberCount,
+    `${slug} should expose its ${memberCount} ordered resources.`,
   );
   assert.equal(
     await evaluate(
       'document.querySelectorAll("[data-playbook-resource-role]").length',
     ),
-    10,
+    memberCount,
     `${slug} should explain every source role.`,
   );
   assert.equal(

@@ -6,7 +6,8 @@ category: landing-marketing
 kind: gallery
 access: free
 summary: Well-designed ecommerce website examples
-status: active
+status: archived
+archived_reason: "Triage score 11/18 (keep threshold 14): ecommerce gallery overlapping ecomm.design; unreachable in Aug 2026"
 added_at: 2026-07-22
 added_via: curator
 last_checked: null

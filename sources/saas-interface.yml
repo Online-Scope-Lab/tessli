@@ -6,7 +6,8 @@ category: product-ui-ux
 kind: gallery
 access: freemium
 summary: SaaS product UI and UX examples
-status: active
+status: archived
+archived_reason: "Triage score 11/18 (keep threshold 14): SaaS UI gallery overlapping Nicelydone/SaaSFrame/Refero"
 added_at: 2026-07-22
 added_via: curator
 last_checked: null

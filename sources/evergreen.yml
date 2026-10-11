@@ -6,7 +6,8 @@ category: ui-libraries
 kind: library
 access: open-source
 summary: React UI framework for enterprise web products
-status: active
+status: archived
+archived_reason: "Triage score 10/18 (keep threshold 14): Segment Evergreen effectively unmaintained"
 added_at: 2026-07-22
 added_via: curator
 last_checked: null

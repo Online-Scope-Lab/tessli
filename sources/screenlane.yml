@@ -6,7 +6,9 @@ category: product-ui-ux
 kind: gallery
 access: free
 summary: Mobile-app screen and flow inspiration
-status: active
+status: archived
+archived_reason: Redirects to Page Flows, which is already listed
+replaced_by: page-flows
 added_at: 2026-07-22
 added_via: curator
 last_checked: null

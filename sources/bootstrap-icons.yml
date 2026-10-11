@@ -6,7 +6,8 @@ category: icons
 kind: asset
 access: open-source
 summary: Official open-source Bootstrap icon set
-status: active
+status: archived
+archived_reason: "Triage score 13/18 (keep threshold 14): Bootstrap icon set; overlap"
 added_at: 2026-07-22
 added_via: curator
 last_checked: null

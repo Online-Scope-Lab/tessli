@@ -6,7 +6,8 @@ category: product-ui-ux
 kind: gallery
 access: free
 summary: Daily UI inspiration organized by component type
-status: active
+status: archived
+archived_reason: "Off-scope: Dribbble-shot aggregation of concept work, not production UI"
 added_at: 2026-07-22
 added_via: curator
 last_checked: null

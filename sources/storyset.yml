@@ -6,7 +6,8 @@ category: visual-assets
 kind: asset
 access: freemium
 summary: Customizable static and animated illustrations
-status: active
+status: archived
+archived_reason: "Triage score 13/18 (keep threshold 14): Freepik animated illustrations; attribution"
 added_at: 2026-07-22
 added_via: curator
 last_checked: null

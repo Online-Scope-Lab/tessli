@@ -2,15 +2,15 @@
   "version": 2,
   "source": {
     "path": "sources",
-    "sha256": "d63c0eae1c380eaef90f32cfa588ccb8654f8e15c512c8f737b0285b5b4d14dd",
+    "sha256": "0bb35ae2619ebbb6b6ba5e37073c4d69a70d6c081f8cbcddf0481f665a3e8cb1",
     "fileCount": 295
   },
   "summary": {
     "resources": 295,
     "status": {
-      "active": 295,
-      "needs-review": 0,
-      "archived": 0
+      "active": 125,
+      "needs-review": 4,
+      "archived": 166
     },
     "categories": 11,
     "access": {
@@ -21,7 +21,7 @@
       "free-trial": 1
     },
     "collections": 6,
-    "collectionItems": 60,
+    "collectionItems": 44,
     "approvedMedia": 165
   },
   "categoryCounts": [
@@ -29,88 +29,72 @@
       "category": "website-inspiration",
       "label": "Website inspiration and design directories",
       "total": 40,
-      "nonArchived": 40
+      "nonArchived": 14
     },
     {
       "category": "product-ui-ux",
       "label": "Product UI, UX flows, and mobile-app inspiration",
       "total": 25,
-      "nonArchived": 25
+      "nonArchived": 8
     },
     {
       "category": "landing-marketing",
       "label": "Landing pages, SaaS, ecommerce, email, and marketing inspiration",
       "total": 25,
-      "nonArchived": 25
+      "nonArchived": 7
     },
     {
       "category": "ui-libraries",
       "label": "UI component and frontend libraries",
       "total": 45,
-      "nonArchived": 45
+      "nonArchived": 27
     },
     {
       "category": "design-systems",
       "label": "Design systems and pattern libraries",
       "total": 25,
-      "nonArchived": 25
+      "nonArchived": 18
     },
     {
       "category": "motion-3d",
       "label": "Motion, animation, WebGL, and 3D",
       "total": 20,
-      "nonArchived": 20
+      "nonArchived": 11
     },
     {
       "category": "typography",
       "label": "Typography, fonts, and type tools",
       "total": 20,
-      "nonArchived": 20
+      "nonArchived": 9
     },
     {
       "category": "color-accessibility",
       "label": "Color, gradients, and accessibility",
       "total": 20,
-      "nonArchived": 20
+      "nonArchived": 11
     },
     {
       "category": "icons",
       "label": "Icon libraries and icon tools",
       "total": 30,
-      "nonArchived": 30
+      "nonArchived": 14
     },
     {
       "category": "visual-assets",
       "label": "Illustrations, mockups, assets, and stock",
       "total": 25,
-      "nonArchived": 25
+      "nonArchived": 4
     },
     {
       "category": "design-tools-ai",
       "label": "Design tools, AI UI tools, and visual builders",
       "total": 20,
-      "nonArchived": 20
+      "nonArchived": 6
     }
   ],
   "duplicates": {
     "urls": [],
     "domains": [
-      {
-        "domain": "builtformars.com",
-        "count": 2,
-        "entries": [
-          {
-            "file": "sources/built-for-mars.yml",
-            "name": "Built for Mars",
-            "url": "https://builtformars.com"
-          },
-          {
-            "file": "sources/ux-bites.yml",
-            "name": "UX Bites",
-            "url": "https://builtformars.com/ux-bites"
-          }
-        ]
-      },
       {
         "domain": "figma.com",
         "count": 2,
@@ -140,38 +124,6 @@
             "file": "sources/material-symbols.yml",
             "name": "Material Symbols",
             "url": "https://fonts.google.com/icons"
-          }
-        ]
-      },
-      {
-        "domain": "icons8.com",
-        "count": 2,
-        "entries": [
-          {
-            "file": "sources/icons8.yml",
-            "name": "Icons8",
-            "url": "https://icons8.com/icons"
-          },
-          {
-            "file": "sources/ouch.yml",
-            "name": "Ouch",
-            "url": "https://icons8.com/illustrations"
-          }
-        ]
-      },
-      {
-        "domain": "radix-ui.com",
-        "count": 2,
-        "entries": [
-          {
-            "file": "sources/radix-icons.yml",
-            "name": "Radix Icons",
-            "url": "https://www.radix-ui.com/icons"
-          },
-          {
-            "file": "sources/radix-ui.yml",
-            "name": "Radix UI",
-            "url": "https://www.radix-ui.com"
           }
         ]
       }
@@ -183,24 +135,6 @@
       {
         "code": "duplicate-domain",
         "message": "Multiple non-archived sources share a domain and require human review, not automatic removal.",
-        "domain": "builtformars.com",
-        "count": 2,
-        "entries": [
-          {
-            "file": "sources/built-for-mars.yml",
-            "name": "Built for Mars",
-            "url": "https://builtformars.com"
-          },
-          {
-            "file": "sources/ux-bites.yml",
-            "name": "UX Bites",
-            "url": "https://builtformars.com/ux-bites"
-          }
-        ]
-      },
-      {
-        "code": "duplicate-domain",
-        "message": "Multiple non-archived sources share a domain and require human review, not automatic removal.",
         "domain": "figma.com",
         "count": 2,
         "entries": [
@@ -233,48 +167,12 @@
             "url": "https://fonts.google.com/icons"
           }
         ]
-      },
-      {
-        "code": "duplicate-domain",
-        "message": "Multiple non-archived sources share a domain and require human review, not automatic removal.",
-        "domain": "icons8.com",
-        "count": 2,
-        "entries": [
-          {
-            "file": "sources/icons8.yml",
-            "name": "Icons8",
-            "url": "https://icons8.com/icons"
-          },
-          {
-            "file": "sources/ouch.yml",
-            "name": "Ouch",
-            "url": "https://icons8.com/illustrations"
-          }
-        ]
-      },
-      {
-        "code": "duplicate-domain",
-        "message": "Multiple non-archived sources share a domain and require human review, not automatic removal.",
-        "domain": "radix-ui.com",
-        "count": 2,
-        "entries": [
-          {
-            "file": "sources/radix-icons.yml",
-            "name": "Radix Icons",
-            "url": "https://www.radix-ui.com/icons"
-          },
-          {
-            "file": "sources/radix-ui.yml",
-            "name": "Radix UI",
-            "url": "https://www.radix-ui.com"
-          }
-        ]
       }
     ]
   },
   "collectionSource": {
     "path": "lib_data/tessli-launch-collections.json",
-    "sha256": "2705725400e84ff6085537e04d8fa1d1708b6bf42f261eef0666b61b75b859dc",
+    "sha256": "8baf5928ea82db46e846379d614aa9f01b61ce40080470f16c8b1a23ae61802a",
     "collectionCount": 6
   },
   "mediaSource": {
@@ -286,37 +184,37 @@
     {
       "id": "collection-saas-landing-pages",
       "slug": "saas-landing-pages",
-      "resourceCount": 10,
+      "resourceCount": 5,
       "status": "published",
-      "lastReviewedAt": "2026-07-29"
+      "lastReviewedAt": "2026-10-11"
     },
     {
       "id": "collection-typography-font-tools",
       "slug": "typography-font-tools",
-      "resourceCount": 10,
+      "resourceCount": 7,
       "status": "published",
-      "lastReviewedAt": "2026-07-29"
+      "lastReviewedAt": "2026-10-11"
     },
     {
       "id": "collection-motion-starter-pack",
       "slug": "motion-starter-pack",
-      "resourceCount": 10,
+      "resourceCount": 8,
       "status": "published",
-      "lastReviewedAt": "2026-07-29"
+      "lastReviewedAt": "2026-10-11"
     },
     {
       "id": "collection-open-source-ui-libraries",
       "slug": "open-source-ui-libraries",
-      "resourceCount": 10,
+      "resourceCount": 7,
       "status": "published",
-      "lastReviewedAt": "2026-07-29"
+      "lastReviewedAt": "2026-10-11"
     },
     {
       "id": "collection-accessible-colour-tools",
       "slug": "accessible-colour-tools",
-      "resourceCount": 10,
+      "resourceCount": 7,
       "status": "published",
-      "lastReviewedAt": "2026-07-29"
+      "lastReviewedAt": "2026-10-11"
     },
     {
       "id": "collection-design-systems-worth-studying",

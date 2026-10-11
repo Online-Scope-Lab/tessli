@@ -96,7 +96,9 @@ function toSourceGuide(profile: SourceProfile) {
       0,
       6,
     ),
-    accessRoutes: toAccessRoutes(profile),
+    // Archived sources stay resolvable as a record but are not recommended,
+    // so they carry no access route (as on their page).
+    accessRoutes: profile.status === "archived" ? [] : toAccessRoutes(profile),
     caveats: profile.limitations.slice(0, 3),
   };
 }

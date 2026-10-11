@@ -6,7 +6,8 @@ category: icons
 kind: asset
 access: open-source
 summary: Outline and fill UI icon set
-status: active
+status: archived
+archived_reason: "Triage score 10/18 (keep threshold 14): unmaintained since ~2019"
 added_at: 2026-07-22
 added_via: curator
 last_checked: null

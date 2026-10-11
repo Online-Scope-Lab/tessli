@@ -6,7 +6,8 @@ category: design-systems
 kind: design-system
 access: free
 summary: Audi digital interface and brand guidelines
-status: active
+status: archived
+archived_reason: "Dead link: returned HTTP 404 in August 2026"
 added_at: 2026-07-22
 added_via: curator
 last_checked: null

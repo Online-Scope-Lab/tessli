@@ -417,7 +417,7 @@ test("website-ready source profiles and MCP preserve the same source identity", 
 });
 
 test("website profiles, public representations, and local MCP share exact AccessRoute values", () => {
-  for (const identifier of ["landingfolio", "google-fonts", "designindex"]) {
+  for (const identifier of ["landingfolio", "google-fonts", "land-book"]) {
     const sourceProfile = getSourceProfile(identifier);
     assert.ok(sourceProfile);
     const publicRepresentation =
@@ -429,6 +429,18 @@ test("website profiles, public representations, and local MCP share exact Access
       sourceProfile.accessRoutes,
     );
     assert.deepEqual(nativeSource.accessRoutes, sourceProfile.accessRoutes);
+  }
+
+  // Archived sources keep their recorded routes in the profile, but neither
+  // the public representation nor MCP recommends them.
+  for (const identifier of ["designindex", "autoanimate"]) {
+    const sourceProfile = getSourceProfile(identifier);
+    assert.equal(sourceProfile?.status, "archived");
+    assert.deepEqual(
+      createPublicSourceRepresentation(sourceProfile).source.accessRoutes,
+      [],
+    );
+    assert.deepEqual(getNativeSource(identifier).source.accessRoutes, []);
   }
 });
 

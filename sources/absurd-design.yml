@@ -6,7 +6,8 @@ category: visual-assets
 kind: asset
 access: freemium
 summary: Distinctive hand-drawn abstract illustrations
-status: active
+status: archived
+archived_reason: "Triage score 11/18 (keep threshold 14): stale illustration set"
 added_at: 2026-07-22
 added_via: curator
 last_checked: null

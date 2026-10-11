@@ -6,7 +6,8 @@ category: icons
 kind: asset
 access: open-source
 summary: Small icon set designed for interfaces
-status: active
+status: archived
+archived_reason: "Triage score 11/18 (keep threshold 14): small ~300-icon set rarely updated; same domain as Radix UI"
 added_at: 2026-07-22
 added_via: curator
 last_checked: null

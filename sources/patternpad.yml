@@ -6,7 +6,8 @@ category: visual-assets
 kind: asset
 access: free
 summary: Browser-based pattern generator
-status: active
+status: archived
+archived_reason: "Triage score 10/18 (keep threshold 14): thin pattern generator"
 added_at: 2026-07-22
 added_via: curator
 last_checked: null

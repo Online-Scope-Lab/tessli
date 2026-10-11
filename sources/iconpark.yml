@@ -6,7 +6,8 @@ category: icons
 kind: asset
 access: open-source
 summary: Customizable multi-theme SVG icon library
-status: active
+status: archived
+archived_reason: "Triage score 11/18 (keep threshold 14): ByteDance set with low maintenance"
 added_at: 2026-07-22
 added_via: curator
 last_checked: null

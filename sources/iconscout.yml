@@ -6,7 +6,8 @@ category: icons
 kind: asset
 access: freemium
 summary: Icons, illustrations, 3D assets, and animations
-status: active
+status: archived
+archived_reason: "Triage score 12/18 (keep threshold 14): icons/illustrations/3D marketplace; overlap"
 added_at: 2026-07-22
 added_via: curator
 last_checked: null

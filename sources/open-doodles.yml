@@ -6,7 +6,8 @@ category: visual-assets
 kind: asset
 access: free
 summary: Open-source hand-drawn illustrations
-status: active
+status: archived
+archived_reason: "Triage score 11/18 (keep threshold 14): stale; same author as Humaaans"
 added_at: 2026-07-22
 added_via: curator
 last_checked: null

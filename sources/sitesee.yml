@@ -6,7 +6,8 @@ category: website-inspiration
 kind: gallery
 access: free
 summary: Modern website inspiration gallery
-status: active
+status: archived
+archived_reason: "Triage score 12/18 (keep threshold 14): generic modern gallery; overlap"
 added_at: 2026-07-22
 added_via: curator
 last_checked: null

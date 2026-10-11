@@ -6,7 +6,8 @@ category: website-inspiration
 kind: gallery
 access: free
 summary: Hand-picked website design gallery
-status: active
+status: archived
+archived_reason: "Triage score 12/18 (keep threshold 14): decent hand-picked gallery; generic vs stronger peers"
 added_at: 2026-07-22
 added_via: curator
 last_checked: null

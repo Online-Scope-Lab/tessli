@@ -6,7 +6,8 @@ category: landing-marketing
 kind: gallery
 access: free
 summary: Curated landing-page inspiration
-status: active
+status: archived
+archived_reason: "Triage score 12/18 (keep threshold 14): landing gallery; overlap"
 added_at: 2026-07-22
 added_via: curator
 last_checked: null

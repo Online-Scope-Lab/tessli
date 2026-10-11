@@ -137,7 +137,12 @@ export function createPublicSourceRepresentation(profile, similarSources = []) {
         ...(profile.capabilities ?? []),
         ...(profile.contentObjects ?? []),
       ]),
-      accessRoutes: publicAccessRoutes(profile.accessRoutes),
+      // An archived source is kept as a record, not recommended: like its
+      // page, its guide names no access route.
+      accessRoutes:
+        profile.status === "archived"
+          ? []
+          : publicAccessRoutes(profile.accessRoutes),
       importantLimitations: uniqueRecordedStrings(profile.limitations),
       alternatives: publicAlternatives(profile, similarSources),
     },
@@ -260,7 +265,12 @@ export function serializePublicSourceMarkdown(document) {
   pushList(lines, "Use it when", source.useWhen);
   pushList(lines, "What to explore", source.whatToExplore);
   lines.push("## How to access", "");
-  if (source.accessRoutes.length === 0) {
+  if (source.status === "archived") {
+    lines.push(
+      "Archived: Tessli no longer recommends an access route. The provider address above is kept for the record.",
+      "",
+    );
+  } else if (source.accessRoutes.length === 0) {
     lines.push("None recorded", "");
   } else {
     for (const route of source.accessRoutes) {

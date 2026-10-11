@@ -8,20 +8,15 @@
       "description": "Focused references for studying SaaS positioning, landing-page structure, pricing presentation, proof, copy, and conversion patterns.",
       "resourceIds": [
         "resource-1ef2bbb67602",
-        "resource-f52b14528531",
         "resource-385af8e671b2",
-        "resource-be31b989dbbe",
-        "resource-8071ca23bfc4",
         "resource-c6ead4379d56",
-        "resource-068a498e5c53",
-        "resource-4aeb8a54737a",
-        "resource-3028e7238961",
-        "resource-6482b53e4e09"
+        "resource-984c1f3c1edb",
+        "resource-4aeb8a54737a"
       ],
       "coverStyle": "editorial",
-      "lastReviewedAt": "2026-07-29",
+      "lastReviewedAt": "2026-10-11",
       "status": "published",
-      "outcome": "A defensible SaaS landing-page direction covering positioning, page structure, proof, pricing, and iteration signals.",
+      "outcome": "A defensible SaaS landing-page direction covering positioning, page structure, proof, and pricing.",
       "audience": "Founders, product marketers, and designers preparing or revising a SaaS marketing site.",
       "stages": [
         {
@@ -33,10 +28,6 @@
             {
               "resourceId": "resource-1ef2bbb67602",
               "role": "SaaS Pages anchors the first scan with examples that combine visual structure and copywriting."
-            },
-            {
-              "resourceId": "resource-f52b14528531",
-              "role": "SaaS Landing Page broadens the comparison set across recognizable SaaS companies."
             },
             {
               "resourceId": "resource-385af8e671b2",
@@ -51,40 +42,24 @@
           "decision": "Decide the page sequence and which sections deserve custom design versus established patterns.",
           "items": [
             {
-              "resourceId": "resource-be31b989dbbe",
-              "role": "SaaS Websites supports screenshot-level comparison of complete pages and recurring patterns."
-            },
-            {
-              "resourceId": "resource-8071ca23bfc4",
-              "role": "SaaS Examples adds product and email references when the marketing journey extends beyond the homepage."
-            },
-            {
               "resourceId": "resource-c6ead4379d56",
               "role": "Landingfolio helps inspect individual sections and templates before composing the full page."
+            },
+            {
+              "resourceId": "resource-984c1f3c1edb",
+              "role": "Really Good Emails adds onboarding and lifecycle email references when the marketing journey extends beyond the homepage."
             }
           ]
         },
         {
           "id": "validate-conversion",
-          "title": "Validate conversion decisions",
-          "inspect": "Study pricing communication, commercial evidence, and visible website experiments.",
-          "decision": "Decide how to present price, proof, and iteration hypotheses before implementation.",
+          "title": "Decide pricing presentation",
+          "inspect": "Study pricing architecture, plan comparison, and how price and proof are presented together.",
+          "decision": "Decide how to present price, plans, and proof before implementation.",
           "items": [
-            {
-              "resourceId": "resource-068a498e5c53",
-              "role": "Landings supplies a broader landing-page reference set for checking whether the chosen structure is too narrow."
-            },
             {
               "resourceId": "resource-4aeb8a54737a",
               "role": "Pricing Pages isolates pricing architecture, plan comparison, and purchase-friction patterns."
-            },
-            {
-              "resourceId": "resource-3028e7238961",
-              "role": "Pages That Print adds examples connected to reported revenue outcomes while remaining directional evidence only."
-            },
-            {
-              "resourceId": "resource-6482b53e4e09",
-              "role": "Glance exposes visible experiments and changes so the team can define what to test after launch."
             }
           ]
         }
@@ -94,21 +69,18 @@
       "id": "collection-typography-font-tools",
       "slug": "typography-font-tools",
       "title": "Typography and font tools",
-      "description": "A practical starting set for finding typefaces, studying real typography, checking pairings, and exploring open and commercial font libraries.",
+      "description": "A practical starting set for finding typefaces, studying real typography and pairings, and exploring open and commercial font libraries.",
       "resourceIds": [
         "resource-75ecf91b7063",
         "resource-25a6040823a7",
         "resource-7ff8dc33fe5e",
         "resource-e50e8d1ec69c",
-        "resource-098d155d3888",
         "resource-3b9d710cd447",
-        "resource-07d9b88ef5af",
-        "resource-42936db47b6a",
         "resource-bfe4ba65c95b",
         "resource-35c3f2fef142"
       ],
       "coverStyle": "typography",
-      "lastReviewedAt": "2026-07-29",
+      "lastReviewedAt": "2026-10-11",
       "status": "published",
       "outcome": "A practical typography direction with licensed candidate fonts, real-world references, pairing rationale, and implementation options.",
       "audience": "Designers and frontend teams choosing type for a brand, marketing site, or product interface.",
@@ -129,7 +101,7 @@
             },
             {
               "resourceId": "resource-7ff8dc33fe5e",
-              "role": "Typewolf supplies editorial recommendations and category context for narrowing candidates."
+              "role": "Typewolf supplies editorial recommendations, pairings seen on real sites, and category context for narrowing candidates."
             }
           ]
         },
@@ -144,10 +116,6 @@
               "role": "Fonts In Use shows typography in real artifacts rather than isolated specimen pages."
             },
             {
-              "resourceId": "resource-098d155d3888",
-              "role": "Font Squirrel helps check commercial-use free options and practical licensing constraints."
-            },
-            {
               "resourceId": "resource-3b9d710cd447",
               "role": "Free Faces adds a curated view of freely licensed typefaces."
             }
@@ -155,18 +123,10 @@
         },
         {
           "id": "pair-and-finalize",
-          "title": "Pair and finalize",
-          "inspect": "Compare pairings and more distinctive open or commercial options after the core direction is clear.",
+          "title": "Finalize the shortlist",
+          "inspect": "Compare more distinctive open and commercial families once the core direction and pairings are clear.",
           "decision": "Select the primary and supporting families to prototype and test.",
           "items": [
-            {
-              "resourceId": "resource-07d9b88ef5af",
-              "role": "Open Foundry focuses the search on open-source families and their presentation."
-            },
-            {
-              "resourceId": "resource-42936db47b6a",
-              "role": "FontPair supports explicit headline-and-body pairing comparisons."
-            },
             {
               "resourceId": "resource-bfe4ba65c95b",
               "role": "Velvetyne introduces experimental libre options when the direction needs more character."
@@ -192,12 +152,10 @@
         "resource-631345718892",
         "resource-e5c348f9190f",
         "resource-c873b7d6cf1d",
-        "resource-e0917de2c7a9",
-        "resource-23cc7dc75f79",
-        "resource-9ab2847bb0d5"
+        "resource-23cc7dc75f79"
       ],
       "coverStyle": "motion",
-      "lastReviewedAt": "2026-07-29",
+      "lastReviewedAt": "2026-10-11",
       "status": "published",
       "outcome": "A motion approach matched to the interaction goal, runtime constraints, authoring workflow, and team stack.",
       "audience": "Designers and frontend engineers deciding how to add purposeful interface motion, vector animation, or browser 3D.",
@@ -245,7 +203,7 @@
         {
           "id": "match-the-stack",
           "title": "Match the implementation stack",
-          "inspect": "Compare low-level rendering, React integration, sequencing, and lightweight alternatives.",
+          "inspect": "Compare React integration for 3D with smaller code-driven animation libraries.",
           "decision": "Select the implementation layer that fits the framework, performance budget, and maintenance capacity.",
           "items": [
             {
@@ -253,16 +211,8 @@
               "role": "React Three Fiber shows how Three.js integrates with React component architecture."
             },
             {
-              "resourceId": "resource-e0917de2c7a9",
-              "role": "Theatre.js supports authored sequencing and motion-design control for web scenes."
-            },
-            {
               "resourceId": "resource-23cc7dc75f79",
               "role": "Anime.js offers a smaller code-driven animation alternative for targeted interactions."
-            },
-            {
-              "resourceId": "resource-9ab2847bb0d5",
-              "role": "AutoAnimate covers low-configuration layout transitions where a full motion system is unnecessary."
             }
           ]
         }
@@ -276,17 +226,14 @@
       "resourceIds": [
         "resource-affc29967a7c",
         "resource-01db82f90e23",
-        "resource-3bfbe7e95242",
         "resource-9ad947201ac6",
-        "resource-1cd898a493ab",
         "resource-efc9a91db0cb",
-        "resource-ea2802bd8265",
         "resource-2210207ad328",
         "resource-d94d49dfe5a3",
         "resource-1f691e6fcca8"
       ],
       "coverStyle": "systems",
-      "lastReviewedAt": "2026-07-29",
+      "lastReviewedAt": "2026-10-11",
       "status": "published",
       "outcome": "A component-library strategy that balances accessibility, styling ownership, speed, animation needs, and long-term maintenance.",
       "audience": "React product teams selecting primitives, copyable components, or higher-level UI building blocks.",
@@ -304,26 +251,18 @@
             {
               "resourceId": "resource-01db82f90e23",
               "role": "Radix UI represents unstyled accessible primitives with strong behavior ownership."
-            },
-            {
-              "resourceId": "resource-3bfbe7e95242",
-              "role": "Headless UI offers an alternative unstyled model across React and Vue."
             }
           ]
         },
         {
           "id": "accelerate-common-ui",
           "title": "Accelerate common UI",
-          "inspect": "Inspect styled and composable component sets that can extend the chosen foundation.",
+          "inspect": "Inspect accessible hooks and composable component sets that can extend the chosen foundation.",
           "decision": "Decide which higher-level components are safe to adopt rather than rebuild.",
           "items": [
             {
               "resourceId": "resource-9ad947201ac6",
               "role": "React Aria provides accessibility-focused hooks and components for teams needing deeper behavior control."
-            },
-            {
-              "resourceId": "resource-1cd898a493ab",
-              "role": "Park UI shows a styled system built on headless primitives."
             },
             {
               "resourceId": "resource-efc9a91db0cb",
@@ -337,10 +276,6 @@
           "inspect": "Review community, interactive, and motion-heavy components only after the accessibility and ownership boundary is fixed.",
           "decision": "Choose where expressive components add value without fragmenting the system.",
           "items": [
-            {
-              "resourceId": "resource-ea2802bd8265",
-              "role": "Float UI supplies responsive Tailwind sections and components for faster assembly."
-            },
             {
               "resourceId": "resource-2210207ad328",
               "role": "Uiverse provides community-made visual elements that require selective quality review."
@@ -368,16 +303,13 @@
         "resource-9b8e899f4893",
         "resource-9aca4d63712d",
         "resource-4eee7a21dbf7",
-        "resource-b44930562cf2",
         "resource-3cfed5eefb62",
-        "resource-06ff97d405dd",
-        "resource-9829cb4f86f3",
         "resource-2f7f7a4aa766"
       ],
       "coverStyle": "systems",
-      "lastReviewedAt": "2026-07-29",
+      "lastReviewedAt": "2026-10-11",
       "status": "published",
-      "outcome": "A colour system that communicates the intended brand while surviving contrast, visual-impairment, component-state, and page-level checks.",
+      "outcome": "A colour system that communicates the intended brand while surviving contrast, visual-impairment, and page-level checks.",
       "audience": "Designers and frontend teams defining or auditing interface colour systems.",
       "stages": [
         {
@@ -413,17 +345,13 @@
             {
               "resourceId": "resource-4eee7a21dbf7",
               "role": "WebAIM Contrast Checker provides a focused standards-based foreground/background test."
-            },
-            {
-              "resourceId": "resource-b44930562cf2",
-              "role": "Stark supports collaborative accessibility review across design and development tools."
             }
           ]
         },
         {
           "id": "verify-in-context",
           "title": "Verify in context",
-          "inspect": "Preview the system on interfaces, then run page- and component-level accessibility checks.",
+          "inspect": "Preview the system on interfaces, then run page-level accessibility checks.",
           "decision": "Approve, revise, or reject the colour implementation based on contextual evidence.",
           "items": [
             {
@@ -431,16 +359,8 @@
               "role": "Realtime Colors previews palette and typography choices in a page-like context."
             },
             {
-              "resourceId": "resource-06ff97d405dd",
-              "role": "Open Color offers an interface-oriented open colour scale for comparison or adoption."
-            },
-            {
-              "resourceId": "resource-9829cb4f86f3",
-              "role": "Accessibility Insights supports structured automated and guided implementation checks."
-            },
-            {
               "resourceId": "resource-2f7f7a4aa766",
-              "role": "WAVE provides a second page-level evaluation lens for issues automation and visual inspection reveal."
+              "role": "WAVE provides a page-level evaluation lens for issues that automation and visual inspection reveal."
             }
           ]
         }

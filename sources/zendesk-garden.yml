@@ -6,7 +6,8 @@ category: design-systems
 kind: design-system
 access: open-source
 summary: Zendesk's design system and React components
-status: active
+status: archived
+archived_reason: "Triage score 13/18 (keep threshold 14): support-product system; overlap"
 added_at: 2026-07-22
 added_via: curator
 last_checked: null

@@ -40,7 +40,7 @@ New summaries say specifically what you'll find there in 40–200 characters; th
 
 `npm run catalogue:generate` reads `sources/*.yml`, the curated order in `lib_data/source-order.json`, the frozen media sidecar and the collections, and writes `web/data/catalogue.json` and `web/data/catalogue-validation.json` deterministically and offline. `npm run catalogue:check` (a CI step) fails when a file breaks the schema, a slug does not match its file name, an ID or normalized URL repeats, a category or `replaced_by` target is unknown, or the committed output drifts. There is no expected number of sources, categories or access values: the generator validates structure, uniqueness and references, never counts. Sources listed in `lib_data/source-order.json` keep that curated order; any others follow by category, then name.
 
-A source is never deleted, and never dropped silently: a source that should go gets `status: archived` and an `archived_reason` (plus `replaced_by` when another source replaces it), so its ID, history and old links survive. Archived sources stay in `catalogue.json` with their status. Every public listing (Browse, home search, collections, sitemap, `llms.txt`, MCP search and counts) shows only non-archived sources; an archived source's own page still renders, marked `noindex`, with an "Archived" notice and a link to its replacement.
+A source is never deleted, and never dropped silently: a source that should go gets `status: archived` and an `archived_reason` (plus `replaced_by` when another source replaces it), so its ID, history and old links survive. Archived sources stay in `catalogue.json` with their status. Every public listing (Browse, home search, collections, sitemap, `llms.txt`, MCP search and counts) shows only non-archived sources; an archived source's own page still renders, marked `noindex`, with an "Archived" notice and a link to its replacement. An archived source's page, `profile.json`/`profile.md` and MCP `get_source` record no access route: it is kept as a record, not recommended. `needs-review` sources stay listed until a human checks them.
 
 Generated catalogue record:
 
@@ -93,7 +93,7 @@ type Category = {
 };
 ```
 
-The category ids are defined in `web/scripts/catalogue-lib.mjs`. The current broad categories remain the release taxonomy until a curator assigns every source to the revised v1.2 categories (the suggest-source issue form already lists them). Short labels are used in compact UI while full labels remain available in filters and detail views.
+The category ids are defined in `web/scripts/catalogue-lib.mjs`. The current broad categories remain the release taxonomy until a curator assigns every source to the revised v1.2 categories; the suggest-source issue form lists the same 11 categories, and its validation Action rejects any other value. Short labels are used in compact UI while full labels remain available in filters and detail views.
 
 ## 3. Collection model
 
@@ -115,6 +115,8 @@ type Collection = {
 ```
 
 Do not invent curators. Repository-maintained collections may use “Curated by Tessli”.
+
+A published collection lists 5 to 24 sources in 2 to 4 stages (`schemas/collections.schema.json`), and never an archived source: `catalogue:check` fails if a member is archived. When archiving a member would leave fewer than 5, add the strongest active peer from the same category and update the copy that named the removed member.
 
 ## 4. Search model
 

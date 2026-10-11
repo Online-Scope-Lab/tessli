@@ -384,6 +384,11 @@ export function validateCollectionSource(source, schema, resources) {
   const availableResourceIds = new Set(
     resources.map((resource) => resource.id),
   );
+  const archivedResourceIds = new Set(
+    resources
+      .filter((resource) => resource.status === "archived")
+      .map((resource) => resource.id),
+  );
   const collectionIds = new Set();
   const collectionSlugs = new Set();
 
@@ -497,6 +502,14 @@ export function validateCollectionSource(source, schema, resources) {
             issue(
               "unknown-collection-resource",
               `${label} references a resource that is not in the catalogue.`,
+              { resourceId },
+            ),
+          );
+        } else if (archivedResourceIds.has(resourceId)) {
+          errors.push(
+            issue(
+              "archived-collection-member",
+              `${label} lists an archived source; remove it or name an active peer.`,
               { resourceId },
             ),
           );

@@ -6,7 +6,8 @@ category: color-accessibility
 kind: tool
 access: open-source
 summary: Microsoft accessibility testing tools for web and Windows
-status: active
+status: archived
+archived_reason: "Triage score 13/18 (keep threshold 14): Microsoft a11y testing tools"
 added_at: 2026-07-22
 added_via: curator
 last_checked: null

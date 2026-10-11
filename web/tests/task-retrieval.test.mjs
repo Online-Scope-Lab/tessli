@@ -97,17 +97,29 @@ test("exclusions remove matching canonical metadata from the shortlist", () => {
 });
 
 test("sparse sources stay sparse and carry no coverage or verification fields", () => {
-  const result = retrieveTaskSources({ task: "DesignIndex" });
-  const designindex = result.sources.find(
-    (source) => source.slug === "designindex",
-  );
-  const profile = getSourceProfile("designindex");
+  const result = retrieveTaskSources({ task: "Land-book" });
+  const landBook = result.sources.find((source) => source.slug === "land-book");
+  const profile = getSourceProfile("land-book");
 
-  assert.ok(designindex);
+  assert.ok(landBook);
   assert.ok(profile);
-  assert.equal(designindex.status, "active");
-  assert.deepEqual(designindex.caveats, []);
-  assert.equal(Object.hasOwn(designindex, "profileLevel"), false);
-  assert.equal(Object.hasOwn(designindex, "coverageNote"), false);
-  assert.deepEqual(designindex.accessRoutes, profile.accessRoutes);
+  assert.equal(landBook.status, "active");
+  assert.deepEqual(landBook.caveats, []);
+  assert.equal(Object.hasOwn(landBook, "profileLevel"), false);
+  assert.equal(Object.hasOwn(landBook, "coverageNote"), false);
+  assert.deepEqual(landBook.accessRoutes, profile.accessRoutes);
+});
+
+test("archived sources are never retrieved, even by exact name", () => {
+  const result = retrieveTaskSources({ task: "DesignIndex" });
+
+  assert.equal(getSourceProfile("designindex")?.status, "archived");
+  assert.equal(
+    result.sources.some((source) => source.slug === "designindex"),
+    false,
+  );
+  assert.equal(
+    result.sources.some((source) => source.status === "archived"),
+    false,
+  );
 });

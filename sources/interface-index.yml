@@ -6,7 +6,8 @@ category: product-ui-ux
 kind: gallery
 access: free
 summary: Interface elements from B2B, SaaS, and desktop products
-status: active
+status: archived
+archived_reason: "Triage score 12/18 (keep threshold 14): B2B/desktop interface elements; activity unclear"
 added_at: 2026-07-22
 added_via: curator
 last_checked: null

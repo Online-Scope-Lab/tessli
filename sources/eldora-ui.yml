@@ -6,7 +6,8 @@ category: ui-libraries
 kind: library
 access: open-source
 summary: Animated React components and landing-page sections
-status: active
+status: archived
+archived_reason: "Triage score 10/18 (keep threshold 14): derivative of Magic UI-style components; low distinctiveness"
 added_at: 2026-07-22
 added_via: curator
 last_checked: null

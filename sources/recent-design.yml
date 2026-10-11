@@ -6,7 +6,8 @@ category: website-inspiration
 kind: gallery
 access: free
 summary: Recent web, interface, and interaction design
-status: active
+status: archived
+archived_reason: "Triage score 10/18 (keep threshold 14): unclear scope and activity; low signal"
 added_at: 2026-07-22
 added_via: curator
 last_checked: null

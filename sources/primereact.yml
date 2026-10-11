@@ -6,7 +6,8 @@ category: ui-libraries
 kind: library
 access: freemium
 summary: Large React component suite with premium templates and themes
-status: active
+status: archived
+archived_reason: "Triage score 12/18 (keep threshold 14): large React suite; overlaps MUI/Mantine/Ant"
 added_at: 2026-07-22
 added_via: curator
 last_checked: null

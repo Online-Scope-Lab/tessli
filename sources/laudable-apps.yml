@@ -6,7 +6,8 @@ category: product-ui-ux
 kind: gallery
 access: free
 summary: Independent showcase of polished iOS applications
-status: active
+status: archived
+archived_reason: "Triage score 11/18 (keep threshold 14): small iOS showcase; low update cadence"
 added_at: 2026-07-22
 added_via: curator
 last_checked: null

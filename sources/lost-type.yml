@@ -6,7 +6,8 @@ category: typography
 kind: asset
 access: freemium
 summary: Independent type foundry with pay-what-you-want and paid fonts
-status: active
+status: archived
+archived_reason: "Triage score 13/18 (keep threshold 14): indie foundry; PWYW"
 added_at: 2026-07-22
 added_via: curator
 last_checked: null

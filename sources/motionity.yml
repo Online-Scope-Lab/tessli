@@ -6,7 +6,8 @@ category: motion-3d
 kind: library
 access: free
 summary: Browser-based motion-graphics editor
-status: active
+status: archived
+archived_reason: "Triage score 10/18 (keep threshold 14): hobby motion editor; little maintenance"
 added_at: 2026-07-22
 added_via: curator
 last_checked: null

@@ -6,7 +6,8 @@ category: color-accessibility
 kind: tool
 access: free
 summary: Gradient inspiration and CSS values
-status: active
+status: archived
+archived_reason: "Triage score 11/18 (keep threshold 14): old gradient picker; low depth"
 added_at: 2026-07-22
 added_via: curator
 last_checked: null

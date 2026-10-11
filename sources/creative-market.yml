@@ -6,7 +6,8 @@ category: visual-assets
 kind: asset
 access: paid
 summary: Marketplace for fonts, templates, mockups, and graphics
-status: active
+status: archived
+archived_reason: "Off-scope: general creative marketplace"
 added_at: 2026-07-22
 added_via: curator
 last_checked: null

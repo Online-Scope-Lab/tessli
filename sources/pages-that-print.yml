@@ -6,7 +6,8 @@ category: landing-marketing
 kind: gallery
 access: free
 summary: Landing pages connected to proven revenue outcomes
-status: active
+status: archived
+archived_reason: "Triage score 12/18 (keep threshold 14): outcome-linked landing pages; claims unverifiable, activity unclear"
 added_at: 2026-07-22
 added_via: curator
 last_checked: null

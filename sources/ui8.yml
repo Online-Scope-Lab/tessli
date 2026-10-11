@@ -6,7 +6,8 @@ category: visual-assets
 kind: asset
 access: paid
 summary: Premium UI kits, fonts, illustrations, and design assets
-status: active
+status: archived
+archived_reason: "Triage score 12/18 (keep threshold 14): premium UI-kit marketplace; previews browsable"
 added_at: 2026-07-22
 added_via: curator
 last_checked: null

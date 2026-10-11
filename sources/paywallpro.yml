@@ -6,7 +6,8 @@ category: product-ui-ux
 kind: gallery
 access: freemium
 summary: Mobile subscription paywall screenshots and analysis
-status: active
+status: archived
+archived_reason: "Triage score 13/18 (keep threshold 14): paywall screen niche; useful for subscription apps"
 added_at: 2026-07-22
 added_via: curator
 last_checked: null

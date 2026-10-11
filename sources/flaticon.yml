@@ -6,7 +6,8 @@ category: icons
 kind: asset
 access: freemium
 summary: Large icon and sticker library
-status: active
+status: archived
+archived_reason: "Triage score 11/18 (keep threshold 14): stock-icon marketplace; inconsistent quality, attribution required"
 added_at: 2026-07-22
 added_via: curator
 last_checked: null

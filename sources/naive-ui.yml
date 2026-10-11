@@ -6,7 +6,8 @@ category: ui-libraries
 kind: library
 access: open-source
 summary: TypeScript-based Vue 3 component library
-status: active
+status: archived
+archived_reason: "Triage score 12/18 (keep threshold 14): Vue 3 library; overlap"
 added_at: 2026-07-22
 added_via: curator
 last_checked: null

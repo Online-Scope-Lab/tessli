@@ -6,7 +6,8 @@ category: design-tools-ai
 kind: tool
 access: freemium
 summary: Visual builder for React websites and applications
-status: active
+status: archived
+archived_reason: "Off-scope: visual React builder; not a reference"
 added_at: 2026-07-22
 added_via: curator
 last_checked: null

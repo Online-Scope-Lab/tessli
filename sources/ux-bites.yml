@@ -6,7 +6,9 @@ category: product-ui-ux
 kind: gallery
 access: free
 summary: Short examples of useful UX interactions and product decisions
-status: active
+status: archived
+archived_reason: Merged into Built for Mars (same product and domain)
+replaced_by: built-for-mars
 added_at: 2026-07-22
 added_via: curator
 last_checked: null

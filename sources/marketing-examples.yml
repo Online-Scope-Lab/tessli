@@ -6,7 +6,8 @@ category: landing-marketing
 kind: gallery
 access: free
 summary: Real-world marketing tactics and copy examples
-status: active
+status: archived
+archived_reason: "Off-scope: marketing/copy tactics, not a design or frontend reference"
 added_at: 2026-07-22
 added_via: curator
 last_checked: null

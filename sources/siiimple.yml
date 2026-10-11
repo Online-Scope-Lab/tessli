@@ -6,7 +6,9 @@ category: website-inspiration
 kind: gallery
 access: free
 summary: Minimal website gallery
-status: active
+status: archived
+archived_reason: "Triage score 11/18 (keep threshold 14): minimal gallery with slow updates; superseded by Minimal Gallery"
+replaced_by: minimal-gallery
 added_at: 2026-07-22
 added_via: curator
 last_checked: null

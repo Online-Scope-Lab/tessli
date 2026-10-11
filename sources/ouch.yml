@@ -6,7 +6,8 @@ category: visual-assets
 kind: asset
 access: freemium
 summary: Vector and 3D illustration library
-status: active
+status: archived
+archived_reason: "Triage score 12/18 (keep threshold 14): Icons8 illustrations; same vendor as Icons8"
 added_at: 2026-07-22
 added_via: curator
 last_checked: null

@@ -6,7 +6,8 @@ category: landing-marketing
 kind: gallery
 access: free
 summary: Landing-page examples from SaaS companies
-status: active
+status: archived
+archived_reason: "Triage score 12/18 (keep threshold 14): SaaS landing examples; overlaps SaaS Pages/SaaSpo"
 added_at: 2026-07-22
 added_via: curator
 last_checked: null

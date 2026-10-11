@@ -6,7 +6,8 @@ category: website-inspiration
 kind: gallery
 access: free
 summary: Small UI and interaction details from digital products
-status: active
+status: archived
+archived_reason: "Triage score 12/18 (keep threshold 14): UI-detail gallery; activity unclear"
 added_at: 2026-07-22
 added_via: curator
 last_checked: null

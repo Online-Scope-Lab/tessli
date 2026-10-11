@@ -6,7 +6,8 @@ category: website-inspiration
 kind: gallery
 access: free
 summary: 3D and WebGL website inspiration
-status: active
+status: archived
+archived_reason: "Triage score 13/18 (keep threshold 14): 3D/WebGL slice; distinct angle"
 added_at: 2026-07-22
 added_via: curator
 last_checked: null

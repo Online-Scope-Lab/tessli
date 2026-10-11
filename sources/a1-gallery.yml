@@ -6,7 +6,8 @@ category: website-inspiration
 kind: gallery
 access: free
 summary: Curated gallery of high-quality websites
-status: active
+status: archived
+archived_reason: "Triage score 10/18 (keep threshold 14): generic gallery, low distinctiveness"
 added_at: 2026-07-22
 added_via: curator
 last_checked: null

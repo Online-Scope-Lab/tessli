@@ -6,7 +6,8 @@ category: color-accessibility
 kind: tool
 access: freemium
 summary: Automated accessibility testing for websites and applications
-status: active
+status: archived
+archived_reason: "Triage score 12/18 (keep threshold 14): automated a11y testing; dev tool"
 added_at: 2026-07-22
 added_via: curator
 last_checked: null

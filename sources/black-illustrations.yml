@@ -6,7 +6,8 @@ category: visual-assets
 kind: asset
 access: freemium
 summary: Illustration collections representing Black people
-status: active
+status: archived
+archived_reason: "Triage score 12/18 (keep threshold 14): representation-focused illustrations; activity unclear"
 added_at: 2026-07-22
 added_via: curator
 last_checked: null

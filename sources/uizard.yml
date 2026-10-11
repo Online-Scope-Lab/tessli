@@ -6,7 +6,8 @@ category: design-tools-ai
 kind: tool
 access: freemium
 summary: AI-assisted wireframing, UI design, and prototyping
-status: active
+status: archived
+archived_reason: "Off-scope: AI wireframing tool (Miro-owned); not a reference source"
 added_at: 2026-07-22
 added_via: curator
 last_checked: null

@@ -6,7 +6,8 @@ category: color-accessibility
 kind: tool
 access: free
 summary: Machine-learning color palettes for brands and interfaces
-status: active
+status: archived
+archived_reason: "Triage score 13/18 (keep threshold 14): ML palettes; overlaps Coolors/Khroma"
 added_at: 2026-07-22
 added_via: curator
 last_checked: null

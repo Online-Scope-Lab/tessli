@@ -6,7 +6,8 @@ category: product-ui-ux
 kind: gallery
 access: freemium
 summary: Interesting patterns found in production iOS apps
-status: active
+status: archived
+archived_reason: "Triage score 13/18 (keep threshold 14): interesting iOS production patterns; cadence unclear"
 added_at: 2026-07-22
 added_via: curator
 last_checked: null

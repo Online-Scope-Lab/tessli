@@ -6,7 +6,8 @@ category: ui-libraries
 kind: library
 access: open-source
 summary: Styled components built on Ark UI
-status: active
+status: archived
+archived_reason: "Triage score 13/18 (keep threshold 14): styled Ark UI/Panda components; niche stack"
 added_at: 2026-07-22
 added_via: curator
 last_checked: null

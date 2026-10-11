@@ -6,7 +6,8 @@ category: ui-libraries
 kind: library
 access: open-source
 summary: Vue 3 component library for desktop applications
-status: active
+status: archived
+archived_reason: "Triage score 13/18 (keep threshold 14): Vue 3 desktop library; overlap"
 added_at: 2026-07-22
 added_via: curator
 last_checked: null

@@ -1,12 +1,12 @@
 id: resource-4b1cd233f883
 slug: v0
 name: v0
-url: https://v0.dev
+url: https://v0.app
 category: design-tools-ai
 kind: tool
 access: freemium
 summary: AI generation of React interfaces and applications
-status: active
+status: needs-review
 added_at: 2026-07-22
 added_via: curator
 last_checked: null

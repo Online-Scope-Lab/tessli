@@ -6,7 +6,8 @@ category: design-tools-ai
 kind: tool
 access: freemium
 summary: Figma-to-code and design-to-production workflows
-status: active
+status: archived
+archived_reason: "Off-scope: design-to-code tool; not a reference"
 added_at: 2026-07-22
 added_via: curator
 last_checked: null
