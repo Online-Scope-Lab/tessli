@@ -79,7 +79,7 @@ export function MobileListDetail({
   backLabel = "Back to list",
   initialSelectedId,
   initialView = "list",
-  headingLevel = 2,
+  headingLevel = 1,
   empty,
   error,
   className,

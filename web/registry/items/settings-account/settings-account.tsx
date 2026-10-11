@@ -266,7 +266,12 @@ export function SettingsAccount({
       await onDeleteAccount?.();
       deletionStarted.current = true;
       setDeleteStatus("started");
-      dialogRef.current?.close();
+      const dialog = dialogRef.current;
+      // Closing fires onClose, which moves focus. If the dialog was already
+      // closed while the request ran, no close event follows, so move focus
+      // here: the delete button it would have returned to is gone.
+      if (dialog?.open) dialog.close();
+      else startedRef.current?.focus();
     } catch {
       setDeleteStatus("error");
     }
@@ -543,6 +548,10 @@ export function SettingsAccount({
         aria-labelledby={ids.dialogTitle}
         aria-describedby={ids.dialogDescription}
         onClose={handleDialogClose}
+        onCancel={(event) => {
+          // Keep the dialog open on Escape while the request is running.
+          if (deleteStatus === "deleting") event.preventDefault();
+        }}
         className="m-auto max-h-[calc(100dvh-2rem)] w-[calc(100%-2rem)] max-w-lg overflow-y-auto rounded-lg border border-border bg-card p-0 text-card-foreground shadow-lg backdrop:bg-background/80"
       >
         <form noValidate onSubmit={handleDelete} className="p-5 sm:p-6">

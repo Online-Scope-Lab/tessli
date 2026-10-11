@@ -1,6 +1,5 @@
 // Fictional product: Northwind Notes. No real brand, person or data.
-import { buttonVariants } from "@/registry/shadcn/ui/button";
-import { cn } from "@/registry/shadcn/lib/utils";
+import { Button } from "@/registry/shadcn/ui/button";
 
 import { MobileListDetailExample } from "./demo";
 
@@ -33,15 +32,13 @@ function LoadError() {
           </p>
         ),
         action: (
-          <a
-            href=""
-            className={cn(
-              buttonVariants({ variant: "outline" }),
-              "h-11 w-full px-5 sm:w-auto",
-            )}
+          <Button
+            size="lg"
+            variant="outline"
+            className="h-11 w-full px-5 sm:w-auto"
           >
             Try loading again
-          </a>
+          </Button>
         ),
       }}
     />

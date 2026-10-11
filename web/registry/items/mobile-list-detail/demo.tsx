@@ -92,6 +92,28 @@ export const notes: MobileListDetailItem[] = [
     ),
   },
   {
+    id: "weekly-sync-2-oct",
+    title: "Weekly sync, 2 October",
+    meta: "2 Oct",
+    summary:
+      "Agreed to share interview notes within a day, and to keep raw recordings off the shared drive.",
+    details: [
+      { label: "Edited", value: "2 October, 10:50" },
+      { label: "Notebook", value: "Field research" },
+      { label: "Shared with", value: "Research team" },
+    ],
+    body: (
+      <>
+        <p>Two decisions and one follow-up from this week’s sync.</p>
+        <ul>
+          <li>Interview notes are shared within one working day.</li>
+          <li>Raw recordings stay off the shared drive.</li>
+          <li>Follow-up: ask the depot manager about photo consent.</li>
+        </ul>
+      </>
+    ),
+  },
+  {
     id: "survey-draft",
     title: "Survey draft, second pass",
     meta: "29 Sep",
@@ -116,33 +138,14 @@ export const notes: MobileListDetailItem[] = [
       </>
     ),
   },
-  {
-    id: "weekly-sync-2-oct",
-    title: "Weekly sync, 2 October",
-    meta: "2 Oct",
-    summary:
-      "Agreed to share interview notes within a day, and to keep raw recordings off the shared drive.",
-    details: [
-      { label: "Edited", value: "2 October, 10:50" },
-      { label: "Notebook", value: "Field research" },
-      { label: "Shared with", value: "Research team" },
-    ],
-    body: (
-      <>
-        <p>Two decisions and one follow-up from this week’s sync.</p>
-        <ul>
-          <li>Interview notes are shared within one working day.</li>
-          <li>Raw recordings stay off the shared drive.</li>
-          <li>Follow-up: ask the depot manager about photo consent.</li>
-        </ul>
-      </>
-    ),
-  },
 ];
 
 export function MobileListDetailExample(props: Partial<MobileListDetailProps>) {
   return (
     <MobileListDetail
+      // The preview page already has its own h1. In an app, leave
+      // headingLevel at its default (1): this is the page title.
+      headingLevel={2}
       title="Field research"
       description="Notes from the Harbour Road depot study."
       items={notes}
