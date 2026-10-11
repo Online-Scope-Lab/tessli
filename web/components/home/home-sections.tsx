@@ -199,7 +199,8 @@ export function HomeSections() {
             <p>
               Agents install items with the shadcn CLI and keep every rule in
               one small file, TESSLI.md. A local, read-only MCP server and plain
-              JSON and Markdown versions of every page cover the rest.
+              JSON and Markdown versions of every library item, source and
+              collection cover the rest.
             </p>
             <ul className={styles.textLinks}>
               <li>

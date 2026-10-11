@@ -95,6 +95,7 @@
 }
 
 .utilityLink {
+  position: relative;
   display: inline-flex;
   min-height: 40px;
   align-items: center;
@@ -111,10 +112,25 @@
 }
 
 .utilityLink:hover,
-.utilityLink:focus-visible,
-.utilityLinkActive {
+.utilityLink:focus-visible {
   background: var(--surface-muted);
   color: var(--text-strong);
+}
+
+/* Active route: the same restrained orange underline as the primary nav,
+   never a filled pill, so it stays distinct from hover and focus. */
+.utilityLinkActive {
+  color: var(--text-strong);
+}
+
+.utilityLinkActive::after {
+  position: absolute;
+  right: var(--space-3);
+  bottom: 4px;
+  left: var(--space-3);
+  height: 2px;
+  background: var(--accent);
+  content: "";
 }
 
 .externalMark {
@@ -293,7 +309,8 @@
 }
 
 @media (forced-colors: active) {
-  .navigationLink::after {
+  .navigationLink::after,
+  .utilityLinkActive::after {
     background: CanvasText;
   }
 

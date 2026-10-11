@@ -113,6 +113,21 @@ test("header visual contract uses underline, utilities, and a viewport modal", a
   assert.match(css, /\.sheetLayer \{[\s\S]*?inset: 0/);
   assert.match(css, /\.sheet \{[\s\S]*?height: 100%/);
   assert.doesNotMatch(css, /\.accountLink|\.mobileAccountLink|backdrop-filter/);
+
+  // Active utility links use the orange underline, not the hover pill
+  // (component-contracts §1), and keep an indicator in forced-colors mode.
+  assert.doesNotMatch(css, /:focus-visible,\s*\.utilityLinkActive\b/);
+  const activeRule = css.match(/\n\.utilityLinkActive \{([^}]*)\}/);
+  assert.ok(activeRule, "expected a standalone .utilityLinkActive rule");
+  assert.doesNotMatch(activeRule[1], /background/);
+  assert.match(
+    css,
+    /\.utilityLinkActive::after \{[^}]*height: 2px;[^}]*background: var\(--accent\)/,
+  );
+  assert.match(
+    css,
+    /@media \(forced-colors: active\) \{[\s\S]*?\.utilityLinkActive::after[\s\S]*?CanvasText/,
+  );
 });
 
 test("site chrome mounts one global header and isolates site content", async () => {
