@@ -1,4 +1,9 @@
-# Tessli
+<h1>
+  <picture>
+    <source media="(prefers-color-scheme: dark)" srcset="web/public/brand/tessli-wordmark-light.svg">
+    <img src="web/public/brand/tessli-wordmark.svg" alt="Tessli" height="56">
+  </picture>
+</h1>
 
 **UI with the reasoning attached.**
 

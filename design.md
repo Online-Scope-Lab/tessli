@@ -31,6 +31,12 @@ Approved hero artwork:
 - canonical source: `docs/ref-img/tessli-hero-geometry.webp`
 - production derivative: `web/public/brand/tessli-hero-geometry.webp`
 
+Logo and sharing images (`web/public/brand/`):
+
+- `tessli-wordmark.svg` and `tessli-wordmark-light.svg`: the wordmark as outlines (Newsreader 700, tracking `-0.045em`), charcoal for light backgrounds and canvas for dark ones.
+- `tessli-mark.svg`, `tessli-mark-dark.svg` and `tessli-mark-512.png`: the square T-and-dot mark, the same drawing as the favicon `web/app/icon.svg`.
+- `tessli-social-preview.png` (1280×640): the GitHub social preview. `web/app/opengraph-image.png` is the same card without the repository address, used for link previews of the site.
+
 The references define the **composition, atmosphere, hierarchy, and component language**. They are not literal specifications for fictional data, tiny generated text, or impossible measurements.
 
 ## 3. Non-negotiable design principles
