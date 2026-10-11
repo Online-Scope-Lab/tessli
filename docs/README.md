@@ -10,6 +10,8 @@ A short index of what lives in `docs/`. Start with the root [`README.md`](../REA
 - [`v1.2/progress-report.md`](v1.2/progress-report.md): Stage B PRs, decisions, what is left and what needs a human.
 - [`v1.2/good-first-issues.md`](v1.2/good-first-issues.md): drafts of the first contributor issues, each with files, acceptance checks and how to verify.
 - [`v1.2/shadcn-directory-listing.md`](v1.2/shadcn-directory-listing.md): the `@tessli` entry for the shadcn registry directory, its pull request text and the pre-flight checklist.
+- [`v1.2/source-audit-2026-10.md`](v1.2/source-audit-2026-10.md): the October 2026 source URL audit and the weak or stale sources awaiting an owner decision.
+- [`v1.2/taste-review.md`](v1.2/taste-review.md): the checklist for signing items and rules `reviewed`, with live preview links for every state and theme.
 - [`v1.2/`](v1.2/): the catalogue audit, triage files and research notes behind the plan.
 - [`decisions.md`](decisions.md): one dated line per decision.
 

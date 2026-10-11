@@ -13,14 +13,14 @@ Researched on 2026-10-11 from `shadcn-ui/ui@main`:
 
 Each entry is a JSON object with exactly these keys (the schema is strict, so any other key fails validation):
 
-| Key           | Rule                                                                                                 |
-| ------------- | ---------------------------------------------------------------------------------------------------- |
-| `name`        | The namespace: `@` then letters, digits, `_` or `-`. Unique, ignoring case.                          |
-| `homepage`    | A URL.                                                                                               |
-| `url`         | A URL that contains `{name}`. The CLI and the monitor replace `{name}` with an item name.            |
-| `description` | Free text. Current entries run from 21 to 355 characters.                                            |
+| Key           | Rule                                                                                                  |
+| ------------- | ----------------------------------------------------------------------------------------------------- |
+| `name`        | The namespace: `@` then letters, digits, `_` or `-`. Unique, ignoring case.                           |
+| `homepage`    | A URL.                                                                                                |
+| `url`         | A URL that contains `{name}`. The CLI and the monitor replace `{name}` with an item name.             |
+| `description` | Free text. Current entries run from 21 to 355 characters.                                             |
 | `logo`        | An inline SVG string. Most entries use `var(--foreground)` so the mark follows the directory's theme. |
-| `author`      | Optional.                                                                                            |
+| `author`      | Optional.                                                                                             |
 
 The docs add four requirements: the registry is open source and public; it conforms to the registry schema; it is **flat**, meaning `{name}` resolves both the index (`registry`) and every item at the same level; and a `files` array in the index carries no `content`.
 
@@ -32,7 +32,7 @@ Tessli already publishes one JSON file per item, with its code inlined, at `web/
 
 Two URL templates resolve that layout:
 
-1. **Hosted, recommended:** `https://tessli.vercel.app/r/{name}.json`. It matches the `homepage`, the `docs` links inside every item and the 397 of 434 entries that use the `<origin>/r/{name}.json` shape. It needs the site deployed from `main` at that domain. This session could not reach `tessli.vercel.app` (its network proxy refused the connection), so it is **unverified**.
+1. **Hosted, recommended:** `https://tessli.vercel.app/r/{name}.json`. It matches the `homepage`, the `docs` links inside every item and the 397 of 434 entries that use the `<origin>/r/{name}.json` shape. It needs the site deployed from `main` at that domain. **Verified on 2026-10-11**; see [Pre-flight status](#pre-flight-status).
 2. **Fallback:** `https://raw.githubusercontent.com/Online-Scope-Lab/tessli/main/web/public/r/{name}.json`. On 2026-10-11 `…/r/pricing-tiers.json` answered HTTP 200 from `main`. Five directory entries already use `raw.githubusercontent.com`. Its costs: GitHub serves it as `text/plain` (the CLI accepts that; the health monitor records it), and it ties the namespace to a repository path.
 
 **Checked locally on 2026-10-11** against `next start` with `"@tessli": "http://127.0.0.1:3000/r/{name}.json"` in a test project's `components.json`, using shadcn CLI 4.21.4: `shadcn search @tessli` lists all 13 items from `/r/registry.json`, and `shadcn view @tessli/faq` and `@tessli/rules` resolve their item files. `shadcn add @tessli/faq` passed the registry check but could not finish, because this session's network blocks `ui.shadcn.com`, which the CLI calls for base colours. The full install is pre-flight step 3.
@@ -105,5 +105,19 @@ All must be true before the pull request is opened:
 5. **The entry validates:** in a fork of `shadcn-ui/ui`, add the entry, run `pnpm install` and `pnpm validate:registries`, and see all checks pass.
 6. **The owner confirms** the domain is the one to keep, the logo and the description.
 7. **Claims still hold:** the description names no reviewed items, ratings or counts, and nothing on the homepage says Tessli improves AI output.
+
+## Pre-flight status
+
+Run on 2026-10-11 against the live site:
+
+| Step               | Result                                                                                                                                                                                                                                                                                                                                                                         |
+| ------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| 1. On `main`       | ✅ `web/public/r/registry.json` is on `main` and `npm run registry:check` passes.                                                                                                                                                                                                                                                                                              |
+| 2. Served publicly | ✅ `/r/registry.json` (`name: tessli`, 13 items) and every item file, `rules.json` included, return 200 with `application/json` and no login or challenge. `/library` returns 200.                                                                                                                                                                                             |
+| 3. Fresh install   | ✅ In a new `create-next-app` project after `npx shadcn@latest init`, with `"@tessli": "https://tessli.vercel.app/r/{name}.json"` in `components.json`: `add @tessli/pricing-tiers` created `components/pricing-tiers.tsx`, importing `@/components/ui/button` and `@/lib/utils`. `add @tessli/rules` created `TESSLI.md`. `npm run build` passed with the component imported. |
+| 4. Namespace free  | ✅ `@tessli` is not among the 435 entries in `https://ui.shadcn.com/r/registries.json`.                                                                                                                                                                                                                                                                                        |
+| 5. Entry validates | ⏳ Owner: run `pnpm validate:registries` in a fork of `shadcn-ui/ui` with the entry added.                                                                                                                                                                                                                                                                                     |
+| 6. Owner confirms  | ⏳ Owner: confirm `tessli.vercel.app` is the domain to keep, and approve the logo and description.                                                                                                                                                                                                                                                                             |
+| 7. Claims hold     | ✅ The description names no reviewed items, ratings or counts.                                                                                                                                                                                                                                                                                                                 |
 
 After the merge, `npx shadcn@latest add @tessli/<item>` works with no configuration, and the Registry Health page starts reporting on the index, a daily sample of items and a dry-run install. Update `/for-ai`, the README and `skills/tessli/SKILL.md` to show the `@tessli/<item>` form next to `online-scope-lab/tessli/<item>` in a follow-up change.
