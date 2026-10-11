@@ -10,8 +10,9 @@ Be clear about what exists today:
 
 - **Live now:**
   - the **Library** at `/library`: three community items (an empty state, an FAQ section and a pricing section), each with a live preview in three themes (Tessli, Neutral, Dark) at three widths, its taste notes, code, and `item.json`/`item.md` for agents. None is reviewed by a maintainer yet.
+  - the **Rules** at `/rules`: 39 draft rules for hierarchy, typography, spacing, colour, components, copy, states, responsive behaviour, motion and accessibility, each with why it matters, how to check it, the default it guards against, its sources and the items that apply it. None is reviewed by a maintainer yet. [`rules/TESSLI.md`](rules/TESSLI.md) is the compact index for agents.
   - the curated **Sources** directory (browse, source pages, collections), public Markdown/JSON for each source, and a local read-only MCP server ([`docs/tessli-native-mcp.md`](docs/tessli-native-mcp.md)).
-- **Being built:** the rest of the starter set, the public rule set, MCP tools for items, and the Contribute page.
+- **Being built:** the rest of the starter set, MCP tools for items and rules, and the Contribute page.
 - **Not built:** accounts, a database, analytics or payments. GitHub issues and pull requests are the backend.
 
 The plan and its phases are in [`docs/v1.2/plan.md`](docs/v1.2/plan.md).
@@ -42,7 +43,13 @@ Install a library item into a project set up with [shadcn/ui](https://ui.shadcn.
 npx shadcn@latest add online-scope-lab/tessli/pricing-tiers
 ```
 
-The shadcn CLI reads the generated root [`registry.json`](registry.json). Items live in `web/registry/items/<slug>/` (the item, a demo, optional states and `notes.md` taste notes validated by [`schemas/library-item.schema.json`](schemas/library-item.schema.json)); `npm run registry:build` regenerates `registry.json`, `web/public/r/*.json` and `web/data/library.json`, and `npm run registry:check` verifies them. `npm run test:items` (after a build) renders every item in every state and theme at five widths with Playwright and axe-core.
+Add the rules index, `TESSLI.md`, to the root of the same kind of project, for your coding agent to read before it builds UI:
+
+```bash
+npx shadcn@latest add online-scope-lab/tessli/rules
+```
+
+The shadcn CLI reads the generated root [`registry.json`](registry.json). Items live in `web/registry/items/<slug>/` (the item, a demo, optional states and `notes.md` taste notes validated by [`schemas/library-item.schema.json`](schemas/library-item.schema.json)); Rules live in `rules/<ID>.md`, validated by [`schemas/rule.schema.json`](schemas/rule.schema.json). `npm run registry:build` regenerates `registry.json`, `web/public/r/*.json`, `web/data/library.json`, `web/data/rules.json` and `rules/TESSLI.md`, and `npm run registry:check` verifies them. `npm run test:items` (after a build) renders every item in every state and theme at five widths with Playwright and axe-core.
 
 Each source is one file, `sources/<slug>.yml`. The catalogue is generated deterministically from those files (plus the curated order, media and collections in `lib_data/`) into `web/data/`; `npm run catalogue:generate` rebuilds it and `npm run catalogue:check` verifies it. Normal build and test make no network calls.
 

@@ -1,0 +1,298 @@
+/* Rule rows (/rules, /library/[slug]) and the rule pages. The page frame,
+   hero, lede, note, section and breadcrumb come from library.module.css. */
+
+.ruleList {
+  margin: 0;
+  border-top: 1px solid var(--line);
+  padding: 0;
+  list-style: none;
+}
+
+.ruleRow {
+  position: relative;
+  display: grid;
+  grid-template-columns: 4.5rem minmax(0, 1fr);
+  gap: var(--space-4);
+  align-items: baseline;
+  border-bottom: 1px solid var(--line);
+  padding: var(--space-4) 0;
+  transition: background-color var(--motion-fast) var(--ease-standard);
+}
+
+.ruleRow:hover,
+.ruleRow:focus-within {
+  background: var(--surface-muted);
+}
+
+.ruleId {
+  padding-left: var(--space-2);
+  color: var(--text-strong);
+  font-size: var(--text-body-sm);
+  font-variant-numeric: tabular-nums;
+  font-weight: 650;
+}
+
+.ruleText {
+  display: grid;
+  gap: var(--space-1);
+  min-width: 0;
+  padding-right: var(--space-2);
+}
+
+.ruleLink {
+  color: var(--text-strong);
+  font-size: var(--text-body-md);
+  font-weight: 550;
+  line-height: 1.45;
+  text-decoration: none;
+}
+
+/* The whole row is one target; the statement link stretches over it. */
+.ruleLink::after {
+  position: absolute;
+  inset: 0;
+  content: "";
+}
+
+.ruleLink:hover {
+  text-decoration: underline;
+  text-underline-offset: 0.2em;
+}
+
+.ruleLink:focus-visible {
+  outline: none;
+}
+
+.ruleRow:has(.ruleLink:focus-visible) {
+  outline: 3px solid var(--focus);
+  outline-offset: 2px;
+}
+
+.ruleMeta {
+  color: var(--text-muted);
+  font-size: var(--text-body-sm);
+}
+
+/* /rules */
+
+.categoryNav {
+  padding: var(--space-8) 0 var(--space-2);
+}
+
+.categoryNav ul {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.categoryNav a {
+  display: inline-flex;
+  min-height: 44px;
+  align-items: center;
+  gap: var(--space-2);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-control-md);
+  background: var(--surface);
+  padding: 0 var(--space-4);
+  color: var(--text-body);
+  font-size: var(--text-body-sm);
+  font-weight: 550;
+  text-decoration: none;
+  transition:
+    border-color var(--motion-fast) var(--ease-standard),
+    background-color var(--motion-fast) var(--ease-standard);
+}
+
+.categoryNav a:hover {
+  border-color: var(--line-strong);
+  background: var(--surface-muted);
+  color: var(--text-strong);
+}
+
+.categoryCount {
+  color: var(--text-muted);
+  font-variant-numeric: tabular-nums;
+}
+
+.categorySection {
+  scroll-margin-top: var(--space-8);
+  padding-top: clamp(32px, 5vw, 56px);
+}
+
+.categorySection h2 {
+  margin: 0 0 var(--space-4);
+  font-family: var(--font-display);
+  font-optical-sizing: auto;
+  font-size: var(--text-h2);
+  font-weight: 610;
+  letter-spacing: var(--tracking-title);
+  line-height: 1.05;
+}
+
+.agents {
+  display: grid;
+  gap: var(--space-3);
+  max-width: 860px;
+  margin-top: clamp(28px, 4vw, 44px);
+  border: 1px solid var(--line);
+  background: var(--surface);
+  padding: var(--space-6);
+}
+
+.agents h2 {
+  margin: 0;
+  font-size: var(--text-h3);
+  font-weight: 600;
+  line-height: 1.25;
+}
+
+.agents p {
+  max-width: 62ch;
+  margin: 0;
+  color: var(--text-body);
+  font-size: var(--text-body-sm);
+  line-height: 1.55;
+}
+
+.agents a {
+  color: var(--text-strong);
+  font-weight: 600;
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 0.2em;
+}
+
+/* /rules/[id] */
+
+.ruleHeader {
+  display: grid;
+  gap: var(--space-4);
+  max-width: 900px;
+  padding-bottom: clamp(28px, 4vw, 44px);
+}
+
+.ruleHeader h1 {
+  max-width: 20ch;
+  margin: 0;
+  font-family: var(--font-display);
+  font-optical-sizing: auto;
+  font-size: var(--text-title);
+  font-weight: 620;
+  letter-spacing: var(--tracking-title);
+  line-height: 0.98;
+  text-wrap: balance;
+}
+
+.statement {
+  max-width: 48ch;
+  margin: 0;
+  color: var(--text-strong);
+  font-size: clamp(1.125rem, 1.6vw, 1.375rem);
+  font-weight: 550;
+  line-height: 1.4;
+  text-wrap: pretty;
+}
+
+.check {
+  max-width: 68ch;
+  margin: 0;
+  border-left: 3px solid var(--text-strong);
+  padding: var(--space-1) 0 var(--space-1) var(--space-5);
+  color: var(--text-strong);
+  font-size: var(--text-body-lg);
+  line-height: 1.55;
+}
+
+.itemLinks {
+  display: grid;
+  gap: var(--space-2);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.itemLinks a {
+  color: var(--text-strong);
+  font-weight: 600;
+}
+
+.pager {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: var(--space-4);
+  border-top: 1px solid var(--line);
+  padding-top: var(--space-8);
+}
+
+.pager a {
+  display: grid;
+  gap: var(--space-1);
+  min-height: 44px;
+  border: 1px solid var(--line);
+  background: var(--surface);
+  padding: var(--space-4) var(--space-5);
+  color: var(--text-strong);
+  font-size: var(--text-body-sm);
+  font-weight: 600;
+  line-height: 1.45;
+  text-decoration: none;
+}
+
+.pager a:hover {
+  border-color: var(--line-strong);
+  background: var(--surface-muted);
+}
+
+.pager span {
+  color: var(--text-muted);
+  font-weight: 500;
+}
+
+.pagerNext {
+  grid-column: 2;
+  text-align: right;
+}
+
+@media (max-width: 767px) {
+  .ruleRow {
+    grid-template-columns: minmax(0, 1fr);
+    gap: var(--space-1);
+  }
+
+  .ruleId,
+  .ruleText {
+    padding-inline: var(--space-2);
+  }
+
+  .agents {
+    padding: var(--space-5);
+  }
+
+  .pager {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .pagerNext {
+    grid-column: auto;
+    text-align: left;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .ruleRow,
+  .categoryNav a {
+    transition: none;
+  }
+}
+
+/* Links inside running text stay recognisable as links. */
+.inlineLinks a,
+.itemLinks a {
+  color: var(--text-strong);
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 0.2em;
+}

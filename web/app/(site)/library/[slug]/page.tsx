@@ -6,6 +6,8 @@ import type { ReactNode } from "react";
 import { CopyCommand } from "@/components/library/copy-command";
 import styles from "@/components/library/library.module.css";
 import { PreviewWorkbench } from "@/components/library/preview-workbench";
+import { RuleList } from "@/components/rules/rule-list";
+import ruleStyles from "@/components/rules/rules.module.css";
 import { Tag } from "@/components/ui/tag";
 import {
   getLibraryItem,
@@ -15,6 +17,7 @@ import {
   libraryKindLabel,
   reviewStatusText,
 } from "@/lib/library";
+import { getRule, type Rule } from "@/lib/rules";
 
 export const dynamicParams = false;
 
@@ -86,6 +89,10 @@ export default async function LibraryItemPage({ params }: ItemPageProps) {
   const command = installCommand(slug);
   const paragraphs = item.body.split(/\n{2,}/).map((p) => p.trim());
   const primitives = item.registryDependencies;
+  // build-registry guarantees every listed rule exists.
+  const rules = notes.rules
+    .map((id) => getRule(id))
+    .filter((rule): rule is Rule => rule !== undefined);
 
   return (
     <main className={styles.page} id="main-content" data-library-item-page>
@@ -170,20 +177,12 @@ export default async function LibraryItemPage({ params }: ItemPageProps) {
         </Section>
 
         <Section id="rules-title" title="Rules">
-          {notes.rules.length ? (
-            <ul className={styles.meta}>
-              {notes.rules.map((rule) => (
-                <li key={rule}>
-                  <Tag>{rule}</Tag>
-                </li>
-              ))}
-            </ul>
-          ) : (
-            <p className={styles.note}>
-              The public rule set is not published yet. This item’s rules will
-              be listed and linked here when it is.
-            </p>
-          )}
+          <RuleList rules={rules} />
+          <p className={`${styles.note} ${ruleStyles.inlineLinks}`}>
+            Each rule page says why the rule matters and how to check it. Rules
+            are drafts until a maintainer signs them;{" "}
+            <Link href="/rules">see all rules</Link>.
+          </p>
         </Section>
 
         <Section id="failures-title" title="How it breaks">

@@ -145,6 +145,7 @@ export interface PublicLibraryItemDocument {
       dependencies: readonly string[];
     };
     notes: Record<string, unknown>;
+    rules: readonly { id: string; statement: string | null; path: string }[];
     explanation: string;
     source: { path: string; code: string };
   };
@@ -173,6 +174,7 @@ export function serializePublicCollectionMarkdown(
 export function createPublicLibraryItemRepresentation(
   item: PublicLibraryItemInput,
   installPrefix: string,
+  rules?: readonly { id: string; statement: string }[],
 ): PublicLibraryItemDocument;
 export function serializePublicLibraryItemMarkdown(
   document: PublicLibraryItemDocument,

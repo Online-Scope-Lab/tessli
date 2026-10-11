@@ -390,17 +390,23 @@ export function createPublicOptionsHeaders() {
 
 const LIBRARY_ITEM_BOUNDARIES = [
   "Community items are merged and pass automated checks (schema, build, accessibility, overflow and console errors in three themes at five widths); only items with status reviewed have been checked by a maintainer.",
-  "The rules list holds rule ids; the public rule set is not published yet.",
+  "Each rule id links to its page at /rules/<id>; every rule is a draft until a maintainer signs it.",
   "Tessli does not claim that using an item improves AI-generated UI; that claim waits for a published evaluation.",
 ];
 
 /**
  * The public JSON document for one library item (`/library/<slug>/item.json`).
- * `item` is one entry of web/data/library.json.
+ * `item` is one entry of web/data/library.json; `rules` (optional) holds the
+ * rule set's `{ id, statement }` pairs so each applied rule carries its text.
  */
-export function createPublicLibraryItemRepresentation(item, installPrefix) {
+export function createPublicLibraryItemRepresentation(
+  item,
+  installPrefix,
+  rules = [],
+) {
   const canonicalPath = `/library/${item.slug}`;
   const notes = item.notes;
+  const statements = new Map(rules.map((rule) => [rule.id, rule.statement]));
   return {
     contract: PUBLIC_LIBRARY_ITEM_REPRESENTATION_CONTRACT,
     canonicalPath,
@@ -423,6 +429,11 @@ export function createPublicLibraryItemRepresentation(item, installPrefix) {
         dependencies: [...item.dependencies],
       },
       notes: structuredClone(notes),
+      rules: notes.rules.map((id) => ({
+        id,
+        statement: statements.get(id) ?? null,
+        path: `/rules/${id}`,
+      })),
       explanation: item.body,
       source: { path: item.sourcePath, code: item.source },
     },
@@ -457,7 +468,15 @@ export function serializePublicLibraryItemMarkdown(document) {
   ];
   pushList(lines, "Use when", notes.use_when);
   pushList(lines, "Avoid when", notes.avoid_when);
-  pushList(lines, "Rules", notes.rules);
+  pushList(
+    lines,
+    "Rules",
+    item.rules.map((rule) =>
+      rule.statement
+        ? `${rule.id} — ${rule.statement} (${rule.path})`
+        : `${rule.id} (${rule.path})`,
+    ),
+  );
   lines.push("## Common AI default", "", inline(notes.ai_default), "");
   pushList(lines, "Why this is better", notes.why_this_is_better);
   pushList(lines, "Common failures when adapting it", notes.failures);

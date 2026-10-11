@@ -1,5 +1,6 @@
 import library from "@/data/library.json";
 import { getLibraryItem, getLibraryItems } from "@/lib/library";
+import { getRules } from "@/lib/rules";
 import {
   createPublicLibraryItemRepresentation,
   createPublicOptionsHeaders,
@@ -61,6 +62,7 @@ async function buildResponse({ params }: RouteProps, head = false) {
   const document = createPublicLibraryItemRepresentation(
     item,
     library.installPrefix,
+    getRules(),
   );
   const format = representation.endsWith(".json") ? "json" : "markdown";
   const body =

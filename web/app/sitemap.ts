@@ -2,6 +2,7 @@ import type { MetadataRoute } from "next";
 
 import { getPublishedCollections } from "@/lib/collections";
 import { getLibraryItems } from "@/lib/library";
+import { getRules, RULES_INDEX_PATH } from "@/lib/rules";
 import { getBrowsableSourceProfiles } from "@/lib/source-profiles";
 
 function siteOrigin() {
@@ -19,6 +20,8 @@ export default function sitemap(): MetadataRoute.Sitemap {
   const staticRoutes = [
     "",
     "/library",
+    "/rules",
+    RULES_INDEX_PATH,
     "/resources",
     "/collections",
     "/for-ai",
@@ -38,6 +41,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
       { url: `${origin}/library/${item.slug}/item.json` },
       { url: `${origin}/library/${item.slug}/item.md` },
     ]),
+    ...getRules().map((rule) => ({ url: `${origin}/rules/${rule.id}` })),
     ...getPublishedCollections().flatMap((collection) => [
       { url: `${origin}/collections/${collection.slug}` },
       { url: `${origin}/collections/${collection.slug}/collection.json` },

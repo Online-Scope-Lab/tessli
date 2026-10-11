@@ -28,6 +28,7 @@ Rules for coding agents and contributors working in this repository. Short on pu
 - Every item must work in the Tessli, Neutral and Dark themes.
 - An item is one folder in `web/registry/items/<slug>/` (start from `web/registry/_template/`). The item file imports shadcn primitives as `@/registry/shadcn/ui/<name>` and `cn` from `@/registry/shadcn/lib/utils`, which `shadcn add` rewrites to the installing project's paths. Run `npm run registry:build` after any change and commit the generated files.
 - Items you build have status `community`. Only a human maintainer signs an item `reviewed`.
+- Each item's `notes.md` lists the 3–8 rules from [`rules/`](rules/TESSLI.md) it really follows. Rules you write or edit stay `status: draft`; only a maintainer signs a rule `reviewed`. Rules cover structure and behaviour, never the Tessli palette.
 - Original work only. Adapted open-source work names its source and licence. No ports of paid kits.
 
 ## Brand
