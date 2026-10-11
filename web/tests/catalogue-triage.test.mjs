@@ -124,7 +124,7 @@ test("source statuses match the owner decisions", async () => {
   }
 });
 
-test("merged rows name their target and fixed rows change URL or wait for review", async () => {
+test("merged rows name their target and renamed rows move to a successor URL", async () => {
   const { rows, sources } = await loadTriage();
 
   const merges = rows.filter((row) => row.owner_decision === "merge");
@@ -153,12 +153,19 @@ test("merged rows name their target and fixed rows change URL or wait for review
     "shopify-polaris",
     "v0",
   ]);
-  for (const row of fixes) {
+  // Rows whose triage action is fix-url moved to a successor URL. Shopify
+  // Polaris is verify-url: its URL is confirmed, not replaced, so a human
+  // may set it active without changing it. Status is already limited to
+  // active or needs-review above and is not tied to the URL here.
+  const renamed = fixes.filter((row) => row.action === "fix-url");
+  assert.deepEqual(renamed.map((row) => row.slug).sort(), [
+    "origin-ui",
+    "react-aria",
+    "v0",
+  ]);
+  for (const row of renamed) {
     const { data } = sources.get(row.slug);
-    assert.ok(
-      data.url !== row.url || data.status === "needs-review",
-      `${row.slug}: a URL that was not changed must wait for review`,
-    );
+    assert.notEqual(data.url, row.url, `${row.slug}: URL moves to a successor`);
   }
   const origin = sources.get("origin-ui").data;
   assert.equal(origin.id, "resource-fd6228fd8e88");

@@ -380,6 +380,17 @@ test("the link check uses HEAD, falls back to GET and caps redirects at five", a
     reason: "more than 5 redirects",
   });
 
+  const malformed = await checkLink("https://example.com", {
+    lookupImpl,
+    fetchImpl: async () =>
+      new Response(null, { status: 302, headers: { location: "http://[bad" } }),
+  });
+  assert.deepEqual(malformed, {
+    ok: false,
+    redirects: 0,
+    reason: "redirects to an invalid URL",
+  });
+
   const down = await checkLink("https://example.com", {
     lookupImpl,
     fetchImpl: async () => {

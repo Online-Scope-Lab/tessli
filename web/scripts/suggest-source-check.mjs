@@ -426,7 +426,11 @@ export async function checkLink(rawUrl, options = {}) {
           reason: `more than ${maxRedirects} redirects`,
         };
       }
-      url = new URL(location, url);
+      try {
+        url = new URL(location, url);
+      } catch {
+        return { ok: false, redirects, reason: "redirects to an invalid URL" };
+      }
       continue;
     }
 
