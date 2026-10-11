@@ -5,13 +5,13 @@ The workspace is a copy of bench/starter/ (plus the Tessli overlay and
 rules/TESSLI.md for the `tessli` condition) in a directory OUTSIDE this
 repository, named only by the opaque run id, so the builder can neither read
 the repository nor tell from a path that it is part of a comparison. The
-workspace root must have a neutral path too (e.g. ~/work or ~/projects): a
+workspace root must have a neutral path too (e.g. /tmp/ws or ~/work): a
 root whose path mentions the bench, a condition, an experiment or an
 evaluation is refused. The rendered prompts and manifest go to
 <runs-dir>/<run-id>/.
 
     python3 -I bench/scripts/new_run.py --brief 01 --condition tessli \
-        --run-index 1 --frozen bench/frozen.json --workspace-root ~/work
+        --run-index 1 --frozen bench/frozen.json --workspace-root /tmp/ws
 """
 
 from __future__ import annotations
@@ -162,7 +162,7 @@ def main(argv: list[str] | None = None) -> int:
     if revealing:
         parser.error(
             f"--workspace-root {workspace_root} gives the setup away to the builder ({', '.join(revealing)}); "
-            "use a neutral directory such as ~/work or ~/projects"
+            "use a neutral directory such as /tmp/ws or ~/work"
         )
 
     commit = git("rev-parse", "HEAD")

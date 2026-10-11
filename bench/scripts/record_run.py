@@ -8,7 +8,7 @@ reviewed can be checked against the code the builder left.
 
     python3 -I bench/scripts/record_run.py start bench/runs/<run-id>
     python3 -I bench/scripts/record_run.py finish bench/runs/<run-id> \
-        --workspace ~/work/<run-id> --outcome completed --turns 1
+        --workspace /tmp/ws/<run-id> --outcome completed --turns 1
 """
 
 from __future__ import annotations

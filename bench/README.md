@@ -8,7 +8,7 @@ The Taste Bench is how Tessli will find out, in public, whether its rules and re
 - The harness has been tested end to end with a dummy dry run: a hand-written page in place of a builder, marked non-evaluative and deleted afterwards.
 - The 36 AI builds have **not** been run. The automation environment the bench was prepared in could not launch the builder, so a human operator runs them; [Operator notes](#operator-notes) collects what that operator needs to know.
 - No human scores exist.
-- The `/bench` results page waits for human scores.
+- A `/bench` results page will be published once human scores exist.
 
 ## Layout
 
@@ -38,7 +38,7 @@ What the first attempt to start the builds showed. None of this changes the prot
 
 - **`turn_allowance: 1` is one prompt, not one agent step.** The builder receives `task.md` and nothing after it: no follow-up, no repair turn. Within that turn it works as long as it needs (reading files, running commands, building). Do not translate it into a harness limit on agent steps, such as a CLI's `--max-turns 1`, which would stop the builder after its first tool call. Record `--turns 1`.
 - **Enforce the 60 minutes with `timeout`.** Wrap the builder command in `timeout --kill-after=30s 60m …` so `time_allowance_minutes` is enforced rather than watched. Exit status 124 (or 137 after the kill) means the allowance ran out: record `--outcome time-allowance-reached`. Keep whatever the workspace holds; it is reviewed as it is.
-- **Workspaces under a neutral root, such as `/tmp/ws/`.** The builder sees its working directory, so `new_run.py` refuses any root whose path gives the setup away, for example anything containing `tessli` (a clone of this repository, a home directory or a temporary directory named after it). Use a root that survives until the reveal: `validate_pair.py` re-hashes every workspace before pairing, and some systems clear `/tmp` on reboot.
+- **Workspaces under a neutral root, such as `/tmp/ws/`.** The builder sees its working directory, so `new_run.py` refuses any root whose path gives the setup away, for example anything containing `tessli` (a clone of this repository, a home directory or a temporary directory named after it). Use a root that survives until the reveal: `validate_pair.py` re-hashes every workspace before pairing, and some systems clear `/tmp` on reboot; on such a system use a persistent neutral root such as `~/work` instead of `/tmp/ws`.
 - **Same tool list in both conditions.** The project notes in a Tessli workspace tell the builder to read the local registry with `curl -s http://127.0.0.1:4100/…`, so the frozen `tools` must allow that, and must allow it in both conditions: the same curl rule, restricted to `http://127.0.0.1`, in the baseline too (where nothing listens on port 4100). The harness gets one permission configuration for every build; only the project differs.
 - **Mirror the shadcn base registry when `ui.shadcn.com` is unreachable.** `npx shadcn@4.21.4 add <component>` fetches the base registry from `ui.shadcn.com`. Where that host is blocked, build a local mirror once from the shadcn sources at the CLI's tag, outside the repository:
 

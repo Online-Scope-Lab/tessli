@@ -10,7 +10,7 @@
 // Uses the Playwright and axe-core already installed for web/ (no new
 // dependencies): run `npm ci` in web/ first.
 //
-//   node bench/scripts/capture.mjs --run bench/runs/<run-id> --workspace ~/work/<run-id>
+//   node bench/scripts/capture.mjs --run bench/runs/<run-id> --workspace /tmp/ws/<run-id>
 //   node bench/scripts/capture.mjs --run bench/runs/<run-id> --url http://127.0.0.1:4310
 //
 // With --workspace it runs `npm run build` and `npm run start` in the
