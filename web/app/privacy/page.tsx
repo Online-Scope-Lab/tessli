@@ -17,7 +17,7 @@ export default function PrivacyPage() {
           title: "What Tessli currently stores.",
           paragraphs: [
             "Tessli does not require an account, profile, email address, or password to browse the public catalogue. The current application does not provide a public form submission flow, analytics control, or cloud user-data workspace.",
-            "Tessli's pages do not write to your browser's local storage and do not keep a list of the sources you open.",
+            "Tessli's pages do not write to your browser's local storage and have no feature that records which sources you open.",
           ],
         },
         {
