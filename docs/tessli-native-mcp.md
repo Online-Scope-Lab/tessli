@@ -1,116 +1,95 @@
-# Tessli Native MCP
+# Tessli MCP
 
-Status: **current local MCP v2 implementation guide**
+The Tessli MCP server is a local, read-only stdio process. It answers questions about the library, the rules and the source directory from the same committed JSON the website renders (`web/data/library.json`, `web/data/rules.json`, `web/data/catalogue.json`). It is the only supported MCP transport (plan §6.6).
 
-Tessli's current MCP server exposes only repository-managed catalogue and UI-intelligence metadata through a local stdio process. It is the only supported MCP transport today.
-
-It does not connect to Landingfolio or another provider, retrieve screenshots, inspect a project repository, access Tessli accounts, or modify data.
+It makes no network request, reads no credentials or project files, and writes nothing.
 
 ## Requirements
 
-- Node.js 22 or later;
+- Node.js 22.18 or later (the server is TypeScript run by Node's built-in type stripping, which is on by default from 22.18);
 - a local checkout of `Online-Scope-Lab/tessli`;
-- locked dependencies installed under `web/`.
-
-## Install
-
-From the repository root:
-
-```bash
-cd web
-npm ci
-```
+- locked dependencies installed under `web/` (`cd web && npm ci`).
 
 ## Run
 
 ```bash
 cd web
-npm run mcp
+npm run mcp     # runs: node mcp/server.ts
 ```
 
-A stdio server waits for an MCP client on standard input and writes protocol messages to standard output. Operational messages use standard error only.
+The server waits for an MCP client on standard input and writes protocol messages to standard output. Operational messages go to standard error only.
 
 ## Client configuration
 
-Use an absolute path to the Tessli checkout. A generic stdio configuration is:
+Point the client at the server file with an absolute path:
 
 ```json
 {
   "mcpServers": {
     "tessli": {
-      "command": "npm",
-      "args": ["--prefix", "/absolute/path/to/tessli/web", "run", "mcp"]
+      "command": "node",
+      "args": ["/absolute/path/to/tessli/web/mcp/server.ts"]
     }
   }
 }
 ```
 
-Some clients use a top-level `servers` key or require an explicit `type: "stdio"`. Follow that client's current MCP configuration format while preserving the same local command and absolute path.
+Don't configure `npm run mcp` as the client command: `npm run` prints its `> tessli-web@… mcp` banner to standard output, which corrupts the protocol stream. Some clients use a top-level `servers` key or need `"type": "stdio"`; keep the same command and path.
 
-## Current V3.8 tools
+## Tools
 
-### `find_sources`
+Exactly five tools, all annotated read-only, non-destructive, idempotent and closed-world. Names and descriptions live in `web/lib/mcp-tool-catalogue.ts`; the logic in `web/lib/mcp-native-tools.ts`. Inputs are validated with zod; unknown slugs and ids return a clear error that names the tool to use instead.
 
-Accepts a structured task with optional surface, framework, needs, and exclusions. Returns at most eight deterministic, explained canonical source choices.
+### `search_items(brief, limit?)`
 
-### `get_source`
+Ranks library items for a brief and returns compact summaries: `slug`, `title`, `kind`, `category`, `summary`, `status`, `rules` (ids), `install` and `matched` (which term matched which field). `limit` is 1–12, default 5.
 
-Returns one exact stable source ID or slug as compact canonical guidance: status, what it helps with, what to inspect, recorded access routes, caveats, and differentiated alternatives. An archived source still resolves by exact ID or slug, with its `archivedReason` and `replacedBy`; it never appears in `find_sources`, alternatives, collections or research briefs.
+Ranking is deterministic keyword matching, with no embeddings and no network. The brief is lower-cased and split into words; stop words go, and a trailing plural `s` is dropped. Each term counts once, in the heaviest field where a word starts with it: title and slug 10, category 8, kind 6, summary 5, use-when 4, the common default and failures 3, why-it-is-better and applied rule titles 2, prose and states 1. Items scoring under a third of the best score are dropped, and ties sort by slug. When nothing matches, the result says so and lists the categories in use.
 
-### `find_alternatives`
+### `get_item(slug)`
 
-Returns one exact source with one to four recorded, differentiated alternatives. It does not rank sources universally or make a live provider comparison.
+Returns the same document as `/library/<slug>/item.json` (contract `tessli.public-library-item.v1`): the code file, the full notes (`meta.tessli` in `registry.json`), the applied rules with their statements, the explanation, the shadcn install command and the preview path. A code file longer than 40,000 characters is cut and points to `item.json`; no item is that long today.
 
-### `get_collection`
+### `get_rules(topic?)`
 
-Returns one published Collection by exact ID or slug, preserving editorial stage order and compact canonical source guidance.
+- No topic: the compact index (`rules/TESSLI.md`), its path and the rules install command.
+- Rule ids in the topic (`H-01 ST-03`, any case): exactly those rules, with unknown ids listed separately.
+- Anything else: rules ranked by the same keyword matching over title, category, statement, check, the default the rule guards against, and why it matters.
 
-### `create_research_brief`
+Each rule comes back with `id`, `category`, `title`, `statement`, `check`, `status`, `path` and the slugs of the items that apply it. At most 12 rules per call.
 
-Returns a compact, deterministic research handoff from the same structured task retrieval used by `find_sources`.
+### `find_sources(task, surface?, framework?, needs?, exclusions?)`
 
-## V1 replacement boundary
+The website's task retrieval (`web/lib/task-retrieval.ts`), unchanged: non-archived sources only, at most eight, in a deterministic order, each with recorded fit reasons, caveats, access routes and up to two alternatives.
 
-The previous seven-tool v1 list is not registered as MCP aliases: registered stdio tools are necessarily visible through `ListTools`, which would contradict the focused five-tool contract. Tool output carries no coverage level, verification date, evidence or governance record.
+### `get_source(slug)`
 
-## Remote MCP availability
+Returns the same document as `/resources/<slug>/profile.json` (contract `tessli.public-source.v3`), by slug or stable ID. An archived source still resolves, with `status: archived`, its reason and its replacement, and no access route.
 
-Hosted Streamable HTTP MCP is not available. It is deferred to V3.16, after local task retrieval and compact static public representations/discovery (V3.9–V3.10) are stable. Any future hosted transport must wrap the same pure read-only layer, expose public data only, and add bounded inputs, origin validation, rate limits, safe logging, timeouts, and monitoring. It must never read browser data, write Tessli state, fetch providers, proxy paid/private content, or accept provider credentials.
+## Hosted MCP stays off
 
-## Data and retention
+`web/app/api/mcp/route.ts` wraps the same server for Streamable HTTP, but it answers 404 unless `TESSLI_REMOTE_MCP_ENABLED=true`, and it stays off in v1.2. Before it can be turned on (plan §6.6):
 
-The process reads committed JSON modules already used by Tessli. It keeps no database, cache, log file, or user profile.
+- the preflight in `web/lib/mcp-http.ts` rejects requests without an `Origin` header, which is what CLI agents send;
+- its rate limit is per instance, in memory;
+- authentication is undecided.
 
-Tool calls are not persisted by Tessli. The invoking MCP client may have its own logging or retention policy.
+## Boundaries
 
-## Security boundary
+- No HTTP listener in the stdio server, no environment credential, no network request, no write tool.
+- No arbitrary path or URL input; no project source or user file is read.
+- Every list is capped: 12 items, 12 rules, 8 sources, 2 alternatives.
+- Source profiles are curator guidance recorded in the repository, not live checks of a provider. Use them to choose where to look, not as permission to copy a provider's layouts, copy, assets or restricted code.
+- Tessli does not claim that using the server or the library improves AI-generated UI; that waits for the published evaluation (plan §9).
 
-The server:
+Tool calls are not logged or kept by Tessli. The MCP client may have its own logging.
 
-- has no HTTP listener;
-- uses no environment credential;
-- performs no network request;
-- exposes no write tool;
-- accepts no arbitrary path or URL to fetch;
-- reads no project source or user file;
-- returns no provider-rendered screenshot or source asset;
-- caps all list-producing tools;
-- labels repository classifications and non-live verification clearly.
-
-It also keeps routine output compact: task fit, action, limitation, and alternatives come first; provenance and operational status are diagnostic depth on demand.
-
-## Research boundary
-
-Use results to choose sources and extract principles. Do not treat Tessli metadata or a provider reference as permission to copy layouts, illustrations, copy, brand assets, templates, or restricted code.
-
-## Development verification
+## Development checks
 
 ```bash
 cd web
-node --test tests/mcp-native-tools.test.mjs tests/mcp-stdio.test.mjs
-npm run typecheck
-npm run lint
-npm test
-npm run catalogue:check
-npm run build
+node --test tests/mcp-native-tools.test.mjs tests/mcp-stdio.test.mjs tests/mcp-http-preflight.test.mjs
+npm run check
 ```
+
+`tests/mcp-stdio.test.mjs` starts the server over stdio and calls every tool.

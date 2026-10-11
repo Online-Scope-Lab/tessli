@@ -1,57 +1,58 @@
-export const TESSLI_MCP_SERVER_NAME = "tessli-native-metadata" as const;
-export const TESSLI_MCP_SERVER_VERSION = "0.2.0" as const;
+export const TESSLI_MCP_SERVER_NAME = "tessli" as const;
+export const TESSLI_MCP_SERVER_VERSION = "0.3.0" as const;
 export const TESSLI_MCP_NODE_REQUIREMENT = "Node.js 22 or newer" as const;
 
+/**
+ * The five read-only tools of the local Tessli MCP server (plan §6.6). The
+ * server registers exactly these, in this order; the For AI page lists them
+ * from here.
+ */
 export const TESSLI_MCP_TOOL_CATALOGUE = [
   {
-    name: "find_sources",
-    title: "Find task-fit Tessli sources",
+    name: "search_items",
+    title: "Search Tessli library items",
     description:
-      "Retrieve up to eight deterministic, explained source choices for a structured design or frontend task. Results include recorded fit reasons, caveats, alternatives, and access routes; no provider is queried.",
-    inputs: "A task, with optional surface, framework, needs, and exclusions.",
+      "Rank Tessli library items (components, sections and pages) for a brief by deterministic keyword matching over each item's notes. Returns compact summaries: slug, title, kind, category, summary, review status, applied rule ids and the install command.",
+    inputs: "A brief, such as “pricing section for two plans”.",
     returns:
-      "A normalized task brief and up to eight ranked canonical source choices.",
+      "Matching items, best first, each with its rule ids and install command.",
+    limit: "Up to 12 items (5 by default)",
+  },
+  {
+    name: "get_item",
+    title: "Get a Tessli library item",
+    description:
+      "Return one library item by slug: its code file, its full notes (use when, avoid when, rules, the common default it replaces, failures, states, responsive behaviour, accessibility, credits and review status) and its shadcn install command. Same document as /library/<slug>/item.json.",
+    inputs: "One item slug, such as pricing-tiers.",
+    returns: "The item's code, notes, rule statements and install command.",
+    limit: "1 item",
+  },
+  {
+    name: "get_rules",
+    title: "Get Tessli UI rules",
+    description:
+      "Return Tessli's UI rules. With no topic: the compact index (rules/TESSLI.md). With rule ids (H-01 ST-03): those rules. With a topic or brief: matching rules. Each rule has its id, statement and how to check it.",
+    inputs: "Optional: rule ids, a category (states) or a brief.",
+    returns: "The full index, or rules with id, statement and check.",
+    limit: "Index, or up to 12 rules",
+  },
+  {
+    name: "find_sources",
+    title: "Find external design sources",
+    description:
+      "Rank non-archived sources from Tessli's curated directory for a design or frontend task, using the website's task retrieval. Each result has recorded fit reasons, caveats, access routes and alternatives; no provider is contacted.",
+    inputs: "A task, with optional surface, framework, needs and exclusions.",
+    returns: "Up to eight sources with the reasons each one fits.",
     limit: "Up to 8 sources",
   },
   {
     name: "get_source",
-    title: "Get Tessli source guidance",
+    title: "Get a source profile",
     description:
-      "Resolve one exact stable source ID or slug into compact, canonical guidance: what it helps with, what to inspect, recorded access routes, limitations, and differentiated alternatives.",
-    inputs: "One exact stable source ID or slug.",
-    returns:
-      "One SourceProfile-derived guide with recorded AccessRoute and caveat truth.",
+      "Return one source's public profile by slug or stable ID: what it is for, what to explore, access routes, limitations and alternatives. Archived sources resolve with their reason and replacement. Same document as /resources/<slug>/profile.json.",
+    inputs: "One source slug or stable ID, such as land-book.",
+    returns: "The public source profile, status included.",
     limit: "1 source; up to 2 alternatives",
-  },
-  {
-    name: "find_alternatives",
-    title: "Find differentiated source alternatives",
-    description:
-      "Find up to four recorded alternatives for one exact Tessli source. Each alternative states a recorded difference rather than a universal ranking.",
-    inputs: "One exact stable source ID or slug and an optional limit.",
-    returns:
-      "A canonical source guide and a bounded ordered set of differentiated alternatives.",
-    limit: "1–4 alternatives",
-  },
-  {
-    name: "get_collection",
-    title: "Get Tessli collection guidance",
-    description:
-      "Resolve one published Tessli collection by exact stable ID or slug with its ordered stages, recorded source roles, and compact canonical source guidance.",
-    inputs: "One exact published collection ID or slug.",
-    returns:
-      "One collection with its preserved editorial order and source access guidance.",
-    limit: "1 collection; up to 12 sources",
-  },
-  {
-    name: "create_research_brief",
-    title: "Create a task research brief",
-    description:
-      "Create a compact, deterministic research handoff from the same structured task retrieval used by find_sources. It routes agents to recorded provider access paths without copying provider content.",
-    inputs: "A task, with optional surface, framework, needs, and exclusions.",
-    returns:
-      "A normalized brief, up to eight explained source choices, and concise next-step guidance.",
-    limit: "Up to 8 sources",
   },
 ] as const;
 

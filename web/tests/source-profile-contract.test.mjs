@@ -11,10 +11,7 @@ import {
 } from "../data/access-route-pilot.ts";
 import { getAllIntelligenceProfiles } from "../lib/intelligence.ts";
 import { resolvePublishedCollections } from "../lib/collections.ts";
-import {
-  createNativeCollection,
-  getNativeSource,
-} from "../lib/mcp-native-tools.ts";
+import { getNativeSource } from "../lib/mcp-native-tools.ts";
 import { createPublicSourceRepresentation } from "../lib/public-representations.mjs";
 import {
   SOURCE_PROFILE_CONTRACT_VERSION,
@@ -409,10 +406,7 @@ test("website-ready source profiles and MCP preserve the same source identity", 
     assert.equal(nativeSource.id, sourceProfile.id);
     assert.equal(nativeSource.slug, sourceProfile.slug);
     assert.equal(nativeSource.status, sourceProfile.status);
-    assert.deepEqual(
-      nativeSource.whatItHelpsWith,
-      sourceProfile.bestFor.slice(0, 4),
-    );
+    assert.deepEqual(nativeSource.useWhen, [...new Set(sourceProfile.bestFor)]);
   }
 });
 
@@ -530,31 +524,6 @@ test("collection pages drop archived members and hide emptied stages", () => {
   assert.equal(collection.resources.length, 2);
 });
 
-test("the MCP collection tool drops archived members and archive-emptied stages", () => {
-  const index = createSourceProfileIndex(fixtures);
-  const output = createNativeCollection(fixtureCollection, index.get);
-
-  assert.equal(output.resourceCount, 2);
-  assert.equal(output.returnedSourceCount, 2);
-  assert.deepEqual(
-    output.sources.map((source) => [source.order, source.slug, source.status]),
-    [
-      [1, "fixture-active", "active"],
-      [2, "fixture-review", "needs-review"],
-    ],
-  );
-  assert.deepEqual(
-    output.stages.map((stage) => [
-      stage.id,
-      stage.sources.map((source) => source.sourceSlug),
-    ]),
-    [
-      ["look", ["fixture-active"]],
-      ["review", ["fixture-review"]],
-    ],
-  );
-});
-
 test("every public listing, search and count reads only non-archived sources", () => {
   const read = (relativePath) =>
     fs.readFileSync(path.join(__dirname, "..", relativePath), "utf8");
@@ -576,14 +545,10 @@ test("every public listing, search and count reads only non-archived sources", (
   ]) {
     assert.match(read(file), /getBrowsableSourceCounts\(\)/, file);
   }
-  // Collections and the MCP collection tool are exercised with fixtures
-  // above; the real data goes through the same functions.
+  // Collections are exercised with fixtures above; the real data goes
+  // through the same function.
   assert.match(
     read("lib/collections.ts"),
     /resolvePublishedCollections\(catalogue\)/,
-  );
-  assert.match(
-    read("lib/mcp-native-tools.ts"),
-    /return createNativeCollection\(resolveCollection\(identifier\)\)/,
   );
 });

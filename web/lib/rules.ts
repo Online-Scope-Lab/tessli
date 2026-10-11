@@ -1,6 +1,6 @@
 import rulesData from "../data/rules.json" with { type: "json" };
 
-import { installCommand } from "./library";
+import { installCommand } from "./library.ts";
 
 /** One rule: the validated frontmatter of rules/<ID>.md plus derived items. */
 export type Rule = Readonly<{
