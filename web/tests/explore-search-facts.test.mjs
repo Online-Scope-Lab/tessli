@@ -27,6 +27,23 @@ test("Explore search exposes semantic and accessible controls", async () => {
   assert.match(search, /enterKeyHint="search"/);
 });
 
+test("search supports controlled URL state and live result counts", async () => {
+  const [search, hero] = await Promise.all([
+    read("components/explore-search/explore-search.tsx"),
+    read("components/explore-hero/explore-hero.tsx"),
+  ]);
+
+  assert.match(search, /value\?: string/);
+  assert.match(search, /onValueChange\?: \(query: string\) => void/);
+  assert.match(search, /resultCount\?: number/);
+  assert.match(search, /const query = value \?\? uncontrolledQuery/);
+  assert.match(search, /onValueChange\?\.\(nextQuery\)/);
+  assert.match(search, /element instanceof HTMLDialogElement/);
+  assert.match(search, /action="\/resources"/);
+  assert.match(search, /name="q"/);
+  assert.match(hero, /resultCount=\{resultCount\}/);
+});
+
 test("keyboard interaction supports focus, clear-first Escape, and blur", async () => {
   const search = await read("components/explore-search/explore-search.tsx");
 

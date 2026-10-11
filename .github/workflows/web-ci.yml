@@ -135,7 +135,7 @@ jobs:
           node tests/resource-card-browser.mjs 2>&1 | tee -a artifacts/search-browser/interaction.log
           node tests/card-surface-parity-browser.mjs 2>&1 | tee -a artifacts/search-browser/interaction.log
           node tests/collections-browser.mjs 2>&1 | tee -a artifacts/search-browser/interaction.log
-          node tests/full-reference-browser.mjs 2>&1 | tee -a artifacts/search-browser/interaction.log
+          node tests/browse-pages-browser.mjs 2>&1 | tee -a artifacts/search-browser/interaction.log
           node tests/release-gate-browser.mjs 2>&1 | tee -a artifacts/search-browser/interaction.log
           node tests/global-navigation-browser.mjs 2>&1 | tee -a artifacts/search-browser/interaction.log
           node tests/for-ai-browser.mjs 2>&1 | tee -a artifacts/search-browser/interaction.log
