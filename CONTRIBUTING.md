@@ -15,6 +15,8 @@ Please read the [Code of Conduct](CODE_OF_CONDUCT.md) first. By contributing you
 
 Designers and developers who build an item from a submitted design are both credited on the item.
 
+A **Suggest a source** issue gets one automatic comment (`.github/workflows/suggest-source.yml`): the normalised URL, any source already in Tessli with the same URL or domain (archived ones included, with their status), problems with required fields, the 40–200 character summary, category or access, and the link's HTTP status. It updates the same comment when you edit the issue. It never accepts, labels or closes a suggestion; a maintainer still opens the source and decides.
+
 ### Contribute an item
 
 **Honest status: the library is not open for item contributions yet.** Tessli v1.2 is in progress. Today the site is the curated Sources directory. The library, the item template (`web/registry/_template/`) and the CI checks for items arrive in Phase 2, and the first items are built and reviewed by the maintainers to set the bar. Until then, the most useful contributions are source suggestions, design submissions, problem reports and fixes to the existing site.

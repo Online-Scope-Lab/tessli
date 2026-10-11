@@ -1,0 +1,91 @@
+name: Suggest-source check
+
+# First-pass check of "Suggest a source" issues: parses the form, normalises
+# the URL, looks for duplicates (archived sources included), validates the
+# fields and fetches the link once. It posts or updates ONE comment. It never
+# accepts, labels, closes or edits an issue, and never edits sources.
+on:
+  issues:
+    types: [opened, edited]
+
+permissions:
+  contents: read
+  issues: write
+
+concurrency:
+  group: suggest-source-${{ github.event.issue.number }}
+  cancel-in-progress: true
+
+jobs:
+  check:
+    # Only issues from the suggest-source form: its title prefix and the
+    # "Canonical URL" heading every form body contains (labels may not exist).
+    if: >-
+      startsWith(github.event.issue.title, '[Source]') &&
+      contains(github.event.issue.body, '### Canonical URL')
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v7
+        with:
+          node-version: 22
+          cache: npm
+          cache-dependency-path: web/package-lock.json
+
+      - name: Install locked dependencies
+        working-directory: web
+        run: npm ci --ignore-scripts --no-audit --no-fund
+
+      # The issue body reaches the script only through the environment, never
+      # through the shell command line.
+      - name: Check the suggestion
+        id: check
+        env:
+          ISSUE_BODY: ${{ github.event.issue.body }}
+          REPORT_PATH: ${{ runner.temp }}/suggest-source-report.md
+        run: node web/scripts/suggest-source-check.mjs
+
+      - name: Post or update the summary comment
+        if: steps.check.outputs.applicable == 'true'
+        uses: actions/github-script@v7
+        env:
+          REPORT_PATH: ${{ runner.temp }}/suggest-source-report.md
+        with:
+          script: |
+            const fs = require("node:fs");
+            const marker = "<!-- tessli:suggest-source-check -->";
+            const body = fs.readFileSync(process.env.REPORT_PATH, "utf8");
+            const { owner, repo } = context.repo;
+            const issue_number = context.issue.number;
+            const comments = await github.paginate(
+              github.rest.issues.listComments,
+              { owner, repo, issue_number, per_page: 100 },
+            );
+            // Only this workflow's own comment is updated; a pasted marker in
+            // someone else's comment is ignored.
+            const previous = comments.find(
+              (comment) =>
+                comment.user?.login === "github-actions[bot]" &&
+                comment.body?.startsWith(marker),
+            );
+            if (previous) {
+              await github.rest.issues.updateComment({
+                owner,
+                repo,
+                comment_id: previous.id,
+                body,
+              });
+            } else {
+              await github.rest.issues.createComment({
+                owner,
+                repo,
+                issue_number,
+                body,
+              });
+            }

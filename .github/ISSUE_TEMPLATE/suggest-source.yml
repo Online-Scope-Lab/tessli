@@ -30,20 +30,19 @@ body:
     id: category
     attributes:
       label: Category
+      description: The current Tessli categories. The automated check flags any other value.
       options:
-        - Website inspiration
-        - Sections and UI patterns
-        - Product UI and flows
-        - Landing, ecommerce and email
-        - UI components
-        - Design systems
-        - Motion and 3D
-        - Typography
-        - Colour
-        - Accessibility
-        - Icons
-        - Illustrations and assets
-        - Design and build tools
+        - Website inspiration and design directories
+        - Product UI, UX flows, and mobile-app inspiration
+        - Landing pages, SaaS, ecommerce, email, and marketing inspiration
+        - UI component and frontend libraries
+        - Design systems and pattern libraries
+        - Motion, animation, WebGL, and 3D
+        - Typography, fonts, and type tools
+        - Color, gradients, and accessibility
+        - Icon libraries and icon tools
+        - Illustrations, mockups, assets, and stock
+        - Design tools, AI UI tools, and visual builders
     validations:
       required: true
   - type: dropdown
