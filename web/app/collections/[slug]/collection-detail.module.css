@@ -144,15 +144,8 @@
   color: var(--accent-text);
 }
 
-.boardNote {
-  max-width: 58ch;
-  margin: var(--space-3) 0 0;
-  color: var(--text-muted);
-  font-size: var(--text-body-sm);
-  line-height: 1.5;
-}
-
 .resources {
+  scroll-margin-top: 40px;
   padding-top: clamp(48px, 8vw, 84px);
 }
 

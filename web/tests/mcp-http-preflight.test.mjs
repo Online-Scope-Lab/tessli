@@ -248,7 +248,7 @@ test("remote MCP exposes only the five existing read-only tools over the SDK HTT
   });
 });
 
-test("remote MCP route stays a public-data forwarding boundary without provider or Board access", async () => {
+test("remote MCP route stays a public-data forwarding boundary without provider or browser-storage access", async () => {
   const [routeSource, transportSource, nativeToolSource] = await Promise.all([
     readFile(new URL("../app/api/mcp/route.ts", import.meta.url), "utf8"),
     readFile(new URL("../lib/mcp-http.ts", import.meta.url), "utf8"),
@@ -260,10 +260,7 @@ test("remote MCP route stays a public-data forwarding boundary without provider 
   assert.match(transportSource, /WebStandardStreamableHTTPServerTransport/);
   assert.doesNotMatch(source, /\bfetch\s*\(/);
   assert.doesNotMatch(source, /provider token|service[- ]role|authorization/i);
-  assert.doesNotMatch(
-    source,
-    /localStorage|sessionStorage|indexedDB|boards-store|board-store/i,
-  );
+  assert.doesNotMatch(source, /localStorage|sessionStorage|indexedDB/i);
   assert.doesNotMatch(source, /https?:\/\/\s*\$?\{/i);
   assert.doesNotMatch(
     transportSource,

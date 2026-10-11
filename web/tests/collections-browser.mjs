@@ -160,8 +160,6 @@ assert.equal(
 );
 await screenshot("playbooks-index-1440x900.png");
 
-await evaluate('localStorage.removeItem("tessli-saved-resource-ids-v2")');
-
 for (const [index, slug] of collectionSlugs.entries()) {
   await navigate(
     `/collections/${slug}`,
@@ -191,10 +189,18 @@ for (const [index, slug] of collectionSlugs.entries()) {
     await evaluate(
       'document.querySelectorAll("[data-collection-resource-grid] [data-resource-save]").length',
     ),
-    10,
+    0,
   );
   assert.equal(
-    await evaluate('Boolean(document.querySelector("a[href=\\"/boards\\"]"))'),
+    await evaluate(
+      'Boolean(document.querySelector("a[href=\\"/boards\\"], a[href=\\"/saved\\"]"))',
+    ),
+    false,
+  );
+  assert.equal(
+    await evaluate(
+      'Boolean(document.querySelector("a[href=\\"#research-sequence\\"]")) && Boolean(document.getElementById("research-sequence"))',
+    ),
     true,
   );
   assert.equal(
@@ -211,17 +217,6 @@ for (const [index, slug] of collectionSlugs.entries()) {
   );
 
   if (index === 0) {
-    await evaluate(
-      `document.querySelector('[data-collection-resource-grid] [data-resource-save]')?.click()`,
-    );
-    await waitFor(
-      `document.querySelector('[data-collection-resource-grid] [data-resource-save]')?.getAttribute('aria-pressed') === 'true'`,
-      "Playbook resource save state",
-    );
-    const storedIds = await evaluate(
-      'JSON.parse(localStorage.getItem("tessli-saved-resource-ids-v2") ?? "[]")',
-    );
-    assert.equal(storedIds.length, 1);
     await screenshot("playbook-detail-1440x900.png");
   }
 
@@ -262,5 +257,5 @@ await screenshot("playbook-detail-390x844.png");
 socket.close();
 assert.deepEqual(browserFailures, []);
 console.log(
-  "Collections research paths, stages, machine links, and Save checks passed.",
+  "Collections research paths, stages and machine links checks passed.",
 );

@@ -75,7 +75,7 @@ The previous seven-tool v1 list is not registered as MCP aliases: registered std
 
 ## Remote MCP availability
 
-Hosted Streamable HTTP MCP is not available. It is deferred to V3.16, after local task retrieval and compact static public representations/discovery (V3.9–V3.10) are stable. Any future hosted transport must wrap the same pure read-only layer, expose public data only, and add bounded inputs, origin validation, rate limits, safe logging, timeouts, and monitoring. It must never read browser-local Boards, write Tessli state, fetch providers, proxy paid/private content, or accept provider credentials.
+Hosted Streamable HTTP MCP is not available. It is deferred to V3.16, after local task retrieval and compact static public representations/discovery (V3.9–V3.10) are stable. Any future hosted transport must wrap the same pure read-only layer, expose public data only, and add bounded inputs, origin validation, rate limits, safe logging, timeouts, and monitoring. It must never read browser data, write Tessli state, fetch providers, proxy paid/private content, or accept provider credentials.
 
 ## Data and retention
 

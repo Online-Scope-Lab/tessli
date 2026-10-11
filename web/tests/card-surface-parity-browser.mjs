@@ -3,7 +3,6 @@ import { readFile } from "node:fs/promises";
 
 const endpoint = process.env.CDP_ENDPOINT ?? "http://127.0.0.1:9222";
 const origin = process.env.TESSLI_ORIGIN ?? "http://127.0.0.1:3000";
-const savedResourceStoreKey = "tessli-saved-resource-ids-v2";
 const catalogue = JSON.parse(
   await readFile(new URL("../data/catalogue.json", import.meta.url), "utf8"),
 );
@@ -156,7 +155,7 @@ async function assertCardActions(surface) {
             target: visit.getAttribute("target"),
           }
         : null,
-      save: card?.querySelector("[data-resource-save]")?.getAttribute("aria-pressed"),
+      saveControls: card?.querySelectorAll("[data-resource-save], button[aria-pressed]").length ?? 0,
     };
   })()`);
 
@@ -185,11 +184,7 @@ async function assertCardActions(surface) {
     true,
     `${surface} protects Visit with noreferrer.`,
   );
-  assert.notEqual(
-    audit.save,
-    undefined,
-    `${surface} exposes an independent Save control.`,
-  );
+  assert.equal(audit.saveControls, 0, `${surface} card has no Save control.`);
 }
 
 async function assertNoOverflow(pathname, label) {
@@ -219,55 +214,14 @@ await waitFor(
 );
 await navigate("/resources?q=motion", "Browse Motion card after Inspect");
 
-const browseLocation = await evaluate("window.location.href");
-await evaluate(
-  `document.querySelector(${JSON.stringify(`${cardSelector()} [data-resource-save]`)})?.click(); true`,
-);
-await waitFor(
-  `document.querySelector(${JSON.stringify(`${cardSelector()} [data-resource-save]`)})?.getAttribute("aria-pressed") === "true"`,
-  "Browse Save state",
-);
-assert.equal(
-  await evaluate("window.location.href"),
-  browseLocation,
-  "Browse Save does not navigate away from the page.",
-);
-assert.equal(
-  await evaluate(
-    `JSON.parse(localStorage.getItem(${JSON.stringify(savedResourceStoreKey)}) ?? "[]").includes(${JSON.stringify(resource.id)})`,
-  ),
-  true,
-  "Browse Save writes the stable resource ID to browser-local storage.",
-);
-
 await navigate(collectionPath, "Motion collection card");
 await assertCardActions("Collection detail");
-assert.equal(
-  await evaluate(
-    `document.querySelector(${JSON.stringify(`${cardSelector()} [data-resource-save]`)})?.getAttribute("aria-pressed")`,
-  ),
-  "true",
-  "Collection detail reads the same saved result.",
-);
-
-await navigate("/saved", "Saved Motion card");
-await assertCardActions("Saved");
-assert.equal(
-  await evaluate(
-    `document.querySelector(${JSON.stringify(`${cardSelector()} [data-resource-save]`)})?.getAttribute("aria-pressed")`,
-  ),
-  "true",
-  "Saved renders the browser-local result created from Browse.",
-);
 
 for (const width of [1440, 390, 320]) {
   await setViewport(width);
   await assertNoOverflow("/resources?q=motion", `Browse at ${width}px`);
   await assertNoOverflow(collectionPath, `Collection detail at ${width}px`);
-  await assertNoOverflow("/saved", `Saved at ${width}px`);
 }
 
 socket.close();
-console.log(
-  "Resource-card parity across Browse, Collections, and Saved passed.",
-);
+console.log("Resource-card parity across Browse and Collections passed.");

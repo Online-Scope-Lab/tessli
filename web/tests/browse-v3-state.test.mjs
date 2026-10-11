@@ -133,10 +133,7 @@ test("V3.4 Browse always renders resource cards with independent actions", async
   );
   assert.match(results, /<ResourceCard/);
   assert.match(results, /profileHref=\{`\/resources\/\$\{profile\.slug\}`\}/);
-  assert.match(results, /onSavedChange=\{handleSavedChange\}/);
-  assert.match(results, /readSavedResourceIds\(cards\)/);
-  assert.match(results, /writeSavedResourceIds\(next\)/);
-  assert.match(results, /aria-live="polite"/);
+  assert.doesNotMatch(results, /save-store|onSavedChange|SavedResourceIds/);
   assert.match(results, /data-browse-view="cards"/);
   assert.doesNotMatch(results, /if \(view|table|compactList|profileLevel/);
 });

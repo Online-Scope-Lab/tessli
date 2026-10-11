@@ -24,7 +24,6 @@ Desktop direction:
 
 - `docs/ref-img/explore-desktop.webp`
 - `docs/ref-img/collections-desktop.webp`
-- `docs/ref-img/saved-desktop.webp`
 - `docs/ref-img/full-reference-desktop.webp`
 
 Approved hero artwork:
@@ -39,7 +38,7 @@ The references define the **composition, atmosphere, hierarchy, and component la
 1. **Task-led discovery first.** Task search is the fastest route to value and must remain prominent; taxonomy is a refinement, not the primary answer.
 2. **Editorial hierarchy.** Display serif is reserved for brand and page-level storytelling; product UI stays sans-serif.
 3. **Warm restraint.** Off-white surfaces, charcoal text, fine borders, and sparse orange accents.
-4. **One primary action per surface.** Resource card opens the destination; save remains a separate control.
+4. **One primary action per surface.** Resource card opens the Source Guide; Visit remains a separate control.
 5. **Progressive complexity.** Basic browsing is simple; advanced filters appear only when requested.
 6. **Truthful interface.** No invented users, ratings, trends, curators, or activity claims.
 7. **Accessible calm.** Grain, shadows, and motion must never weaken contrast or legibility.

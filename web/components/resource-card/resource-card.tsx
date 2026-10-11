@@ -41,8 +41,6 @@ type ResourceCardProps = Readonly<{
   media?: ResourceCardMedia;
   /** Use the Tessli profile as the primary destination when supplied. */
   profileHref?: string;
-  saved?: boolean;
-  onSavedChange?: (resourceId: string, saved: boolean) => void;
 }>;
 
 type MediaCandidate = Readonly<{
@@ -71,18 +69,6 @@ function InternalArrowIcon() {
   return (
     <svg aria-hidden="true" fill="none" focusable="false" viewBox="0 0 24 24">
       <path d="M5 12h14M13 6l6 6-6 6" />
-    </svg>
-  );
-}
-
-function SaveIcon({ saved }: { saved: boolean }) {
-  return (
-    <svg
-      aria-hidden="true"
-      fill={saved ? "currentColor" : "none"}
-      viewBox="0 0 24 24"
-    >
-      <path d="M7 4.75h10a1.25 1.25 0 0 1 1.25 1.25v14l-6.25-4-6.25 4V6A1.25 1.25 0 0 1 7 4.75Z" />
     </svg>
   );
 }
@@ -145,8 +131,6 @@ export function ResourceCard({
   categoryLabel,
   media,
   profileHref,
-  saved = false,
-  onSavedChange,
 }: ResourceCardProps) {
   const candidates = createMediaCandidates(resource, media);
   const [mediaIndex, setMediaIndex] = useState(0);
@@ -305,24 +289,6 @@ export function ResourceCard({
             </a>
           )}
         </div>
-      ) : null}
-
-      {onSavedChange ? (
-        <button
-          aria-label={
-            saved
-              ? `Remove ${resource.name} from saved resources`
-              : `Save ${resource.name}`
-          }
-          aria-pressed={saved}
-          className={styles.saveButton}
-          data-resource-save={resource.id}
-          onClick={() => onSavedChange(resource.id, !saved)}
-          type="button"
-        >
-          <SaveIcon saved={saved} />
-          <span>{saved ? "Saved" : "Save"}</span>
-        </button>
       ) : null}
     </article>
   );

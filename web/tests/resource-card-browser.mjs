@@ -182,7 +182,7 @@ assert.equal(
     return cards.every((card) => {
       const inspect = card.querySelector('a[data-resource-inspect]');
       const primary = card.querySelector(':scope > a[data-resource-profile-link]');
-      const save = card.querySelector('button[data-resource-save]');
+      const save = card.querySelector('button[data-resource-save], button[aria-pressed]');
       const visit = card.querySelector('a[data-resource-visit]');
       const unavailable = card.getAttribute('data-resource-status') === 'unavailable';
       const independentActions = unavailable
@@ -194,14 +194,14 @@ assert.equal(
         inspect &&
           primary?.getAttribute('href')?.startsWith('/resources/') &&
           !primary.hasAttribute('target') &&
-          save &&
+          !save &&
           independentActions &&
           !card.querySelector('a a, a button, button a, button button'),
       );
     });
   })()`),
   true,
-  "Every profile-linked Browse card should keep Inspect, Visit, and Save as independent controls.",
+  "Every profile-linked Browse card should keep Inspect and Visit as independent controls, with no Save control.",
 );
 
 assert.equal(

@@ -15,8 +15,8 @@ const facts = [
   },
   {
     icon: "private",
-    label: "Browser-local saves",
-    value: "Private",
+    label: "Needed to browse",
+    value: "No account",
   },
   {
     icon: "open",

@@ -121,5 +121,5 @@ test("create_research_brief is deterministic and shares V3.7 explained results",
   assert.deepEqual(first.sources, retrieveTaskSources(retrievalInput).sources);
   assert.equal(first.sourceCount, first.sources.length);
   assert.equal(first.nextSteps.length, 3);
-  assert.match(first.boundary, /does not access local Boards/i);
+  assert.match(first.boundary, /does not read browser data/i);
 });

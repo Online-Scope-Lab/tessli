@@ -58,7 +58,7 @@ test("Collection cards expose goal, audience, stages, and expected decision", as
   );
 });
 
-test("Playbook detail exposes intent, stages, roles, Board, and exports", async () => {
+test("Playbook detail exposes intent, stages, roles, and exports", async () => {
   const [detail, resourceList, resourceCard] = await Promise.all([
     read("app/collections/[slug]/page.tsx"),
     read("components/collection-resources/collection-resource-list.tsx"),
@@ -76,7 +76,9 @@ test("Playbook detail exposes intent, stages, roles, Board, and exports", async 
   assert.match(detail, /data-playbook-stage=\{stage\.id\}/);
   assert.match(detail, /stage\.inspect/);
   assert.match(detail, /stage\.decision/);
-  assert.match(detail, /href="\/boards"/);
+  assert.match(detail, /href="#research-sequence"/);
+  assert.match(detail, /id="research-sequence"/);
+  assert.doesNotMatch(detail, /href="\/(?:boards|saved)"|\bBoards?\b/);
   assert.match(detail, /collection\.md/);
   assert.match(detail, /collection\.json/);
   assert.match(detail, /resources=\{stage\.resources\}/);
@@ -84,8 +86,7 @@ test("Playbook detail exposes intent, stages, roles, Board, and exports", async 
   assert.match(resourceList, /data-playbook-resource-role/);
   assert.match(resourceList, /Why included/);
   assert.match(resourceList, /\{role\}/);
-  assert.match(resourceList, /onSavedChange=\{handleSavedChange\}/);
-  assert.match(resourceList, /saved=\{savedIds\.includes\(resource\.id\)\}/);
+  assert.doesNotMatch(resourceList, /save-store|onSavedChange|saved=/);
   assert.match(resourceCard, /data-resource-visit=\{resource\.id\}/);
   assert.match(resourceCard, /target="_blank"/);
   assert.match(resourceCard, /rel="noopener noreferrer"/);

@@ -117,7 +117,7 @@ export function createTessliMcpServer(): McpServer {
     },
     {
       instructions:
-        "Use Tessli to retrieve task-fit design sources, inspect recorded source guidance, compare differentiated alternatives, review collections, and create compact research briefs. This server is local, read-only, and repository-backed. It performs no provider browsing or verification, browser-local Board access, credential access, project-code ingestion, or write operation.",
+        "Use Tessli to retrieve task-fit design sources, inspect recorded source guidance, compare differentiated alternatives, review collections, and create compact research briefs. This server is local, read-only, and repository-backed. It performs no provider browsing or verification, browser-data access, credential access, project-code ingestion, or write operation.",
     },
   );
 

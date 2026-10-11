@@ -11,20 +11,12 @@ async function read(relativePath) {
   return readFile(path.join(webRoot, relativePath), "utf8");
 }
 
-const headerRoutes = [
-  "/resources",
-  "/collections",
-  "/for-ai",
-  "/saved",
-  "/boards",
-];
+const headerRoutes = ["/resources", "/collections", "/for-ai"];
 
 const footerRoutes = [
   "/resources",
   "/collections",
   "/for-ai",
-  "/saved",
-  "/boards",
   "/about",
   "/curation",
   "/privacy",
@@ -61,8 +53,9 @@ test("public header and footer promote only implemented routes", async () => {
 
   assert.doesNotMatch(
     `${navigation}\n${header}\n${footer}`,
-    /href: "\/(?:auth|submit|suggest)"/u,
+    /href: "\/(?:auth|submit|suggest|saved|boards)"/u,
   );
+  assert.doesNotMatch(footerNavigation, /href: "\/(?:saved|boards)"/u);
 });
 
 test("unfinished and internal-lab routes are non-indexable", async () => {
@@ -84,6 +77,23 @@ test("the account route, auth shell and session proxy are removed", async () => 
     "components/auth-shell",
     "proxy.ts",
     "middleware.ts",
+  ]) {
+    await assert.rejects(access(path.join(webRoot, removed)), {
+      code: "ENOENT",
+    });
+  }
+});
+
+test("Saved and Boards routes, components and stores are removed", async () => {
+  for (const removed of [
+    "app/saved",
+    "app/boards",
+    "components/saved-resources",
+    "components/project-boards",
+    "components/board-intake",
+    "components/toast-notification",
+    "lib/board-agent-handoff.mjs",
+    "lib/board-research-pack.mjs",
   ]) {
     await assert.rejects(access(path.join(webRoot, removed)), {
       code: "ENOENT",

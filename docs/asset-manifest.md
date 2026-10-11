@@ -59,13 +59,6 @@ These are canonical desktop art-direction captures. They preserve composition, h
 - size: `51,658 bytes`
 - SHA-256: `5e02b4c2775e854bf78e364d5d0d8d0f6b04a2c74bfb418fd0030b22edd468ae`
 
-### Saved
-
-- path: `docs/ref-img/saved-desktop.webp`
-- dimensions: `1200 × 849`
-- size: `42,034 bytes`
-- SHA-256: `d00e2e30ba64c95455af405f130e3e9457f60b7659b37085bf23f8175a76e5c1`
-
 ### Full Reference
 
 - path: `docs/ref-img/full-reference-desktop.webp`

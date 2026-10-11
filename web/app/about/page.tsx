@@ -32,11 +32,10 @@ export default function AboutPage() {
           id: "open-work",
           title: "The catalogue is maintained in the open.",
           paragraphs: [
-            "Phase 1 catalogue changes live in Tessli's public repository so additions and corrections can be reviewed with their source context. Browser-local saves stay private to the browser where they were made; browsing does not require an account.",
+            "Phase 1 catalogue changes live in Tessli's public repository so additions and corrections can be reviewed with their source context. Browsing does not require an account.",
           ],
           items: [
             "Explore and search the public catalogue without an account.",
-            "Save useful resources privately in the current browser.",
             "Suggest additions and corrections through the published contribution paths.",
           ],
         },

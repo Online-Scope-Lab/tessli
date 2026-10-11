@@ -11,7 +11,7 @@ async function read(relativePath) {
   return readFile(path.join(webRoot, relativePath), "utf8");
 }
 
-test("Collection detail is an ordered research checklist with a truthful Board path", async () => {
+test("Collection detail is an ordered research checklist that starts at stage 1", async () => {
   const [page, resourceList] = await Promise.all([
     read("app/collections/[slug]/page.tsx"),
     read("components/collection-resources/collection-resource-list.tsx"),
@@ -25,7 +25,8 @@ test("Collection detail is an ordered research checklist with a truthful Board p
   assert.match(page, /Stage \{index \+ 1\}/);
   assert.match(page, /inspectPrompt=\{stage\.inspect\}/);
   assert.match(page, /decisionPrompt=\{stage\.decision\}/);
-  assert.match(page, /href="\/boards"/);
+  assert.match(page, /href="#research-sequence"/);
+  assert.doesNotMatch(page, /href="\/(?:boards|saved)"|\bBoards?\b/);
   assert.match(page, /Machine access/);
   assert.match(page, /collection\.json/);
   assert.match(page, /collection\.md/);
@@ -38,11 +39,9 @@ test("Collection detail is an ordered research checklist with a truthful Board p
   assert.match(resourceList, /Role — Why included/);
   assert.match(resourceList, /Inspect/);
   assert.match(resourceList, /Decision prompt/);
-  assert.match(resourceList, /onSavedChange=\{handleSavedChange\}/);
-  assert.match(resourceList, /aria-live="polite"/);
   assert.doesNotMatch(
     resourceList,
-    /fetch\(|create(?:Browser|Server)?Client\(|board/i,
+    /fetch\(|create(?:Browser|Server)?Client\(|board|save-store|onSavedChange/i,
   );
 });
 

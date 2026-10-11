@@ -213,7 +213,7 @@ const facts = await evaluate(`Array.from(
 assert.deepEqual(facts, [
   { label: "Curated resources", value: "295" },
   { label: "Practical categories", value: "11" },
-  { label: "Browser-local saves", value: "Private" },
+  { label: "Needed to browse", value: "No account" },
   { label: "Community-built project", value: "Open" },
 ]);
 

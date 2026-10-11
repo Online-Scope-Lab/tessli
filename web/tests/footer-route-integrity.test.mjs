@@ -15,8 +15,6 @@ const footerRoutes = [
   "/resources",
   "/collections",
   "/for-ai",
-  "/saved",
-  "/boards",
   "/about",
   "/curation",
   "/privacy",
@@ -28,8 +26,6 @@ const implementedRoutes = new Set([
   "/resources",
   "/collections",
   "/for-ai",
-  "/saved",
-  "/boards",
   "/about",
   "/curation",
   "/privacy",
@@ -63,9 +59,10 @@ test("footer contains truthful research groups and safe external links", async (
 
   assert.match(navigation, /label: "Browse sources", href: "\/resources"/);
   assert.match(navigation, /label: "For AI", href: "\/for-ai"/);
-  assert.match(navigation, /label: "Saved sources", href: "\/saved"/);
-  assert.match(navigation, /label: "Project boards", href: "\/boards"/);
-  assert.doesNotMatch(navigation, /href: "\/submit"|href: "\/suggest"/);
+  assert.doesNotMatch(
+    navigation,
+    /href: "\/(?:submit|suggest|saved|boards)"|Saved sources|Project boards/,
+  );
   assert.doesNotMatch(
     navigation,
     /Explore resources|Full reference|footer-explore/,
@@ -108,11 +105,9 @@ test("header exposes only working primary and utility routes", async () => {
   assert.match(navigation, /label: "Collections"[\s\S]*?available: true/);
   assert.match(navigation, /label: "For AI"[\s\S]*?available: true/);
   assert.match(navigation, /label: "Search"[\s\S]*?available: true/);
-  assert.match(navigation, /label: "Saved"[\s\S]*?available: true/);
-  assert.match(navigation, /label: "Boards"[\s\S]*?available: true/);
   assert.doesNotMatch(
     navigation,
-    /label: "Explore"|label: "Resources"|label: "About"|\/auth/,
+    /label: "Explore"|label: "Resources"|label: "About"|label: "Saved"|label: "Boards"|\/auth|\/saved|\/boards/,
   );
 });
 

@@ -44,7 +44,7 @@ Tessli's MCP server is a local, read-only, repository-backed stdio process. Ther
 
 ## Boundaries
 
-- No Board or Saved data is public: both stay browser-local and private.
+- No accounts: Tessli has no sign-in and keeps no user workspace.
 - Tessli has no bulk catalogue API or bulk public-data endpoint.
 - No provider crawl, proxy, or credential handling: Tessli does not bypass provider access controls.
 - Recheck provider access, pricing, licensing, terms, availability, and other time-sensitive details at the provider.

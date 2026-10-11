@@ -183,7 +183,7 @@ export function createPublicSourceRepresentation(profile, similarSources = []) {
       "Repository intelligence is not live-provider verification.",
       "Revalidate provider access, pricing, licensing, terms, availability, and time-sensitive claims.",
       "Tessli classifications are research guidance, not provider claims or universal rankings.",
-      "No browser-local Board, Saved, account, cookie, or credential data is included.",
+      "No browser, account, cookie, or credential data is included.",
     ],
   };
 }
@@ -265,7 +265,7 @@ export function createPublicCollectionRepresentation(
       "Collection order is editorial guidance and does not represent popularity, sponsorship, or universal quality.",
       "Repository intelligence is not live-provider verification.",
       "Revalidate provider access, pricing, licensing, terms, availability, and time-sensitive claims.",
-      "No browser-local Board, Saved, account, cookie, or credential data is included.",
+      "No browser, account, cookie, or credential data is included.",
     ],
   };
 }

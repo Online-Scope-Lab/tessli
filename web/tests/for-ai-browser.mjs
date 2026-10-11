@@ -142,7 +142,6 @@ assert.equal(
       "data-for-ai-workflow",
       "data-for-ai-example",
       "data-for-ai-representations",
-      "data-for-ai-board-boundary",
       "data-for-ai-local-mcp",
       "data-for-ai-access-routes",
       "data-for-ai-boundaries"
@@ -196,7 +195,7 @@ assert.equal(
 );
 assert.equal(
   await evaluate(
-    'document.body.textContent.includes("Export their compact Markdown") && document.body.textContent.includes("do not read a browser Board automatically") && document.body.textContent.includes("not uploaded or synced")',
+    '!/\\bBoards?\\b/.test(document.querySelector("main").textContent) && !document.querySelector("a[href=\\"/boards\\"], a[href=\\"/saved\\"]") && Boolean(document.querySelector("a[href=\\"#local-mcp\\"]")) && Boolean(document.getElementById("local-mcp"))',
   ),
   true,
 );

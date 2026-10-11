@@ -123,7 +123,7 @@ const cardAudit = await evaluate(`(() => ({
 assert.equal(cardAudit.cards, 24);
 assert.equal(cardAudit.internalLinks, true);
 assert.ok(cardAudit.providerLinks > 0);
-assert.equal(cardAudit.saves, 24);
+assert.equal(cardAudit.saves, 0);
 assert.match(cardAudit.nextHref, /page=2/);
 assert.equal(cardAudit.overflow, false);
 

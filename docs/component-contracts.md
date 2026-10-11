@@ -10,7 +10,7 @@ These contracts describe working public interfaces only. Components being remove
 
 - Tessli wordmark;
 - working primary navigation: Browse, Collections, For AI;
-- utilities: Search (Saved and Boards are removed in C4);
+- utilities: Search;
 - mobile menu and search shortcut.
 
 ### Behaviour
@@ -72,7 +72,6 @@ Desktop can use concise inline controls or a sidebar. Tablet/mobile use an acces
 - source identity/title linking to the internal Source Guide;
 - one-line purpose;
 - two or three high-value task cues;
-- independent Save control (removed in C4);
 - explicit external `Visit source` action;
 - optional compact `Inspect` affordance when title/card treatment alone is not sufficient.
 
@@ -80,7 +79,7 @@ Desktop can use concise inline controls or a sidebar. Tablet/mobile use an acces
 
 - title, identity, or whole-card profile link navigates to `/resources/[slug]`, never directly to the provider;
 - Visit has a clear label and safe external-link behaviour;
-- Visit (and Save until C4) sits above the profile-link hit area in stacking order;
+- Visit sits above the profile-link hit area in stacking order;
 - modifier-click and text selection continue to work;
 - hover and `:focus-within` communicate the same hierarchy.
 
@@ -99,7 +98,7 @@ Coverage level, evidence, freshness, and governance can be available in a quiet 
 Source Guide composition follows this fixed reading hierarchy:
 
 1. identity/purpose and preview;
-2. Visit (Save and Add to Board are removed in C4);
+2. Visit;
 3. Use it when and What to explore;
 4. How to access and useful compatibility;
 5. Important limitations;
@@ -125,13 +124,9 @@ The component family must degrade honestly for thinly described sources and omit
 - source role;
 - what to inspect;
 - decision prompt;
-- Visit the source (Save and Add to Board are removed in C4).
+- Visit the source.
 
-## 9. Saved shortlist — removed in C4
-
-## 10. Board workspace — removed in C4
-
-## 11. Preview fallback
+## 9. Preview fallback
 
 - fixed aspect ratio prevents layout shift;
 - the frozen fallback chain preview → favicon → lettermark ([`data-and-media-contract.md`](data-and-media-contract.md)) remains canonical;
@@ -139,11 +134,11 @@ The component family must degrade honestly for thinly described sources and omit
 - preview failure still leaves identity, purpose, and actions usable;
 - live framed previews are not a default component (the live-preview pilot is removed in C5).
 
-## 12. Account and form components — removed in C3
+## 10. Account and form components — removed in C3
 
 Auth, account menus and in-site forms are not part of v1.2. Contributions go through GitHub issue forms and pull requests (see [`CONTRIBUTING.md`](../CONTRIBUTING.md)).
 
-## 13. Footer
+## 11. Footer
 
 - concise Tessli statement;
 - footer-only links: About, Curation, Privacy, Terms, Content policy;
@@ -151,6 +146,6 @@ Auth, account menus and in-site forms are not part of v1.2. Contributions go thr
 - no newsletter until operational;
 - no Auth or Lab destination.
 
-## 14. Announcements
+## 12. Announcements
 
-Dynamic result, search and filter-recovery status changes are announced to assistive technology through live regions. Errors are never explained only in a transient message. The `ToastNotification` component loses its last user (Save and Boards) in C4, which removes it or keeps it as an unused primitive.
+Dynamic result, search and filter-recovery status changes are announced to assistive technology through live regions. Errors are never explained only in a transient message. There is no toast component; it was removed with Saved and Boards in C4.

@@ -1,5 +1,5 @@
 import assert from "node:assert/strict";
-import { mkdir, readFile, writeFile } from "node:fs/promises";
+import { mkdir, writeFile } from "node:fs/promises";
 
 const endpoint = process.env.CDP_ENDPOINT ?? "http://127.0.0.1:9222";
 const origin = process.env.TESSLI_ORIGIN ?? "http://127.0.0.1:3000";
@@ -7,36 +7,6 @@ const outputDirectory = new URL(
   "../artifacts/phase-1-release/",
   import.meta.url,
 );
-const catalogue = JSON.parse(
-  await readFile(new URL("../data/catalogue.json", import.meta.url), "utf8"),
-);
-const boardSeed = [
-  {
-    id: "release-board",
-    name: "Release research pack",
-    goal: "Verify the browser-local Board export workflow.",
-    audience: "Tessli researchers and model users.",
-    constraints: "Local-only, deterministic, accessible, and responsive.",
-    unresolvedQuestions: ["Does the exported context remain compact?"],
-    createdAt: "2026-08-04T00:00:00.000Z",
-    updatedAt: "2026-08-04T00:00:00.000Z",
-    items: [
-      {
-        resourceId: catalogue.resources[0].id,
-        note: "Inspect the hierarchy and source boundaries.",
-        decision: "selected",
-        rationale: "Useful for validating the export path.",
-      },
-      {
-        resourceId: catalogue.resources[1].id,
-        note: "Retain the rejected direction in project context.",
-        decision: "rejected",
-        rationale: "Not appropriate for this verification task.",
-      },
-    ],
-  },
-];
-
 const viewports = [
   [1440, 900],
   [1280, 800],
@@ -62,8 +32,6 @@ const routeChecks = [
   ],
   ["/resources", 200, "What are you trying to design?"],
   ["/resources/designindex", 200, "How to access it"],
-  ["/saved", 200, "Search and refine the references kept in this browser"],
-  ["/boards", 200, "Project boards"],
   ["/about", 200, "Keep reading"],
   ["/curation", 200, "Keep reading"],
   ["/privacy", 200, "Keep reading"],
@@ -72,6 +40,8 @@ const routeChecks = [
   ["/submit", 200, "What this route does today"],
   ["/suggest", 200, "What this route does today"],
   ["/auth", 404, "Page not found"],
+  ["/saved", 404, "Page not found"],
+  ["/boards", 404, "Page not found"],
   ["/collections/not-a-real-collection", 404, "Page not found"],
   ["/a-clearly-missing-route", 404, "Page not found"],
 ];
@@ -122,7 +92,7 @@ assert.match(
   /^Sitemap:\s*.+\/sitemap\.xml\s*$/imu,
   "/robots.txt sitemap",
 );
-for (const pathname of ["/submit", "/suggest", "/boards", "/lab/"]) {
+for (const pathname of ["/submit", "/suggest", "/lab/"]) {
   assert.match(
     robots,
     new RegExp(`^Disallow:\\s*${pathname.replaceAll("/", "\\/")}\\s*$`, "imu"),
@@ -157,8 +127,13 @@ for (const fragment of [
 assert.match(llms, /local\s+MCP/i, "/llms.txt local MCP boundary");
 assert.match(
   llms,
-  /No Board or Saved data is public:[\s\S]*browser-local and private/i,
-  "/llms.txt Board privacy boundary",
+  /No accounts:[\s\S]{0,80}no sign-in/i,
+  "/llms.txt account boundary",
+);
+assert.doesNotMatch(
+  llms,
+  /\bBoards?\b|\bSaved\b|\/saved|\/boards/u,
+  "/llms.txt no Saved or Boards",
 );
 assert.match(
   llms,
@@ -364,18 +339,6 @@ const visualCases = [
     selector: "[data-browse-view=cards]",
     browse: true,
   },
-  {
-    name: "saved",
-    path: "/saved",
-    selector: "[data-saved-resources-page=true]",
-    saved: true,
-  },
-  {
-    name: "boards",
-    path: "/boards",
-    selector: "#board-export-title",
-    boards: true,
-  },
   { name: "about", path: "/about", selector: "#main-content article" },
   {
     name: "contribution-guidance",
@@ -482,26 +445,6 @@ for (const [width, height] of viewports) {
   });
 
   for (const visualCase of visualCases) {
-    if (visualCase.saved || visualCase.boards) {
-      await send("Page.navigate", { url: `${origin}/` });
-      await waitFor(
-        "document.readyState === 'complete'",
-        `${visualCase.name} seed page`,
-      );
-    }
-
-    if (visualCase.saved) {
-      await evaluate(
-        `localStorage.setItem('tessli-saved-resource-ids-v2', JSON.stringify([${JSON.stringify(catalogue.resources[0].id)}, ${JSON.stringify(catalogue.resources[1].id)}])); true`,
-      );
-    }
-
-    if (visualCase.boards) {
-      await evaluate(
-        `localStorage.setItem('tessli-project-boards-v1', ${JSON.stringify(JSON.stringify(boardSeed))}); true`,
-      );
-    }
-
     await send("Page.navigate", { url: `${origin}${visualCase.path}` });
     await waitFor(
       "document.readyState === 'complete'",
@@ -549,55 +492,11 @@ for (const [width, height] of viewports) {
         browseAudit.providerLinks > 0,
         `Browse provider links at ${width}`,
       );
-      assert.equal(browseAudit.saveButtons, 24, `Browse saves at ${width}`);
-    }
-
-    if (visualCase.boards) {
-      const boardAudit = await evaluate(`(() => {
-        const section = document.querySelector('[aria-labelledby=board-export-title]');
-        const buttons = [...(section?.querySelectorAll('button') ?? [])];
-        const date = section?.querySelector('input[type=date]');
-        const audience = [...document.querySelectorAll('label span')]
-          .find((label) => label.textContent === 'Audience')
-          ?.parentElement?.querySelector('textarea');
-        return {
-          audience: audience?.value,
-          buttonsEnabled:
-            buttons.length === 4 && buttons.every((button) => !button.disabled),
-          buttonLabels: buttons.map((button) => button.textContent?.trim()),
-          dateValue: date?.value,
-          localOnlyCopy: section?.textContent?.includes(
-            'Board content stays in this browser and is not uploaded',
-          ),
-          readyCopy: section?.textContent?.includes('Ready: 1 selected reference'),
-        };
-      })()`);
       assert.equal(
-        boardAudit.audience,
-        boardSeed[0].audience,
-        `Board audience at ${width}`,
+        browseAudit.saveButtons,
+        0,
+        `Browse has no Save controls at ${width}`,
       );
-      assert.equal(
-        boardAudit.buttonsEnabled,
-        true,
-        `Board export controls enabled at ${width}`,
-      );
-      assert.deepEqual(
-        boardAudit.buttonLabels,
-        ["Copy Markdown", "Download .md", "Copy JSON", "Download .json"],
-        `Board export labels at ${width}`,
-      );
-      assert.match(
-        boardAudit.dateValue ?? "",
-        /^\d{4}-\d{2}-\d{2}$/u,
-        `Board generated date at ${width}`,
-      );
-      assert.equal(
-        boardAudit.localOnlyCopy,
-        true,
-        `Board local-only copy at ${width}`,
-      );
-      assert.equal(boardAudit.readyCopy, true, `Board ready state at ${width}`);
     }
 
     const screenshot = await send("Page.captureScreenshot", {
@@ -611,35 +510,6 @@ for (const [width, height] of viewports) {
     );
   }
 }
-
-await send("Emulation.setDeviceMetricsOverride", {
-  width: 390,
-  height: 844,
-  deviceScaleFactor: 1,
-  mobile: true,
-});
-await send("Page.navigate", { url: `${origin}/` });
-await waitFor(
-  "document.readyState === 'complete'",
-  "Explore before empty Saved",
-);
-await evaluate(
-  "localStorage.setItem('tessli-saved-resource-ids-v2', '[]'); true",
-);
-await send("Page.navigate", { url: `${origin}/saved` });
-await waitFor(
-  "Boolean(document.querySelector('[data-saved-resources-empty]'))",
-  "empty Saved state",
-);
-const emptyScreenshot = await send("Page.captureScreenshot", {
-  format: "png",
-  fromSurface: true,
-  captureBeyondViewport: false,
-});
-await writeFile(
-  new URL("saved-empty-390x844.png", outputDirectory),
-  Buffer.from(emptyScreenshot.data, "base64"),
-);
 
 socket.close();
 assert.deepEqual(

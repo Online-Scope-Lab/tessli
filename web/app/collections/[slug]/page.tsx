@@ -94,18 +94,18 @@ export default async function CollectionDetailPage({
               </section>
             </div>
             <div className={styles.actions}>
-              <Link className={styles.primaryAction} href="/boards">
-                Continue in Boards
-              </Link>
+              <a className={styles.primaryAction} href="#research-sequence">
+                Start with stage 1
+              </a>
             </div>
-            <p className={styles.boardNote}>
-              Save sources here, then use Boards to record the choices you want
-              to carry into your project.
-            </p>
           </div>
         </header>
 
-        <section className={styles.resources} aria-labelledby="stages-title">
+        <section
+          className={styles.resources}
+          aria-labelledby="stages-title"
+          id="research-sequence"
+        >
           <header className={styles.resourcesHeading}>
             <div>
               <p className={styles.eyebrow}>Ordered research sequence</p>
@@ -113,7 +113,7 @@ export default async function CollectionDetailPage({
             </div>
             <p>
               Start with the first stage, inspect each source against its
-              prompt, and save the references that help you make the decision.
+              prompt, and note the references that help you make the decision.
             </p>
           </header>
 

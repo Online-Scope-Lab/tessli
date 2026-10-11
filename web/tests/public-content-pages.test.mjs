@@ -25,7 +25,8 @@ test("public content routes replace preview shells with factual Phase 1 pages", 
     /295 repository-managed resources across 11 practical categories/,
   );
   assert.match(pages[1], /pricing, licensing, availability/i);
-  assert.match(pages[2], /local browser storage/i);
+  assert.match(pages[2], /do not write to your browser's local storage/i);
+  assert.doesNotMatch(pages[2], /\bSaved\b|save a resource/i);
   assert.match(pages[3], /not an endorsement, warranty, licence grant/i);
   assert.match(pages[4], /Remote SVG markup is never injected/i);
 });

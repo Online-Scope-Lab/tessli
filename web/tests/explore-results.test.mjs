@@ -50,8 +50,7 @@ test("Explore results render semantic ready, empty, error, and load-more states"
   );
   assert.match(results, /<ul className=\{styles\.grid\} data-resource-grid>/);
   assert.match(results, /<ResourceCard/);
-  assert.match(results, /onSavedChange=\{onSavedChange\}/);
-  assert.match(results, /saved=\{savedResourceIds\.has\(resource\.id\)\}/);
+  assert.doesNotMatch(results, /onSavedChange|savedResourceIds/);
   assert.match(results, /data-reset-discovery/);
   assert.match(results, /data-load-more-resources/);
   assert.match(

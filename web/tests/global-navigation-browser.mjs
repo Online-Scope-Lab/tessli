@@ -145,11 +145,7 @@ assert.deepEqual(desktop.primary, [
   ["Collections", "/collections"],
   ["For AI", "/for-ai"],
 ]);
-assert.deepEqual(desktop.utilities, [
-  ["Search", "/resources#browse-search"],
-  ["Saved", "/saved"],
-  ["Boards", "/boards"],
-]);
+assert.deepEqual(desktop.utilities, [["Search", "/resources#browse-search"]]);
 assert.deepEqual(desktop.current, ["Browse"]);
 assert.equal(desktop.authLinks, 0);
 assert.equal(desktop.legacyLabels, false);
@@ -190,7 +186,7 @@ assert.equal(mobileOpen.dialog, "dialog");
 assert.equal(mobileOpen.modal, "true");
 assert.deepEqual(mobileOpen.primary, ["Browse", "Collections", "For AI"]);
 assert.deepEqual(mobileOpen.current, ["Collections"]);
-assert.deepEqual(mobileOpen.utilities, ["Search", "Saved", "Boards"]);
+assert.deepEqual(mobileOpen.utilities, ["Search"]);
 assert.equal(mobileOpen.authLinks, 0);
 assert.equal(mobileOpen.bodyOverflow, "hidden");
 assert.equal(mobileOpen.contentInert, true);

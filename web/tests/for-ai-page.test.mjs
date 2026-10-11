@@ -66,7 +66,6 @@ test("For AI page leads with the task-to-agent workflow and current access truth
   assert.match(page, /data-for-ai-workflow/);
   assert.match(page, /data-for-ai-example/);
   assert.match(page, /data-for-ai-representations/);
-  assert.match(page, /data-for-ai-board-boundary/);
   assert.match(page, /data-for-ai-local-mcp/);
   assert.match(page, /data-for-ai-remote-status="unavailable"/);
   assert.match(page, /data-for-ai-access-routes/);
@@ -85,8 +84,9 @@ test("For AI page leads with the task-to-agent workflow and current access truth
   assert.match(page, /npm run mcp/);
   assert.match(page, /profile\.json/);
   assert.match(page, /profile\.md/);
-  assert.match(page, /Export their compact Markdown[\s\S]*?JSON/);
-  assert.match(page, /do not read a browser Board[\s\S]*?automatically/);
+  assert.match(page, /href="#local-mcp"/);
+  assert.match(page, /id="local-mcp"/);
+  assert.doesNotMatch(page, /\bBoards?\b|href="\/(?:boards|saved)"/);
   assert.match(page, /Remote and hosted MCP are unavailable today/);
   assert.match(page, /checked-out repository/);
   assert.match(page, /read-only/);

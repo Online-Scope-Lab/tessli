@@ -77,14 +77,13 @@ test("Browse state is task-focused, serializable, and rejects fake verification 
   assert.match(browse, /slice\(0, 160\)/);
 });
 
-test("Browse cards expose internal profiles plus independent save and provider actions", async () => {
+test("Browse cards expose internal profiles plus independent provider actions", async () => {
   const results = await read("components/browse/browse-results.tsx");
 
   assert.match(results, /data-browse-view="cards"/);
   assert.match(results, /<ResourceCard/);
   assert.match(results, /profileHref=\{`\/resources\/\$\{profile\.slug\}`\}/);
-  assert.match(results, /onSavedChange=\{handleSavedChange\}/);
-  assert.match(results, /aria-live="polite"/);
+  assert.doesNotMatch(results, /onSavedChange|save-store/);
   assert.doesNotMatch(results, /table|compactList|profileLevel/);
   assert.doesNotMatch(results, /fetch\(|sessionStorage/);
   assert.doesNotMatch(

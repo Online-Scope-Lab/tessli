@@ -27,8 +27,16 @@ test("robots metadata advertises the sitemap and blocks unpublished routes", asy
   assert.match(robots, /sitemap/i);
   assert.match(robots, /sitemap\.xml/);
 
-  for (const pathname of ["/submit", "/suggest", "/boards", "/lab/"]) {
+  for (const pathname of ["/submit", "/suggest", "/lab/"]) {
     assert.match(robots, quotedPath(pathname), `robots disallows ${pathname}`);
+  }
+
+  for (const pathname of ["/saved", "/boards"]) {
+    assert.doesNotMatch(
+      robots,
+      quotedPath(pathname),
+      `robots no longer lists removed ${pathname}`,
+    );
   }
 });
 
@@ -60,10 +68,8 @@ test("llms discovery route is static, deterministic, and bounded to public truth
   assert.match(route, /local\s+MCP/i);
   assert.match(route, /no hosted(?: or remote)? MCP endpoint/i);
   assert.match(route, /(?:no|not)\b[\s\S]{0,80}\bbulk\b/i);
-  assert.match(
-    route,
-    /No Board or Saved data is public:[\s\S]*browser-local and private/i,
-  );
+  assert.match(route, /No accounts:[\s\S]{0,80}no sign-in/i);
+  assert.doesNotMatch(route, /\bBoards?\b|\bSaved\b|\/saved|\/boards/u);
   assert.match(route, /(?:no|not)\b[\s\S]{0,80}\bcredential/i);
   assert.match(route, /(?:no|not)\b[\s\S]{0,80}\bcrawl/i);
   assert.match(route, /(?:no|not)\b[\s\S]{0,80}\buniversal\b/i);

@@ -11,10 +11,9 @@ async function read(relativePath) {
   return readFile(path.join(webRoot, relativePath), "utf8");
 }
 
-test("resource card exposes independent profile, visit, and save actions", async () => {
+test("resource card exposes independent profile and visit actions", async () => {
   const component = await read("components/resource-card/resource-card.tsx");
   const anchorClose = component.indexOf("</a>");
-  const saveButton = component.indexOf("<button", anchorClose);
 
   assert.match(component, /^"use client";/);
   assert.match(component, /<a[\s\S]*?className=\{styles\.cardLink\}/);
@@ -25,12 +24,11 @@ test("resource card exposes independent profile, visit, and save actions", async
     component,
     /rel=\{opensExternal \? "noopener noreferrer" : undefined\}/,
   );
-  assert.ok(anchorClose > 0 && saveButton > anchorClose);
-  assert.match(component, /saved\?: boolean/);
-  assert.match(component, /onSavedChange\?:/);
-  assert.match(component, /\{onSavedChange \? \(/);
-  assert.match(component, /aria-pressed=\{saved\}/);
-  assert.match(component, /data-resource-save=\{resource\.id\}/);
+  assert.ok(anchorClose > 0);
+  assert.doesNotMatch(
+    component,
+    /<button|onSavedChange|aria-pressed|data-resource-save/,
+  );
   assert.match(component, /profileHref\?: string/);
   assert.match(component, /data-resource-primary-link/);
   assert.match(component, /data-resource-profile-link/);
@@ -45,7 +43,6 @@ test("resource card exposes independent profile, visit, and save actions", async
   assert.match(component, /target="_blank"/);
   assert.match(component, /rel="noopener noreferrer"/);
   assert.match(component, /Provider unavailable/);
-  assert.match(component, /onSavedChange\(resource\.id, !saved\)/);
   assert.doesNotMatch(component, /window\.open|router\.push|preventDefault/);
 });
 
@@ -89,8 +86,8 @@ test("resource card geometry survives long copy and restores restrained hover mo
   assert.match(css, /\.description\s*\{[\s\S]*?margin: var\(--space-2\) 0 0/);
   assert.match(css, /\.tags\s*\{[\s\S]*?margin-top: var\(--space-3\)/);
   assert.match(css, /\.footer\s*\{[\s\S]*?margin-top: auto/);
-  assert.match(css, /min-width: 44px/);
   assert.match(css, /min-height: 44px/);
+  assert.doesNotMatch(css, /\.saveButton/);
   assert.match(
     css,
     /\.profileAction\s*\{[\s\S]*?grid-template-columns: repeat\(2, minmax\(0, 1fr\)\)/,

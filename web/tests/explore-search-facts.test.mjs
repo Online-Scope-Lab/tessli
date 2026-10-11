@@ -79,14 +79,14 @@ test("search styling keeps a visible focus treatment and touch targets", async (
 test("hero facts contain only the approved truthful values", async () => {
   const facts = await read("components/explore-facts/explore-facts.tsx");
 
-  for (const value of ["295", "11", "Private", "Open"]) {
+  for (const value of ["295", "11", "No account", "Open"]) {
     assert.match(facts, new RegExp(`value: "${value}"`));
   }
 
   for (const label of [
     "Curated resources",
     "Practical categories",
-    "Browser-local saves",
+    "Needed to browse",
     "Community-built project",
   ]) {
     assert.match(facts, new RegExp(`label: "${label}"`));

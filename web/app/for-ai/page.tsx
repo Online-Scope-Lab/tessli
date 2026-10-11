@@ -7,7 +7,7 @@ import styles from "./for-ai.module.css";
 export const metadata = {
   title: "For AI",
   description:
-    "Turn a design task into a small, explicit source handoff for an agent—through source guides, public representations, local Boards, or local MCP.",
+    "Turn a design task into a small, explicit source handoff for an agent—through source guides, public representations, or local MCP.",
 };
 
 const repositoryUrl = "https://github.com/itsdeepaks/tessli";
@@ -48,11 +48,11 @@ const workflow = [
   ],
   [
     "Keep the decision",
-    "Save useful sources or add them to a local Board with selected, rejected, and open decisions.",
+    "Record in your own project notes which sources you selected or rejected, and which questions stay open.",
   ],
   [
     "Hand off compact context",
-    "Copy or download the Board’s Markdown or JSON, then explicitly give it to the agent.",
+    "Give the agent your notes with the source guide URLs or their JSON or Markdown representations.",
   ],
   [
     "Build and review",
@@ -82,8 +82,8 @@ export default function ForAiPage() {
             <Link className={styles.primaryAction} href="/resources">
               Start with a task
             </Link>
-            <Link className={styles.secondaryAction} href="/boards">
-              Open local Boards
+            <Link className={styles.secondaryAction} href="#local-mcp">
+              Set up local MCP
             </Link>
           </div>
         </header>
@@ -157,7 +157,7 @@ export default function ForAiPage() {
             <article>
               <h3>Project-owned decisions</h3>
               <p>
-                A local Board preserves why a source was selected or rejected,
+                Your project notes record why a source was selected or rejected,
                 plus constraints and questions the agent should not guess.
               </p>
             </article>
@@ -272,30 +272,13 @@ export default function ForAiPage() {
               </div>
             </article>
           </div>
-
-          <aside className={styles.boardBoundary} data-for-ai-board-boundary>
-            <div>
-              <p className={styles.eyebrow}>Board handoff stays explicit</p>
-              <h3>
-                Local project context does not appear in an agent by itself.
-              </h3>
-            </div>
-            <p>
-              Boards are stored in this browser. Export their compact Markdown
-              or JSON, then explicitly paste it into, or attach it to, the
-              agent. Tessli and local MCP do not read a browser Board
-              automatically, and Board data is not uploaded or synced.
-            </p>
-            <Link href="/boards">
-              Open local Boards <span aria-hidden="true">→</span>
-            </Link>
-          </aside>
         </section>
 
         <section
           aria-labelledby="local-mcp-title"
           className={`${styles.section} ${styles.mcpSection}`}
           data-for-ai-local-mcp
+          id="local-mcp"
         >
           <div className={styles.sectionHeading}>
             <div>
@@ -349,8 +332,8 @@ export default function ForAiPage() {
             data-for-ai-remote-status="unavailable"
           >
             Remote and hosted MCP are unavailable today. Do not configure an
-            endpoint, and do not expect Tessli to access provider accounts,
-            browser state, or local Board data.
+            endpoint, and do not expect Tessli to access provider accounts or
+            browser state.
           </p>
         </section>
 

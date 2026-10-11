@@ -18,9 +18,6 @@ type ExploreResultsProps = Readonly<{
   visibleCount: number;
   onLoadMore: () => void;
   onResetDiscovery: () => void;
-  savedResourceIds: ReadonlySet<string>;
-  onSavedChange: (resourceId: string, saved: boolean) => void;
-  saveAnnouncement: string;
 }>;
 
 function resultSummary(
@@ -44,9 +41,6 @@ export function ExploreResults({
   visibleCount,
   onLoadMore,
   onResetDiscovery,
-  savedResourceIds,
-  onSavedChange,
-  saveAnnouncement,
 }: ExploreResultsProps) {
   if (resultSet.status === "error") {
     return (
@@ -138,10 +132,8 @@ export function ExploreResults({
             <li key={resource.id}>
               <ResourceCard
                 categoryLabel={categoryLabel}
-                onSavedChange={onSavedChange}
                 profileHref={`/resources/${resource.slug}`}
                 resource={resource}
-                saved={savedResourceIds.has(resource.id)}
               />
             </li>
           ))}
@@ -153,10 +145,6 @@ export function ExploreResults({
             <span aria-hidden="true">→</span>
           </Link>
         </div>
-
-        <p aria-live="polite" className={styles.visuallyHidden}>
-          {saveAnnouncement}
-        </p>
 
         {remaining > 0 ? (
           <div className={styles.loadMoreFrame}>

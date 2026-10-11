@@ -49,7 +49,7 @@ const steps = [
     label: "Find sources",
   },
   {
-    detail: "Save useful references and turn them into project decisions.",
+    detail: "Note the useful references and turn them into project decisions.",
     label: "Keep decisions",
   },
   {
@@ -146,8 +146,8 @@ export function HomeTaskEntry({ collections }: HomeTaskEntryProps) {
             <p>
               Tessli exposes the same source guidance as readable pages, JSON,
               Markdown, and local MCP tools. Keep your selected references and
-              decisions in a Board, then hand over only the context that
-              matters.
+              decisions in your project notes, then hand over only the context
+              that matters.
             </p>
             <Link href="/for-ai">See how Tessli works with AI →</Link>
           </div>

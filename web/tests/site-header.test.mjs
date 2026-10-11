@@ -30,17 +30,9 @@ test("public navigation separates primary research routes from utilities", async
     navigation,
     /label: "Search"[\s\S]*?href: "\/resources#browse-search"[\s\S]*?match: "none"/,
   );
-  assert.match(
-    navigation,
-    /label: "Saved"[\s\S]*?href: "\/saved"[\s\S]*?available: true/,
-  );
-  assert.match(
-    navigation,
-    /label: "Boards"[\s\S]*?href: "\/boards"[\s\S]*?available: true/,
-  );
   assert.doesNotMatch(
     navigation,
-    /label: "Explore"|label: "Resources"|label: "About"/,
+    /label: "Explore"|label: "Resources"|label: "About"|label: "Saved"|label: "Boards"|\/saved|\/boards/,
   );
 });
 

@@ -321,52 +321,6 @@
   color: var(--danger);
 }
 
-.saveButton {
-  position: absolute;
-  z-index: 2;
-  top: 12px;
-  right: 12px;
-  display: inline-flex;
-  min-width: 44px;
-  min-height: 44px;
-  align-items: center;
-  justify-content: center;
-  gap: 7px;
-  border: 1px solid color-mix(in srgb, var(--line-strong) 76%, transparent);
-  border-radius: var(--radius-control-md);
-  background: color-mix(in srgb, var(--surface) 92%, transparent);
-  color: var(--text-strong);
-  cursor: pointer;
-  padding: 0 11px;
-  box-shadow: var(--shadow-xs);
-  font-size: var(--text-label);
-  font-weight: 650;
-  transition:
-    border-color var(--motion-fast) var(--ease-standard),
-    background var(--motion-fast) var(--ease-standard),
-    color var(--motion-fast) var(--ease-standard);
-}
-
-.saveButton:hover {
-  border-color: var(--line-strong);
-  background: var(--surface);
-}
-
-.saveButton[aria-pressed="true"] {
-  border-color: color-mix(in srgb, var(--accent) 42%, var(--line));
-  background: var(--accent-soft);
-  color: var(--accent-text);
-}
-
-.saveButton svg {
-  width: 17px;
-  height: 17px;
-  stroke: currentColor;
-  stroke-linecap: round;
-  stroke-linejoin: round;
-  stroke-width: 1.7;
-}
-
 @media (max-width: 480px) {
   .card {
     border-bottom: 1px solid var(--line-subtle);
@@ -378,16 +332,6 @@
 
   .profileAction {
     padding-inline: var(--space-4);
-  }
-
-  .saveButton span {
-    position: absolute;
-    width: 1px;
-    height: 1px;
-    overflow: hidden;
-    clip: rect(0 0 0 0);
-    clip-path: inset(50%);
-    white-space: nowrap;
   }
 
   .headingRow > svg {
@@ -416,9 +360,5 @@
     outline: 3px solid Highlight;
     outline-offset: 3px;
     box-shadow: none;
-  }
-
-  .saveButton[aria-pressed="true"] {
-    border: 2px solid Highlight;
   }
 }

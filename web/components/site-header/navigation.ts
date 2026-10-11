@@ -23,8 +23,6 @@ export const utilityNavigationItems: readonly NavigationItem[] = [
     available: true,
     match: "none",
   },
-  { label: "Saved", href: "/saved", available: true, match: "prefix" },
-  { label: "Boards", href: "/boards", available: true, match: "prefix" },
 ] as const;
 
 export const availablePrimaryNavigationItems = primaryNavigationItems.filter(

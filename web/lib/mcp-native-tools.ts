@@ -207,7 +207,7 @@ export function createNativeResearchBrief(input: TaskRetrievalInput) {
       "Turn selected principles into an original project decision, then verify the implemented result with people and in a browser.",
     ],
     boundary:
-      "The brief is deterministic, repository-backed guidance. It does not access local Boards, inspect project code, fetch providers, use credentials, or write state.",
+      "The brief is deterministic, repository-backed guidance. It does not read browser data, inspect project code, fetch providers, use credentials, or write state.",
   };
 }
 
