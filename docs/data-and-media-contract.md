@@ -1,6 +1,6 @@
 # Tessli data and media contract
 
-The catalogue models behind the Sources directory, and the frozen media fallback. The media pipeline (discovery, coverage, candidate review, screenshot capture) and the verification workflow are out of scope in v1.2: their documentation is removed, their code goes in cleanup step C5, and both stay recoverable from the `v1.1-archive` tag.
+The catalogue models behind the Sources directory, and the frozen media fallback. The media pipeline (discovery, coverage, candidate review, screenshot capture) and the verification workflow are out of scope in v1.2: their documentation, code, data and schemas are removed, and both stay recoverable from the `v1.1-archive` tag.
 
 ## 1. Catalogue model
 

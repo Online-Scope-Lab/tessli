@@ -134,7 +134,7 @@ export function IntelligenceDetail({
       </GuideSection>
 
       <details className={styles.diagnostics}>
-        <summary>Source details and references</summary>
+        <summary>Source details</summary>
         <div className={styles.diagnosticsBody}>
           <dl>
             <div>
@@ -153,68 +153,40 @@ export function IntelligenceDetail({
               <dt>Availability</dt>
               <dd>{label(profile.status)}</dd>
             </div>
-            <div>
-              <dt>Coverage</dt>
-              <dd>{label(profile.profileLevel)}</dd>
-            </div>
           </dl>
 
-          <p className={styles.coverageNote}>{profile.coverage.reason}</p>
-
           {intelligence ? (
-            <>
-              <section aria-labelledby="governance-title">
-                <h3 id="governance-title">Recorded governance</h3>
-                <ul>
-                  <li>
-                    Persistence:{" "}
-                    {label(intelligence.governance.defaultPersistence)}
-                  </li>
-                  <li>
-                    Redistribution:{" "}
-                    {label(intelligence.governance.assetRedistribution)}
-                  </li>
-                  <li>
-                    Attribution:{" "}
-                    {label(intelligence.governance.sourceAttribution)}
-                  </li>
-                  <li>
-                    User credential required:{" "}
-                    {intelligence.governance.userCredentialRequired
-                      ? "Yes"
-                      : "No"}
-                  </li>
-                  <li>
-                    Terms review required:{" "}
-                    {intelligence.governance.termsReviewRequired ? "Yes" : "No"}
-                  </li>
-                </ul>
-              </section>
-
-              <section aria-labelledby="evidence-title">
-                <h3 id="evidence-title">Recorded references</h3>
-                <ul>
-                  {profile.evidence.map((item) => (
-                    <li key={`${item.claim}-${item.sourceUrl}`}>
-                      <a
-                        href={item.sourceUrl}
-                        rel="noopener noreferrer"
-                        target="_blank"
-                      >
-                        {item.claim} ↗
-                      </a>{" "}
-                      <span>
-                        ({label(item.sourceType)}, {item.verifiedAt})
-                      </span>
-                    </li>
-                  ))}
-                </ul>
-              </section>
-            </>
+            <section aria-labelledby="governance-title">
+              <h3 id="governance-title">Recorded governance</h3>
+              <ul>
+                <li>
+                  Persistence:{" "}
+                  {label(intelligence.governance.defaultPersistence)}
+                </li>
+                <li>
+                  Redistribution:{" "}
+                  {label(intelligence.governance.assetRedistribution)}
+                </li>
+                <li>
+                  Attribution:{" "}
+                  {label(intelligence.governance.sourceAttribution)}
+                </li>
+                <li>
+                  User credential required:{" "}
+                  {intelligence.governance.userCredentialRequired
+                    ? "Yes"
+                    : "No"}
+                </li>
+                <li>
+                  Terms review required:{" "}
+                  {intelligence.governance.termsReviewRequired ? "Yes" : "No"}
+                </li>
+              </ul>
+            </section>
           ) : (
             <p className={styles.emptyNote}>
-              No structured evidence or governance record is linked. This page
-              does not imply live provider verification.
+              No structured governance record is linked to this Listed source.
+              This page does not imply live provider verification.
             </p>
           )}
         </div>

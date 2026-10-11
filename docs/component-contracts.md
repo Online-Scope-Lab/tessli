@@ -103,9 +103,9 @@ Source Guide composition follows this fixed reading hierarchy:
 4. How to access and useful compatibility;
 5. Important limitations;
 6. differentiated alternatives and containing Collections;
-7. quiet source details/references.
+7. quiet source details (domain, type, access model, availability and any recorded governance).
 
-The component family must degrade honestly for thinly described sources and omit unsupported optional fields. It must not promote raw schema, evidence counts, review state, or verification mechanics above the source guidance.
+The component family must degrade honestly for thinly described sources and omit unsupported optional fields. Coverage levels, evidence records and verification mechanics are not shown on the Source Guide in v1.2.
 
 ## 8. Collection card and stage item
 
@@ -132,7 +132,7 @@ The component family must degrade honestly for thinly described sources and omit
 - the frozen fallback chain preview → favicon → lettermark ([`data-and-media-contract.md`](data-and-media-contract.md)) remains canonical;
 - below-fold media loads lazily;
 - preview failure still leaves identity, purpose, and actions usable;
-- live framed previews are not a default component (the live-preview pilot is removed in C5).
+- live framed previews are not a component: the live-preview iframe pilot was removed in v1.2.
 
 ## 10. Account and form components — removed in C3
 

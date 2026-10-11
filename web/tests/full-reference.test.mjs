@@ -127,8 +127,9 @@ test("minimum source profile routes cover all source slugs without overstating e
   assert.match(detail, /profile\.profileLevel/);
   assert.match(detail, /<SourceActions resource=\{card\}/);
   assert.match(detail, /Use it when/i);
-  assert.match(guide, /profile\.coverage\.reason/);
-  assert.match(guide, /Source details and references/i);
+  assert.match(guide, /does not imply live provider verification/);
+  assert.doesNotMatch(guide, /profile\.coverage|Recorded references/);
+  assert.match(guide, /Source details/i);
   assert.match(actions, /Visit source ↗/);
   assert.match(actions, /rel="noopener noreferrer"/);
   assert.doesNotMatch(detail, /rating|popularity|quality score|trend/i);

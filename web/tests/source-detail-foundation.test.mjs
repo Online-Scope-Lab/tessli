@@ -43,17 +43,17 @@ test("source detail follows the V3.3 guide-first reading order", () => {
     "Important limitations",
     "Consider instead",
     "Collections",
-    "Source details and references",
+    "Source details",
   ]) {
     assert.match(`${page}\n${detail}`, new RegExp(text));
   }
 
   assert.match(page, /<SourceActions resource=\{card\}/);
-  assert.match(page, /<LivePreview resourceId=\{profile\.id\}/);
   assert.match(page, /className=\{styles\.preview\}/);
   assert.match(page, /referrerPolicy="no-referrer"/);
   assert.match(page, /previewMark/);
   assert.doesNotMatch(page, /<iframe|coverage-title|Evidence records/);
+  assert.doesNotMatch(page, /LivePreview|live-preview/);
 });
 
 test("Listed source guidance uses honest compact fallbacks", () => {

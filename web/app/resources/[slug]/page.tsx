@@ -7,7 +7,6 @@ import type {
   ResourceCardData,
 } from "@/components/resource-card/resource-card";
 import { IntelligenceDetail } from "@/components/source-detail/intelligence-detail";
-import { LivePreview } from "@/components/source-detail/live-preview";
 import { SourceActions } from "@/components/source-detail/source-actions";
 import catalogue from "@/data/catalogue.json";
 import { getPublishedCollections } from "@/lib/collections";
@@ -135,7 +134,6 @@ export default async function SourceProfilePage({ params }: Props) {
 
         <section aria-label="Source actions" className={styles.actions}>
           <SourceActions resource={card} />
-          <LivePreview resourceId={profile.id} resourceName={profile.name} />
         </section>
 
         <div className={styles.guide}>

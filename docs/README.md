@@ -18,8 +18,6 @@ A short index of what lives in `docs/`. Start with the root [`README.md`](../REA
 - [`ref-img/`](ref-img/): art-direction references and the canonical hero artwork.
 - [`tessli-native-mcp.md`](tessli-native-mcp.md): running the local read-only MCP server.
 
-`reports/` is a leftover from v1.1 and is removed in cleanup step C5.
-
 ## Recovering removed docs
 
 PRD, build slices, slice evidence, contracts, handoffs and earlier research were removed in v1.2. Read any of them with `git show v1.1-archive:<path>`, or browse the `archive/v1.1` branch.

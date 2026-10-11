@@ -81,8 +81,7 @@
 }
 
 .accessRoutes p,
-.alternatives p,
-.coverageNote {
+.alternatives p {
   max-width: 62ch;
   margin: 0;
   color: var(--text-body, #4f4a44);
@@ -90,15 +89,13 @@
 }
 
 .routeMeta,
-.emptyNote,
-.coverageNote {
+.emptyNote {
   color: var(--text-muted, #78716a) !important;
   font-size: 0.92rem;
 }
 
 .accessRoutes a,
-.alternatives a,
-.diagnostics a {
+.alternatives a {
   width: fit-content;
   color: var(--accent-text, #b9380e);
   font-weight: 650;
