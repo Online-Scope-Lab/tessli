@@ -18,9 +18,10 @@
     "typecheck": "tsc --noEmit",
     "lint": "eslint .",
     "test": "node --test tests/*.test.mjs && node scripts/check-intelligence-profiles.mjs && node scripts/check-source-profile-contract.mjs",
+    "bench:test": "python3 -I -B -m unittest discover -s ../bench/tests -p \"test_*.py\" && node --check ../bench/scripts/capture.mjs",
     "format": "prettier --write .",
     "format:check": "prettier --check .",
-    "check": "npm run check:hero && npm run format:check && npm run typecheck && npm run lint && npm test && npm run catalogue:check && npm run registry:check && npm run build",
+    "check": "npm run check:hero && npm run format:check && npm run typecheck && npm run lint && npm test && npm run bench:test && npm run catalogue:check && npm run registry:check && npm run build",
     "registry:build": "node scripts/build-registry.mjs",
     "registry:check": "node scripts/build-registry.mjs --check",
     "test:items": "playwright test"

@@ -19,6 +19,7 @@ A short index of what lives in `docs/`. Start with the root [`README.md`](../REA
 ## Reference
 
 - [`quality-gates.md`](quality-gates.md): the checklist for visible changes (widths, accessibility, interaction, truthfulness) and the twelve review dimensions.
+- [`../bench/PROTOCOL.md`](../bench/PROTOCOL.md) and [`../bench/README.md`](../bench/README.md): the Taste Bench protocol (published before any run) and how to operate it.
 - [`../rules/`](../rules/): the UI rules, one file each, and the generated agent index [`TESSLI.md`](../rules/TESSLI.md).
 - [`data-and-media-contract.md`](data-and-media-contract.md): the catalogue, category and collection models, and the frozen media fallback chain.
 - [`component-contracts.md`](component-contracts.md): behaviour of the site's shared components.

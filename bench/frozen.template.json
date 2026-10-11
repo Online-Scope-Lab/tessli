@@ -1,0 +1,15 @@
+{
+  "builder_harness": "RECORD_BEFORE_RUN: agent harness name and exact version",
+  "model": "withheld-by-operator",
+  "model_record_sha256": "RECORD_BEFORE_RUN: SHA-256 of the private model record",
+  "reasoning_level": "RECORD_BEFORE_RUN",
+  "tools": [
+    "RECORD_BEFORE_RUN: every tool the builder may use, e.g. shell, file read/write"
+  ],
+  "network_policy": "RECORD_BEFORE_RUN: e.g. npm registry and ui.shadcn.com only; no web search",
+  "time_allowance_minutes": 60,
+  "turn_allowance": 1,
+  "verification_steps": [
+    "node bench/scripts/capture.mjs --run <run-dir> --workspace <workspace>"
+  ]
+}

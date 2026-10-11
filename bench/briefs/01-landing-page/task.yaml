@@ -1,0 +1,9 @@
+id: "01"
+slug: landing-page
+title: Landing page for a UI review tool
+category: marketing-page
+adapted_from: evaluation/task-01-marketing-page (v1.1-archive)
+route: /
+states: [default, mobile-menu-open, waitlist-error, waitlist-success]
+widths: [1440, 768, 390]
+focus: [hierarchy, positioning, responsive-storytelling, trust]

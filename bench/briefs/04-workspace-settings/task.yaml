@@ -1,0 +1,9 @@
+id: "04"
+slug: workspace-settings
+title: Workspace settings for a shared support inbox
+category: settings-account
+adapted_from: evaluation/task-04-settings-account (v1.1-archive)
+route: /
+states: [default, unsaved-changes, saving, saved, validation-error, permission-denied, delete-confirm, delete-failed]
+widths: [1440, 768, 390]
+focus: [categorisation, permissions, destructive-actions, save-feedback]

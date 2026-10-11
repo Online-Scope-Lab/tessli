@@ -1,0 +1,185 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/Online-Scope-Lab/tessli/blob/main/bench/schemas/score.schema.json",
+  "title": "Taste Bench score (one human reviewer, one pair)",
+  "description": "Filled in by a human reviewer from the pair's score-form.json and committed as bench/scores/<pair-id>/<github-handle>.json. bench/scripts/validate_scores.py enforces this schema and also rejects reviewer names that name software, timestamps before the blinding commitment or in the future, and duplicate reviews.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema",
+    "pair_id",
+    "reviewer",
+    "reviewer_kind",
+    "submitted_at",
+    "declarations",
+    "dimensions"
+  ],
+  "properties": {
+    "schema": {
+      "const": "taste-bench-score/1"
+    },
+    "pair_id": {
+      "type": "string",
+      "pattern": "^[0-9]{2}-[0-9a-f]{6}$"
+    },
+    "reviewer": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "name",
+        "github"
+      ],
+      "properties": {
+        "name": {
+          "type": "string",
+          "minLength": 2,
+          "description": "The reviewer's own name."
+        },
+        "github": {
+          "type": "string",
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9-]{0,38}$",
+          "description": "The reviewer's GitHub handle; the score's pull request comes from this account."
+        }
+      }
+    },
+    "reviewer_kind": {
+      "const": "human"
+    },
+    "submitted_at": {
+      "type": "string",
+      "format": "date-time",
+      "description": "ISO 8601 with a time zone, e.g. 2026-11-02T14:05:00Z."
+    },
+    "declarations": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "human_reviewer",
+        "scored_without_ai_assistance",
+        "condition_unknown_while_scoring",
+        "not_the_operator"
+      ],
+      "properties": {
+        "human_reviewer": {
+          "const": true
+        },
+        "scored_without_ai_assistance": {
+          "const": true
+        },
+        "condition_unknown_while_scoring": {
+          "const": true
+        },
+        "not_the_operator": {
+          "const": true
+        }
+      }
+    },
+    "dimensions": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "task_fit",
+        "hierarchy",
+        "mobile_usability",
+        "discoverability",
+        "density",
+        "coherence",
+        "consistency",
+        "component_reuse",
+        "accessibility",
+        "restraint",
+        "regression_risk",
+        "ship_readiness"
+      ],
+      "properties": {
+        "task_fit": {
+          "$ref": "#/$defs/dimension",
+          "description": "Does the screen do what the brief asks, for the person it describes?"
+        },
+        "hierarchy": {
+          "$ref": "#/$defs/dimension",
+          "description": "Is it clear what matters most, what to read first and what to do next?"
+        },
+        "mobile_usability": {
+          "$ref": "#/$defs/dimension",
+          "description": "At 390 px, is it comfortable to read and operate, not a squeezed desktop?"
+        },
+        "discoverability": {
+          "$ref": "#/$defs/dimension",
+          "description": "Can people find the controls and paths the brief needs without guessing?"
+        },
+        "density": {
+          "$ref": "#/$defs/dimension",
+          "description": "Is the amount of information per screen right for the task: not cramped, not sparse?"
+        },
+        "coherence": {
+          "$ref": "#/$defs/dimension",
+          "description": "Do the parts read as one designed screen rather than assembled pieces?"
+        },
+        "consistency": {
+          "$ref": "#/$defs/dimension",
+          "description": "Are the same things done the same way across the screen and its states?"
+        },
+        "component_reuse": {
+          "$ref": "#/$defs/dimension",
+          "description": "Are repeated elements (buttons, fields, rows, messages) visibly one consistent set?"
+        },
+        "accessibility": {
+          "$ref": "#/$defs/dimension",
+          "description": "Labels, contrast, focus, target size and structure; use the axe counts as one input."
+        },
+        "restraint": {
+          "$ref": "#/$defs/dimension",
+          "description": "Free of decoration, effects and invented content the task does not need?"
+        },
+        "regression_risk": {
+          "$ref": "#/$defs/dimension",
+          "description": "How likely is it to break or mislead in real use: overflow, broken states, risky actions?"
+        },
+        "ship_readiness": {
+          "$ref": "#/$defs/dimension",
+          "description": "Could this be shipped as it is, with minor fixes at most?"
+        }
+      }
+    },
+    "overall_note": {
+      "type": "string"
+    }
+  },
+  "$defs": {
+    "dimension": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "A",
+        "B",
+        "preference",
+        "note"
+      ],
+      "properties": {
+        "A": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 5
+        },
+        "B": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 5
+        },
+        "preference": {
+          "enum": [
+            "A",
+            "B",
+            "tie"
+          ]
+        },
+        "note": {
+          "type": "string",
+          "minLength": 15,
+          "description": "What you saw that explains the scores."
+        }
+      }
+    }
+  }
+}

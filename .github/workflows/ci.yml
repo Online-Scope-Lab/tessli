@@ -59,6 +59,11 @@ jobs:
       - name: Test
         run: npm test
 
+      # Taste Bench harness: Python standard library on the runner's python3, plus
+      # a syntax check of bench/scripts/capture.mjs.
+      - name: Bench harness tests
+        run: npm run bench:test
+
       - name: Check catalogue drift
         run: npm run catalogue:check
 

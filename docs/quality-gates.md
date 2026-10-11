@@ -58,7 +58,7 @@ A checklist for any visible change. A page isn't done because it looks close in 
 
 ## Review dimensions
 
-Human review of a screen, and the Taste Bench in [`v1.2/plan.md`](v1.2/plan.md) §9, use these twelve dimensions (first set out in `AGENTS.md` §12 of v1.1, readable with `git show v1.1-archive:AGENTS.md`). Rules in [`rules/`](../rules/) cite them as "Review dimension: …".
+Human review of a screen, and the [Taste Bench](../bench/PROTOCOL.md) in [`v1.2/plan.md`](v1.2/plan.md) §9, use these twelve dimensions (first set out in `AGENTS.md` §12 of v1.1, readable with `git show v1.1-archive:AGENTS.md`). Rules in [`rules/`](../rules/) cite them as "Review dimension: …".
 
 task fit · hierarchy · mobile usability · discoverability · density · coherence · consistency · component reuse · accessibility · restraint · regression risk · ship readiness
 

@@ -14,6 +14,7 @@ Be clear about what exists today:
   - the curated **Sources** directory (browse, source pages, collections) and public Markdown/JSON for each source.
   - **For AI** at `/for-ai`: the shadcn install, `TESSLI.md`, a local read-only MCP server, `llms.txt` and an Agent Skill (see [For AI](#for-ai) below).
   - **Contribute** at `/contribute`: the four contribution paths, each ending in a GitHub issue form or pull request. The old `/submit` and `/suggest` addresses redirect there.
+- **Published, not yet run:** the **Taste Bench** in [`bench/`](bench/README.md): the [protocol](bench/PROTOCOL.md) (six briefs, baseline against Tessli, 36 builds, 18 blinded pairs, at least three human reviewers, a pre-registered decision rule), the starter app, the prompts and the harness. No scored build has run and no human has scored anything.
 - **Not built:** accounts, a database, analytics or payments. GitHub issues and pull requests are the backend.
 
 The plan and its phases are in [`docs/v1.2/plan.md`](docs/v1.2/plan.md).
@@ -36,7 +37,7 @@ Before a pull request, run one command from `web/`:
 npm run check
 ```
 
-It runs the hero artwork hash check, `format:check`, `typecheck`, `lint`, `test`, `catalogue:check`, `registry:check` and `build`: everything CI runs except the shadcn registry validation and the browser and item preview tests. `npm run format` fixes formatting.
+It runs the hero artwork hash check, `format:check`, `typecheck`, `lint`, `test`, `bench:test` (the Taste Bench harness tests; needs `python3`), `catalogue:check`, `registry:check` and `build`: everything CI runs except the shadcn registry validation and the browser and item preview tests. `npm run format` fixes formatting.
 
 Install a library item into a project set up with [shadcn/ui](https://ui.shadcn.com) (works once the registry is on `main`):
 
@@ -63,7 +64,7 @@ Coding agents get the same code, notes and rules people see, in four ways:
 - **Plain files:** `/llms.txt`, `/rules/TESSLI.md`, `/library/<slug>/item.json` and `item.md`, `/resources/<slug>/profile.json` and `profile.md`.
 - **Agent Skill:** [`skills/tessli/SKILL.md`](skills/tessli/SKILL.md): read the rules, find an item, install it, adapt it to the project's tokens, then check it against the rules at 1440, 768 and 390 px.
 
-Tessli does not claim that any of this improves AI-generated UI. That waits for the published, human-scored evaluation in the plan (§9).
+Tessli does not claim that any of this improves AI-generated UI. That waits for the published, human-scored [Taste Bench](bench/PROTOCOL.md) (plan §9), whatever it shows.
 
 ## Contribute
 
@@ -79,5 +80,6 @@ Code and taste notes are released under the [MIT licence](LICENSE). The Tessli n
 - [`docs/README.md`](docs/README.md): index of the remaining docs.
 - [`docs/decisions.md`](docs/decisions.md): dated decisions.
 - [`docs/v1.2/plan.md`](docs/v1.2/plan.md): the product and build plan.
+- [`bench/README.md`](bench/README.md): the Taste Bench, how to run a build, capture, pair, blind, review, reveal and analyse.
 
 Earlier planning, slice evidence, proofs and experiments are preserved at the `v1.1-archive` tag.

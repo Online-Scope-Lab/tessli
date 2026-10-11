@@ -1,0 +1,9 @@
+id: "06"
+slug: exceptions-queue
+title: Order exceptions queue for a wholesale supplier
+category: data-heavy-admin
+adapted_from: new in v1.2
+route: /
+states: [default, filtered-no-results, rows-selected, order-open, loading, error, queue-empty]
+widths: [1440, 768, 390]
+focus: [density, scanability, bulk-actions, list-detail]

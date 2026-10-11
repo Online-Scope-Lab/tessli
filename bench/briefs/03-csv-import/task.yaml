@@ -1,0 +1,9 @@
+id: "03"
+slug: csv-import
+title: Contact import flow for a nonprofit CRM
+category: complex-workflow
+adapted_from: evaluation/task-03-complex-workflow (v1.1-archive)
+route: /
+states: [default, file-selected, mapping, validation-errors, preview, importing, complete, network-error]
+widths: [1440, 768, 390]
+focus: [progressive-disclosure, validation, recovery, completion-clarity]

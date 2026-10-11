@@ -1,0 +1,9 @@
+id: "02"
+slug: workspace-dashboard
+title: Workspace dashboard for a copy-approval tool
+category: saas-dashboard
+adapted_from: evaluation/task-02-saas-dashboard (v1.1-archive)
+route: /
+states: [default, first-use, loading, no-active-projects, error]
+widths: [1440, 768, 390]
+focus: [information-density, prioritisation, navigation, states]

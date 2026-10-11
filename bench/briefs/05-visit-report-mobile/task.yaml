@@ -1,0 +1,9 @@
+id: "05"
+slug: visit-report-mobile
+title: Mobile visit report for lift technicians
+category: mobile-first-screen
+adapted_from: evaluation/task-05-mobile-first-screen (v1.1-archive)
+route: /
+states: [default, offline, photo-uploading, validation-error, issue-flagged, submitted, sync-failed]
+widths: [1440, 768, 390]
+focus: [touch-priority, limited-space, offline-feedback, error-recovery]
