@@ -96,6 +96,16 @@ test("footer contains truthful research groups and safe external links", async (
   assert.match(footer, /target="_blank"/);
   assert.match(footer, /rel="noopener noreferrer"/);
   assert.match(footer, /public repository does not itself grant reuse rights/i);
+  // Owner rule (2026-10-25): the Labs credit, a plain link to Tessli's page on
+  // the company site (www host).
+  assert.match(
+    footer,
+    /const labsCreditUrl = "https:\/\/www\.onlinescope\.in\/labs\/tessli";/,
+  );
+  assert.match(
+    footer,
+    /Built by <a href=\{labsCreditUrl\}>Online Scope Labs<\/a>/,
+  );
   assert.match(
     styles,
     /@media \(max-width: 767px\)[\s\S]*?\.footnote[\s\S]*?font-size: var\(--text-body-sm\)/,

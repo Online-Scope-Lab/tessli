@@ -5,6 +5,10 @@ import { BrandMark } from "@/components/brand-mark/brand-mark";
 import { footerGroups } from "./footer-navigation";
 import styles from "./site-footer.module.css";
 
+// Owner rule (2026-10-25): every Online Scope Labs product carries this credit,
+// a plain link to the product's page on the company site (www host).
+const labsCreditUrl = "https://www.onlinescope.in/labs/tessli";
+
 export function SiteFooter() {
   return (
     <footer className={styles.footer}>
@@ -65,6 +69,9 @@ export function SiteFooter() {
             A public repository does not itself grant reuse rights. Verify the
             original source and its licence before using a resource in
             production.
+          </p>
+          <p className={styles.credit}>
+            Built by <a href={labsCreditUrl}>Online Scope Labs</a>
           </p>
         </div>
       </div>
